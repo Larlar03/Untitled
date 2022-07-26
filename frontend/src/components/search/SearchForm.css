@@ -15,6 +15,11 @@
   color: #c5decd;
 }
 
+#submit-button:hover {
+  background-color: #eee2eb;
+  color: #a27e97;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .search-form-container {

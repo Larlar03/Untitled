@@ -16,3 +16,7 @@ li.service-button {
   border-radius: 100px;
   margin: 6px 0;
 }
+
+li.service-button:hover {
+  color: #88627d;
+}

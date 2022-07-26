@@ -6,12 +6,34 @@
 .content {
   padding: 54px 48px 54px 48px;
   height: 100%;
+  overflow-y: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbacc2;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a27e97;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .content-container {
-    padding: 70px 92px;
+    padding: 40px 40px;
   }
   .content {
     border-radius: 10px;
