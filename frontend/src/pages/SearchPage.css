@@ -1,0 +1,19 @@
+.content-container {
+  margin: 0;
+  height: 100%;
+}
+
+.content {
+  padding: 54px 48px 54px 48px;
+  height: 100%;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .content-container {
+    padding: 70px 92px;
+  }
+  .content {
+    border-radius: 10px;
+  }
+}

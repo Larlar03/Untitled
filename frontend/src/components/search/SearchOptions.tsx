@@ -1,0 +1,32 @@
+import "./SearchOptions.css";
+
+const services = [
+  "Any",
+  "Conditioning Treatments",
+  "Silk Press",
+  "Trims",
+  "Braids",
+  "Relaxer",
+  "Extentions",
+  "Keratin",
+  "Wash, Cut & Style",
+  "Texture Release",
+  "Colour",
+  "Texturizer",
+  "Children",
+  "Twist Out",
+  "Curl Set",
+  "Other",
+];
+
+export default function SearchOptions() {
+  return (
+    <ul className="services-container">
+      {services.map((service, i) => (
+        <li key={i} id={service} className="service-button">
+          {service}
+        </li>
+      ))}
+    </ul>
+  );
+}

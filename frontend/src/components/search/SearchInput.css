@@ -1,0 +1,20 @@
+#addon-wrapping {
+  background: white;
+  border: none;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  color: #cbacc2;
+}
+
+#search-input {
+  border: none;
+  height: 47px;
+}
+
+#current-location-button {
+  background: white;
+  border: none;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  color: #37515f;
+}

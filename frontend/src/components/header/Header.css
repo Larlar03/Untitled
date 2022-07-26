@@ -1,0 +1,16 @@
+.header-container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem !important;
+  font-weight: 700 !important;
+  color: #3b122e;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h2 {
+  font-size: 1.2rem !important;
+  font-weight: 400 !important;
+  font-family: "Space Mono", monospace;
+}

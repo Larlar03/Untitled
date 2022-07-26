@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  color: #262626;
+  /* Font size is 16px */
+}
+
+#SearchPage,
+#ResultsPage {
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  padding: 0;
+}
+
+.content {
+  background-image: url(./assets/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
