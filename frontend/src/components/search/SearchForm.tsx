@@ -9,11 +9,7 @@ export default function SearchForm() {
 
   const storeOptions = (arr: string[]) => {
     setOptions(arr);
-<<<<<<< HEAD
-=======
-    console.log("array stored");
->>>>>>> 5fb1855c1e77202c4c740e57a5a27e4d4088a1d2
-    console.log(options);
+    // console.log(options);
   };
 
   return (
