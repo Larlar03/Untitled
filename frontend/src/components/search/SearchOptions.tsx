@@ -38,8 +38,11 @@ export default function SearchOptions(props: any) {
       }
     });
 
-    // console.log(optionsArr);
+<<<<<<< HEAD
+    console.log(optionsArr);
 
+=======
+>>>>>>> 5fb1855c1e77202c4c740e57a5a27e4d4088a1d2
     applyStyles(event);
   };
 

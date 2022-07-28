@@ -5,7 +5,7 @@ ul.services-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 li.service-button {
@@ -19,4 +19,22 @@ li.service-button {
 
 li.service-button:hover {
   color: #88627d;
+  cursor: pointer;
+}
+
+li.active {
+  color: #f6eff4;
+  background: #88627d;
+}
+
+li.active:hover {
+  color: #f6eff4;
+}
+
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.05);
 }
