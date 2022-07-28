@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./SearchOptions.css";
 
 const services = [
@@ -23,19 +23,31 @@ const services = [
 export default function SearchOptions(props: any) {
   const [optionsArr, setOptionsArr] = useState<Array<string>>([]);
 
+  useEffect(() => {
+    props.storeOptions(optionsArr);
+  }, [optionsArr]);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     const clickedOption: any = event.currentTarget.textContent;
-    console.log(clickedOption);
 
     setOptionsArr((prev: string[]) => {
       if (prev.includes(clickedOption)) {
-        return prev.filter((option) => option != clickedOption);
+        return prev.filter((option) => option !== clickedOption);
       } else {
         return [...prev, clickedOption];
       }
     });
 
-    console.log(optionsArr);
+    // console.log(optionsArr);
+
+    applyStyles(event);
+  };
+
+  const applyStyles = (event: React.MouseEvent<HTMLElement>): void => {
+    const currentOption = event.currentTarget;
+    currentOption.classList[2]
+      ? currentOption.classList.remove("active")
+      : currentOption.classList.add("active");
   };
 
   return (
@@ -45,7 +57,7 @@ export default function SearchOptions(props: any) {
           onClick={handleClick}
           key={i}
           id={service}
-          className="service-button"
+          className="service-button grow"
         >
           {service}
         </li>

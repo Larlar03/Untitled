@@ -13,7 +13,7 @@ export default function SearchForm() {
 
   const storeOptions = (arr: string[]) => {
     setOptions(arr);
-    console.log("arra stored");
+    console.log(options);
   };
 
   return (
@@ -23,7 +23,7 @@ export default function SearchForm() {
           <SearchInput />
         </div>
         <div className="mb-3">
-          <SearchOptions {...storeOptions} />
+          <SearchOptions storeOptions={storeOptions} />
         </div>
         <div className="mb-3">
           <SearchPriceRange />
