@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./SearchOptions.css";
 
 const services = [
@@ -19,11 +20,33 @@ const services = [
   "Other",
 ];
 
-export default function SearchOptions() {
+export default function SearchOptions(props: any) {
+  const [optionsArr, setOptionsArr] = useState<Array<string>>([]);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
+    const clickedOption: any = event.currentTarget.textContent;
+    console.log(clickedOption);
+
+    setOptionsArr((prev: string[]) => {
+      if (prev.includes(clickedOption)) {
+        return prev.filter((option) => option != clickedOption);
+      } else {
+        return [...prev, clickedOption];
+      }
+    });
+
+    console.log(optionsArr);
+  };
+
   return (
     <ul className="services-container">
       {services.map((service, i) => (
-        <li key={i} id={service} className="service-button">
+        <li
+          onClick={handleClick}
+          key={i}
+          id={service}
+          className="service-button"
+        >
           {service}
         </li>
       ))}
