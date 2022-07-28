@@ -6,10 +6,16 @@ import "./SearchForm.css";
 
 export default function SearchForm() {
   const [options, setOptions] = useState<Array<string>>([]);
+  const [maxPrice, setMaxPrice] = useState<number>(0);
 
   const storeOptions = (arr: string[]) => {
     setOptions(arr);
     // console.log(options);
+  };
+
+  const storeMaxPrice = (max: number) => {
+    setMaxPrice(max);
+    console.log(maxPrice);
   };
 
   return (
@@ -22,7 +28,7 @@ export default function SearchForm() {
           <SearchOptions storeOptions={storeOptions} />
         </div>
         <div className="mb-3">
-          <SearchPriceRange />
+          <SearchPriceRange storeMaxPrice={storeMaxPrice} />
         </div>
         <button id="submit-button" type="submit" className="btn btn-primary">
           Submit

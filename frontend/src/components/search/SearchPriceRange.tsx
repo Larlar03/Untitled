@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchPriceRange.css";
 
-export default function SearchPriceRange() {
+export default function SearchPriceRange(props: any) {
   const [max, setMax] = useState(200);
+
+  useEffect(() => {
+    props.storeMaxPrice(max);
+  });
 
   const handleChange = () => {
     const i: any = document.querySelector(".price-range");
