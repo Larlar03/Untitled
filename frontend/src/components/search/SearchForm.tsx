@@ -4,16 +4,13 @@ import SearchOptions from "./SearchOptions";
 import SearchPriceRange from "./SearchPriceRange";
 import "./SearchForm.css";
 
-// interface SearchFormProps {
-//   storeOptions: (arr: string[]) => void;
-// }
-
 export default function SearchForm() {
   const [options, setOptions] = useState<Array<string>>([]);
 
   const storeOptions = (arr: string[]) => {
     setOptions(arr);
-    console.log("arra stored");
+    console.log("array stored");
+    console.log(options);
   };
 
   return (
@@ -23,7 +20,7 @@ export default function SearchForm() {
           <SearchInput />
         </div>
         <div className="mb-3">
-          <SearchOptions {...storeOptions} />
+          <SearchOptions storeOptions={storeOptions} />
         </div>
         <div className="mb-3">
           <SearchPriceRange />
