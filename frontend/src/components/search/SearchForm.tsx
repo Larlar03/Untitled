@@ -15,7 +15,7 @@ export default function SearchForm() {
 
   const storeMaxPrice = (max: number) => {
     setMaxPrice(max);
-    console.log(maxPrice);
+    // console.log(maxPrice);
   };
 
   return (
