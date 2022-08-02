@@ -1,37 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Trie from "../autocomplete/Trie";
+import cityList from "../autocomplete/cities";
 import "./SearchInput.css";
 
-const dictionary = {
-  words: [
-    "hello",
-    "helium",
-    "world",
-    "car",
-    "carpet",
-    "test",
-    "this",
-    "that",
-    "those",
-    "working",
-    "is",
-  ],
-};
-
-export default function SearchInput() {
+export default function SearchInput(props: any) {
   const [prefix, setPrefix] = useState("");
   const [suggestion, setSuggestion] = useState("");
 
   const myTrie = new Trie();
 
-  (async () => {
-    // const dictionary = await getWords();
-    const words = dictionary.words;
-    for (let i = 0; i < words.length; i++) {
-      const word = words[i];
-      myTrie.insert(word);
+  useEffect(() => {
+    props.storeCity(prefix);
+  }, [prefix]);
+
+  useEffect(() => {
+    const cities = cityList.cities;
+    for (let i = 0; i < cities.length; i++) {
+      const city = cities[i];
+      myTrie.insert(city);
     }
-  })();
+  }, [myTrie]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;

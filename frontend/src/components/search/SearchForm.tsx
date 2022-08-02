@@ -7,6 +7,7 @@ import "./SearchForm.css";
 export default function SearchForm() {
   const [options, setOptions] = useState<Array<string>>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
+  const [city, setCity] = useState<string>("");
 
   const storeOptions = (arr: string[]) => {
     setOptions(arr);
@@ -18,11 +19,16 @@ export default function SearchForm() {
     // console.log(maxPrice);
   };
 
+  const storeCity = (city: string) => {
+    setCity(city);
+    // console.log(city);
+  };
+
   return (
     <div className="search-form-container">
       <form action="submit">
         <div className="mb-3">
-          <SearchInput />
+          <SearchInput storeCity={storeCity} />
         </div>
         <div className="mb-3">
           <SearchOptions storeOptions={storeOptions} />
