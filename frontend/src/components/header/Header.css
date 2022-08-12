@@ -9,6 +9,15 @@ h1 {
   font-family: "Space Grotesk", sans-serif;
 }
 
+h1 a {
+  text-decoration: none !important;
+  color: #3b122e;
+}
+
+h1 a:hover {
+  color: #000000;
+}
+
 h2 {
   font-size: 1.2rem !important;
   font-weight: 400 !important;

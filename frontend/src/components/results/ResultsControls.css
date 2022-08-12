@@ -1,0 +1,29 @@
+.controls-container {
+  font-weight: 700;
+  width: 80%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 40px auto 20px auto;
+  font-size: 1.2rem;
+}
+
+span.results-total {
+}
+
+i {
+  color: #37515f;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .controls-container {
+    font-weight: 700;
+    width: 600px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 40px auto 20px auto;
+    font-size: 1.2rem;
+  }
+}

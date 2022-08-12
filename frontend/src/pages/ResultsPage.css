@@ -1,0 +1,19 @@
+.content-container {
+  margin: 0;
+  height: auto;
+}
+
+#results-content {
+  padding: 54px 0;
+  height: 100%;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .content-container {
+    padding: 40px 40px;
+  }
+  .results-content {
+    border-radius: 10px;
+  }
+}

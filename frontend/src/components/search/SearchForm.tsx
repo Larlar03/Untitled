@@ -4,7 +4,7 @@ import SearchOptions from "./SearchOptions";
 import SearchPriceRange from "./SearchPriceRange";
 import "./SearchForm.css";
 
-export default function SearchForm() {
+export default function SearchForm(props: any) {
   const [options, setOptions] = useState<Array<string>>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [city, setCity] = useState<string>("");
@@ -24,6 +24,11 @@ export default function SearchForm() {
     // console.log(city);
   };
 
+  const sendToApp = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    props.setAppCityState(city);
+  };
+
   return (
     <div className="search-form-container">
       <form action="submit">
@@ -36,7 +41,12 @@ export default function SearchForm() {
         <div className="mb-3">
           <SearchPriceRange storeMaxPrice={storeMaxPrice} />
         </div>
-        <button id="submit-button" type="submit" className="btn btn-primary">
+        <button
+          onClick={sendToApp}
+          id="submit-button"
+          type="submit"
+          className="btn btn-primary"
+        >
           Submit
         </button>
       </form>
