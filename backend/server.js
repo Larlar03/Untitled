@@ -27,6 +27,16 @@ app.get("/", (req, res) => {
   res.send("Care DB");
 });
 
+app.get("/salons", (req, res) => {
+  db.query("SELECT name, post_code FROM salons", (err, results) => {
+    if (err) {
+      console.log(err.response.data);
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 app.get("/location", (req, res) => {
   db.query("SELECT * FROM location", (err, results) => {
     if (err) {
