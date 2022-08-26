@@ -15,7 +15,7 @@ body {
 }
 
 .content {
-  background-image: url(./assets/background.jpg);
+  background-image: url(./assets/background3.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,7 +23,8 @@ body {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  .content {
-    border-radius: 10px;
+  .content-container {
+    margin: 0;
+    height: 100%;
   }
 }

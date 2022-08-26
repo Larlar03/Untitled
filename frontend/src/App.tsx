@@ -13,15 +13,15 @@ const App: React.FC = () => {
     console.log(city);
   };
 
-  useEffect(() => {
-    Axios.get(`http://localhost:3001/location/${city}`)
-      .then((response) => {
-        console.log(response.data[0]);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-  });
+  // useEffect(() => {
+  //   Axios.get(`http://localhost:3001/location/${city}`)
+  //     .then((response) => {
+  //       console.log(response.data[0]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response.data);
+  //     });
+  // });
 
   return (
     <BrowserRouter>
