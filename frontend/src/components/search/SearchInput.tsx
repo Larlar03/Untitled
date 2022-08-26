@@ -3,14 +3,18 @@ import Trie from "../autocomplete/Trie";
 import cityList from "../autocomplete/cities";
 import "./SearchInput.css";
 
-export default function SearchInput(props: any) {
+interface Props {
+  storeCity(city: string): void;
+}
+
+export default function SearchInput({ storeCity }: Props) {
   const [prefix, setPrefix] = useState("");
   const [suggestion, setSuggestion] = useState("");
 
   const myTrie = new Trie();
 
   useEffect(() => {
-    props.storeCity(prefix);
+    storeCity(prefix);
   }, [prefix]);
 
   useEffect(() => {

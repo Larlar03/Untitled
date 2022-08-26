@@ -5,8 +5,8 @@ import SearchPage from "./pages/SearchPage";
 import ResultsPage from "./pages/ResultsPage";
 import Axios from "axios";
 
-function App() {
-  const [city, setCity] = useState("");
+const App: React.FC = () => {
+  const [city, setCity] = useState<string>("");
 
   const setAppCityState = (cityName: string) => {
     setCity(cityName);
@@ -34,6 +34,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

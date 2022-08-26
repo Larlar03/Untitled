@@ -3,7 +3,7 @@ import ResultsCard from "./ResultsCard";
 import ResultsControls from "./ResultsControls";
 
 function Results() {
-  const [currentResult, setCurrentResult] = useState<number>(0);
+  const [currentResult, setCurrentResult] = useState<number>(1);
   const [salons, setSalons] = useState<{ name: string; city: string }[]>([
     { name: "Francesco Group", city: "Wolverhampton" },
     { name: "Redcoco Hair Studio ", city: "Walsall" },
@@ -11,7 +11,9 @@ function Results() {
   ]);
 
   const storeCurrentResult = (result: number) => {
-    setCurrentResult(result);
+    result === salons.length - 1
+      ? setCurrentResult(1)
+      : setCurrentResult(currentResult + 1);
   };
 
   return (

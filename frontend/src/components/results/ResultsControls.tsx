@@ -13,7 +13,7 @@ function ResultsControls(props: any) {
     <div className="controls-container">
       <i className="bi bi-filter-circle"></i>
       <span className="results-total">
-        {props.currentResult + 1} of {salons.length}
+        {props.currentResult} of {salons.length}
       </span>
       <Link to="/">
         <i className="bi bi-arrow-return-left"></i>
