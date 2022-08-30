@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./ResultsControls.css";
 
 interface Props {
-  salons: { name: string; post_code: string }[];
+  salons: { id: number; name: string; post_code: string }[];
   currentResult: number;
 }
 

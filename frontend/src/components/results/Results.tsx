@@ -5,33 +5,54 @@ import Axios from "axios";
 
 function Results() {
   const [currentResult, setCurrentResult] = useState<number>(1);
-  const [salons, setSalons] = useState<{ name: string; post_code: string }[]>([
-    { name: "", post_code: "" },
-    { name: "", post_code: "" },
-    { name: "", post_code: "" },
+  const [data, setData] = useState<
+    { id: number; name: string; post_code: string }[]
+  >([
+    { id: 0, name: "", post_code: "" },
+    { id: 1, name: "", post_code: "" },
+    { id: 2, name: "", post_code: "" },
+  ]);
+  const [salons, setSalons] = useState<
+    { id: number; name: string; post_code: string }[]
+  >([
+    { id: 0, name: "", post_code: "" },
+    { id: 1, name: "", post_code: "" },
+    { id: 2, name: "", post_code: "" },
   ]);
 
-  const storeCurrentResult = (result: number) => {
-    result === salons.length - 1
-      ? setCurrentResult(1)
-      : setCurrentResult(currentResult + 1);
+  const storeCurrentResultPrev = (id: number) => {
+    id === 1 ? setCurrentResult(salons.length) : setCurrentResult(id - 1);
+  };
+
+  const storeCurrentResultNext = (id: number) => {
+    id > salons.length - 1 ? setCurrentResult(1) : setCurrentResult(id + 1);
   };
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/salons`)
       .then((response) => {
-        setSalons(response.data);
+        setData(response.data);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   }, []);
 
+  useEffect(() => {
+    setSalons(data);
+    console.log(salons);
+  }, [data]);
+
   return (
     <div className="results-container">
       <ResultsControls salons={salons} currentResult={currentResult} />
       {/* Map Results cards in a carousel */}
-      <ResultsCard salons={salons} storeCurrentResult={storeCurrentResult} />
+      <ResultsCard
+        salons={salons}
+        storeCurrentResultPrev={storeCurrentResultPrev}
+        storeCurrentResultNext={storeCurrentResultNext}
+      />
     </div>
   );
 }

@@ -43,13 +43,13 @@ i:hover {
   align-items: center;
 }
 
-.results-card-left {
+#results-card-prev {
   transform: translatex(-110%) scale(0.8);
   transition: 500ms;
   opacity: 0.5;
 }
 
-.results-card-right {
+#results-card-next {
   transform: translatex(110%) scale(0.8);
   transition: 500ms;
   opacity: 0.5;
