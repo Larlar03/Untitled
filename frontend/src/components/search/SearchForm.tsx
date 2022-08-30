@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchInput from "./SearchInput";
 import SearchOptions from "./SearchOptions";
 import SearchPriceRange from "./SearchPriceRange";
@@ -7,7 +7,7 @@ import "./SearchForm.css";
 export default function SearchForm(props: any) {
   const [options, setOptions] = useState<Array<string>>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
-  const [city, setCity] = useState<string>("");
+  const [city, setCity] = useState<any>(null);
   const [toggleDisabled, setToggleDisabled] = useState<boolean>(true);
 
   const storeOptions = (arr: string[]) => {
@@ -22,8 +22,12 @@ export default function SearchForm(props: any) {
 
   const storeCity = (city: string) => {
     setCity(city);
-    // console.log(city);
+    console.log(city);
   };
+
+  useEffect(() => {
+    city ? setToggleDisabled(false) : setToggleDisabled(true);
+  }, [city]);
 
   const sendToApp = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();

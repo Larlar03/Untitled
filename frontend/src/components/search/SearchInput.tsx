@@ -6,13 +6,12 @@ import cities from "../autocomplete/cities";
 import "./SearchInput.css";
 
 export default function SearchInput(props: any) {
-  const [citySelection, setCitySelection] = useState<any>();
+  const [citySelection, setCitySelection] = useState<any>(null);
 
   useEffect(() => {
-    console.log(citySelection);
+    props.storeCity(citySelection);
   }, [citySelection]);
 
-  // props.storeCity(city)
   return (
     <div className="input-group flex-nowrap">
       <span className="input-group-text" id="addon-wrapping">
