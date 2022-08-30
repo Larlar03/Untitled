@@ -8,48 +8,52 @@ interface Props {
   storeCurrentResultNext(id: number): void;
 }
 
-function ResultsCard({
-  salons,
-  storeCurrentResultPrev,
-  storeCurrentResultNext,
-}: Props) {
-  const [prevCard, setPrevCard] = useState<number>(salons.length - 1);
+function ResultsCard(props: any) {
+  const [prevCard, setPrevCard] = useState<number>(props.salons.length - 1);
   const [activeCard, setActiveCard] = useState<number>(0);
   const [nextCard, setNextCard] = useState<number>(1);
 
   useEffect(() => {
-    setPrevCard(salons.length - 1);
-  }, [salons]);
+    setPrevCard(props.salons.length - 1);
+  }, [props.salons]);
 
   const prevResult = (event: React.MouseEvent<HTMLElement>) => {
     // Prev button logic here
     activeCard === 0
-      ? setActiveCard(salons.length - 1)
+      ? setActiveCard(props.salons.length - 1)
       : setActiveCard(activeCard - 1);
 
-    prevCard === 0 ? setPrevCard(salons.length - 1) : setPrevCard(prevCard - 1);
+    prevCard === 0
+      ? setPrevCard(props.salons.length - 1)
+      : setPrevCard(prevCard - 1);
 
-    nextCard === 0 ? setNextCard(salons.length - 1) : setNextCard(nextCard - 1);
+    nextCard === 0
+      ? setNextCard(props.salons.length - 1)
+      : setNextCard(nextCard - 1);
 
-    const activeCardId = salons[activeCard].id;
+    const activeCardId = props.salons[activeCard].id;
 
-    storeCurrentResultPrev(activeCardId);
+    props.storeCurrentResultPrev(activeCardId);
   };
 
   //  Fix order that cards display on next click
   const nextResult = (event: React.MouseEvent<HTMLElement>) => {
-    activeCard < salons.length - 1
+    activeCard < props.salons.length - 1
       ? setActiveCard(activeCard + 1)
       : setActiveCard(0);
 
-    prevCard === salons.length - 1 ? setPrevCard(0) : setPrevCard(prevCard + 1);
+    prevCard === props.salons.length - 1
+      ? setPrevCard(0)
+      : setPrevCard(prevCard + 1);
 
-    nextCard === salons.length - 1 ? setNextCard(0) : setNextCard(nextCard + 1);
+    nextCard === props.salons.length - 1
+      ? setNextCard(0)
+      : setNextCard(nextCard + 1);
 
     // console.log(salons[activeCard].id);
-    const activeCardId = salons[activeCard].id;
+    const activeCardId = props.salons[activeCard].id;
 
-    storeCurrentResultNext(activeCardId);
+    props.storeCurrentResultNext(activeCardId);
   };
 
   return (
@@ -57,18 +61,18 @@ function ResultsCard({
       <div className="prev" onClick={prevResult}>
         <i className="bi bi-arrow-left-circle-fill"></i>
       </div>
-      {!salons ? (
+      {!props.salons ? (
         <p>Loading</p>
       ) : (
         <div className="carousel">
           <div
             className="results-card"
             id="results-card-prev"
-            key={salons[prevCard].id}
+            key={props.salons[prevCard].id}
           >
             <div className="results-card-heading">
-              <h3>{salons[prevCard].name}</h3>
-              <h4>{salons[prevCard].post_code}</h4>
+              <h3>{props.salons[prevCard].name}</h3>
+              <h4>{props.salons[prevCard].post_code}</h4>
               <div className="star-rating">*****</div>
             </div>
             <div className="results-description">
@@ -99,11 +103,11 @@ function ResultsCard({
           <div
             className="results-card"
             id="results-card-active"
-            key={salons[activeCard].id}
+            key={props.salons[activeCard].id}
           >
             <div className="results-card-heading">
-              <h3>{salons[activeCard].name}</h3>
-              <h4>{salons[activeCard].post_code}</h4>
+              <h3>{props.salons[activeCard].name}</h3>
+              <h4>{props.salons[activeCard].post_code}</h4>
               <div className="star-rating">*****</div>
             </div>
             <div className="results-description">
@@ -134,11 +138,11 @@ function ResultsCard({
           <div
             className="results-card"
             id="results-card-next"
-            key={salons[nextCard].id}
+            key={props.salons[nextCard].id}
           >
             <div className="results-card-heading">
-              <h3>{salons[nextCard].name}</h3>
-              <h4>{salons[nextCard].post_code}</h4>
+              <h3>{props.salons[nextCard].name}</h3>
+              <h4>{props.salons[nextCard].post_code}</h4>
               <div className="star-rating">*****</div>
             </div>
             <div className="results-description">

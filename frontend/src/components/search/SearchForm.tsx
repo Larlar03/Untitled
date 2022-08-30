@@ -4,11 +4,7 @@ import SearchOptions from "./SearchOptions";
 import SearchPriceRange from "./SearchPriceRange";
 import "./SearchForm.css";
 
-interface Props {
-  setAppCityState(cityName: string): void;
-}
-
-export default function SearchForm({ setAppCityState }: Props) {
+export default function SearchForm(props: any) {
   const [options, setOptions] = useState<Array<string>>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [city, setCity] = useState<string>("");
@@ -30,7 +26,7 @@ export default function SearchForm({ setAppCityState }: Props) {
 
   const sendToApp = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    setAppCityState(city);
+    props.setAppCityState(city);
   };
 
   return (

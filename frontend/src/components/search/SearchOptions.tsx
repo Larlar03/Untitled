@@ -24,11 +24,11 @@ interface Props {
   storeOptions(arr: string[]): void;
 }
 
-export default function SearchOptions({ storeOptions }: Props) {
+export default function SearchOptions(props: any) {
   const [optionsArr, setOptionsArr] = useState<Array<string>>([]);
 
   useEffect(() => {
-    storeOptions(optionsArr);
+    props.storeOptions(optionsArr);
   }, [optionsArr]);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {

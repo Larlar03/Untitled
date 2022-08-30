@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./SearchPriceRange.css";
 
-interface Props {
-  storeMaxPrice(max: number): void;
-}
-
-export default function SearchPriceRange({ storeMaxPrice }: Props) {
+export default function SearchPriceRange(props: any) {
   const [max, setMax] = useState(200);
 
   useEffect(() => {
-    storeMaxPrice(max);
+    props.storeMaxPrice(max);
   });
 
   const handleChange = () => {

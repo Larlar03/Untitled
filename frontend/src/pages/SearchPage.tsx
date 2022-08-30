@@ -2,17 +2,13 @@ import Header from "../components/header/Header";
 import SearchForm from "../components/search/SearchForm";
 import "./SearchPage.css";
 
-interface Props {
-  setAppCityState(cityName: string): void;
-}
-
-export default function SearchPage({ setAppCityState }: Props) {
+export default function SearchPage(props: any) {
   return (
     <div className="container-fluid" id="SearchPage">
       <div className="content-container">
         <div className="content" id="search-content">
           <Header />
-          <SearchForm setAppCityState={setAppCityState} />
+          <SearchForm setAppCityState={props.setAppCityState} />
         </div>
       </div>
     </div>
