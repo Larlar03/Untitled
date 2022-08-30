@@ -10,7 +10,7 @@ const App: React.FC = () => {
 
   const setAppCityState = (cityName: string) => {
     setCity(cityName);
-    console.log(city);
+    console.log("city:" + city);
   };
 
   // useEffect(() => {

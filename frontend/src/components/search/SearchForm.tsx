@@ -8,6 +8,7 @@ export default function SearchForm(props: any) {
   const [options, setOptions] = useState<Array<string>>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [city, setCity] = useState<string>("");
+  const [toggleDisabled, setToggleDisabled] = useState<boolean>(true);
 
   const storeOptions = (arr: string[]) => {
     setOptions(arr);
@@ -46,6 +47,7 @@ export default function SearchForm(props: any) {
           id="submit-button"
           type="submit"
           className="btn btn-primary"
+          disabled={toggleDisabled}
         >
           Submit
         </button>

@@ -1,6 +1,5 @@
 #addon-wrapping {
   background: white;
-  border: none;
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
   color: #cbacc2;
@@ -11,6 +10,15 @@
   flex-direction: column;
   position: relative;
   width: 100%;
+}
+
+.css-gcwvw8-MuiAutocomplete-root {
+  width: 100% !important;
+  background: white;
+}
+
+.css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 0 !important;
 }
 
 #search-input {
@@ -46,7 +54,7 @@
 
 #current-location-button {
   background: white;
-  border: none;
+  border: 1px solid #ced4da;
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
   color: #3b122e;
