@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/salons", (req, res) => {
-  db.query("SELECT name, post_code FROM salons", (err, results) => {
+  db.query("SELECT id, name, post_code FROM salons", (err, results) => {
     if (err) {
       console.log(err.response.data);
     } else {
