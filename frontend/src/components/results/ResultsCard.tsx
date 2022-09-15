@@ -1,6 +1,7 @@
 import { act } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import "./ResultsCard.css";
+import PI from "../../assets/placeholder-image.jpg";
 
 interface Props {
   salons: { id: number; name: string; post_code: string }[];
@@ -58,109 +59,115 @@ function ResultsCard(props: any) {
 
   return (
     <div id="ResultsCard">
-      <div className="prev" onClick={prevResult}>
+      {/* <div className="prev" onClick={prevResult}>
         <i className="bi bi-arrow-left-circle-fill"></i>
-      </div>
+      </div> */}
       {!props.salons ? (
         <p>Loading</p>
       ) : (
         <div className="carousel">
+          {/* PREV CARD */}
           <div
-            className="results-card"
-            id="results-card-prev"
+            className="card-container"
+            id="prev-card"
             key={props.salons[prevCard].id}
           >
-            <div className="results-card-heading">
-              <h3>{props.salons[prevCard].name}</h3>
-              <h4>{props.salons[prevCard].post_code}</h4>
-              <div className="star-rating">*****</div>
+            <div className="results-card">
+              <div className="heading">
+                <h3>{props.salons[prevCard].name}</h3>
+                <h4>Walsall</h4>
+              </div>
+              <div className="address">
+                99 Darlington Street, Wolverhampton, West Midlands, WV1 4EX
+              </div>
+              <div className="links">
+                <i className="bi bi-instagram"></i>
+                <i className="bi bi-facebook"></i>
+              </div>
+              <div className="image">
+                <img src={PI} alt="placeholder" />
+              </div>
+              <div className="contact">
+                <span className="website">www.redcocohairstudio.co.uk</span>
+                <span className="phone">01217478332</span>
+              </div>
             </div>
-            <div className="results-description">
-              <p>
-                Services offered by Francesco Group include silk press, trims,
-                extensions, texture release, colour, braids and more...
-              </p>
-            </div>
-            <div className="results-card-links">
-              <i className="bi bi-box-arrow-up-right"></i>
-              <i className="bi bi-telephone"></i>
-              <i className="bi bi-instagram"></i>
-              <i className="bi bi-facebook"></i>
-            </div>
-            <div className="results-card-address">
-              99 Darlington Street, Wolverhampton, West Midlands, WV1 4EX
-            </div>
-            <div className="results-map-container"></div>
+            <div className="results-card-shadow"></div>
           </div>
 
+          {/* ACTIVE CARD */}
+
           <div
-            className="results-card"
-            id="results-card-active"
+            className="card-container"
+            id="active-card"
             key={props.salons[activeCard].id}
           >
-            <div className="results-card-heading">
-              <h3>{props.salons[activeCard].name}</h3>
-              <h4>{props.salons[activeCard].post_code}</h4>
-              <div className="star-rating">*****</div>
+            <div className="results-card">
+              <div className="heading">
+                <h3>{props.salons[activeCard].name}</h3>
+                <h4>Walsall</h4>
+              </div>
+              <div className="address">
+                99 Darlington Street, Wolverhampton, West Midlands, WV1 4EX
+              </div>
+
+              <div className="links">
+                <i className="bi bi-instagram"></i>
+                <i className="bi bi-facebook"></i>
+              </div>
+              <div className="mid-section">
+                <div className="prev" onClick={prevResult}>
+                  <i className="bi bi-arrow-left-short"></i>{" "}
+                </div>
+                <div className="image">
+                  <img src={PI} alt="placeholder" />
+                </div>
+                <div className="next" onClick={nextResult}>
+                  <i className="bi bi-arrow-right-short"></i>{" "}
+                </div>
+              </div>
+              <div className="contact">
+                <span className="website">www.redcocohairstudio.co.uk</span>
+                <span className="phone">0121 747 8332</span>
+              </div>
             </div>
-            <div className="results-description">
-              <p>
-                Services offered by Francesco Group include silk press, trims,
-                extensions, texture release, colour, braids and more...
-              </p>
-            </div>
-            <div className="results-card-links">
-              <i className="bi bi-box-arrow-up-right"></i>
-              <i className="bi bi-telephone"></i>
-              <i className="bi bi-instagram"></i>
-              <i className="bi bi-facebook"></i>
-            </div>
-            <div className="results-card-address">
-              99 Darlington Street, Wolverhampton, West Midlands, WV1 4EX
-            </div>
-            <div className="results-map-container"></div>
+            <div className="results-card-shadow"></div>
           </div>
 
+          {/* NEXT CARD */}
           <div
-            className="results-card"
-            id="results-card-next"
+            className="card-container"
+            id="next-card"
             key={props.salons[nextCard].id}
           >
-            <div className="results-card-heading">
-              <h3>{props.salons[nextCard].name}</h3>
-              <h4>{props.salons[nextCard].post_code}</h4>
-              <div className="star-rating">*****</div>
+            <div className="results-card">
+              <div className="heading">
+                <h3>{props.salons[nextCard].name}</h3>
+                <h4>Walsall</h4>
+              </div>
+              <div className="address">
+                99 Darlington Street, Wolverhampton, West Midlands, WV1 4EX
+              </div>
+              <div className="links">
+                <i className="bi bi-instagram"></i>
+                <i className="bi bi-facebook"></i>
+              </div>
+              <div className="image">
+                <img src={PI} alt="placeholder" />
+              </div>
+              <div className="contact">
+                <span className="website">www.redcocohairstudio.co.uk</span>
+                <span className="phone">01217478332</span>
+              </div>
             </div>
-            <div className="results-description">
-              <p>
-                Services offered by Francesco Group include silk press, trims,
-                extensions, texture release, colour, braids and more...
-              </p>
-            </div>
-            <div className="results-card-links">
-              <i className="bi bi-box-arrow-up-right"></i>
-              <i className="bi bi-telephone"></i>
-              <i className="bi bi-instagram"></i>
-              <i className="bi bi-facebook"></i>
-            </div>
-            <div className="results-card-address">
-              99 Darlington Street, Wolverhampton, West Midlands, WV1 4EX
-            </div>
-            <div className="results-map-container">
-              {/* <iframe
-                title="Salon Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2424.1063768129247!2d-2.131966048611175!3d52.58576993900637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48709b9a913c037b%3A0x73dec7565c6ed3c0!2sFrancesco%20Group!5e0!3m2!1sen!2suk!4v1660207736054!5m2!1sen!2suk"
-                style={{ border: 0 }}
-                loading="lazy"
-              ></iframe> */}
-            </div>
+            <div className="results-card-shadow"></div>
           </div>
         </div>
       )}
 
-      <div className="next" onClick={nextResult}>
+      {/* <div className="next" onClick={nextResult}>
         <i className="bi bi-arrow-right-circle-fill"></i>
-      </div>
+      </div> */}
     </div>
   );
 }

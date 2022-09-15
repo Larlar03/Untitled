@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ResultsCard from "./ResultsCard";
-import ResultsControls from "./ResultsControls";
 import Axios from "axios";
+import ResultsNav from "./ResultsNav";
 
 function Results() {
   const [currentResult, setCurrentResult] = useState<number>(1);
@@ -46,7 +46,7 @@ function Results() {
 
   return (
     <div className="results-container">
-      <ResultsControls salons={salons} currentResult={currentResult} />
+      <ResultsNav salons={salons} currentResult={currentResult} />
       {/* Map Results cards in a carousel */}
       <ResultsCard
         salons={salons}

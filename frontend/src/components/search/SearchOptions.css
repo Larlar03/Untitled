@@ -5,7 +5,7 @@ ul.services-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 li.service-button {
@@ -32,4 +32,12 @@ li.active {
 
 .grow:hover {
   transform: scale(1.05);
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  ul.services-container {
+    margin: 20px auto;
+    gap: 6px;
+  }
 }

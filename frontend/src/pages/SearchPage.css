@@ -18,12 +18,12 @@
   #search-content,
   #search-content-shadow {
     width: 529px;
-    height: 852px;
+    height: 790px;
     border-radius: 10px;
     position: absolute;
   }
   #search-content {
-    padding: 19px 50px;
+    padding: 15px 50px;
     border: solid 2px #241e92;
     background: #f7f7f7;
     z-index: 10;

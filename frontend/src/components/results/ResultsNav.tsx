@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./ResultsControls.css";
+import "./ResultsNav.css";
 
-function ResultsControls(props: any) {
+function ResultsNav(props: any) {
   return (
     <div className="controls-container">
       <i className="bi bi-filter-circle"></i>
-      <span className="results-total">
+      <span className="results-counter">
         {props.currentResult} of {props.salons.length}
       </span>
       <Link to="/">
@@ -17,4 +17,4 @@ function ResultsControls(props: any) {
   );
 }
 
-export default ResultsControls;
+export default ResultsNav;

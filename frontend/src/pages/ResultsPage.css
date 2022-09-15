@@ -1,6 +1,7 @@
 #results-content {
-  padding: 54px 0;
+  /* padding: 54px 0; */
   height: 100vh;
+  margin: 34px 0;
 }
 
 /* Large devices (desktops, 992px and up) */
