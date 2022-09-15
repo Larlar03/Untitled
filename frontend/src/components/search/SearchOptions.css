@@ -11,24 +11,19 @@ ul.services-container {
 li.service-button {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 500;
-  background: #f6eff4;
+  border: 1px solid #7b6cf6;
   padding: 8px 15px;
   border-radius: 100px;
   margin: 6px 0;
 }
 
 li.service-button:hover {
-  color: #88627d;
   cursor: pointer;
+  background: #7b6cf6;
 }
 
 li.active {
-  color: #f6eff4;
-  background: #88627d;
-}
-
-li.active:hover {
-  color: #f6eff4;
+  background: #7b6cf6;
 }
 
 .grow {

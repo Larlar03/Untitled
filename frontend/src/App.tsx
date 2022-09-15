@@ -6,22 +6,22 @@ import ResultsPage from "./pages/ResultsPage";
 import Axios from "axios";
 
 const App: React.FC = () => {
-  const [city, setCity] = useState<string>("");
+  const [city, setCity] = useState<any>("");
 
-  const setAppCityState = (cityName: string) => {
-    setCity(cityName);
+  const setAppCityState = (cityName: any) => {
+    setCity(cityName["label"]);
     console.log("city:" + city);
   };
 
-  // useEffect(() => {
-  //   Axios.get(`http://localhost:3001/location/${city}`)
-  //     .then((response) => {
-  //       console.log(response.data[0]);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response.data);
-  //     });
-  // });
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/salons/${city}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  });
 
   return (
     <BrowserRouter>

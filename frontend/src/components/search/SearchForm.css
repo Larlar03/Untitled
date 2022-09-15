@@ -11,19 +11,22 @@
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 5px;
-  background-color: #37515f;
-  color: #c5decd;
+  background-color: #c6a3ff;
+  color: #241e92;
+  margin-top: 10px;
 }
 
 #submit-button:hover {
-  background-color: #eee2eb;
-  color: #a27e97;
+  background-color: #7b6cf6;
+  color: #241e92;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .search-form-container {
-    margin: 64px auto 0 auto;
-    width: 600px;
+    margin: 60px auto 0 auto;
+  }
+
+  #submit-button {
   }
 }

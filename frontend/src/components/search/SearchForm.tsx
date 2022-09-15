@@ -20,14 +20,15 @@ export default function SearchForm(props: any) {
     // console.log(maxPrice);
   };
 
-  const storeCity = (city: string) => {
+  const storeCity = (city: any) => {
     setCity(city);
-    console.log(city);
   };
 
   useEffect(() => {
-    city ? setToggleDisabled(false) : setToggleDisabled(true);
-  }, [city]);
+    city && options.length > 0
+      ? setToggleDisabled(false)
+      : setToggleDisabled(true);
+  }, [city, options]);
 
   const sendToApp = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();

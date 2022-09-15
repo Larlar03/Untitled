@@ -5,13 +5,12 @@
 h1 {
   font-size: 4rem !important;
   font-weight: 700 !important;
-  color: #3b122e;
   font-family: "Space Grotesk", sans-serif;
 }
 
 h1 a {
   text-decoration: none !important;
-  color: #3b122e;
+  color: #000000;
 }
 
 h1 a:hover {
