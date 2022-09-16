@@ -1,11 +1,10 @@
-// Import Express
+// Express
 import express from "express";
 const app = express();
 app.use(express.json());
 
-// Import postgres
-import pkg from "pg";
-const { Client } = pkg;
+// MySQL
+import mysql from "mysql";
 
 // Cors
 import cors from "cors";
@@ -17,37 +16,27 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-// const connectionString='postgressql://username:password@localhost:5432/databasename'
-// const connectionString = "postgressql://lana.gordon:root@localhost:5432/care";
-// const client = new Client({
-//   connectionString: connectionString,
-// });
-
-const db = new Client({
-  host: "localhost", // server name or IP address;
-  port: 5432,
+const db = mysql.createConnection({
+  host: "localhost",
   database: "care",
-  user: "lana.gordon",
+  user: "root",
   password: "root",
-});
-
-db.connect();
-
-// Get all salons
-app.get("/salons", (req, res) => {
-  db.query("SELECT id, name, post_code FROM salons", (err, results) => {
-    if (err) {
-      console.log(err.response.data);
-    } else {
-      res.send(results.rows);
-    }
-    db.end;
-  });
 });
 
 app.get("/", (req, res) => {
   res.send("Care DB");
 });
+
+// Get all salons
+// app.get("/salons", (req, res) => {
+//   db.query("SELECT id, name, post_code FROM salons", (err, results) => {
+//     if (err) {
+//       console.log(err.response.data);
+//     } else {
+//       res.send(results);
+//     }
+//   });
+// });
 
 // // Get all locations
 // app.get("/location", (req, res) => {
@@ -55,8 +44,7 @@ app.get("/", (req, res) => {
 //     if (err) {
 //       console.log(err.response.data);
 //     } else {
-//       res.send(results.rows);
-//           db.end;
+//       res.send(results);
 //     }
 //   });
 // });
