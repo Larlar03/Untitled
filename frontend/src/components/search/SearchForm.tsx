@@ -1,62 +1,57 @@
 import { useEffect, useState } from "react";
-import SearchInput from "./SearchInput";
-import SearchOptions from "./SearchOptions";
-import SearchPriceRange from "./SearchPriceRange";
+import SearchInput from "./search-input/SearchInput";
+import SearchOptions from "./search-options/SearchOptions";
+import SearchPriceRange from "./search-price-range/SearchPriceRange";
 import "./SearchForm.css";
 
 export default function SearchForm(props: any) {
-  const [options, setOptions] = useState<Array<string>>([]);
-  const [maxPrice, setMaxPrice] = useState<number>(0);
-  const [city, setCity] = useState<any>(null);
-  const [toggleDisabled, setToggleDisabled] = useState<boolean>(true);
+    const [services, setServices] = useState<Array<string>>([]);
+    const [city, setCity] = useState<any>();
+    const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  const storeOptions = (arr: string[]) => {
-    setOptions(arr);
-    // console.log(options);
-  };
+    useEffect(() => {
+        city && services.length > 0
+            ? setIsDisabled(false)
+            : setIsDisabled(true);
+    }, [city, services]);
 
-  const storeMaxPrice = (max: number) => {
-    setMaxPrice(max);
-    // console.log(maxPrice);
-  };
+    const selectCity = (event: React.MouseEvent<HTMLElement>) => {
+        setCity(event);
+        city && props.onCitySelection(city["label"]);
+    };
 
-  const storeCity = (city: any) => {
-    setCity(city);
-  };
+    const selectServices = (options: string[]) => {
+        setServices(options);
+        services && props.onServiceSelection(services);
+    };
 
-  useEffect(() => {
-    city && options.length > 0
-      ? setToggleDisabled(false)
-      : setToggleDisabled(true);
-  }, [city, options]);
+    const onSubmit = (event: React.MouseEvent<HTMLElement>) => {
+        event?.preventDefault();
+        props.getSalons();
+    };
 
-  const sendToApp = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    props.setAppCityState(city);
-  };
-
-  return (
-    <div className="search-form-container">
-      <form action="submit">
-        <div className="mb-3">
-          <SearchInput storeCity={storeCity} />
+    return (
+        <div className="search-form-container">
+            <form action="submit">
+                <div className="mb-3">
+                    <SearchInput selectCity={selectCity} />
+                </div>
+                <div className="mb-3">
+                    <SearchOptions selectServices={selectServices} />
+                </div>
+                <div className="mb-3">
+                    <SearchPriceRange />
+                </div>
+                <button
+                    onClick={onSubmit}
+                    id="submit-button"
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isDisabled}
+                >
+                    Submit
+                </button>
+            </form>
         </div>
-        <div className="mb-3">
-          <SearchOptions storeOptions={storeOptions} />
-        </div>
-        <div className="mb-3">
-          <SearchPriceRange storeMaxPrice={storeMaxPrice} />
-        </div>
-        <button
-          onClick={sendToApp}
-          id="submit-button"
-          type="submit"
-          className="btn btn-primary"
-          disabled={toggleDisabled}
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  );
+    );
 }

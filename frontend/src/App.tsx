@@ -4,36 +4,66 @@ import "./App.css";
 import SearchPage from "./pages/SearchPage";
 import ResultsPage from "./pages/ResultsPage";
 import Axios from "axios";
+import Salon from "./types/salons";
 
 const App: React.FC = () => {
-  const [city, setCity] = useState<any>("");
+    const [city, setCity] = useState<string | undefined>();
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
+    const [salonsInCity, setSalonsInCity] = useState<Salon[]>();
+    const [filteredSalons, setFilteredSalons] = useState<Salon[]>();
 
-  const setAppCityState = (cityName: any) => {
-    setCity(cityName["label"]);
-    console.log("city:" + city);
-  };
+    useEffect(() => {
+        getSalonsInCity();
+    }, [city]);
 
-  useEffect(() => {
-    Axios.get(`http://localhost:3001/salons/${city}`)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-  });
+    useEffect(() => {
+        filterSalonsInCity();
+    }, [selectedServices]);
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<SearchPage setAppCityState={setAppCityState} />}
-        />
-        <Route path="/results" element={<ResultsPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    const onCitySelection = (city: any) => {
+        setCity(city);
+    };
+
+    const onServiceSelection = (services: string[]) => {
+        setSelectedServices(services);
+    };
+
+    const getSalonsInCity = () => {
+        Axios.get(`${process.env.REACT_APP_SALONS_API}/${city}`).then(
+            (response) => {
+                setSalonsInCity(response.data);
+                console.log(salonsInCity);
+            }
+        );
+    };
+
+    const filterSalonsInCity = () => {
+        const filteredSalonsInCity = salonsInCity?.filter((salon: Salon) => {
+            return selectedServices.some((service: string) => {
+                return salon.services?.includes(service);
+            });
+        });
+
+        setFilteredSalons(filteredSalonsInCity);
+    };
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <SearchPage
+                            onCitySelection={onCitySelection}
+                            onServiceSelection={onServiceSelection}
+                            getSalons={getSalonsInCity}
+                        />
+                    }
+                />
+                <Route path="/results" element={<ResultsPage />} />
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export default App;

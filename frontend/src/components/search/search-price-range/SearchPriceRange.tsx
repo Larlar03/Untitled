@@ -5,7 +5,7 @@ export default function SearchPriceRange(props: any) {
   const [max, setMax] = useState(200);
 
   useEffect(() => {
-    props.storeMaxPrice(max);
+    // props.storeMaxPrice(max);
   });
 
   const handleChange = () => {

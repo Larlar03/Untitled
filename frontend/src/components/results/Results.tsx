@@ -32,7 +32,6 @@ function Results() {
     Axios.get(`http://localhost:3001/salons`)
       .then((response) => {
         setData(response.data);
-        console.log(data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -41,7 +40,6 @@ function Results() {
 
   useEffect(() => {
     setSalons(data);
-    console.log(salons);
   }, [data]);
 
   return (
