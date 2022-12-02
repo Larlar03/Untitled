@@ -10,33 +10,73 @@ import mysql from "mysql";
 import cors from "cors";
 app.use(cors());
 
+import mockSalon from "./mock-salon-data";
+
 // Port
 const PORT = 3001;
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server is listening on port ${PORT}`);
 });
 
 const db = mysql.createConnection({
-  host: "localhost",
-  database: "care",
-  user: "root",
-  password: "root",
+    host: "localhost",
+    database: "care",
+    user: "root",
+    password: "root",
 });
 
 app.get("/", (req, res) => {
-  res.send("Care DB");
+    res.send("Care DB");
 });
 
 // Get all salons
-// app.get("/salons", (req, res) => {
-//   db.query("SELECT id, name, post_code FROM salons", (err, results) => {
-//     if (err) {
-//       console.log(err.response.data);
-//     } else {
-//       res.send(results);
+app.get("/salons", (req, res) => {
+    db.query("SELECT id, name, post_code FROM salons", (err, results) => {
+        if (err) {
+            console.log(err.response.data);
+        } else {
+            res.send(results);
+        }
+    });
+});
+
+// app.get('/salons/:city', (req, res) => {
+//   db.query(
+//     'SELECT * \
+//     FROM location \
+//     WHERE city = ?',
+//     [req.params.city],
+//     (err, results) => {
+//       if (err) {
+//         console.log(err.response.data);
+//       } else {
+//         res.send(results);
+//       }
+//       db.end;
 //     }
-//   });
+//   );
 // });
+
+//  Get all salons from city
+app.get("/salons/:city", (req, res) => {
+    db.query(
+        "SELECT * \
+        FROM salons \
+        WHERE city_id IN ( \
+        SELECT id \
+	      FROM location \
+	      WHERE city = ?)",
+        [req.params.city],
+        (err, results) => {
+            if (err) {
+                console.log(err.response.data);
+            } else {
+                res.send(results.rows);
+            }
+            db.end;
+        }
+    );
+});
 
 // // Get all locations
 // app.get("/location", (req, res) => {

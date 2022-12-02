@@ -1,131 +1,45 @@
-// Import Express
-import express from "express";
+// express
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const mockSalons = require("./mock-data/mock-salon-data.json");
+
+//  defining the express app
 const app = express();
-app.use(express.json());
 
-// Import postgres
-import pkg from "pg";
-const { Client } = pkg;
+// adding Helmet to enhance your API's security
+app.use(helmet());
 
-// Cors
-import cors from "cors";
+// using bodyParser to parse JSON bodies into JS objects
+app.use(bodyParser.json());
+
+// enabling CORS for all requests
 app.use(cors());
+
+// adding morgan to log HTTP requests
+app.use(morgan("combined"));
 
 // Port
 const PORT = 3001;
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
-
-// const connectionString='postgressql://username:password@localhost:5432/databasename'
-// const connectionString = "postgressql://lana.gordon:root@localhost:5432/care";
-// const client = new Client({
-//   connectionString: connectionString,
-// });
-
-const db = new Client({
-  host: "localhost", // server name or IP address;
-  port: 5432,
-  database: "care",
-  user: "lana.gordon",
-  password: "root",
-});
-
-db.connect();
-
-// Get all salons
-app.get("/salons", (req, res) => {
-  db.query("SELECT id, name, post_code FROM salons", (err, results) => {
-    if (err) {
-      console.log(err.response.data);
-    } else {
-      res.send(results.rows);
-    }
-    db.end;
-  });
+    console.log(`Server is listening on port ${PORT}`);
 });
 
 app.get("/", (req, res) => {
-  res.send("Care DB");
+    res.send("Care DB");
 });
 
-// // Get all locations
-// app.get("/location", (req, res) => {
-//   db.query("SELECT * FROM location", (err, results) => {
-//     if (err) {
-//       console.log(err.response.data);
-//     } else {
-//       res.send(results.rows);
-//           db.end;
-//     }
-//   });
-// });
+// Get all salons
+app.get("/salons", (req, res) => {
+    res.send(mockSalons);
+});
 
-// // Get all locations that match city param
-// app.get("/location/:city", (req, res) => {
-//   db.query(
-//     "SELECT * FROM location WHERE city = ?",
-//     [req.params.city],
-//     (err, results) => {
-//       if (err) {
-//         console.log(err.response.data);
-//       } else {
-//         res.send(results);
-//       }
-//     }
-//   );
-// });
-
-// //  Get all salons from city
-// app.get("/salons/:city", (req, res) => {
-//   db.query(
-//     "SELECT * FROM \
-//     salons s \
-//     INNER JOIN \
-//     location l \
-//     ON s.city_id = l.id \
-//     WHERE l.city = ?",
-//     [req.params.city],
-//     (err, results) => {
-//       if (err) {
-//         console.log(err.response.data);
-//       } else {
-//         res.send(results);
-//       }
-//     }
-//   );
-// });
-
-// app.get("/location", (req, res) => {
-//   const city = req.body.city;
-//   console.log(city);
-//   db.query("SELECT * FROM location WHERE city = ?", [city], (err, results) => {
-//     if (err) {
-//       console.log(err.response.data);
-//     } else {
-//       res.send(results);
-//     }
-//   });
-// });
-
-// app.get("/location", (req, res) => {
-//   db.query("SELECT * FROM location", (err, results) => {
-//     if (err) {
-//       console.log(err.response.data);
-//     } else {
-//       res.send(results);
-//     }
-//   });
-// });
-
-// app.get("/salons/:id", function getSalon(req, res, next) {
-//   const salonId = req.params.id;
-//   connection.query(
-//     "SELECT * FROM salons WHERE id = ?",
-//     [salonId],
-//     (err, results) => {
-//       if (err) throw err;
-//       res.json(results);
-//     }
-//   );
-// });
+app.get("/salons/:city", (req, res) => {
+    const city = req.params.city;
+    const salons = mockSalons.filter((s) => {
+        return s.location.city === city;
+    });
+    res.send(salons);
+});
