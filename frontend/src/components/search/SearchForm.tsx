@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchInput from "./search-input/SearchInput";
 import SearchOptions from "./search-options/SearchOptions";
 import SearchPriceRange from "./search-price-range/SearchPriceRange";
@@ -9,25 +10,27 @@ export default function SearchForm(props: any) {
     const [city, setCity] = useState<any>();
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         city && services.length > 0
             ? setIsDisabled(false)
             : setIsDisabled(true);
     }, [city, services]);
 
-    const selectCity = (event: React.MouseEvent<HTMLElement>) => {
-        setCity(event);
-        city && props.onCitySelection(city["label"]);
+    const selectCity = (label: any) => {
+        props.onCitySelection(label.label);
+        setCity(label.label);
     };
 
     const selectServices = (options: string[]) => {
+        props.onServiceSelection(options);
         setServices(options);
-        services && props.onServiceSelection(services);
     };
 
     const onSubmit = (event: React.MouseEvent<HTMLElement>) => {
-        event?.preventDefault();
-        props.getSalons();
+        event.preventDefault();
+        navigate("/results");
     };
 
     return (

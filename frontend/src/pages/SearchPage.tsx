@@ -10,7 +10,7 @@ export default function SearchPage(props: any) {
                 <SearchForm
                     onCitySelection={props.onCitySelection}
                     onServiceSelection={props.onServiceSelection}
-                    getSalons={props.getSalons}
+                    navigateToResults={props.navigateToResults}
                 />
             </div>
             <div id="search-content-shadow"></div>

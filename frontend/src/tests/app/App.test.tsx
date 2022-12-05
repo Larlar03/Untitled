@@ -136,4 +136,16 @@ describe("Filter salons by services", () => {
             },
         ]);
     });
+
+    test("Given the service 'any' is selected, all salons should be returned", () => {
+        // arrange
+
+        const mockServices = ["Any", "Braids"];
+
+        // act
+        const results = mockFilterSalonsInCity(mockSalons, mockServices);
+
+        // assert
+        expect(results).toEqual(mockSalons);
+    });
 });
