@@ -46,7 +46,7 @@ export default function SearchForm(props: any) {
                     <SearchPriceRange />
                 </div>
                 <button
-                    onClick={onSubmit}
+                    onClick={() => navigate("/results")}
                     id="submit-button"
                     type="submit"
                     className="btn btn-primary"

@@ -1,13 +1,6 @@
-import { act } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 import "./ResultsCard.css";
 import PI from "../../assets/placeholder-image.jpg";
-
-interface Props {
-    salons: { id: number; name: string; post_code: string }[];
-    storeCurrentResultPrev(id: number): void;
-    storeCurrentResultNext(id: number): void;
-}
 
 function ResultsCard(props: any) {
     const [prevCard, setPrevCard] = useState<number>(props.salons.length - 1);
@@ -19,7 +12,6 @@ function ResultsCard(props: any) {
     }, [props.salons]);
 
     const prevResult = (event: React.MouseEvent<HTMLElement>) => {
-        // Prev button logic here
         activeCard === 0
             ? setActiveCard(props.salons.length - 1)
             : setActiveCard(activeCard - 1);
@@ -37,7 +29,6 @@ function ResultsCard(props: any) {
         props.storeCurrentResultPrev(activeCardId);
     };
 
-    //  Fix order that cards display on next click
     const nextResult = (event: React.MouseEvent<HTMLElement>) => {
         activeCard < props.salons.length - 1
             ? setActiveCard(activeCard + 1)
@@ -51,7 +42,6 @@ function ResultsCard(props: any) {
             ? setNextCard(0)
             : setNextCard(nextCard + 1);
 
-        // console.log(salons[activeCard].id);
         const activeCardId = props.salons[activeCard].id;
 
         props.storeCurrentResultNext(activeCardId);
@@ -59,14 +49,9 @@ function ResultsCard(props: any) {
 
     return (
         <div id="ResultsCard">
-            {/* <div className="prev" onClick={prevResult}>
-        <i className="bi bi-arrow-left-circle-fill"></i>
-      </div> */}
-            {!props.salons ? (
-                <p>Loading</p>
-            ) : (
-                <div className="carousel">
-                    {/* PREV CARD */}
+            <div className="carousel">
+                {/* PREV CARD */}
+                {props?.salons.length > 2 && (
                     <div
                         className="card-container"
                         id="prev-card"
@@ -75,11 +60,15 @@ function ResultsCard(props: any) {
                         <div className="results-card">
                             <div className="heading">
                                 <h3>{props.salons[prevCard].name}</h3>
-                                <h4>Walsall</h4>
+                                <h4>{props.salons[prevCard].location.city}</h4>
                             </div>
                             <div className="address">
-                                99 Darlington Street, Wolverhampton, West
-                                Midlands, WV1 4EX
+                                {`
+                                ${props.salons[prevCard].location.address}, 
+                                ${props.salons[prevCard].location.city},
+                                ${props.salons[prevCard].location.region},
+                                ${props.salons[prevCard].location.post_code}
+                                `}
                             </div>
                             <div className="links">
                                 <i className="bi bi-instagram"></i>
@@ -92,55 +81,62 @@ function ResultsCard(props: any) {
                                 <span className="website">
                                     www.redcocohairstudio.co.uk
                                 </span>
-                                <span className="phone">01217478332</span>
-                            </div>
-                        </div>
-                        <div className="results-card-shadow"></div>
-                    </div>
-
-                    {/* ACTIVE CARD */}
-
-                    <div
-                        className="card-container"
-                        id="active-card"
-                        key={props.salons[activeCard].id}
-                    >
-                        <div className="results-card">
-                            <div className="heading">
-                                <h3>{props.salons[activeCard].name}</h3>
-                                <h4>Walsall</h4>
-                            </div>
-                            <div className="address">
-                                99 Darlington Street, Wolverhampton, West
-                                Midlands, WV1 4EX
-                            </div>
-
-                            <div className="links">
-                                <i className="bi bi-instagram"></i>
-                                <i className="bi bi-facebook"></i>
-                            </div>
-                            <div className="mid-section">
-                                <div className="prev" onClick={prevResult}>
-                                    <i className="bi bi-arrow-left-short"></i>{" "}
-                                </div>
-                                <div className="image">
-                                    <img src={PI} alt="placeholder" />
-                                </div>
-                                <div className="next" onClick={nextResult}>
-                                    <i className="bi bi-arrow-right-short"></i>{" "}
-                                </div>
-                            </div>
-                            <div className="contact">
-                                <span className="website">
-                                    www.redcocohairstudio.co.uk
+                                <span className="phone">
+                                    {props.salons[prevCard].phone_number}
                                 </span>
-                                <span className="phone">0121 747 8332</span>
                             </div>
                         </div>
                         <div className="results-card-shadow"></div>
                     </div>
+                )}
 
-                    {/* NEXT CARD */}
+                {/* ACTIVE CARD */}
+                <div
+                    className="card-container"
+                    id="active-card"
+                    key={props.salons[activeCard].id}
+                >
+                    <div className="results-card">
+                        <div className="heading">
+                            <h3>{props.salons[activeCard].name}</h3>
+                            <h4>{props.salons[activeCard].location.city}</h4>
+                        </div>
+                        <div className="address">
+                            {`
+                                ${props.salons[activeCard].location.address}, 
+                                ${props.salons[activeCard].location.city},
+                                ${props.salons[activeCard].location.region},
+                                ${props.salons[activeCard].location.post_code}
+                                `}
+                        </div>
+
+                        <div className="links">
+                            <i className="bi bi-instagram"></i>
+                            <i className="bi bi-facebook"></i>
+                        </div>
+                        <div className="mid-section">
+                            <div className="prev" onClick={prevResult}>
+                                <i className="bi bi-arrow-left-short"></i>{" "}
+                            </div>
+                            <div className="image">
+                                <img src={PI} alt="placeholder" />
+                            </div>
+                            <div className="next" onClick={nextResult}>
+                                <i className="bi bi-arrow-right-short"></i>{" "}
+                            </div>
+                        </div>
+                        <div className="contact">
+                            <span className="website">
+                                www.redcocohairstudio.co.uk
+                            </span>
+                            <span className="phone">0121 747 8332</span>
+                        </div>
+                    </div>
+                    <div className="results-card-shadow"></div>
+                </div>
+
+                {/* NEXT CARD */}
+                {props.salons?.length > 1 && (
                     <div
                         className="card-container"
                         id="next-card"
@@ -149,11 +145,15 @@ function ResultsCard(props: any) {
                         <div className="results-card">
                             <div className="heading">
                                 <h3>{props.salons[nextCard].name}</h3>
-                                <h4>Walsall</h4>
+                                <h4>{props.salons[nextCard].location.city}</h4>
                             </div>
                             <div className="address">
-                                99 Darlington Street, Wolverhampton, West
-                                Midlands, WV1 4EX
+                                {`
+                                ${props.salons[nextCard].location.address}, 
+                                ${props.salons[nextCard].location.city},
+                                ${props.salons[nextCard].location.region},
+                                ${props.salons[nextCard].location.post_code}
+                                `}
                             </div>
                             <div className="links">
                                 <i className="bi bi-instagram"></i>
@@ -166,17 +166,15 @@ function ResultsCard(props: any) {
                                 <span className="website">
                                     www.redcocohairstudio.co.uk
                                 </span>
-                                <span className="phone">01217478332</span>
+                                <span className="phone">
+                                    {props.salons[nextCard].phone_number}
+                                </span>
                             </div>
                         </div>
                         <div className="results-card-shadow"></div>
                     </div>
-                </div>
-            )}
-
-            {/* <div className="next" onClick={nextResult}>
-        <i className="bi bi-arrow-right-circle-fill"></i>
-      </div> */}
+                )}
+            </div>
         </div>
     );
 }
