@@ -7,16 +7,16 @@ export default function SearchPage(props: any) {
 	return (
 		<>
 			<Navbar />
-			<div className="container-fluid" id="SearchPage">
-				<div id="search-content">
-					<Header />
+			<div className="container-fluid" id="MainPage">
+				<div id="MainPageContent">
+					<Header subheading="Ultrices ornare neque in" />
 					<SearchForm
 						onCitySelection={props.onCitySelection}
 						onServiceSelection={props.onServiceSelection}
 						navigateToResults={props.navigateToResults}
 					/>
 				</div>
-				<div id="search-content-shadow"></div>
+				<div id="MainPageContentShadow"></div>
 			</div>
 		</>
 	);
