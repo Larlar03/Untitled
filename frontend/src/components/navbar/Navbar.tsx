@@ -1,7 +1,8 @@
 import "./Navbar.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Grow from "@mui/material/Grow";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 
 export default function Navbar() {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -10,45 +11,37 @@ export default function Navbar() {
 		!showMenu ? setShowMenu(true) : setShowMenu(false);
 	};
 
-	// useEffect(() => {
-	// 	const links = document.getElementById("links");
-	// 	console.log(links);
-	// 	if (links && showMenu) {
-	// 		links.classList.remove("hidden");
-	// 		links.classList.add("visible", "transition");
-	// 	}
-	// 	if (links && !showMenu) {
-	// 		links.classList.remove("visible", "transition");
-	// 		links.classList.add("hidden");
-	// 	}
-	// }, [showMenu]);
-	useEffect(() => {
-		const links = document.querySelectorAll(".nav-link");
-		console.log(links);
-		links.forEach((link) => {
-			if (showMenu) {
-				link.classList.remove("hidden");
-				link.classList.add("visible", "animation");
-			}
-			if (!showMenu) {
-				link.classList.remove("visible", "animation");
-				link.classList.add("hidden");
-			}
-		});
-	}, [showMenu]);
-
 	return (
 		<div className="navbar-container">
 			<div className="navbar">
 				<div className="nav-link-container">
-					<div id="links">
-						<Link key={1} className="nav-link" to="/">
-							Home
-						</Link>
-						<Link key={2} className="nav-link" to="/">
-							Sign In
-						</Link>
-					</div>
+					<Box sx={{ height: 28.5 }}>
+						<Box sx={{ display: "flex", gap: "25px" }}>
+							<Grow in={showMenu}>
+								<Link key={1} className="nav-link" to="/">
+									Home
+								</Link>
+							</Grow>
+							<Grow
+								in={showMenu}
+								style={{ transformOrigin: "0 0 0" }}
+								{...(showMenu ? { timeout: 1000 } : {})}
+							>
+								<Link key={2} className="nav-link" to="/">
+									Sign Up
+								</Link>
+							</Grow>
+							<Grow
+								in={showMenu}
+								style={{ transformOrigin: "0 0 0" }}
+								{...(showMenu ? { timeout: 2000 } : {})}
+							>
+								<Link key={2} className="nav-link" to="/">
+									Log In
+								</Link>
+							</Grow>
+						</Box>
+					</Box>
 				</div>
 				<div className="nav-icon">
 					<button

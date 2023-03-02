@@ -21,15 +21,6 @@
   gap: 20px;
 }
 
-.nav-link {
-  display: none !important;
-}
-
-.visible {
-  display: inline-block !important;
-  transition: transform 3s;
-}
-
 .nav-icon {
   width: 10%;
   text-align: center;
@@ -50,8 +41,9 @@
 
 .bi-three-dots {
   font-size: 30px;
+  color: #241e92;
 }
 
 .bi-three-dots:hover {
-  color: pink !important;
+  color: #7b6cf6 !important;
 }

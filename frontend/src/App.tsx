@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import ResultsPage from "./pages/ResultsPage";
+import SignUpPage from "./pages/SignUpPage";
 import Axios from "axios";
 import Salon from "./types/salons";
 
@@ -57,6 +58,7 @@ const App: React.FC = () => {
 				path="/results"
 				element={<ResultsPage results={filteredSalons} />}
 			/>
+			<Route path="/signup" element={<SignUpPage />} />
 		</Routes>
 	);
 };
