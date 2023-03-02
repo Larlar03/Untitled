@@ -7,7 +7,7 @@ export default function SearchPage(props: any) {
 	return (
 		<>
 			<Navbar />
-			<div className="container-fluid" id="MainPage">
+			<div id="MainPage" className="">
 				<div id="MainPageContent">
 					<Header subheading="Ultrices ornare neque in" />
 					<SearchForm
