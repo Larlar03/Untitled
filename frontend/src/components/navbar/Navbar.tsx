@@ -27,7 +27,7 @@ export default function Navbar() {
 								style={{ transformOrigin: "0 0 0" }}
 								{...(showMenu ? { timeout: 1000 } : {})}
 							>
-								<Link key={2} className="nav-link" to="/">
+								<Link key={2} className="nav-link" to="/signup">
 									Sign Up
 								</Link>
 							</Grow>
@@ -36,7 +36,7 @@ export default function Navbar() {
 								style={{ transformOrigin: "0 0 0" }}
 								{...(showMenu ? { timeout: 2000 } : {})}
 							>
-								<Link key={2} className="nav-link" to="/">
+								<Link key={2} className="nav-link" to="/login">
 									Log In
 								</Link>
 							</Grow>

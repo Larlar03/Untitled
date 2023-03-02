@@ -16,6 +16,42 @@ body {
   /* Font size is 16px */
 }
 
+#MainPage {
+  min-height: 100vh;
+  /* min-width: 100vw; */
+  max-width: 528px;
+  padding: 0 !important;
+}
+
+#MainPageContent {
+  padding: 38px 44px;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  #MainPage {
+    position: relative;
+    margin: 20px auto;
+  }
+  #MainPageContent,
+  #MainPageContentShadow {
+    width: 529px;
+    height: 670px;
+    border-radius: 10px;
+    position: absolute;
+  }
+  #MainPageContent {
+    padding: 15px 50px;
+    border: solid 2px #241e92;
+    background: #f7f7f7;
+    z-index: 10;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+  #MainPageContentShadow {
+    background: #241e92;
+    left: 53%;
+    top: 2%;
+    transform: translatex(-50%);
+  }
 }

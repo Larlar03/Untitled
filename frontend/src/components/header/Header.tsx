@@ -1,7 +1,7 @@
 import "./Header.css";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header(props: any) {
 	return (
 		<div className="header-container">
 			<h1>
@@ -12,8 +12,7 @@ export default function Header() {
 					untitled
 				</Link>
 			</h1>
-
-			<h2>Ultrices ornare neque in</h2>
+			<h2>{props.subheading}</h2>
 		</div>
 	);
 }

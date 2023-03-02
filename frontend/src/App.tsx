@@ -4,6 +4,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import ResultsPage from "./pages/ResultsPage";
 import SignUpPage from "./pages/SignUpPage";
+import LogInPage from "./pages/LogInPage";
 import Axios from "axios";
 import Salon from "./types/salons";
 
@@ -59,6 +60,7 @@ const App: React.FC = () => {
 				element={<ResultsPage results={filteredSalons} />}
 			/>
 			<Route path="/signup" element={<SignUpPage />} />
+			<Route path="/login" element={<LogInPage />} />
 		</Routes>
 	);
 };

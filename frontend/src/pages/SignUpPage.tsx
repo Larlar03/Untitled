@@ -1,12 +1,19 @@
-import Header from "../components/header/Header";
 import "./SignUpPage.css";
+import Header from "../components/header/Header";
+import Navbar from "../components/navbar/Navbar";
+import SignUp from "../components/signup/signup";
 
-export default function ResultsPage(props: any) {
+export default function SignUpPage(props: any) {
 	return (
-		<div className="container-fluid" id="ResultsPage">
-			<div id="results-content">
-				<Header />
+		<>
+			<Navbar />
+			<div className="container-fluid" id="MainPage">
+				<div id="MainPageContent">
+					<Header subheading="Sign Up" />
+					<SignUp />
+				</div>
+				<div id="MainPageContentShadow"></div>
 			</div>
-		</div>
+		</>
 	);
 }
