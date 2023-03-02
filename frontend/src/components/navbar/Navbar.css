@@ -19,15 +19,15 @@
   flex-flow: row nowrap;
   justify-content: right;
   gap: 20px;
-
 }
 
-.hidden {
+.nav-link {
   display: none !important;
 }
 
 .visible {
-  display: flex !important;
+  display: inline-block !important;
+  transition: transform 3s;
 }
 
 .nav-icon {

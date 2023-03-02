@@ -10,17 +10,31 @@ export default function Navbar() {
 		!showMenu ? setShowMenu(true) : setShowMenu(false);
 	};
 
+	// useEffect(() => {
+	// 	const links = document.getElementById("links");
+	// 	console.log(links);
+	// 	if (links && showMenu) {
+	// 		links.classList.remove("hidden");
+	// 		links.classList.add("visible", "transition");
+	// 	}
+	// 	if (links && !showMenu) {
+	// 		links.classList.remove("visible", "transition");
+	// 		links.classList.add("hidden");
+	// 	}
+	// }, [showMenu]);
 	useEffect(() => {
-		const links = document.getElementById("links");
+		const links = document.querySelectorAll(".nav-link");
 		console.log(links);
-		if (links && showMenu) {
-			links.classList.remove("hidden");
-			links.classList.add("visible", "transition");
-		}
-		if (links && !showMenu) {
-			links.classList.remove("visible", "transition");
-			links.classList.add("hidden");
-		}
+		links.forEach((link) => {
+			if (showMenu) {
+				link.classList.remove("hidden");
+				link.classList.add("visible", "animation");
+			}
+			if (!showMenu) {
+				link.classList.remove("visible", "animation");
+				link.classList.add("hidden");
+			}
+		});
 	}, [showMenu]);
 
 	return (
