@@ -50,7 +50,7 @@ export default function Navbar() {
 						id="nav-btn"
 						onClick={handleNavClick}
 					>
-						<i className="bi bi-three-dots"></i>
+						Menu
 					</button>
 				</div>
 			</div>

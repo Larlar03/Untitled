@@ -1,45 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
-html,
-body,
-#root,
-.app {
-  min-height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Space Grotesk", sans-serif !important;
-  color: #000000 !important;
-  background: #f7f7f7 !important;
-  /* Font size is 16px */
-}
-
-#MainPage {
-  min-height: 100vh;
-  max-width: 528px;
-  padding: 0 !important;
-}
-
-#MainPageContent {
-  padding: 38px 44px;
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  #MainPage {
+/* Medium devices (768px and up) */
+@media (min-width: 768px) {
+  #Page {
     position: relative;
-    margin: 20px auto;
+    /* margin: 20px auto; */
   }
-  #MainPageContent,
-  #MainPageContentShadow {
+  #PageCard,
+  #PageCardShadow {
     width: 529px;
     height: 670px;
     border-radius: 10px;
     position: absolute;
   }
-  #MainPageContent {
+  #PageCard {
     padding: 15px 50px;
     border: solid 2px #241e92;
     background: #f7f7f7;
@@ -47,7 +19,7 @@ body {
     left: 50%;
     transform: translatex(-50%);
   }
-  #MainPageContentShadow {
+  #PageCardShadow {
     background: #241e92;
     left: 53%;
     top: 2%;

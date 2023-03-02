@@ -7,8 +7,8 @@ export default function SearchPage(props: any) {
 	return (
 		<>
 			<Navbar />
-			<div id="MainPage" className="">
-				<div id="MainPageContent">
+			<div id="Page" className="h-screen max-w-md p-0 mx-auto">
+				<div id="PageCard" className="px-11">
 					<Header subheading="Ultrices ornare neque in" />
 					<SearchForm
 						onCitySelection={props.onCitySelection}
@@ -16,7 +16,7 @@ export default function SearchPage(props: any) {
 						navigateToResults={props.navigateToResults}
 					/>
 				</div>
-				<div id="MainPageContentShadow"></div>
+				<div id="PageCardShadow"></div>
 			</div>
 		</>
 	);
