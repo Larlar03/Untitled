@@ -21,24 +21,23 @@ const Results = (props: any) => {
 	};
 
 	return (
-		<div>
+		<>
 			{props.results && props.results.length > 0 ? (
-				<div>
+				<>
 					<ResultsNav
 						salons={props.results}
 						currentResult={currentResult}
 					/>
-					{/* Map Results cards in a carousel */}
 					<ResultsCard
 						salons={props.results}
 						storeCurrentResultPrev={storeCurrentResultPrev}
 						storeCurrentResultNext={storeCurrentResultNext}
 					/>
-				</div>
+				</>
 			) : (
 				<div>No Results</div>
 			)}
-		</div>
+		</>
 	);
 };
 

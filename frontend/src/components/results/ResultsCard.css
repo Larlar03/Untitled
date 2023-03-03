@@ -1,13 +1,3 @@
-#ResultsCard {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
 .carousel {
   min-width: 100%;
   height: 600px;
@@ -16,6 +6,7 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 60px;
 }
 
 #prev-card {
@@ -32,7 +23,7 @@
 
 .card-container {
   width: 400px;
-  height: 600px;
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -41,8 +32,8 @@
 
 .results-card,
 .results-card-shadow {
-  width: 327px;
-  height: 565px;
+  width: 350px;
+  height: 100%;
   border-radius: 10px;
 }
 
@@ -77,10 +68,6 @@
   margin: 10px 0;
 }
 
-.links .bi {
-  color: #241e92;
-  margin: 0 6px;
-}
 
 .mid-section {
   display: flex;
@@ -148,7 +135,7 @@ i:hover {
   .results-card,
   .results-card-shadow {
     width: 375px;
-    height: 585px;
+    height: 100%;
   }
 
   .heading h3 {
@@ -156,7 +143,7 @@ i:hover {
   }
 
   .heading h4 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .address {
@@ -164,9 +151,6 @@ i:hover {
     margin: 10px 0;
   }
 
-  .links .bi {
-    font-size: 1.1rem;
-  }
 
   .mid-section i {
     font-size: 2rem;

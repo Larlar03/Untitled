@@ -14,7 +14,7 @@ module.exports = {
 				spacegrotesk: ['"Space Grotesk"', "sans-serif"],
 			},
 			colors: {
-				purple: {
+				main: {
 					100: "#241E92",
 					200: "#5432D3",
 					200: "#7B6CF6",

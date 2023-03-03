@@ -48,7 +48,7 @@ const Navbar = () => {
 				id=""
 				onClick={handleNavClick}
 			>
-				<Bars2Icon className="h-6 w-6 text-greyscale-100" />
+				<Bars2Icon className="h-6 w-6 text-greyscale-100 hover:text-main-200" />
 			</button>
 		</div>
 	);
