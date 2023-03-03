@@ -8,7 +8,7 @@ import LogInPage from "./pages/LogInPage";
 import Axios from "axios";
 import Salon from "./types/salons";
 
-const App: React.FC = () => {
+const App = () => {
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
 	const [salonsInCity, setSalonsInCity] = useState<Salon[]>();
 	const [filteredSalons, setFilteredSalons] = useState<Salon[]>();

@@ -1,4 +1,3 @@
-import "./SignUpPage.css";
 import Header from "../components/header/Header";
 import Navbar from "../components/navbar/Navbar";
 import SignUp from "../components/signup/signup";

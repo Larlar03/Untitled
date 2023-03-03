@@ -1,10 +1,13 @@
-import "./Header.css";
 import { Link } from "react-router-dom";
 
-export default function Header(props: any) {
+export interface Props {
+	subheading: string;
+}
+
+const Header = (props: Props) => {
 	return (
 		<div className="text-center">
-			<h1 className="text-6xl font-bold font-spacegrotesk no-underline hover:text-red-600">
+			<h1 className="text-6xl font-bold font-spacegrotesk no-underline hover:text-black">
 				<Link
 					to="/
       "
@@ -17,4 +20,6 @@ export default function Header(props: any) {
 			</h2>
 		</div>
 	);
-}
+};
+
+export default Header;

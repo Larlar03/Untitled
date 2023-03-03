@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CtaButton from "../buttons/CtaButton";
 import SearchInput from "./search-input/SearchInput";
 import SearchOptions from "./search-options/SearchOptions";
-import "./SearchForm.css";
 
-export default function SearchForm(props: any) {
+const SearchForm = (props: any) => {
 	const [services, setServices] = useState<Array<string>>([]);
 	const [city, setCity] = useState<any>();
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -27,13 +27,8 @@ export default function SearchForm(props: any) {
 		setServices(options);
 	};
 
-	const onSubmit = (event: React.MouseEvent<HTMLElement>) => {
-		event.preventDefault();
-		navigate("/results");
-	};
-
 	return (
-		<div className="search-form-container">
+		<div className="mt-16">
 			<form action="submit">
 				<div className="mb-3">
 					<SearchInput selectCity={selectCity} />
@@ -41,16 +36,15 @@ export default function SearchForm(props: any) {
 				<div className="mb-4">
 					<SearchOptions selectServices={selectServices} />
 				</div>
-				<button
-					onClick={() => navigate("/results")}
-					id="submit-button"
+				<CtaButton
+					text="Submit"
+					handleClick={() => navigate("/results")}
+					isDisabled={isDisabled}
 					type="submit"
-					className="btn btn-primary"
-					disabled={isDisabled}
-				>
-					Submit
-				</button>
+				/>
 			</form>
 		</div>
 	);
-}
+};
+
+export default SearchForm;

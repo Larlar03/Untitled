@@ -1,9 +1,8 @@
 import Header from "../components/header/Header";
 import SearchForm from "../components/search/SearchForm";
 import Navbar from "../components/navbar/Navbar";
-import "./HomePage.css";
 
-export default function SearchPage(props: any) {
+const HomePage = (props: any) => {
 	return (
 		<>
 			<Navbar />
@@ -20,4 +19,6 @@ export default function SearchPage(props: any) {
 			</div>
 		</>
 	);
-}
+};
+
+export default HomePage;

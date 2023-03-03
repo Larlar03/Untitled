@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./SearchOptions.css";
 import services from "../../../constants/services";
+import OptionButton from "../../buttons/OptionButton";
 
 export default function SearchOptions(props: any) {
 	const [options, setOptions] = useState<Array<string>>([]);
@@ -25,22 +25,20 @@ export default function SearchOptions(props: any) {
 
 	const applyStyles = (event: React.MouseEvent<HTMLElement>): void => {
 		const currentSelection = event.currentTarget;
-		currentSelection.classList[2]
+		currentSelection.classList[3]
 			? currentSelection.classList.remove("active")
 			: currentSelection.classList.add("active");
 	};
 
 	return (
-		<ul className="services-container">
+		<ul className="list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center md:gap-1.5 md:my-5">
 			{services.map((service, i) => (
-				<li
-					onClick={handleServiceClick}
+				<OptionButton
 					key={i}
-					id={service}
-					className="service-button grow"
-				>
-					{service}
-				</li>
+					id={props.serviceName}
+					serviceName={service}
+					handleClick={handleServiceClick}
+				/>
 			))}
 		</ul>
 	);

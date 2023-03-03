@@ -1,23 +1,7 @@
-#addon-wrapping {
-  background: white;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-  color: #3b3b3b;
-  border: none;
-}
-
-#search-input-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-}
-
 .MuiAutocomplete-root {
   width: 100% !important;
   background: white;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
+  border-radius: 100px;
 }
 
 fieldset {

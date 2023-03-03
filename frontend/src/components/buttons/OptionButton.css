@@ -1,0 +1,24 @@
+li.option-button {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  border: 1px solid #7b6cf6;
+  padding: 8px 15px;
+  margin: 6px 0;
+}
+
+li.option-button:hover {
+  cursor: pointer;
+  background: #7b6cf6;
+}
+
+li.active {
+  background: #7b6cf6;
+}
+
+.hover-grow {
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+}
