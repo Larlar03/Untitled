@@ -1,14 +1,17 @@
 import Header from "../components/header/Header";
 import Results from "../components/results/Results";
-import "./ResultsPage.css";
+import Navbar from "../components/navbar/Navbar";
 
-export default function ResultsPage(props: any) {
-    return (
-        <div className="container-fluid" id="ResultsPage">
-            <div id="results-content">
-                <Header />
-                <Results results={props.results} />
-            </div>
-        </div>
-    );
-}
+const ResultsPage = (props: any) => {
+	return (
+		<>
+			<Navbar />
+			<div className="my-8">
+				<Header subheading="Results" />
+				<Results results={props.results} />
+			</div>
+		</>
+	);
+};
+
+export default ResultsPage;
