@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import services from "../../../constants/services";
 import OptionButton from "../../buttons/OptionButton";
 
-export default function SearchOptions(props: any) {
+const SearchOptions = (props: any) => {
 	const [options, setOptions] = useState<Array<string>>([]);
 
 	useEffect(() => {
-		props.selectServices(options);
+		props.selectOptions(options);
 	}, [options]);
 
-	const handleServiceClick = (event: React.MouseEvent<HTMLElement>): void => {
+	const handleOptionClick = (event: React.MouseEvent<HTMLElement>): void => {
 		const selection: any = event.currentTarget.textContent;
 
 		setOptions((prev: string[]) => {
@@ -34,12 +34,13 @@ export default function SearchOptions(props: any) {
 		<ul className="list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center md:gap-1.5 md:my-5">
 			{services.map((service, i) => (
 				<OptionButton
-					key={i}
-					id={props.serviceName}
+					keyIndex={i}
 					serviceName={service}
-					handleClick={handleServiceClick}
+					handleClick={handleOptionClick}
 				/>
 			))}
 		</ul>
 	);
-}
+};
+
+export default SearchOptions;

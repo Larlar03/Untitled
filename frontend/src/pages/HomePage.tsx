@@ -6,12 +6,12 @@ const HomePage = (props: any) => {
 	return (
 		<>
 			<Navbar />
-			<div id="Page" className="h-screen max-w-md p-0 mx-auto">
+			<div id="Page" className="h-full max-w-md p-0 mx-auto">
 				<div id="PageCard" className="px-11">
 					<Header subheading="Ultrices ornare neque in" />
 					<SearchForm
 						onCitySelection={props.onCitySelection}
-						onServiceSelection={props.onServiceSelection}
+						onOptionSelection={props.onOptionSelection}
 						navigateToResults={props.navigateToResults}
 					/>
 				</div>

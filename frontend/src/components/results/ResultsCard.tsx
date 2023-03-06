@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./ResultsCard.css";
-import PI from "../../assets/placeholder-image.jpg";
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 const ResultsCard = (props: any) => {
-	const [prevCard, setPrevCard] = useState<number>(props.salons.length - 1);
+	const [prevCard, setPrevCard] = useState<number>(props.studios.length - 1);
 	const [activeCard, setActiveCard] = useState<number>(0);
 	const [nextCard, setNextCard] = useState<number>(1);
 
 	useEffect(() => {
-		setPrevCard(props.salons.length - 1);
-	}, [props.salons]);
+		setPrevCard(props.studios.length - 1);
+	}, [props.studios]);
 
-	const prevResult = (event: React.MouseEvent<HTMLElement>) => {
+	const prevResult = () => {
 		activeCard === 0
-			? setActiveCard(props.salons.length - 1)
+			? setActiveCard(props.studios.length - 1)
 			: setActiveCard(activeCard - 1);
 
 		prevCard === 0
-			? setPrevCard(props.salons.length - 1)
+			? setPrevCard(props.studios.length - 1)
 			: setPrevCard(prevCard - 1);
 
 		nextCard === 0
-			? setNextCard(props.salons.length - 1)
+			? setNextCard(props.studios.length - 1)
 			: setNextCard(nextCard - 1);
 
-		const activeCardId = props.salons[activeCard].id;
+		const activeCardId = props.studios[activeCard].id;
 
 		props.storeCurrentResultPrev(activeCardId);
+		console.log(prevCard);
+		console.log(activeCard);
+		console.log(nextCard);
 	};
 
-	const nextResult = (event: React.MouseEvent<HTMLElement>) => {
-		activeCard < props.salons.length - 1
+	const nextResult = () => {
+		activeCard < props.studios.length - 1
 			? setActiveCard(activeCard + 1)
 			: setActiveCard(0);
 
-		prevCard === props.salons.length - 1
+		prevCard === props.studios.length - 1
 			? setPrevCard(0)
 			: setPrevCard(prevCard + 1);
 
-		nextCard === props.salons.length - 1
+		nextCard === props.studios.length - 1
 			? setNextCard(0)
 			: setNextCard(nextCard + 1);
 
-		const activeCardId = props.salons[activeCard].id;
+		const activeCardId = props.studios[activeCard].id;
 
 		props.storeCurrentResultNext(activeCardId);
 	};
@@ -55,37 +57,40 @@ const ResultsCard = (props: any) => {
 		<div className="w-full h-min-full flex flex-row flex-nowrap align-center justify-center">
 			<div className="carousel">
 				{/* PREV CARD */}
-				{props?.salons.length > 2 && (
+				{props?.studios.length > 2 && (
 					<div
 						className="card-container"
 						id="prev-card"
-						key={props.salons[prevCard].id}
+						key={props.studios[prevCard].id}
 					>
 						<div className="card">
 							<div className="heading">
-								<h3>{props.salons[prevCard].name}</h3>
-								<h4>{props.salons[prevCard].location.city}</h4>
+								<h3>{props.studios[prevCard].name}</h3>
+								<h4>{props.studios[prevCard].location.city}</h4>
 							</div>
 							<div className="address">
-								{`${props.salons[prevCard].location.address}, ${props.salons[prevCard].location.city},`}
+								{`${props.studios[prevCard].location.address}, ${props.studios[prevCard].location.city},`}
 								<br />
-								{`${props.salons[prevCard].location.region}, ${props.salons[prevCard].location.post_code}`}
+								{`${props.studios[prevCard].location.region}, ${props.studios[prevCard].location.post_code}`}
+							</div>
+							<div className="mid-section">
+								<div className="image">
+									<img
+										src={props.studios[prevCard].logo}
+										alt="placeholder"
+									/>
+								</div>
 							</div>
 							<div className="links">
 								<InstagramIcon />
 								<FacebookIcon />
 							</div>
-							<div className="mid-section">
-								<div className="image">
-									<img src={PI} alt="placeholder" />
-								</div>
-							</div>
 							<div className="contact">
-								<span className="website">
-									www.redcocohairstudio.co.uk
+								<span>
+									{`${props.studios[prevCard].social_links.website}`}
 								</span>
-								<span className="phone">
-									{props.salons[prevCard].phone_number}
+								<span>
+									{props.studios[prevCard].phone_number}
 								</span>
 							</div>
 						</div>
@@ -97,78 +102,122 @@ const ResultsCard = (props: any) => {
 				<div
 					className="card-container"
 					id="active-card"
-					key={props.salons[activeCard].id}
+					key={props.studios[activeCard].id}
 				>
 					<div className="card">
 						<div className="heading">
-							<h3>{props.salons[activeCard].name}</h3>
-							<h4>{props.salons[activeCard].location.city}</h4>
+							<a
+								href={
+									props.studios[activeCard].social_links
+										.website
+								}
+							>
+								<h3>{props.studios[activeCard].name}</h3>
+							</a>
+							<h4>{props.studios[activeCard].location.city}</h4>
 						</div>
 						<div className="address">
-							{`${props.salons[activeCard].location.address}, ${props.salons[activeCard].location.city},`}
+							{`${props.studios[activeCard].location.address}, ${props.studios[activeCard].location.city},`}
 							<br />
-							{`${props.salons[activeCard].location.region}, ${props.salons[activeCard].location.post_code}`}
+							{`${props.studios[activeCard].location.region}, ${props.studios[activeCard].location.post_code}`}
 						</div>
 
-						<div className="links">
-							{" "}
-							<InstagramIcon className="h-6 w-6 text-main-200 hover:text-main-100 cursor-pointer" />
-							<FacebookIcon className="h-6 w-6 text-main-200 hover:text-main-100 cursor-pointer" />
-						</div>
 						<div className="mid-section">
 							<div className="prev" onClick={prevResult}>
 								<ArrowSmallLeftIcon className="h-6 w-6 text-black hover:text-main-200 cursor-pointer" />
 							</div>
 							<div className="image">
-								<img src={PI} alt="placeholder" />
+								<img
+									src={props.studios[activeCard].logo}
+									alt="placeholder"
+								/>
 							</div>
 							<div className="next" onClick={nextResult}>
 								<ArrowSmallRightIcon className="h-6 w-6 text-black hover:text-main-200 cursor-pointer" />
 							</div>
 						</div>
+						<div className="links">
+							<a
+								href={
+									props.studios[activeCard].social_links
+										.instagram
+								}
+								rel="noreferrer"
+								target="_blank"
+							>
+								<InstagramIcon className="h-6 w-6 text-main-200 hover:text-main-100 cursor-pointer" />
+							</a>
+							<a
+								target="_blank"
+								rel="noreferrer"
+								href={
+									props.studios[activeCard].social_links
+										.facebook
+								}
+							>
+								<FacebookIcon className="h-6 w-6 text-main-200 hover:text-main-100 cursor-pointer" />
+							</a>
+						</div>
 						<div className="contact">
-							<span className="website">
-								www.redcocohairstudio.co.uk
+							<span>
+								<a
+									target="_blank"
+									rel="noreferrer"
+									href={
+										props.studios[activeCard].social_links
+											.website
+									}
+								>
+									{`${props.studios[activeCard].social_links.website}`}
+								</a>
 							</span>
-							<span className="phone">0121 747 8332</span>
+							<span>
+								<a
+									href={`tel:${props.studios[activeCard].phone_number}`}
+								>
+									{props.studios[activeCard].phone_number}
+								</a>
+							</span>
 						</div>
 					</div>
 					<div className="card-shadow"></div>
 				</div>
 
 				{/* NEXT CARD */}
-				{props.salons?.length > 1 && (
+				{props.studios?.length > 1 && (
 					<div
 						className="card-container"
 						id="next-card"
-						key={props.salons[nextCard].id}
+						key={props.studios[nextCard].id}
 					>
 						<div className="card">
 							<div className="heading">
-								<h3>{props.salons[nextCard].name}</h3>
-								<h4>{props.salons[nextCard].location.city}</h4>
+								<h3>{props.studios[nextCard].name}</h3>
+								<h4>{props.studios[nextCard].location.city}</h4>
 							</div>
 							<div className="address">
-								{`${props.salons[prevCard].location.address}, ${props.salons[nextCard].location.city},`}
+								{`${props.studios[nextCard].location.address}, ${props.studios[nextCard].location.city},`}
 								<br />
-								{`${props.salons[prevCard].location.region}, ${props.salons[nextCard].location.post_code}`}
-							</div>
-							<div className="links">
-								{" "}
-								<InstagramIcon />
-								<FacebookIcon />
+								{`${props.studios[nextCard].location.region}, ${props.studios[nextCard].location.post_code}`}
 							</div>
 							<div className="mid-section">
 								<div className="image">
-									<img src={PI} alt="placeholder" />
+									<img
+										src={props.studios[nextCard].logo}
+										alt="placeholder"
+									/>
 								</div>
 							</div>
+							<div className="links">
+								<InstagramIcon />
+								<FacebookIcon />
+							</div>
 							<div className="contact">
-								<span className="website">
-									www.redcocohairstudio.co.uk
+								<span>
+									{`${props.studios[nextCard].social_links.website}`}
 								</span>
-								<span className="phone">
-									{props.salons[nextCard].phone_number}
+								<span>
+									{props.studios[nextCard].phone_number}
 								</span>
 							</div>
 						</div>

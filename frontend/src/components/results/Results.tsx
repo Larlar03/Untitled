@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ResultsCard from "./ResultsCard";
 import ResultsNav from "./ResultsNav";
-import Salons from "../../types/salons";
+import Studio from "../../types/studios";
 
 const Results = (props: any) => {
 	const [currentResult, setCurrentResult] = useState<number>(1);
@@ -9,7 +9,7 @@ const Results = (props: any) => {
 	const storeCurrentResultPrev = (id: number) => {
 		props.results &&
 			(id === 1
-				? setCurrentResult(props.results)
+				? setCurrentResult(props.results.length)
 				: setCurrentResult(id - 1));
 	};
 
@@ -25,11 +25,11 @@ const Results = (props: any) => {
 			{props.results && props.results.length > 0 ? (
 				<>
 					<ResultsNav
-						salons={props.results}
+						studios={props.results}
 						currentResult={currentResult}
 					/>
 					<ResultsCard
-						salons={props.results}
+						studios={props.results}
 						storeCurrentResultPrev={storeCurrentResultPrev}
 						storeCurrentResultNext={storeCurrentResultNext}
 					/>

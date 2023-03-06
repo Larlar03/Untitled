@@ -7,7 +7,7 @@ const ResultsNav = (props: any) => {
 		<div className="w-7/12 flex flex-row flex-nowrap justify-between mt-10 mb-4 mx-auto text-xl md:w-80 md:font-bold">
 			<AdjustmentsHorizontalIcon className="h-6 w-6 text-main-100 hover:text-main-200 cursor-pointer" />
 			<span>
-				{props.currentResult} of {props.salons.length}
+				{props.currentResult} of {props.studios.length}
 			</span>
 			<Link to="/">
 				<ArrowUturnLeftIcon className="h-6 w-6 text-main-100 hover:text-main-200" />

@@ -24,7 +24,6 @@
 .card-container {
   width: 400px;
   height: 100%;
-  background-: olive;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -60,6 +59,10 @@
   color: #7b6cf6;
 }
 
+.heading h3:hover {
+  color:#241e92;
+}
+
 .heading h4 {
   font-size: 1.14rem;
   color: #241e92;
@@ -74,6 +77,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 300px;
 }
 
 .image {
@@ -126,6 +130,14 @@
     width: 375px;
     height: 100%;
   }
+
+  .heading h3 {
+  font-size: 2rem;
+}
+
+.heading h4 {
+  font-size: 1.5rem;
+}
 
   .address {
     font-size: 0.87rem;
