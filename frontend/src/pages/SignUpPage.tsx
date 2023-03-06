@@ -2,7 +2,7 @@ import Header from "../components/header/Header";
 import Navbar from "../components/navbar/Navbar";
 import SignUp from "../components/signup/signup";
 
-export default function SignUpPage(props: any) {
+const SignUpPage = (props: any) => {
 	return (
 		<>
 			<Navbar />
@@ -15,4 +15,6 @@ export default function SignUpPage(props: any) {
 			</div>
 		</>
 	);
-}
+};
+
+export default SignUpPage;

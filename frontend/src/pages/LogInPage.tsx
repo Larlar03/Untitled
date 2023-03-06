@@ -1,6 +1,6 @@
 import Header from "../components/header/Header";
 
-export default function LogInPage(props: any) {
+const LogInPage = (props: any) => {
 	return (
 		<div className="container-fluid" id="ResultsPage">
 			<div id="results-content">
@@ -8,4 +8,6 @@ export default function LogInPage(props: any) {
 			</div>
 		</div>
 	);
-}
+};
+
+export default LogInPage;

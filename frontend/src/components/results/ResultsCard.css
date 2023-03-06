@@ -12,41 +12,42 @@
 #prev-card {
   transform: translatex(-110%) scale(0.8);
   z-index: 100;
-  transition: 1000ms;
+  transition: 2000ms;
 }
 
 #next-card {
   transform: translatex(110%) scale(0.8);
   z-index: 100;
-  transition: 1000ms;
+  transition: 2000ms;
 }
 
 .card-container {
   width: 400px;
   height: 100%;
+  background-: olive;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   position: absolute;
 }
 
-.results-card,
-.results-card-shadow {
+.card,
+.card-shadow {
   width: 350px;
   height: 100%;
   border-radius: 10px;
 }
 
-.results-card {
+.card {
   border: 1px solid #241e92;
   background: #f7f7f7;
   position: absolute;
   z-index: 10;
   text-align: center;
-  padding: 21px;
+  padding: 20px;
 }
 
-.results-card-shadow {
+.card-shadow {
   background: #7b6cf6;
   position: relative;
   bottom: -2.5%;
@@ -55,6 +56,7 @@
 
 .heading h3 {
   font-size: 1.5rem;
+  font-weight: 700;
   color: #7b6cf6;
 }
 
@@ -68,21 +70,10 @@
   margin: 10px 0;
 }
 
-
 .mid-section {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.mid-section i {
-  color: #c6a3ff !important;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-i:hover {
-  color: #000000 !important;
 }
 
 .image {
@@ -90,7 +81,7 @@ i:hover {
 }
 
 .contact {
-  margin: 10px 0;
+  padding: 10px 0;
   font-size: 0.87rem;
 }
 
@@ -98,13 +89,13 @@ i:hover {
   display: block;
 }
 
-#prev-card .results-card,
-#next-card .results-card {
+#prev-card .card,
+#next-card .card {
   border: 1px solid black;
 }
 
-#prev-card .results-card-shadow,
-#next-card .results-card-shadow {
+#prev-card .card-shadow,
+#next-card .card-shadow {
   background: black;
 }
 
@@ -114,10 +105,8 @@ i:hover {
 }
 #prev-card h3,
 #prev-card h4,
-#prev-card .bi,
 #next-card h3,
-#next-card h4,
-#next-card .bi {
+#next-card h4 {
   color: black;
 }
 
@@ -128,32 +117,19 @@ i:hover {
   }
 
   .card-container {
-    width: 450px;
+    width: 410px;
     height: 600px;
   }
 
-  .results-card,
-  .results-card-shadow {
+  .card,
+  .card-shadow {
     width: 375px;
     height: 100%;
-  }
-
-  .heading h3 {
-    font-size: 2rem;
-  }
-
-  .heading h4 {
-    font-size: 1.5rem;
   }
 
   .address {
     font-size: 0.87rem;
     margin: 10px 0;
-  }
-
-
-  .mid-section i {
-    font-size: 2rem;
   }
 
   .image {

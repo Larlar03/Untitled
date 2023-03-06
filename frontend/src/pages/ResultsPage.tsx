@@ -6,7 +6,7 @@ const ResultsPage = (props: any) => {
 	return (
 		<>
 			<Navbar />
-			<div className="my-12">
+			<div className="my-8">
 				<Header subheading="Results" />
 				<Results results={props.results} />
 			</div>
