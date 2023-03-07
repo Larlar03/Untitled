@@ -12,7 +12,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<div className="w-100 mx-auto px-8 pt-3 mb-1 flex flex-nowrap items-center justify-center">
+		<div className="w-100 mx-auto px-8 pt-3 mb-2.5 flex flex-nowrap items-center justify-center">
 			<div className="w-full font-spacemono font-bold text-greyscale-100">
 				<Box sx={{ height: 28.5 }}>
 					<Box sx={{ display: "flex", gap: "25px" }}>

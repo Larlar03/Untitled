@@ -57,7 +57,9 @@ const App = () => {
 			/>
 			<Route
 				path="/results"
-				element={<ResultsPage results={filteredStudios} />}
+				element={
+					filteredStudios && <ResultsPage results={filteredStudios} />
+				}
 			/>
 			<Route path="/signup" element={<SignUpPage />} />
 			<Route path="/login" element={<LogInPage />} />

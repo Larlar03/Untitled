@@ -10,6 +10,7 @@ const Results = ({ results }: { results: Array<Studio> }) => {
 	const [nextCard, setNextCard] = useState<number>(1);
 
 	useEffect(() => {
+		setResultsTotal(results.length);
 		setPrevCard(results.length - 1);
 	}, [results]);
 
