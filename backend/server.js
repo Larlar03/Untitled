@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const mockSalons = require("./mock-databases/mock-salon-db.json");
+const mockStudios = require("./mock-databases/mock-studio-db.json");
 
 //  defining the express app
 const app = express();
@@ -32,14 +33,14 @@ app.get("/", (req, res) => {
 });
 
 // Get all salons
-app.get("/salons", (req, res) => {
-	res.send(mockSalons);
+app.get("/studios", (req, res) => {
+	res.send(mockStudios);
 });
 
-app.get("/salons/:city", (req, res) => {
+app.get("/studios/:city", (req, res) => {
 	const city = req.params.city;
-	const salons = mockSalons.filter((s) => {
+	const studios = mockStudios.filter((s) => {
 		return s.location.city === city;
 	});
-	res.send(salons);
+	res.send(studios);
 });

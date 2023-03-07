@@ -1,14 +1,15 @@
 import Header from "../components/header/Header";
 import Results from "../components/results/Results";
 import Navbar from "../components/navbar/Navbar";
+import Studio from "../types/studios";
 
-const ResultsPage = (props: any) => {
+const ResultsPage = ({ results }: { results: Array<Studio> }) => {
 	return (
 		<>
 			<Navbar />
-			<div className="my-8">
+			<div className="my-2">
 				<Header subheading="Results" />
-				<Results results={props.results} />
+				<Results results={results} />
 			</div>
 		</>
 	);

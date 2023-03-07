@@ -4,7 +4,7 @@ const OptionButton = (props: any) => {
 	return (
 		<li
 			onClick={props.handleClick}
-			key={props.key}
+			key={props.keyIndex}
 			id={props.serviceName}
 			className="option-button hover-grow rounded-full"
 		>

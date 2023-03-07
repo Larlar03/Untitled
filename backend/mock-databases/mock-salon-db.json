@@ -11,7 +11,13 @@
             "region": "West Midlands",
             "country": "England"
         },
-        "services": ["Colour"]
+        "social_links": {
+            "website": "www.redcocohairstudio.co.uk",
+            "instagram": ""
+        },
+        "services": [
+            "Colour"
+        ]
     },
     {
         "id": 2,
@@ -25,7 +31,14 @@
             "region": "West Midlands",
             "country": "England"
         },
-        "services": ["Trims", "Extensions"]
+        "social_links": {
+            "website": "www.ddempire.co.uk",
+            "instagram": ""
+        },
+        "services": [
+            "Trims",
+            "Extensions"
+        ]
     },
     {
         "id": 3,
@@ -39,7 +52,11 @@
             "region": "West Midlands",
             "country": "England"
         },
-        "services": ["Braids", "Trims", "Extensions"]
+        "services": [
+            "Braids",
+            "Trims",
+            "Extensions"
+        ]
     },
     {
         "id": 4,
@@ -67,7 +84,9 @@
             "region": "West Midlands",
             "country": "England"
         },
-        "services": ["Keratin"]
+        "services": [
+            "Keratin"
+        ]
     },
     {
         "id": 6,
@@ -81,6 +100,9 @@
             "region": "West Midlands",
             "country": "England"
         },
-        "services": ["Curl Set", "Twist Out"]
+        "services": [
+            "Curl Set",
+            "Twist Out"
+        ]
     }
 ]

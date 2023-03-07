@@ -1,151 +1,252 @@
-import Salon from "../../types/salons";
-import { mockFilterSalonsInCity } from "./mock-app-functions";
-const mockSalons = require("./mock-salons.json");
+import Studio from "../../types/studios";
+import { mockFilterStudiosInCity } from "./mock-app-functions";
+const mockStudios = require("./mock-studios.json");
 
-describe("Filter salons by services", () => {
-    test("Given one service is selected, and one salon has that service, that salon should be returned", () => {
-        // arrange
-        const mockServices = ["Braids"];
+describe("Filter studios by services", () => {
+	test("Given one service is selected, and one studio has that service, that studio should be returned", () => {
+		// arrange
+		const mockServices = ["Stretch & Flexibility"];
 
-        // act
-        const results = mockFilterSalonsInCity(mockSalons, mockServices);
+		// act
+		const results = mockFilterStudiosInCity(mockStudios, mockServices);
 
-        // assert
-        expect(results).toEqual([
-            {
-                id: 3,
-                name: "Hairfyx",
-                phone_number: "07786068698",
-                email_address: "hairfyx.contact@gmail.com",
-                location: {
-                    address: "27 Acfold Rd",
-                    post_code: "B20 1HD",
-                    city: "Birmingham",
-                    region: "West Midlands",
-                    country: "England",
-                },
-                services: ["Braids", "Trims", "Extensions"],
-            },
-        ]);
-    });
+		// assert
+		expect(results).toEqual([
+			{
+				id: 2,
+				name: "AYC Studios",
+				phone_number: "07507797220",
+				email_address: "aerialyogicircus@gmail.com",
+				location: {
+					address:
+						"Unit 10B, Robins Business Park, Bagnall Street, West Bromwich",
+					post_code: "DY4 7BS",
+					city: "Birmingham",
+					region: "West Midlands",
+					country: "England",
+				},
+				social_links: {
+					website: "www.aycstudios.co.uk/",
+					instagram: "www.instagram.com/aycstudios/",
+					"facebook:": "www.facebook.com/AYcircus/",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Stretch & Flexibility",
+				],
+			},
+		]);
+	});
 
-    test("Given one service is selected, and two salons have that service, both salons should be returned", () => {
-        // arrange
-        const mockServices = ["Trims"];
+	test("Given one service is selected, and two studios have that service, both studios should be returned", () => {
+		// arrange
+		const mockServices = ["Flying Pole"];
 
-        // act
-        const results = mockFilterSalonsInCity(mockSalons, mockServices);
+		// act
+		const results = mockFilterStudiosInCity(mockStudios, mockServices);
 
-        // assert
-        expect(results).toEqual([
-            {
-                id: 2,
-                name: "DD Empire",
-                phone_number: "01214291772",
-                email_address: "ddempire@hotmail.com",
-                location: {
-                    address: "592 Bearwood Rd",
-                    post_code: "B66 4BW",
-                    city: "Birmingham",
-                    region: "West Midlands",
-                    country: "England",
-                },
-                services: ["Trims", "Extensions"],
-            },
-            {
-                id: 3,
-                name: "Hairfyx",
-                phone_number: "07786068698",
-                email_address: "hairfyx.contact@gmail.com",
-                location: {
-                    address: "27 Acfold Rd",
-                    post_code: "B20 1HD",
-                    city: "Birmingham",
-                    region: "West Midlands",
-                    country: "England",
-                },
-                services: ["Braids", "Trims", "Extensions"],
-            },
-        ]);
-    });
+		// assert
+		expect(results).toEqual([
+			{
+				id: 4,
+				name: "K Pole Solihull",
+				phone_number: "07800793337",
+				email_address: "kpoleshirley@hotmail.com",
+				location: {
+					address: "YogaHaven, Radway Road",
+					post_code: "B90 4NR",
+					city: "Birmingham",
+					region: "West Midlands",
+					country: "England",
+				},
+				social_links: {
+					website: "www.kpole.co.uk",
+					instagram: "www.instagram.com/kpole_danceandfitness",
+					"facebook:": "www.facebook.com/KpoleShirley/",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Flying Pole",
+				],
+			},
+			{
+				id: 4,
+				name: "K Pole Cradely Heath",
+				phone_number: "07800793337",
+				email_address: "kpoleshirley@hotmail.com",
+				location: {
+					address: "5 Market Square, Cradley Heath",
+					post_code: "B64 5HH",
+					city: "Birmingham",
+					region: "West Midlands",
+					country: "England",
+				},
+				social_links: {
+					website: "www.kpole.co.uk",
+					instagram: "www.instagram.com/kpole_danceandfitness",
+					"facebook:": "www.facebook.com/KpoleShirley/",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Flying Pole",
+				],
+			},
+		]);
+	});
 
-    test("Given multiple services are selected, salons with any selected service should be returned", () => {
-        // arrange
+	test("Given multiple services are selected, studios with any of the selected services should be returned", () => {
+		// arrange
 
-        const mockServices = ["Keratin", "Colour"];
+		const mockServices = ["Flying Pole", "Stretch & Flexibility"];
 
-        // act
-        const results = mockFilterSalonsInCity(mockSalons, mockServices);
+		// act
+		const results = mockFilterStudiosInCity(mockStudios, mockServices);
 
-        // assert
-        expect(results).toEqual([
-            {
-                id: 1,
-                name: "Redcoco Hair Studio",
-                phone_number: "07920401832",
-                email_address: "redcoco@live.co.uk",
-                location: {
-                    address: "146 Wallows Ln",
-                    post_code: "WS1 4LZ",
-                    city: "Walsall",
-                    region: "West Midlands",
-                    country: "England",
-                },
-                services: ["Colour"],
-            },
-            {
-                id: 5,
-                name: "SG Hair",
-                phone_number: "01216475000",
-                email_address: "appointments@sghair.uk",
-                location: {
-                    address: "297A Walsall Rd",
-                    post_code: "B42 1TY",
-                    city: "Birmingham",
-                    region: "West Midlands",
-                    country: "England",
-                },
-                services: ["Keratin"],
-            },
-        ]);
-    });
+		// assert
+		expect(results).toEqual([
+			{
+				id: 2,
+				name: "AYC Studios",
+				phone_number: "07507797220",
+				email_address: "aerialyogicircus@gmail.com",
+				location: {
+					address:
+						"Unit 10B, Robins Business Park, Bagnall Street, West Bromwich",
+					post_code: "DY4 7BS",
+					city: "Birmingham",
+					region: "West Midlands",
+					country: "England",
+				},
+				social_links: {
+					website: "www.aycstudios.co.uk/",
+					instagram: "www.instagram.com/aycstudios/",
+					"facebook:": "www.facebook.com/AYcircus/",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Stretch & Flexibility",
+				],
+			},
+			{
+				id: 4,
+				name: "K Pole Solihull",
+				phone_number: "07800793337",
+				email_address: "kpoleshirley@hotmail.com",
+				location: {
+					address: "YogaHaven, Radway Road",
+					post_code: "B90 4NR",
+					city: "Birmingham",
+					region: "West Midlands",
+					country: "England",
+				},
+				social_links: {
+					website: "www.kpole.co.uk",
+					instagram: "www.instagram.com/kpole_danceandfitness",
+					"facebook:": "www.facebook.com/KpoleShirley/",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Flying Pole",
+				],
+			},
+			{
+				id: 4,
+				name: "K Pole Cradely Heath",
+				phone_number: "07800793337",
+				email_address: "kpoleshirley@hotmail.com",
+				location: {
+					address: "5 Market Square, Cradley Heath",
+					post_code: "B64 5HH",
+					city: "Birmingham",
+					region: "West Midlands",
+					country: "England",
+				},
+				social_links: {
+					website: "www.kpole.co.uk",
+					instagram: "www.instagram.com/kpole_danceandfitness",
+					"facebook:": "www.facebook.com/KpoleShirley/",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Flying Pole",
+				],
+			},
+		]);
+	});
 
-    test("Given multiple services are selected, and only one salon has these services, that salon should be returned", () => {
-        // arrange
+	test("Given multiple services are selected, and only one studio has these services, that studio should be returned", () => {
+		// arrange
 
-        const mockServices = ["Curl Set", "Twist Out"];
+		const mockServices = ["Lyrical Pole", "Burlesque"];
 
-        // act
-        const results = mockFilterSalonsInCity(mockSalons, mockServices);
+		// act
+		const results = mockFilterStudiosInCity(mockStudios, mockServices);
 
-        // assert
-        expect(results).toEqual([
-            {
-                id: 6,
-                name: "Tia's Hair Salon",
-                phone_number: "01213778255",
-                email_address: "tia@tiahairsalon.com",
-                location: {
-                    address: "15 York Rd",
-                    post_code: "B23 6TE",
-                    city: "Birmingham",
-                    region: "West Midlands",
-                    country: "England",
-                },
-                services: ["Curl Set", "Twist Out"],
-            },
-        ]);
-    });
+		// assert
+		expect(results).toEqual([
+			{
+				id: 1,
+				name: "Siren Asylum",
+				phone_number: "07784967677",
+				email_address: "info@sirenasylum.com",
+				location: {
+					address: "24 Missouri Ave",
+					post_code: "M50 2NP",
+					city: "Birmingham",
+					region: "North West",
+					country: "England",
+				},
+				social_links: {
+					website: "www.sirenasylum.co.uk",
+					instagram: "www.instagram.com/sirenasylumfitness",
+					"facebook:": "www.facebook.com/sirenasylum",
+				},
+				services: [
+					"Aerial Hoop",
+					"Pole Dance",
+					"Pole Fitness",
+					"Aerial Silks",
+					"Lollipop",
+					"Lyrical Pole",
+					"Burlesque",
+				],
+			},
+		]);
+	});
 
-    test("Given the service 'any' is selected, all salons should be returned", () => {
-        // arrange
+	test("Given the service 'any' is selected, all salons should be returned", () => {
+		// arrange
 
-        const mockServices = ["Any", "Braids"];
+		const mockServices = ["Any", "Pole Fitness"];
 
-        // act
-        const results = mockFilterSalonsInCity(mockSalons, mockServices);
+		// act
+		const results = mockFilterStudiosInCity(mockStudios, mockServices);
 
-        // assert
-        expect(results).toEqual(mockSalons);
-    });
+		// assert
+		expect(results).toEqual(mockStudios);
+	});
 });

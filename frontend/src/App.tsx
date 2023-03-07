@@ -6,41 +6,41 @@ import ResultsPage from "./pages/ResultsPage";
 import SignUpPage from "./pages/SignUpPage";
 import LogInPage from "./pages/LogInPage";
 import Axios from "axios";
-import Salon from "./types/salons";
+import Studio from "./types/studios";
 
 const App = () => {
-	const [selectedServices, setSelectedServices] = useState<string[]>([]);
-	const [salonsInCity, setSalonsInCity] = useState<Salon[]>();
-	const [filteredSalons, setFilteredSalons] = useState<Salon[]>();
+	const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+	const [studiosInCity, setStudiosInCity] = useState<Studio[]>();
+	const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
-	const getSalonsInCity = (city: string) => {
-		Axios.get(`${process.env.REACT_APP_SALONS_API}/${city}`).then(
+	const getStudiosInCity = (city: string) => {
+		Axios.get(`${process.env.REACT_APP_STUDIOS_API}/${city}`).then(
 			(response) => {
-				setSalonsInCity(response.data);
+				setStudiosInCity(response.data);
 			}
 		);
 	};
 
-	const onServiceSelection = (services: string[]) => {
-		setSelectedServices(services);
+	const onOptionSelection = (options: string[]) => {
+		setSelectedOptions(options);
 	};
 
 	useEffect(() => {
-		filterSalonsInCity();
-	}, [selectedServices]);
+		filterStudiosInCity();
+	}, [selectedOptions]);
 
-	const filterSalonsInCity = () => {
-		if (selectedServices.includes("Any")) {
-			setFilteredSalons(salonsInCity);
+	const filterStudiosInCity = () => {
+		if (selectedOptions.includes("Any")) {
+			setFilteredStudios(studiosInCity);
 		} else {
-			const filteredSalonsInCity = salonsInCity?.filter(
-				(salon: Salon) => {
-					return selectedServices.some((service: string) => {
-						return salon.services?.includes(service);
+			const filteredStudiosInCity = studiosInCity?.filter(
+				(studio: Studio) => {
+					return selectedOptions.some((service: string) => {
+						return studio.services?.includes(service);
 					});
 				}
 			);
-			setFilteredSalons(filteredSalonsInCity);
+			setFilteredStudios(filteredStudiosInCity);
 		}
 	};
 
@@ -50,14 +50,16 @@ const App = () => {
 				path="/"
 				element={
 					<HomePage
-						onCitySelection={getSalonsInCity}
-						onServiceSelection={onServiceSelection}
+						onCitySelection={getStudiosInCity}
+						onOptionSelection={onOptionSelection}
 					/>
 				}
 			/>
 			<Route
 				path="/results"
-				element={<ResultsPage results={filteredSalons} />}
+				element={
+					filteredStudios && <ResultsPage results={filteredStudios} />
+				}
 			/>
 			<Route path="/signup" element={<SignUpPage />} />
 			<Route path="/login" element={<LogInPage />} />

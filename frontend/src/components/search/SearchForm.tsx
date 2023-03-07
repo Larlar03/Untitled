@@ -5,26 +5,24 @@ import SearchInput from "./search-input/SearchInput";
 import SearchOptions from "./search-options/SearchOptions";
 
 const SearchForm = (props: any) => {
-	const [services, setServices] = useState<Array<string>>([]);
+	const [options, setOptions] = useState<Array<string>>([]);
 	const [city, setCity] = useState<any>();
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		city && services.length > 0
-			? setIsDisabled(false)
-			: setIsDisabled(true);
-	}, [city, services]);
+		city && options.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
+	}, [city, options]);
 
 	const selectCity = (label: any) => {
 		props.onCitySelection(label.label);
 		setCity(label.label);
 	};
 
-	const selectServices = (options: string[]) => {
-		props.onServiceSelection(options);
-		setServices(options);
+	const selectOptions = (options: string[]) => {
+		props.onOptionSelection(options);
+		setOptions(options);
 	};
 
 	return (
@@ -34,7 +32,7 @@ const SearchForm = (props: any) => {
 					<SearchInput selectCity={selectCity} />
 				</div>
 				<div className="mb-4">
-					<SearchOptions selectServices={selectServices} />
+					<SearchOptions selectOptions={selectOptions} />
 				</div>
 				<CtaButton
 					text="Submit"
