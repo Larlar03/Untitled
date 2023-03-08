@@ -1,11 +1,11 @@
 // express
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const mockSalons = require("./mock-databases/mock-salon-db.json");
-const mockStudios = require("./mock-databases/mock-studio-db.json");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const mockSalons = require('./mock-databases/mock-salon-db.json');
+const mockStudios = require('./mock-databases/mock-studio-db.json');
 
 //  defining the express app
 const app = express();
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // adding morgan to log HTTP requests
-app.use(morgan("combined"));
+app.use(morgan('combined'));
 
 // Port
 const PORT = 3001;
@@ -28,19 +28,19 @@ app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}`);
 });
 
-app.get("/", (req, res) => {
-	res.send("Care DB");
+app.get('/', (req, res) => {
+	res.send('Care DB');
 });
 
 // Get all salons
-app.get("/studios", (req, res) => {
+app.get('/studios', (req, res) => {
 	res.send(mockStudios);
 });
 
-app.get("/studios/:city", (req, res) => {
-	const city = req.params.city;
+app.get('/studios/:location', (req, res) => {
+	const cityOrRegion = req.params.location;
 	const studios = mockStudios.filter((s) => {
-		return s.location.city === city;
+		return s.location.city === city || s.location.region;
 	});
 	res.send(studios);
 });
