@@ -9,9 +9,16 @@
   background-color: #c6a3ff;
   color: #241e92;
   margin-top: 0;
+  border-radius: 9999px;
 }
 
 #cta-button:hover {
   background-color: #7b6cf6;
   color: #241e92;
 }
+
+button:disabled, button[disabled] {
+  opacity: .65;
+  cursor:not-allowed;
+}
+

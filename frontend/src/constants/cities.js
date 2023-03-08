@@ -1,10 +1,10 @@
 const cities = [
-  { label: "Birmingham", type: "City" },
-  { label: "Coventry", type: "City" },
-  { label: "London", type: "City" },
-  { label: "Manchester", type: "City" },
-  { label: "Walsall", type: "City" },
-  { label: "Wolverhampton", type: "City" },
+    { label: 'Birmingham', type: 'City' },
+    { label: 'Coventry', type: 'City' },
+    { label: 'London', type: 'City' },
+    { label: 'Manchester', type: 'City' },
+    { label: 'Walsall', type: 'City' },
+    { label: 'Wolverhampton', type: 'City' }
 ];
 // const cityList = {
 //   cities: [
