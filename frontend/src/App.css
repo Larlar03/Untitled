@@ -1,17 +1,17 @@
 /* Medium devices (768px and up) */
 @media (min-width: 768px) {
-  #Page {
+  #page {
     position: relative;
     /* margin: 20px auto; */
   }
-  #PageCard,
-  #PageCardShadow {
+  #page__card,
+  #page__card--shadow {
     width: 529px;
     height: 670px;
     border-radius: 10px;
     position: absolute;
   }
-  #PageCard {
+  #page__card {
     padding: 15px 50px;
     border: solid 2px #241e92;
     background: #f7f7f7;
@@ -19,7 +19,7 @@
     left: 50%;
     transform: translatex(-50%);
   }
-  #PageCardShadow {
+  #page__card--shadow {
     background: #241e92;
     left: 53%;
     top: 2%;

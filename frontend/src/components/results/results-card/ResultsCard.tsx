@@ -1,6 +1,6 @@
 import React from 'react';
 import './ResultsCard.css';
-import Studio from '../../types/studios';
+import Studio from '../../../types/studios';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
@@ -17,7 +17,7 @@ const ResultsCard = ({
             {studio && (
                 <>
                     <div className='card' key={studio.id}>
-                        <div className='heading'>
+                        <div className='card__heading'>
                             <a
                                 href={studio.social_links?.website}
                                 target='_blank'
@@ -27,21 +27,21 @@ const ResultsCard = ({
                             </a>
                             <h4>{studio.location?.city}</h4>
                         </div>
-                        <div className='address'>
+                        <div className='card__address'>
                             {studio.location?.address}
                             <br />
                             {studio.location?.city},{' '}
                             {studio.location?.post_code}
                         </div>
-                        <div className='image-container'>
+                        <div className='card__image-container'>
                             <img src={studio.logo} alt='placeholder' />
                         </div>
-                        <div className='links'>
+                        <div className='card__links'>
                             <a
                                 href={studio.social_links?.instagram}
                                 target='_blank'
                                 rel='noreferrer'
-                                className='instagram'
+                                className='card__links--instagram'
                             >
                                 <InstagramIcon />
                             </a>
@@ -49,12 +49,12 @@ const ResultsCard = ({
                                 href={studio.social_links?.facebook}
                                 target='_blank'
                                 rel='noreferrer'
-                                className='facebook'
+                                className='card__links--facebook'
                             >
                                 <FacebookIcon />
                             </a>
                         </div>
-                        <div className='contact'>
+                        <div className='card__contact'>
                             <a href={studio.social_links?.website}>
                                 {studio.social_links?.website}
                             </a>
@@ -63,7 +63,7 @@ const ResultsCard = ({
                             </a>
                         </div>
                     </div>
-                    <div className='card-shadow'></div>
+                    <div className='card__shadow'></div>
                 </>
             )}
         </div>

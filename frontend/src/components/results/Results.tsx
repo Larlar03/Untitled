@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import ResultsCard from './ResultsCard';
-import ResultsNav from './ResultsNav';
+import ResultsCard from './results-card/ResultsCard';
+import ResultsNav from './results-nav/ResultsNav';
 import Studio from '../../types/studios';
 
 const Results = ({ results }: { results: Array<Studio> }) => {

@@ -40,7 +40,10 @@ app.get('/studios', (req, res) => {
 app.get('/studios/:location', (req, res) => {
 	const cityOrRegion = req.params.location;
 	const studios = mockStudios.filter((s) => {
-		return s.location.city === city || s.location.region;
+		return (
+			s.location.city === cityOrRegion ||
+			s.location.region === cityOrRegion
+		);
 	});
 	res.send(studios);
 });
