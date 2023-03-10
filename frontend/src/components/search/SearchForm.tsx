@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CtaButton from '../buttons/CtaButton';
+import CtaButton from '../buttons/cta-button/CtaButton';
 import SearchInput from './search-input/SearchInput';
 import SearchOptions from './search-options/SearchOptions';
 

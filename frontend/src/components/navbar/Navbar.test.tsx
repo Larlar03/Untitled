@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Navbar from './Navbar';
-import SignUp from '../signup/signup';
 
 const navbarComponent = (
     <Router>
@@ -21,9 +20,11 @@ describe('testing the rendering of the navbar', () => {
         //Assert
         expect(hamburgerIcon).toBeInTheDocument();
     });
+
     test('the menu items render', () => {
         //Arrange
         render(navbarComponent);
+
         //Act
         const item1 = screen.getByText('Home');
         const item2 = screen.getByText('Sign Up');
@@ -36,8 +37,6 @@ describe('testing the rendering of the navbar', () => {
         });
     });
 });
-
-// Menu items link to correct pages
 
 describe('testing the navbar items navigation', () => {
     test('given the Home link is clicked, the page navigates to the homepage', async () => {
@@ -63,6 +62,7 @@ describe('testing the navbar items navigation', () => {
         //Assert
         expect(signUpLink.closest('a')).toHaveAttribute('href', '/signup');
     });
+
     test('given the Log In link is clicked, the page navigates to the login page', async () => {
         //Arrange
         render(navbarComponent);

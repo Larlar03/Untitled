@@ -1,10 +1,14 @@
 import './OptionButton.css';
 
-const OptionButton = (props: any) => {
+interface Props {
+    serviceName: string;
+    handleClick: (event: React.MouseEvent<HTMLElement>) => void;
+}
+
+const OptionButton = (props: Props) => {
     return (
         <li
             onClick={props.handleClick}
-            key={props.keyIndex}
             id={props.serviceName}
             className='option-button hover-grow rounded-full'
         >

@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import services from '../../../constants/services';
-import OptionButton from '../../buttons/OptionButton';
+import OptionButton from '../../buttons/option-button/OptionButton';
 
-const SearchOptions = (props: any) => {
+interface Props {
+    selectOptions: (options: string[]) => void;
+}
+
+const SearchOptions = (props: Props) => {
     const [options, setOptions] = useState<Array<string>>([]);
 
     useEffect(() => {
@@ -34,7 +38,7 @@ const SearchOptions = (props: any) => {
         <ul className='list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center md:gap-1.5 md:my-5'>
             {services.map((service, i) => (
                 <OptionButton
-                    keyIndex={i}
+                    key={i}
                     serviceName={service}
                     handleClick={handleOptionClick}
                 />

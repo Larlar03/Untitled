@@ -1,6 +1,7 @@
 import React from 'react';
 import './CtaButton.css';
 
+interface Props {}
 const CtaButton = (props: any) => {
     return (
         <button
