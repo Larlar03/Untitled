@@ -5,7 +5,11 @@ import regions from '../../../constants/regions';
 import './SearchInput.css';
 import { useEffect, useState } from 'react';
 
-const SearchInput = (props: any) => {
+interface Props {
+    selectCity: (label: any) => void;
+}
+
+const SearchInput = (props: Props) => {
     const [searchOptions, setSearchOptions] = useState<any>();
 
     useEffect(() => {

@@ -3,16 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter as Router } from 'react-router-dom';
 import SearchOptions from './SearchOptions';
 import OptionButton from '../../buttons/option-button/OptionButton';
+import { mockHandleOptionClick } from './mockFunctions';
 
 // OptionButtons render
 // handleOptionClick function
 // Styles are applied
-
-// const options = [];
-// const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
-//     const selection: any = event.currentTarget.textContent;
-//     options.push(selection);
-// };
 
 test('option buttons render', () => {
     // Arrange
@@ -24,20 +19,52 @@ test('option buttons render', () => {
         </Router>
     );
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
+    const mockHandleClick = (event: React.MouseEvent<HTMLElement>): void => {
         event.preventDefault();
     };
 
     // Act
     const services = ['Aerial Hoop', 'Aerial Silks', 'Pole Fitness'];
     const optionButtons = services.map((service) => (
-        <OptionButton serviceName={service} handleClick={handleClick} />
+        <OptionButton serviceName={service} handleClick={mockHandleClick} />
     ));
 
     // Assert
     expect(optionButtons).toEqual([
-        <OptionButton handleClick={handleClick} serviceName='Aerial Hoop' />,
-        <OptionButton handleClick={handleClick} serviceName='Aerial Silks' />,
-        <OptionButton handleClick={handleClick} serviceName='Pole Fitness' />
+        <OptionButton
+            handleClick={mockHandleClick}
+            serviceName='Aerial Hoop'
+        />,
+        <OptionButton
+            handleClick={mockHandleClick}
+            serviceName='Aerial Silks'
+        />,
+        <OptionButton
+            handleClick={mockHandleClick}
+            serviceName='Pole Fitness'
+        />
     ]);
 });
+
+// test('given an option is clicked once, the option is added to the options array', async () => {
+//     // Arrange
+//     const selectOptions = (options: string[]) => {};
+
+//     render(
+//         <Router>
+//             <SearchOptions selectOptions={selectOptions} />
+//         </Router>
+//     );
+
+//     // Act
+//     const mockOptions = [];
+//     const mockSelections = ['Aerial Hoop', 'Aerial Silks', 'Pole Fitness'];
+//     const optionButtons = services.map((service) => (
+//         <OptionButton
+//             serviceName={service}
+//             handleClick={mockHandleOptionClick(mockOptions, mockSelections)}
+//         />
+//     ));
+
+//     // Assert
+// }, 10000);
