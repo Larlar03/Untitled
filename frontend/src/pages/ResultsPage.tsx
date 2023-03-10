@@ -4,13 +4,17 @@ import Results from '../components/results/Results';
 import Navbar from '../components/navbar/Navbar';
 import Studio from '../types/studios';
 
-const ResultsPage = ({ results }: { results: Array<Studio> }) => {
+interface Props {
+    results?: Studio[];
+}
+
+const ResultsPage = (props: Props) => {
     return (
         <>
             <Navbar />
             <div className='my-2'>
                 <Header subheading='Results' />
-                <Results results={results} />
+                <Results results={props.results && props.results} />
             </div>
         </>
     );

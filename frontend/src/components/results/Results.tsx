@@ -3,27 +3,49 @@ import ResultsCard from './results-card/ResultsCard';
 import ResultsNav from './results-nav/ResultsNav';
 import Studio from '../../types/studios';
 
-const Results = ({ results }: { results: Array<Studio> }) => {
-    const [resultsTotal, setResultsTotal] = useState<number>(results.length);
-    const [prevCard, setPrevCard] = useState<number>(results.length - 1);
+interface Props {
+    results?: Studio[];
+}
+
+const Results = (props: Props) => {
+    const [resultsTotal, setResultsTotal] = useState<number>(0);
+    const [prevCard, setPrevCard] = useState<number>(0);
     const [activeCard, setActiveCard] = useState<number>(0);
     const [nextCard, setNextCard] = useState<number>(1);
 
     useEffect(() => {
-        setResultsTotal(results.length);
-        setPrevCard(results.length - 1);
-    }, [results]);
+        if (props.results) {
+            setResultsTotal(props.results.length);
+            setPrevCard(props.results.length - 1);
+        }
+    }, [props.results]);
 
     const handleNextClick = () => {
-        setPrevCard(prevCard === results.length - 1 ? 0 : prevCard + 1);
-        setActiveCard(activeCard < results.length - 1 ? activeCard + 1 : 0);
-        setNextCard(nextCard === results.length - 1 ? 0 : nextCard + 1);
+        if (props.results) {
+            setPrevCard(
+                prevCard === props.results.length - 1 ? 0 : prevCard + 1
+            );
+            setActiveCard(
+                activeCard < props.results.length - 1 ? activeCard + 1 : 0
+            );
+            setNextCard(
+                nextCard === props.results.length - 1 ? 0 : nextCard + 1
+            );
+        }
     };
 
     const handlePrevClick = () => {
-        setPrevCard(prevCard === 0 ? results.length - 1 : prevCard - 1);
-        setActiveCard(activeCard === 0 ? results.length - 1 : activeCard - 1);
-        setNextCard(nextCard === 0 ? results.length - 1 : nextCard - 1);
+        if (props.results) {
+            setPrevCard(
+                prevCard === 0 ? props.results.length - 1 : prevCard - 1
+            );
+            setActiveCard(
+                activeCard === 0 ? props.results.length - 1 : activeCard - 1
+            );
+            setNextCard(
+                nextCard === 0 ? props.results.length - 1 : nextCard - 1
+            );
+        }
     };
 
     return (
@@ -35,11 +57,24 @@ const Results = ({ results }: { results: Array<Studio> }) => {
                 handlePrevClick={handlePrevClick}
             />
             <div className='h-full w-full flex flex-row flex-nowrap justify-center'>
-                <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
-                    <ResultsCard studio={results[prevCard]} isActive={false} />
-                    <ResultsCard studio={results[activeCard]} isActive={true} />
-                    <ResultsCard studio={results[nextCard]} isActive={false} />
-                </div>
+                {props.results && props.results.length > 0 ? (
+                    <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
+                        <ResultsCard
+                            studio={props.results[prevCard]}
+                            isActive={false}
+                        />
+                        <ResultsCard
+                            studio={props.results[activeCard]}
+                            isActive={true}
+                        />
+                        <ResultsCard
+                            studio={props.results[nextCard]}
+                            isActive={false}
+                        />
+                    </div>
+                ) : (
+                    <p>No Results</p>
+                )}
             </div>
         </>
     );

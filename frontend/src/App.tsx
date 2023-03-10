@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
@@ -35,8 +35,8 @@ const App = () => {
         } else {
             const filteredStudiosInLocation = studiosInLocation?.filter(
                 (studio: Studio) => {
-                    return selectedOptions.some((service: string) => {
-                        return studio.services?.includes(service);
+                    return selectedOptions.some((option: string) => {
+                        return studio.services?.includes(option);
                     });
                 }
             );
@@ -57,9 +57,7 @@ const App = () => {
             />
             <Route
                 path='/results'
-                element={
-                    filteredStudios && <ResultsPage results={filteredStudios} />
-                }
+                element={<ResultsPage results={filteredStudios} />}
             />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/login' element={<LogInPage />} />

@@ -4,7 +4,12 @@ import CtaButton from '../buttons/CtaButton';
 import SearchInput from './search-input/SearchInput';
 import SearchOptions from './search-options/SearchOptions';
 
-const SearchForm = (props: any) => {
+interface Props {
+    onCitySelection: (location: string) => void;
+    onOptionSelection: (options: string[]) => void;
+}
+
+const SearchForm = (props: Props) => {
     const [options, setOptions] = useState<Array<string>>([]);
     const [city, setCity] = useState<any>();
     const [isDisabled, setIsDisabled] = useState<boolean>(true);

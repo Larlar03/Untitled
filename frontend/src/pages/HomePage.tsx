@@ -1,9 +1,13 @@
-import React from 'react';
 import Header from '../components/header/Header';
 import SearchForm from '../components/search/SearchForm';
 import Navbar from '../components/navbar/Navbar';
 
-const HomePage = (props: any) => {
+interface Props {
+    onCitySelection: (location: string) => void;
+    onOptionSelection: (options: string[]) => void;
+}
+
+const HomePage = (props: Props) => {
     return (
         <>
             <Navbar />
@@ -13,7 +17,6 @@ const HomePage = (props: any) => {
                     <SearchForm
                         onCitySelection={props.onCitySelection}
                         onOptionSelection={props.onOptionSelection}
-                        navigateToResults={props.navigateToResults}
                     />
                 </div>
                 <div id='page__card-shadow'></div>
