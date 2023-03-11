@@ -47,7 +47,7 @@ const App = () => {
     return (
         <Routes>
             <Route
-                path='/'
+                path="/"
                 element={
                     <HomePage
                         onCitySelection={getStudiosInCity}
@@ -56,11 +56,11 @@ const App = () => {
                 }
             />
             <Route
-                path='/results'
+                path="/results"
                 element={<ResultsPage results={filteredStudios} />}
             />
-            <Route path='/signup' element={<SignUpPage />} />
-            <Route path='/login' element={<LogInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/login" element={<LogInPage />} />
         </Routes>
     );
 };
