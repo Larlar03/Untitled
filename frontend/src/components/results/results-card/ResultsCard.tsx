@@ -44,6 +44,7 @@ const ResultsCard = (props: Props) => {
                                 target='_blank'
                                 rel='noreferrer'
                                 className='card__links--instagram'
+                                data-testid='instagram'
                             >
                                 <InstagramIcon />
                             </a>
@@ -52,6 +53,7 @@ const ResultsCard = (props: Props) => {
                                 target='_blank'
                                 rel='noreferrer'
                                 className='card__links--facebook'
+                                data-testid='facebook'
                             >
                                 <FacebookIcon />
                             </a>
