@@ -19,15 +19,22 @@ const ResultsNav = (props: Props) => {
                 <ArrowLeftCircleIcon
                     onClick={props.handlePrevClick}
                     className='prev-arrow h-8 w-8  text-black hover:text-main-200 cursor-pointer'
+                    data-testid='prev-arrow'
                 />
-                {props.activeCardNum + 1} of {props.resultsTotal}
+                {props.resultsTotal === 0
+                    ? '0 Results'
+                    : `${props.activeCardNum + 1} of ${props.resultsTotal}`}
                 <ArrowRightCircleIcon
                     onClick={props.handleNextClick}
                     className=' next-arrow h-8 w-8 text-black hover:text-main-200 cursor-pointer'
+                    data-testid='next-arrow'
                 />
             </span>
             <Link to='/'>
-                <ArrowUturnLeftIcon className='h-6 w-6 text-main-100 hover:text-main-200' />
+                <ArrowUturnLeftIcon
+                    className='h-6 w-6 text-main-100 hover:text-main-200'
+                    data-testid='return-arrow'
+                />
             </Link>
         </div>
     );

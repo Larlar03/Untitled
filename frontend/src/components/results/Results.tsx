@@ -59,18 +59,28 @@ const Results = (props: Props) => {
             <div className='h-full w-full flex flex-row flex-nowrap justify-center'>
                 {props.results && props.results.length > 0 ? (
                     <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
-                        <ResultsCard
-                            studio={props.results[prevCard]}
-                            isActive={false}
-                        />
-                        <ResultsCard
-                            studio={props.results[activeCard]}
-                            isActive={true}
-                        />
-                        <ResultsCard
-                            studio={props.results[nextCard]}
-                            isActive={false}
-                        />
+                        {props.results?.length <= 2 && (
+                            <ResultsCard
+                                studio={props.results[activeCard]}
+                                isActive={true}
+                            />
+                        )}
+                        {props.results?.length >= 3 && (
+                            <>
+                                <ResultsCard
+                                    studio={props.results[prevCard]}
+                                    isActive={false}
+                                />
+                                <ResultsCard
+                                    studio={props.results[activeCard]}
+                                    isActive={true}
+                                />
+                                <ResultsCard
+                                    studio={props.results[nextCard]}
+                                    isActive={false}
+                                />
+                            </>
+                        )}
                     </div>
                 ) : (
                     <p>No Results</p>

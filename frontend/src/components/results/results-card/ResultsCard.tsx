@@ -14,7 +14,11 @@ const ResultsCard = (props: Props) => {
         <div className='card-container' id={!props.isActive ? 'inactive' : ''}>
             {props.studio && (
                 <>
-                    <div className='card' key={props.studio.id}>
+                    <div
+                        className='card'
+                        key={props.studio.id}
+                        data-testid='results-card'
+                    >
                         <div className='card__heading'>
                             <a
                                 href={props.studio.social_links?.website}
@@ -36,7 +40,7 @@ const ResultsCard = (props: Props) => {
                         </div>
                         <div className='card__links'>
                             <a
-                                href={props.studio.social_links?.instagram}
+                                href={`${props.studio.social_links?.instagram}`}
                                 target='_blank'
                                 rel='noreferrer'
                                 className='card__links--instagram'
