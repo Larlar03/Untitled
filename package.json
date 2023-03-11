@@ -35,10 +35,14 @@
         "format": "prettier --ignore-path .gitignore --write \"**/*.+(jsx|tsx|json|js|ts)\"",
         "prepare": "husky install"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run test a",
-            "pre-push": "npm run test a"
+    "jest": {
+        "coverageThreshold": {
+            "global": {
+                "statements": 0,
+                "branches": 0,
+                "function": 0,
+                "lines": 0
+            }
         }
     },
     "eslintConfig": {
@@ -66,7 +70,7 @@
         "eslint": "^8.35.0",
         "eslint-config-prettier": "^8.7.0",
         "eslint-plugin-react": "^7.32.2",
-        "husky": "^8.0.3",
+        "husky": "^8.0.0",
         "lint-staged": "^13.1.2",
         "prettier": "2.8.4"
     }

@@ -9,7 +9,7 @@ import { mockHandleOptionClick } from './mockFunctions';
 // handleOptionClick function
 // Styles are applied
 
-test('option buttons render', () => {
+test('test that the option button renders', () => {
     // Arrange
     const selectOptions = (options: string[]) => {};
 
@@ -33,16 +33,16 @@ test('option buttons render', () => {
     expect(optionButtons).toEqual([
         <OptionButton
             handleClick={mockHandleClick}
-            serviceName='Aerial Hoop'
+            serviceName="Aerial Hoop"
         />,
         <OptionButton
             handleClick={mockHandleClick}
-            serviceName='Aerial Silks'
+            serviceName="Aerial Silks"
         />,
         <OptionButton
             handleClick={mockHandleClick}
-            serviceName='Pole Fitness'
-        />
+            serviceName="Pole Fitness"
+        />,
     ]);
 });
 
