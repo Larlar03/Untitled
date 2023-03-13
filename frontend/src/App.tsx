@@ -7,7 +7,7 @@ import SignUpPage from './pages/SignUpPage';
 import LogInPage from './pages/LogInPage';
 import Axios from 'axios';
 import Studio from './types/studios';
-
+//Test
 const App = () => {
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
     const [studiosInLocation, setStudiosInLocation] = useState<Studio[]>();
