@@ -1,5 +1,5 @@
-import { mockFilterStudiosInCity } from './mock-app-functions';
-const mockStudios = require('./mock-studios.json');
+import { mockFilterStudiosInCity } from '../mock/mock-app-functions';
+const mockStudios = require('../mock/mock-studios.json');
 
 describe('Filter studios by services', () => {
     test('Given one service is selected, and one studio has that service, that studio should be returned', () => {
