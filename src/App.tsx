@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { apiCall } from './hooks/api/api-call';
 import HomePage from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
 import SignUpPage from './pages/SignUpPage';
 import LogInPage from './pages/LogInPage';
-import Axios from 'axios';
 import Studio from './types/studios';
 //Test
 const App = () => {
@@ -13,13 +13,13 @@ const App = () => {
     const [studiosInLocation, setStudiosInLocation] = useState<Studio[]>();
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
-    const getStudiosInCity = (location: string) => {
-        console.log('IN API CALL');
-        // Axios.get(`${process.env.REACT_APP_STUDIOS_API}/${location}`).then(
-        //     (response) => {
-        //         setStudiosInLocation(response.data);
-        //     }
-        // );
+    const getStudiosInCity = async (location: string) => {
+        setStudiosInLocation(
+            await apiCall(
+                'GET',
+                `${process.env.REACT_APP_STUDIOS_API}/${location}`
+            )
+        );
     };
 
     const onOptionSelection = (options: string[]) => {
