@@ -14,11 +14,12 @@ const App = () => {
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
     const getStudiosInCity = (location: string) => {
-        Axios.get(`${process.env.REACT_APP_STUDIOS_API}/${location}`).then(
-            (response) => {
-                setStudiosInLocation(response.data);
-            }
-        );
+        console.log('IN API CALL');
+        // Axios.get(`${process.env.REACT_APP_STUDIOS_API}/${location}`).then(
+        //     (response) => {
+        //         setStudiosInLocation(response.data);
+        //     }
+        // );
     };
 
     const onOptionSelection = (options: string[]) => {

@@ -1,4 +1,4 @@
-import Studio from '../../../types/studios';
+import Studio from '../../types/studios';
 
 export const mockFilterStudiosInCity = (
     studios: Studio[],

@@ -22,12 +22,12 @@ describe('Filter studios by services', () => {
                     post_code: 'DY4 7BS',
                     city: 'Birmingham',
                     region: 'West Midlands',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.aycstudios.co.uk/',
                     instagram: 'www.instagram.com/aycstudios/',
-                    'facebook:': 'www.facebook.com/AYcircus/'
+                    'facebook:': 'www.facebook.com/AYcircus/',
                 },
                 services: [
                     'Aerial Hoop',
@@ -35,9 +35,9 @@ describe('Filter studios by services', () => {
                     'Pole Fitness',
                     'Aerial Silks',
                     'Lollipop',
-                    'Stretch & Flexibility'
-                ]
-            }
+                    'Stretch & Flexibility',
+                ],
+            },
         ]);
     });
 
@@ -60,12 +60,12 @@ describe('Filter studios by services', () => {
                     post_code: 'B90 4NR',
                     city: 'Birmingham',
                     region: 'West Midlands',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.kpole.co.uk',
                     instagram: 'www.instagram.com/kpole_danceandfitness',
-                    'facebook:': 'www.facebook.com/KpoleShirley/'
+                    'facebook:': 'www.facebook.com/KpoleShirley/',
                 },
                 services: [
                     'Aerial Hoop',
@@ -73,8 +73,8 @@ describe('Filter studios by services', () => {
                     'Pole Fitness',
                     'Aerial Silks',
                     'Lollipop',
-                    'Flying Pole'
-                ]
+                    'Flying Pole',
+                ],
             },
             {
                 id: 4,
@@ -86,12 +86,12 @@ describe('Filter studios by services', () => {
                     post_code: 'B64 5HH',
                     city: 'Birmingham',
                     region: 'West Midlands',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.kpole.co.uk',
                     instagram: 'www.instagram.com/kpole_danceandfitness',
-                    'facebook:': 'www.facebook.com/KpoleShirley/'
+                    'facebook:': 'www.facebook.com/KpoleShirley/',
                 },
                 services: [
                     'Aerial Hoop',
@@ -99,9 +99,9 @@ describe('Filter studios by services', () => {
                     'Pole Fitness',
                     'Aerial Silks',
                     'Lollipop',
-                    'Flying Pole'
-                ]
-            }
+                    'Flying Pole',
+                ],
+            },
         ]);
     });
 
@@ -126,12 +126,12 @@ describe('Filter studios by services', () => {
                     post_code: 'DY4 7BS',
                     city: 'Birmingham',
                     region: 'West Midlands',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.aycstudios.co.uk/',
                     instagram: 'www.instagram.com/aycstudios/',
-                    'facebook:': 'www.facebook.com/AYcircus/'
+                    'facebook:': 'www.facebook.com/AYcircus/',
                 },
                 services: [
                     'Aerial Hoop',
@@ -139,8 +139,8 @@ describe('Filter studios by services', () => {
                     'Pole Fitness',
                     'Aerial Silks',
                     'Lollipop',
-                    'Stretch & Flexibility'
-                ]
+                    'Stretch & Flexibility',
+                ],
             },
             {
                 id: 4,
@@ -152,12 +152,12 @@ describe('Filter studios by services', () => {
                     post_code: 'B90 4NR',
                     city: 'Birmingham',
                     region: 'West Midlands',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.kpole.co.uk',
                     instagram: 'www.instagram.com/kpole_danceandfitness',
-                    'facebook:': 'www.facebook.com/KpoleShirley/'
+                    'facebook:': 'www.facebook.com/KpoleShirley/',
                 },
                 services: [
                     'Aerial Hoop',
@@ -165,8 +165,8 @@ describe('Filter studios by services', () => {
                     'Pole Fitness',
                     'Aerial Silks',
                     'Lollipop',
-                    'Flying Pole'
-                ]
+                    'Flying Pole',
+                ],
             },
             {
                 id: 4,
@@ -178,12 +178,12 @@ describe('Filter studios by services', () => {
                     post_code: 'B64 5HH',
                     city: 'Birmingham',
                     region: 'West Midlands',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.kpole.co.uk',
                     instagram: 'www.instagram.com/kpole_danceandfitness',
-                    'facebook:': 'www.facebook.com/KpoleShirley/'
+                    'facebook:': 'www.facebook.com/KpoleShirley/',
                 },
                 services: [
                     'Aerial Hoop',
@@ -191,9 +191,9 @@ describe('Filter studios by services', () => {
                     'Pole Fitness',
                     'Aerial Silks',
                     'Lollipop',
-                    'Flying Pole'
-                ]
-            }
+                    'Flying Pole',
+                ],
+            },
         ]);
     });
 
@@ -217,12 +217,12 @@ describe('Filter studios by services', () => {
                     post_code: 'M50 2NP',
                     city: 'Birmingham',
                     region: 'North West',
-                    country: 'England'
+                    country: 'England',
                 },
                 social_links: {
                     website: 'www.sirenasylum.co.uk',
                     instagram: 'www.instagram.com/sirenasylumfitness',
-                    'facebook:': 'www.facebook.com/sirenasylum'
+                    'facebook:': 'www.facebook.com/sirenasylum',
                 },
                 services: [
                     'Aerial Hoop',
@@ -231,9 +231,9 @@ describe('Filter studios by services', () => {
                     'Aerial Silks',
                     'Lollipop',
                     'Lyrical Pole',
-                    'Burlesque'
-                ]
-            }
+                    'Burlesque',
+                ],
+            },
         ]);
     });
 
