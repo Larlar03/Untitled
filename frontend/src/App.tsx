@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -15,7 +14,7 @@ const App = () => {
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
     const getStudiosInCity = async (location: string) => {
-        setStudiosInLocation(await apiCall('GET', `http://localhost:3001/studios/${location}`));
+        setStudiosInLocation(await apiCall('GET', `${process.env.REACT_APP_STUDIOS_API}/${location}`));
     };
 
     const onOptionSelection = (options: string[]) => {
