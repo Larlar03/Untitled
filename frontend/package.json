@@ -9,7 +9,7 @@
         "preview": "vite preview",
         "prepare": "cd .. husky install",
         "test": "react-scripts test",
-        "test:coverage": "npm run test -- --coverage -watchAll=false",
+        "test:coverage": "npm run test -- --coverage --watchAll=false",
         "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|jsx|ts|tsx|json)\"",
         "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
         "lint:fix": "npm run lint -- --fix",
