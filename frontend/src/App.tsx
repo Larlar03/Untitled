@@ -14,7 +14,7 @@ const App = () => {
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
     const getStudiosInCity = async (location: string) => {
-        setStudiosInLocation(await apiCall('GET', `${process.env.REACT_APP_STUDIOS_API}/${location}`));
+        setStudiosInLocation(await apiCall('GET', `${import.meta.env.VITE_STUDIOS_API}/${location}`));
     };
 
     const onOptionSelection = (options: string[]) => {

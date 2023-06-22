@@ -4,7 +4,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const mockSalons = require('./mock-databases/mock-salon-db.json');
 const mockStudios = require('./mock-databases/mock-studio-db.json');
 
 //  defining the express app
@@ -32,7 +31,7 @@ app.get('/', (req, res) => {
 	res.send('Care DB');
 });
 
-// Get all salons
+// Get all studios
 app.get('/studios', (req, res) => {
 	res.send(mockStudios);
 });
