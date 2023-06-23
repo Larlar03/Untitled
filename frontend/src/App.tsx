@@ -13,9 +13,11 @@ const App = () => {
     const [studiosInLocation, setStudiosInLocation] = useState<Studio[]>();
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
-    const getStudiosInCity = async (location: string) => {
-        setStudiosInLocation(await axios.get(`${import.meta.env.VITE_STUDIOS_API}/${location}`));
-        // console.log(studiosInLocation);
+    const getStudiosInCity = (location: string) => {
+        axios.get(`${import.meta.env.VITE_STUDIOS_API}/${location}`).then((response) => {
+            console.log(response.data);
+            setStudiosInLocation(response.data);
+        });
     };
 
     const onOptionSelection = (options: string[]) => {
@@ -45,7 +47,7 @@ const App = () => {
                 path='/'
                 element={<HomePage onCitySelection={getStudiosInCity} onOptionSelection={onOptionSelection} />}
             />
-            <Route path='/results' element={<ResultsPage results={filteredStudios} />} />
+            <Route path='/results' element={<ResultsPage results={studiosInLocation} />} />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/login' element={<LogInPage />} />
         </Routes>

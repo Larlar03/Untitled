@@ -24,6 +24,7 @@ const SearchForm = (props: Props) => {
     const selectCity = (label: any) => {
         props.onCitySelection(label.label);
         setCity(label.label);
+        console.log('selecting city');
     };
 
     const selectOptions = (options: string[]) => {
