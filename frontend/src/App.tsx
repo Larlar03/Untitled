@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { apiCall } from './hooks/api/api-call';
+import axios from 'axios';
 import HomePage from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
 import SignUpPage from './pages/SignUpPage';
@@ -14,7 +14,8 @@ const App = () => {
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
     const getStudiosInCity = async (location: string) => {
-        setStudiosInLocation(await apiCall('GET', `${import.meta.env.VITE_STUDIOS_API}/${location}`));
+        setStudiosInLocation(await axios.get(`${import.meta.env.VITE_STUDIOS_API}/${location}`));
+        // console.log(studiosInLocation);
     };
 
     const onOptionSelection = (options: string[]) => {
