@@ -6,7 +6,7 @@ import './SearchInput.css';
 import { useEffect, useState } from 'react';
 
 interface Props {
-    selectCity: (label: any) => void;
+    selectLocation: (label: any) => void;
 }
 
 const SearchInput = (props: Props) => {
@@ -20,7 +20,7 @@ const SearchInput = (props: Props) => {
     return (
         <div>
             <Autocomplete
-                onChange={(event, label) => props.selectCity(label)}
+                onChange={(event, label) => props.selectLocation(label)}
                 disablePortal
                 options={searchOptions}
                 groupBy={(searchOption: any) => searchOption.type}
