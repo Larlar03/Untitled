@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { apiCall } from './hooks/api/api-call';
+import axios from 'axios';
 import HomePage from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
 import SignUpPage from './pages/SignUpPage';
@@ -13,8 +13,11 @@ const App = () => {
     const [studiosInLocation, setStudiosInLocation] = useState<Studio[]>();
     const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
 
-    const getStudiosInCity = async (location: string) => {
-        setStudiosInLocation(await apiCall('GET', `${process.env.REACT_APP_STUDIOS_API}/${location}`));
+    const getStudiosInCity = (location: string) => {
+        axios.get(`${import.meta.env.VITE_STUDIOS_API}/${location}`).then((response) => {
+            console.log(response.data);
+            setStudiosInLocation(response.data);
+        });
     };
 
     const onOptionSelection = (options: string[]) => {
@@ -44,7 +47,7 @@ const App = () => {
                 path='/'
                 element={<HomePage onCitySelection={getStudiosInCity} onOptionSelection={onOptionSelection} />}
             />
-            <Route path='/results' element={<ResultsPage results={filteredStudios} />} />
+            <Route path='/results' element={<ResultsPage results={studiosInLocation} />} />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/login' element={<LogInPage />} />
         </Routes>

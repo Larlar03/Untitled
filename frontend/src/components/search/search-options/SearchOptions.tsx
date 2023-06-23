@@ -11,6 +11,7 @@ const SearchOptions = (props: Props) => {
 
     useEffect(() => {
         props.selectOptions(options);
+        console.log('selecting options');
     }, [options]);
 
     const handleOptionClick = (event: React.MouseEvent<HTMLElement>): void => {

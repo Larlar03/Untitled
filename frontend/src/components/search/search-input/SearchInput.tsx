@@ -10,7 +10,7 @@ interface Props {
 }
 
 const SearchInput = (props: Props) => {
-    const [searchOptions, setSearchOptions] = useState<any>();
+    const [searchOptions, setSearchOptions] = useState<any>([]);
 
     useEffect(() => {
         setSearchOptions(regions.concat(cities));

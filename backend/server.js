@@ -1,49 +1,26 @@
-// express
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const mockSalons = require('./mock-databases/mock-salon-db.json');
-const mockStudios = require('./mock-databases/mock-studio-db.json');
+const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
 
-//  defining the express app
 const app = express();
-
-// adding Helmet to enhance your API's security
-app.use(helmet());
-
-// using bodyParser to parse JSON bodies into JS objects
+app.use(cors());
 app.use(bodyParser.json());
 
-// enabling CORS for all requests
-app.use(cors());
+// router
+const newRouter = require('./router.js');
 
-// adding morgan to log HTTP requests
-app.use(morgan('combined'));
+MongoClient.connect(process.env.MONGODB_URI) // This is the location of where your local database is living.
+	.then((client) => {
+		const db = client.db('aeriform'); // The name of the DB
+		const studioCollection = db.collection('studios'); // The name of the collection inside the DB
+		const studioRouter = newRouter(studioCollection); // We haven't built the router functionality yet, but we will next!
 
-// Port
-const PORT = 3001;
-app.listen(PORT, () => {
-	console.log(`Server is listening on port ${PORT}`);
-});
+		app.use('/studios', studioRouter); // Defining the base route where we can later access our data
+	})
+	.catch(console.err);
 
-app.get('/', (req, res) => {
-	res.send('Care DB');
-});
-
-// Get all salons
-app.get('/studios', (req, res) => {
-	res.send(mockStudios);
-});
-
-app.get('/studios/:location', (req, res) => {
-	const cityOrRegion = req.params.location;
-	const studios = mockStudios.filter((s) => {
-		return (
-			s.location.city === cityOrRegion ||
-			s.location.region === cityOrRegion
-		);
-	});
-	res.send(studios);
+app.listen(3000, function () {
+	console.log(`Listening on this port: ${this.address().port}`);
 });
