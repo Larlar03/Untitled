@@ -12,7 +12,7 @@ const newRouter = function (collection) {
 		res.json({ status: 500, error: inputError });
 	};
 
-	// Route for getting all studios
+	// get all studios
 	router.get('/', (req, res) => {
 		collection
 			.find()
@@ -21,8 +21,8 @@ const newRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// Route for getting studio by location
-	router.get('/:location', (req, res) => {
+	// get studio by location
+	router.get('/locations/:location', (req, res) => {
 		const location = req.params.location;
 		collection
 			.find({
@@ -40,14 +40,26 @@ const newRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// Route for getting studio by id
-	// router.get('/:id', (req, res) => {
-	// 	const id = req.params.id;
-	// 	collection
-	// 		.findOne({ _id: ObjectID(id) })
-	// 		.then((doc) => res.json(doc))
-	// 		.catch((err) => errorCatcher(err));
-	// });
+	// get all studios in location with services
+	router.get('/:location/:services', (req, res) => {
+		const location = req.params.location;
+		const services = req.query.services;
+		collection
+			.find({
+				$and: [
+					{
+						$or: [
+							{ 'location.region': location },
+							{ 'location.city': location },
+						],
+					},
+					{ services: { $in: services } },
+				],
+			})
+			.toArray()
+			.then((docs) => res.json(docs))
+			.catch((err) => errorCatcher(err));
+	});
 
 	return router;
 };

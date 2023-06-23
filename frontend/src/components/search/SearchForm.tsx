@@ -1,49 +1,45 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CtaButton from '../buttons/cta-button/CtaButton';
 import SearchInput from './search-input/SearchInput';
 import SearchOptions from './search-options/SearchOptions';
 
 interface Props {
-    onCitySelection: (location: string) => void;
-    onOptionSelection: (options: string[]) => void;
+    getStudios: (location: string, services: string[]) => void;
 }
 
 const SearchForm = (props: Props) => {
     const [options, setOptions] = useState<Array<string>>([]);
-    const [city, setCity] = useState<any>();
+    const [location, setLocation] = useState<any>();
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
-        city && options.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
-    }, [city, options]);
+        location && options.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
+    }, [location, options]);
 
-    const selectCity = (label: any) => {
-        props.onCitySelection(label.label);
-        setCity(label.label);
-        console.log('selecting city');
+    const selectLocation = (label: any) => {
+        setLocation(label.label);
+        // console.log('location', location);
     };
 
     const selectOptions = (options: string[]) => {
-        props.onOptionSelection(options);
         setOptions(options);
+        // console.log('options', options);
     };
+
+    // ;
 
     return (
         <div className='mt-16'>
             <form action='submit'>
                 <div className='mb-3'>
-                    <SearchInput selectCity={selectCity} />
+                    <SearchInput selectLocation={selectLocation} />
                 </div>
                 <div className='mb-4'>
                     <SearchOptions selectOptions={selectOptions} />
                 </div>
                 <CtaButton
                     text='Submit'
-                    handleClick={() => navigate('/results')}
+                    handleClick={(e) => [e.preventDefault(), props.getStudios(location, options)]}
                     isDisabled={isDisabled}
                     type='submit'
                 />

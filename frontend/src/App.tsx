@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import HomePage from './pages/HomePage';
@@ -9,45 +9,35 @@ import LogInPage from './pages/LogInPage';
 import Studio from './types/studios';
 //Test
 const App = () => {
-    const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-    const [studiosInLocation, setStudiosInLocation] = useState<Studio[]>();
-    const [filteredStudios, setFilteredStudios] = useState<Studio[]>();
+    const [studios, setStudios] = useState<Studio[]>();
 
-    const getStudiosInCity = (location: string) => {
-        axios.get(`${import.meta.env.VITE_STUDIOS_API}/${location}`).then((response) => {
-            console.log(response.data);
-            setStudiosInLocation(response.data);
-        });
-    };
+    const navigate = useNavigate();
 
-    const onOptionSelection = (options: string[]) => {
-        setSelectedOptions(options);
-    };
-
-    useEffect(() => {
-        filterStudiosInLocation();
-    }, [selectedOptions]);
-
-    const filterStudiosInLocation = () => {
-        if (selectedOptions.includes('Any')) {
-            setFilteredStudios(studiosInLocation);
-        } else {
-            const filteredStudiosInLocation = studiosInLocation?.filter((studio: Studio) => {
-                return selectedOptions.some((option: string) => {
-                    return studio.services?.includes(option);
-                });
+    const getStudios = (location: string, services: string[]) => {
+        console.log('location', location);
+        console.log('options', services);
+        axios
+            .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/:services`, {
+                params: {
+                    services
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                setStudios(response.data);
+            })
+            .then(() => {
+                navigate('/results');
+            })
+            .catch((error) => {
+                console.log(error);
             });
-            setFilteredStudios(filteredStudiosInLocation);
-        }
     };
 
     return (
         <Routes>
-            <Route
-                path='/'
-                element={<HomePage onCitySelection={getStudiosInCity} onOptionSelection={onOptionSelection} />}
-            />
-            <Route path='/results' element={<ResultsPage results={studiosInLocation} />} />
+            <Route path='/' element={<HomePage getStudios={getStudios} />} />
+            <Route path='/results' element={<ResultsPage results={studios} />} />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/login' element={<LogInPage />} />
         </Routes>
