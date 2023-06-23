@@ -1,23 +1,17 @@
-// express
 const express = require('express');
-const app = express();
-
-// mongodb
-const MongoClient = require('mongodb').MongoClient;
-const connectionString = 'mongodb://localhost:27017';
-
-// cors
 const cors = require('cors');
-app.use(cors());
-
-// bodyparser
 const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
+
+const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 // router
 const newRouter = require('./router.js');
 
-MongoClient.connect(connectionString) // This is the location of where your local database is living.
+MongoClient.connect(process.env.MONGODB_URI) // This is the location of where your local database is living.
 	.then((client) => {
 		const db = client.db('aeriform'); // The name of the DB
 		const studioCollection = db.collection('studios'); // The name of the collection inside the DB

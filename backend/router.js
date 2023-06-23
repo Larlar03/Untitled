@@ -21,14 +21,33 @@ const newRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// Route for getting specific studio
-	router.get('/:id', (req, res) => {
-		const id = req.params.id;
+	// Route for getting studio by location
+	router.get('/:location', (req, res) => {
+		const location = req.params.location;
 		collection
-			.findOne({ _id: ObjectID(id) })
+			.find({
+				$or: [
+					{
+						'location.region': location,
+					},
+					{
+						'location.city': location,
+					},
+				],
+			})
+			.toArray()
 			.then((doc) => res.json(doc))
 			.catch((err) => errorCatcher(err));
 	});
+
+	// Route for getting studio by id
+	// router.get('/:id', (req, res) => {
+	// 	const id = req.params.id;
+	// 	collection
+	// 		.findOne({ _id: ObjectID(id) })
+	// 		.then((doc) => res.json(doc))
+	// 		.catch((err) => errorCatcher(err));
+	// });
 
 	return router;
 };
