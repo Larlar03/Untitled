@@ -1,6 +1,6 @@
-import Header from '../components/header/Header';
+import Header from '../components/header/header';
 import Results from '../components/results/Results';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/navbar/navbar';
 import Studio from '../types/studios';
 
 interface Props {

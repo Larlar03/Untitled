@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import CtaButton from '../buttons/cta-button/CtaButton';
+import CtaButton from '../buttons/cta-button/cta-button';
 import SearchInput from './search-input/SearchInput';
 import SearchOptions from './search-options/SearchOptions';
 

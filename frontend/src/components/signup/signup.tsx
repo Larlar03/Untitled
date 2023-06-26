@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
-import CtaButton from '../buttons/cta-button/CtaButton';
+import CtaButton from '../buttons/cta-button/cta-button';
 import { EyeIcon } from '@heroicons/react/24/outline';
 import { EyeSlashIcon } from '@heroicons/react/24/outline';
 

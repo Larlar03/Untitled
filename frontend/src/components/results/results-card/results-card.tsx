@@ -1,5 +1,4 @@
-import React from 'react';
-import './ResultsCard.css';
+import './results-card.css';
 import Studio from '../../../types/studios';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';

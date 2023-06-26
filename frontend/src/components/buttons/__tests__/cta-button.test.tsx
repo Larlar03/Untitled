@@ -1,7 +1,6 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import CtaButton from './CtaButton';
+import CtaButton from '../cta-button/cta-button';
 
 // test button is rendering
 // test button can't be clicked when disabled

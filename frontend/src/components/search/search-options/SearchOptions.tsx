@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import services from '../../../constants/services';
-import OptionButton from '../../buttons/option-button/OptionButton';
+import OptionButton from '../../buttons/option-button/option-button';
 
 interface Props {
     selectOptions: (options: string[]) => void;

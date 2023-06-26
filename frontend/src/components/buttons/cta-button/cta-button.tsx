@@ -1,5 +1,4 @@
-import React from 'react';
-import './CtaButton.css';
+import './cta-button.css';
 
 const CtaButton = (props: any) => {
     return (

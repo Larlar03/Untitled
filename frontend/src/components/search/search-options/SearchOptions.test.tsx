@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter as Router } from 'react-router-dom';
 import SearchOptions from './SearchOptions';
-import OptionButton from '../../buttons/option-button/OptionButton';
+import OptionButton from '../../buttons/option-button/option-button';
 import { mockHandleOptionClick } from './mockFunctions';
 
 // OptionButtons render

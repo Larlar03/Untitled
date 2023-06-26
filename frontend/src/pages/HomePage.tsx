@@ -1,6 +1,6 @@
-import Header from '../components/header/Header';
+import Header from '../components/header/header';
 import SearchForm from '../components/search/SearchForm';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../components/navbar/navbar';
 
 interface Props {
     getStudios: (location: string, services: string[]) => void;

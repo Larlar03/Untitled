@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ResultsCard from './results-card/ResultsCard';
+import ResultsCard from './results-card/results-card';
 import ResultsNav from './results-nav/ResultsNav';
 import Studio from '../../types/studios';
 
