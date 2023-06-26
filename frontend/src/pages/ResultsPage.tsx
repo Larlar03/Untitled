@@ -1,5 +1,5 @@
 import Header from '../components/header/header';
-import Results from '../components/results/Results';
+import Results from '../components/results/results';
 import Navbar from '../components/navbar/navbar';
 import Studio from '../types/studios';
 

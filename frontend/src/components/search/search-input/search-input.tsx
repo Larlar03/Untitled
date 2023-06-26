@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import cities from '../../../constants/cities';
 import regions from '../../../constants/regions';
-import './SearchInput.css';
-import { useEffect, useState } from 'react';
+import './search-input.css';
 
 interface Props {
     selectLocation: (label: any) => void;

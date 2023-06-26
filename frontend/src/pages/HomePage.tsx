@@ -1,5 +1,5 @@
 import Header from '../components/header/header';
-import SearchForm from '../components/search/SearchForm';
+import SearchForm from '../components/search/search-form';
 import Navbar from '../components/navbar/navbar';
 
 interface Props {
