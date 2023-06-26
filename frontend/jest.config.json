@@ -7,5 +7,6 @@
             "statements": 80
         }
     },
+    "coveragePathIgnorePatterns": ["./src/main.tsx"],
     "setupFilesAfterEnv": "./src/setupTests.js"
 }
