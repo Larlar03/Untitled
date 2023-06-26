@@ -8,7 +8,7 @@ const Navbar = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
 
     const handleNavClick = () => {
-        !showMenu ? setShowMenu(true) : setShowMenu(true);
+        !showMenu ? setShowMenu(true) : setShowMenu(false);
     };
 
     return (

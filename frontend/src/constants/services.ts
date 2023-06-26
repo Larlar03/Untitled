@@ -1,5 +1,4 @@
 const services: string[] = [
-    'Any',
     'Aerial Hoop',
     'Aerial Silks',
     'Burlesque',

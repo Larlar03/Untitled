@@ -11,11 +11,11 @@ const SearchOptions = (props: Props) => {
 
     useEffect(() => {
         props.selectOptions(options);
-        console.log('selecting options');
+        console.log('OPTIONS', options);
     }, [options]);
 
     const handleOptionClick = (event: React.MouseEvent<HTMLElement>): void => {
-        const selection: any = event.currentTarget.textContent;
+        const selection = event.currentTarget.textContent;
 
         setOptions((prev: string[]) => {
             if (prev.includes(selection)) {
