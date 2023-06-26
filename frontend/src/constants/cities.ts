@@ -1,4 +1,6 @@
-const cities = [
+import CitiesRegion from '../types/cities-regions.ts';
+
+const cities: CitiesRegion[] = [
     { label: 'Birmingham', type: 'City' },
     { label: 'Coventry', type: 'City' },
     { label: 'London', type: 'City' },

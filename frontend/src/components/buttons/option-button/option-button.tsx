@@ -1,4 +1,4 @@
-import './OptionButton.css';
+import './option-button.css';
 
 interface Props {
     serviceName: string;
@@ -7,7 +7,12 @@ interface Props {
 
 const OptionButton = (props: Props) => {
     return (
-        <li onClick={props.handleClick} id={props.serviceName} className='option-button hover-grow rounded-full'>
+        <li
+            onClick={props.handleClick}
+            id={props.serviceName}
+            data-testid='option-button'
+            className='option-button hover-grow rounded-full'
+        >
             {props.serviceName}
         </li>
     );

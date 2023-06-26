@@ -1,8 +1,7 @@
-import React from 'react';
-import './ResultsCard.css';
 import Studio from '../../../types/studios';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import './results-card.css';
 
 interface Props {
     studio: Studio;

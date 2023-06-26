@@ -1,12 +1,68 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
-
-import { MemoryRouter as Router } from 'react-router-dom';
-import Studio from '../../../types/studios';
-import Results from '../Results';
-
-const mockResults: Studio[] = [
+export const mockOneStudio: Studio[] = [
+    {
+        id: 1,
+        name: 'Siren Asylum',
+        phone_number: '07784967677',
+        email_address: 'info@sirenasylum.com',
+        location: {
+            address: '24 Missouri Ave',
+            post_code: 'M50 2NP',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
+        },
+        social_links: {
+            website: 'www.sirenasylum.co.uk',
+            instagram: 'www.instagram.com/sirenasylumfitness',
+            facebook: 'www.facebook.com/sirenasylum'
+        },
+        logo: 'https://previews.dropbox.com/p/thumb/AB0f-LuJKBrA5Gj9gjfCqUYhpQWAAXeuxVzS1zxw1fHL1kMv7It2SI-CWnZnJxGmOO42BAOiNF5sDIjl-lj3aAdnW8CLE23rVYHAlnkRvsJTxBPaiBPN8D7Y3DDg3XwuG3Ya0aCeZABU-rBGdUwJj9vXKQR0pSPcydevvJZjuDDLVa0byIFSqUuOGHzWIo2hXjuLD47IDpMI3GPFefKgwRiKo8J5b_Bo40AxfcveGQHjRkcZSFxbGUv3AjqhTtj4ikM23j3CGaTIKpKLQ6j1JaRRLfsWEIVo03fUX_pug2k26Q79dT63wFRQs0en35pvOQzPg6MSYZX2GIOg6bVEPJ5gKmT_YUSwxu6uKLpC8pXNzZIgJ1uOeEKYFYk-p0-DUTg/p.png',
+        services: ['Aerial Hoop', 'Aerial Silks', 'Contemporary Dance']
+    }
+];
+export const mockTwoStudios: Studio[] = [
+    {
+        id: 1,
+        name: 'Siren Asylum',
+        phone_number: '07784967677',
+        email_address: 'info@sirenasylum.com',
+        location: {
+            address: '24 Missouri Ave',
+            post_code: 'M50 2NP',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
+        },
+        social_links: {
+            website: 'www.sirenasylum.co.uk',
+            instagram: 'www.instagram.com/sirenasylumfitness',
+            facebook: 'www.facebook.com/sirenasylum'
+        },
+        logo: 'https://previews.dropbox.com/p/thumb/AB0f-LuJKBrA5Gj9gjfCqUYhpQWAAXeuxVzS1zxw1fHL1kMv7It2SI-CWnZnJxGmOO42BAOiNF5sDIjl-lj3aAdnW8CLE23rVYHAlnkRvsJTxBPaiBPN8D7Y3DDg3XwuG3Ya0aCeZABU-rBGdUwJj9vXKQR0pSPcydevvJZjuDDLVa0byIFSqUuOGHzWIo2hXjuLD47IDpMI3GPFefKgwRiKo8J5b_Bo40AxfcveGQHjRkcZSFxbGUv3AjqhTtj4ikM23j3CGaTIKpKLQ6j1JaRRLfsWEIVo03fUX_pug2k26Q79dT63wFRQs0en35pvOQzPg6MSYZX2GIOg6bVEPJ5gKmT_YUSwxu6uKLpC8pXNzZIgJ1uOeEKYFYk-p0-DUTg/p.png',
+        services: ['Aerial Hoop', 'Aerial Silks', 'Contemporary Dance']
+    },
+    {
+        id: 2,
+        name: 'AYC Studios',
+        phone_number: '07507797220',
+        email_address: 'aerialyogicircus@gmail.com',
+        location: {
+            address: 'Unit 10B, Robins Business Park, Bagnall St, West Bromwich',
+            post_code: 'DY4 7BS',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
+        },
+        social_links: {
+            website: 'www.aycstudios.co.uk',
+            instagram: 'www.instagram.com/aycstudios',
+            facebook: 'www.facebook.com/AYcircus'
+        },
+        logo: 'https://previews.dropbox.com/p/thumb/AB1buuviZMRgDmN93Pabxt4ortY0ZaP_bvycJ3BRSV6kh4kkiZxXyvOB89rs2hXy7yxLcTVL49SGdZtwsqNNN2KBsoi9APGDRLjd1uVtACoCtth66YkHSL2JRRIIZIU4cfF1HNjw3EdiDQHdVrLC2Ar96M6qnpksy_L0b0RD3TzRWxsruf1Hs3uBh6Im_7vEcSBAmoABJotnJs6AgUHWqOG7aG9XfBWbXMbtMMg2BUlpMfavjty00zLImHWmH6bvBSDqQaiqjHufj0rAaEmHtzGZegtxADm_IWAVeDQuRovV2uB7w6aFwYHmIx4sfBf3hhC5WTeVnSz4mIdJU31u0pJJEE-1mJAckha6HYGq3NzLb-rTGxAcKxvW8OfFTfiEZ2E/p.png',
+        services: ['Aerial Hoop', 'Aerial Silks', 'Contemporary Dance']
+    }
+];
+export const mockFiveStudios: Studio[] = [
     {
         id: 1,
         name: 'Siren Asylum',
@@ -108,119 +164,3 @@ const mockResults: Studio[] = [
         services: ['Pole Dance', 'Pole Fitness']
     }
 ];
-
-describe('testing the results navigation', () => {
-    test('given there are 5 results, the results counter displays the total amount of results', () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        const resultsCounter = screen.getByText('1 of 5');
-
-        expect(resultsCounter).toBeInTheDocument();
-    });
-    test('given there are 0 results, the counter displays 0', () => {
-        render(
-            <Router>
-                <Results results={[]} />
-            </Router>
-        );
-
-        const resultsCounter = screen.getByText('0 Results');
-
-        expect(resultsCounter).toBeInTheDocument();
-    });
-
-    test('results navigation return button renders', () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        const returnIcon = screen.getByTestId('return-arrow');
-
-        expect(returnIcon).toBeInTheDocument();
-    });
-
-    test('given the return button is clicked, it navigates to the homepage', async () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        const returnIcon = screen.getByTestId('return-arrow');
-        await userEvent.click(returnIcon);
-
-        expect(returnIcon.closest('a')).toHaveAttribute('href', '/');
-    });
-
-    test('given I am on the first result and I click the previous arrow button, then the results counter will display the number of the last result', async () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        const prevArrow = screen.getByTestId('prev-arrow');
-        await userEvent.click(prevArrow);
-        const resultsCounter = screen.getByText('5 of 5');
-
-        expect(resultsCounter).toBeInTheDocument();
-    });
-
-    test('given I click the previous arrow button, then the results counter will display the number of the previous result', async () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        const prevArrow = screen.getByTestId('prev-arrow');
-        // Go to result 5
-        await userEvent.click(prevArrow);
-
-        // Go to result 4
-        await userEvent.click(prevArrow);
-        const resultsCounter = screen.getByText('4 of 5');
-
-        // Assert
-        expect(resultsCounter).toBeInTheDocument();
-    });
-    test('given I click the next arrow button, then the results counter will display the number of the next result', async () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        const nextArrow = screen.getByTestId('next-arrow');
-        await userEvent.click(nextArrow);
-        const resultsCounter = screen.getByText('2 of 5');
-
-        expect(resultsCounter).toBeInTheDocument();
-    });
-
-    test('given I am on the last result and I click the next arrow button, then the results counter will display the number of the first result', async () => {
-        render(
-            <Router>
-                <Results results={mockResults} />
-            </Router>
-        );
-
-        // Act
-        // Go to last result
-        const prevArrow = screen.getByTestId('prev-arrow');
-        await userEvent.click(prevArrow);
-
-        const nextArrow = screen.getByTestId('next-arrow');
-        await userEvent.click(nextArrow);
-        const resultsCounter = screen.getByText('1 of 5');
-
-        // Assert
-        expect(resultsCounter).toBeInTheDocument();
-    });
-});
