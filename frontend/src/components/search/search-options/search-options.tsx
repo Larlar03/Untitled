@@ -11,7 +11,6 @@ const SearchOptions = (props: Props) => {
 
     useEffect(() => {
         props.selectOptions(options);
-        console.log('OPTIONS', options);
     }, [options]);
 
     const handleOptionClick = (event: React.MouseEvent<HTMLElement>): void => {
@@ -30,7 +29,7 @@ const SearchOptions = (props: Props) => {
 
     const applyStyles = (event: React.MouseEvent<HTMLElement>): void => {
         const currentSelection = event.currentTarget;
-        currentSelection.classList[3]
+        currentSelection.classList.contains('active')
             ? currentSelection.classList.remove('active')
             : currentSelection.classList.add('active');
     };

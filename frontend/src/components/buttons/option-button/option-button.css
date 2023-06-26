@@ -12,7 +12,7 @@ li.option-button:hover {
 }
 
 li.active {
-  background: #7b6cf6;
+  background: #7b6cf6 !important;
 }
 
 .hover-grow {
