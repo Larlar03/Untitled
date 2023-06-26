@@ -6,11 +6,12 @@ import './results-card.css';
 interface Props {
     studio: Studio;
     isActive: boolean;
+    cardPosition: string;
 }
 
 const ResultsCard = (props: Props) => {
     return (
-        <div className='card-container' id={!props.isActive ? 'inactive' : ''}>
+        <div className='card-container' id={!props.isActive ? 'inactive' : ''} data-testid={`${props.cardPosition}`}>
             {props.studio && (
                 <>
                     <div className='card' key={props.studio.id} data-testid='results-card'>

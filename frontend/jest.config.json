@@ -1,4 +1,6 @@
 {
+    "collectCoverageFrom": ["**/*.{js,jsx,ts,tsx}"],
+    "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/src/main.tsx", "<rootDir>/src/types"],
     "coverageThreshold": {
         "global": {
             "branches": 80,
@@ -7,6 +9,5 @@
             "statements": 80
         }
     },
-    "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/src/main.tsx", "<rootDir>/src/types"],
     "setupFilesAfterEnv": "./src/setupTests.js"
 }

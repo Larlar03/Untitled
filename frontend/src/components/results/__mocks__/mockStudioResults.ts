@@ -1,3 +1,5 @@
+import Studio from '../../../types/studios';
+
 export const mockOneStudio: Studio[] = [
     {
         id: 1,
