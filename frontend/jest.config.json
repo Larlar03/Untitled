@@ -7,6 +7,6 @@
             "statements": 80
         }
     },
-    "coveragePathIgnorePatterns": ["./src/main.tsx"],
+    "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/src/main.tsx", "<rootDir>/src/types"],
     "setupFilesAfterEnv": "./src/setupTests.js"
 }
