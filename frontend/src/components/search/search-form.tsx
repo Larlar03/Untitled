@@ -10,7 +10,7 @@ interface Props {
 
 const SearchForm = (props: Props) => {
     const [options, setOptions] = useState<Array<string>>([]);
-    const [location, setLocation] = useState<any>();
+    const [location, setLocation] = useState<string>();
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
     useEffect(() => {
@@ -19,12 +19,10 @@ const SearchForm = (props: Props) => {
 
     const selectLocation = (label: any) => {
         setLocation(label.label);
-        // console.log('location', location);
     };
 
     const selectOptions = (options: string[]) => {
         setOptions(options);
-        // console.log('options', options);
     };
 
     // ;
