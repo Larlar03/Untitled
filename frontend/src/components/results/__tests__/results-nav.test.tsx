@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import Results from '../results';
+import Results from '../results.tsx';
 import { mockFiveStudios } from '../__mocks__/mockStudioResults.ts';
 
 describe('Results Navigation', () => {
@@ -18,12 +18,12 @@ describe('Results Navigation', () => {
 
     it('displays the total amount of results on the counter', () => {
         const resultsCounter = screen.getByText('1 of 5');
-        expect(resultsCounter).toBeInTheDocument();
+        expect(resultsCounter).toBeVisible();
     });
 
     it('renders return arrow button', () => {
         const returnIcon = screen.getByTestId('return-arrow');
-        expect(returnIcon).toBeInTheDocument();
+        expect(returnIcon).toBeVisible();
     });
 
     it('navigates to the home page when the return icon is clicked', () => {
@@ -40,7 +40,7 @@ describe('Results Navigation', () => {
 
         const resultsCounter = screen.getByText('5 of 5');
 
-        expect(resultsCounter).toBeInTheDocument();
+        expect(resultsCounter).toBeVisible();
     });
 
     it('displays the number of the next result when the next arrow is clicked', () => {
@@ -49,7 +49,7 @@ describe('Results Navigation', () => {
 
         const resultsCounter = screen.getByText('2 of 5');
 
-        expect(resultsCounter).toBeInTheDocument();
+        expect(resultsCounter).toBeVisible();
     });
 
     it('displays the first result when on the last result and the next arrow is clicked', () => {
@@ -62,7 +62,35 @@ describe('Results Navigation', () => {
         fireEvent.click(nextArrow);
         const resultsCounter = screen.getByText('1 of 5');
 
-        expect(resultsCounter).toBeInTheDocument();
+        expect(resultsCounter).toBeVisible();
+    });
+
+    it('shifts cards to the left when the next arrow is clicked', () => {
+        const nextArrow = screen.getByTestId('next-arrow');
+        fireEvent.click(nextArrow);
+
+        const leftCard = screen.getByText('Siren Asylum');
+        const middleCard = screen.getByText('AYC Studios');
+        const rightCard = screen.getByText('Body Synergy');
+        const cardArray = [leftCard, middleCard, rightCard];
+
+        cardArray.forEach((card) => {
+            expect(card).toBeVisible();
+        });
+    });
+
+    it('shifts cards to the right when the prev arrow is clicked', () => {
+        const prevArrow = screen.getByTestId('prev-arrow');
+        fireEvent.click(prevArrow);
+
+        const leftCard = screen.getByText('K Pole Solihull');
+        const middleCard = screen.getByText('K Pole Cradely Heath');
+        const rightCard = screen.getByText('Siren Asylum');
+        const cardArray = [leftCard, middleCard, rightCard];
+
+        cardArray.forEach((card) => {
+            expect(card).toBeVisible();
+        });
     });
 });
 
@@ -75,6 +103,6 @@ describe('Results Navigation 0 Results', () => {
         );
 
         const resultsCounter = screen.getByText('0 Results');
-        expect(resultsCounter).toBeInTheDocument();
+        expect(resultsCounter).toBeVisible();
     });
 });

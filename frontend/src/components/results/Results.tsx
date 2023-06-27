@@ -48,13 +48,29 @@ const Results = (props: Props) => {
                 {props.results && props.results.length > 0 ? (
                     <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
                         {props.results?.length <= 2 && (
-                            <ResultsCard studio={props.results[activeCard]} isActive={true} />
+                            <ResultsCard
+                                cardPosition='center-card'
+                                studio={props.results[activeCard]}
+                                isActive={true}
+                            />
                         )}
                         {props.results?.length >= 3 && (
                             <>
-                                <ResultsCard studio={props.results[prevCard]} isActive={false} />
-                                <ResultsCard studio={props.results[activeCard]} isActive={true} />
-                                <ResultsCard studio={props.results[nextCard]} isActive={false} />
+                                <ResultsCard
+                                    cardPosition='left-card'
+                                    studio={props.results[prevCard]}
+                                    isActive={false}
+                                />
+                                <ResultsCard
+                                    cardPosition='center-card'
+                                    studio={props.results[activeCard]}
+                                    isActive={true}
+                                />
+                                <ResultsCard
+                                    cardPosition='right-card'
+                                    studio={props.results[nextCard]}
+                                    isActive={false}
+                                />
                             </>
                         )}
                     </div>

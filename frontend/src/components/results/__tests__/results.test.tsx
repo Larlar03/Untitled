@@ -1,9 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import Results from '../results';
+import Results from '../results.tsx';
 import { mockOneStudio, mockTwoStudios, mockFiveStudios } from '../__mocks__/mockStudioResults.ts';
 
 describe('Results', () => {
+    afterEach(() => {
+        cleanup();
+    });
     it('displays 1 results card when 1 result is returned', () => {
         render(
             <Router>
@@ -51,5 +54,70 @@ describe('Results', () => {
         mockResultsArr.forEach((result) => {
             expect(result).toBeInTheDocument();
         });
+    });
+
+    it('displays last result on the right card if right card is result 1 and previous button is clicked', () => {
+        render(
+            <Router>
+                <Results results={mockFiveStudios} />
+            </Router>
+        );
+        const prevArrow = screen.getByTestId('prev-arrow');
+
+        // Arrange: get result 1 on right card
+        fireEvent.click(prevArrow);
+
+        // Act
+        fireEvent.click(prevArrow);
+
+        // Assert
+        const rightCard = screen.getByTestId('right-card');
+        const h3 = within(rightCard).getByRole('heading', { level: 3 });
+        expect(h3).toHaveTextContent('K Pole Cradely Heath');
+    });
+
+    it('displays last result on the left card if left card is result 1 and previous button is clicked', () => {
+        render(
+            <Router>
+                <Results results={mockFiveStudios} />
+            </Router>
+        );
+
+        const nextArrow = screen.getByTestId('next-arrow');
+        const prevArrow = screen.getByTestId('prev-arrow');
+
+        // Arrange: get result 1 on the left card
+        fireEvent.click(nextArrow);
+
+        // Act
+        fireEvent.click(prevArrow);
+
+        // Assert
+        const leftCard = screen.getByTestId('left-card');
+        const h3 = within(leftCard).getByRole('heading', { level: 3 });
+        expect(h3).toHaveTextContent('K Pole Cradely Heath');
+    });
+
+    it('displays result 1 on the right card when right card is the last result and the next button is clicked', () => {
+        render(
+            <Router>
+                <Results results={mockFiveStudios} />
+            </Router>
+        );
+
+        const prevArrow = screen.getByTestId('prev-arrow');
+        const nextArrow = screen.getByTestId('next-arrow');
+
+        // Arrange: get result 5 (last result) on right card
+        fireEvent.click(prevArrow);
+        fireEvent.click(prevArrow);
+
+        // Act
+        fireEvent.click(nextArrow);
+
+        // Assert
+        const rightCard = screen.getByTestId('right-card');
+        const h3 = within(rightCard).getByRole('heading', { level: 3 });
+        expect(h3).toHaveTextContent('Siren Asylum');
     });
 });
