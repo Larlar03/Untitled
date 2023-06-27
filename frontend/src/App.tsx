@@ -7,13 +7,14 @@ import ResultsPage from './pages/ResultsPage';
 import SignUpPage from './pages/SignUpPage';
 import LogInPage from './pages/LogInPage';
 import Studio from './types/studios';
+import ErrorPage from './pages/ErrorPage';
 //Test
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
 
     const navigate = useNavigate();
 
-    const getStudios = (location: string, services: string[]) => {
+    const getStudios = (location: string | undefined, services: string[]) => {
         console.log('location', location);
         console.log('options', services);
         axios
@@ -40,6 +41,7 @@ const App = () => {
             <Route path='/results' element={<ResultsPage results={studios} />} />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/login' element={<LogInPage />} />
+            <Route path='*' element={<ErrorPage />} />
         </Routes>
     );
 };

@@ -3,7 +3,7 @@ import SearchForm from '../components/search/search-form';
 import Navbar from '../components/navbar/navbar';
 
 interface Props {
-    getStudios: (location: string, services: string[]) => void;
+    getStudios: (location: string | undefined, services: string[]) => void;
 }
 
 const HomePage = (props: Props) => {

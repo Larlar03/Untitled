@@ -5,7 +5,7 @@ import SearchOptions from './search-options/search-options';
 import services from '../../constants/services.ts';
 
 interface Props {
-    getStudios: (location: string, services: string[]) => void;
+    getStudios: (location: string | undefined, services: string[]) => void;
 }
 
 const SearchForm = (props: Props) => {
@@ -28,7 +28,7 @@ const SearchForm = (props: Props) => {
     // ;
 
     return (
-        <div className='mt-16'>
+        <div className='mt-12'>
             <form action='submit'>
                 <div className='mb-3'>
                     <SearchInput selectLocation={selectLocation} />
