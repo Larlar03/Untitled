@@ -6,10 +6,10 @@ const newRouter = function (collection) {
 	const router = express.Router();
 
 	// Function for catching errors, this is to keep the code DRY
-	const errorCatcher = function (inputError) {
-		console.error(inputError);
+	const errorCatcher = function (error) {
+		console.error(error);
 		res.status(500);
-		res.json({ status: 500, error: inputError });
+		res.json({ status: 500, error: error });
 	};
 
 	// get all studios
@@ -41,24 +41,42 @@ const newRouter = function (collection) {
 	});
 
 	// get all studios in location with services
-	router.get('/:location/:services', (req, res) => {
+	router.get('/:location/services', (req, res) => {
 		const location = req.params.location;
 		const services = req.query.services;
-		collection
-			.find({
-				$and: [
-					{
-						$or: [
-							{ 'location.region': location },
-							{ 'location.city': location },
-						],
-					},
-					{ services: { $in: services } },
-				],
-			})
-			.toArray()
-			.then((docs) => res.json(docs))
-			.catch((err) => errorCatcher(err));
+		if (Array.isArray(services)) {
+			collection
+				.find({
+					$and: [
+						{
+							$or: [
+								{ 'location.region': 'Birmingham' },
+								{ 'location.city': 'Birmingham' },
+							],
+						},
+						{ services: { $in: services } },
+					],
+				})
+				.toArray()
+				.then((docs) => res.json(docs))
+				.catch((err) => errorCatcher(err));
+		} else {
+			collection
+				.find({
+					$and: [
+						{
+							$or: [
+								{ 'location.region': location },
+								{ 'location.city': location },
+							],
+						},
+						{ services: services },
+					],
+				})
+				.toArray()
+				.then((docs) => res.json(docs))
+				.catch((err) => errorCatcher(err));
+		}
 	});
 
 	return router;
