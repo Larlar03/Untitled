@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "name": "Siren Asylum",
         "phone_number": "07784967677",
         "email_address": "info@sirenasylum.com",
@@ -22,7 +21,6 @@
         ]
     },
     {
-        "id": 2,
         "name": "AYC Studios",
         "phone_number": "07507797220",
         "email_address": "aerialyogicircus@gmail.com",
@@ -44,7 +42,6 @@
         ]
     },
     {
-        "id": 3,
         "name": "Body Synergy",
         "phone_number": "07507797220",
         "email_address": "bodysynergymanagement@gmail.com",
@@ -66,7 +63,6 @@
         ]
     },
     {
-        "id": 4,
         "name": "K Pole Solihull",
         "phone_number": "07800793337",
         "email_address": "kpoleshirley@hotmail.com",
@@ -88,7 +84,6 @@
         ]
     },
     {
-        "id": 5,
         "name": "K Pole Cradely Heath",
         "phone_number": "07800793337",
         "email_address": "kpoleshirley@hotmail.com",

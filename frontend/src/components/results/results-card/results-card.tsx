@@ -10,6 +10,9 @@ interface Props {
 }
 
 const ResultsCard = (props: Props) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const studioImage = require(`../../../assets/studio-logos/${props.studio.logo}`);
+
     return (
         <div className='card-container' id={!props.isActive ? 'inactive' : ''} data-testid={`${props.cardPosition}`}>
             {props.studio && (
@@ -27,7 +30,8 @@ const ResultsCard = (props: Props) => {
                             {props.studio.location?.city}, {props.studio.location?.post_code}
                         </div>
                         <div className='card__image-container'>
-                            <img src={props.studio.logo} alt='placeholder' />
+                            {/* <img src={props.studio.logo} alt='placeholder' /> */}
+                            <img src={studioImage} alt={`${props.studio.name} logo`} />
                         </div>
                         <div className='card__links'>
                             <a

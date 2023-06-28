@@ -1,5 +1,6 @@
 const express = require('express');
 const ObjectID = require('mongodb').ObjectID;
+const fs = require('fs');
 
 // This function will hold all the routing functionality for the database, and will be used in server.js
 const newRouter = function (collection) {
@@ -11,6 +12,30 @@ const newRouter = function (collection) {
 		res.status(500);
 		res.json({ status: 500, error: error });
 	};
+
+	// create new studio
+	router.post('/', (req, res) => {
+		let newStudio = req.body;
+		const studioLogoFilePath = newStudio.logo;
+
+		// Read the image file
+		const logoData = fs.readFileSync(studioLogoFilePath);
+		// Convert image data to a Buffer object to store in mongoDB
+		const logoBuffer = Buffer.from(logoData);
+
+		newStudio.logo = logoBuffer;
+
+		collection
+			.insertOne(newStudio)
+			.then(() => {
+				console.log('New studio stored successfully.');
+				res.status(200).send('New studio stored successfully.');
+			})
+			.catch((error) => {
+				console.error('Error storing image:', error);
+				res.status(500).send('Error storing image.');
+			});
+	});
 
 	// get all studios
 	router.get('/', (req, res) => {

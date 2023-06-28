@@ -18,7 +18,7 @@ const App = () => {
         console.log('location', location);
         console.log('options', services);
         axios
-            .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/:services`, {
+            .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/services/`, {
                 params: {
                     services
                 }

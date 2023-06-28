@@ -1,12 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+
+// Middleware to parse JSON body
+app.use(express.json());
 
 // router
 const newRouter = require('./router.js');
