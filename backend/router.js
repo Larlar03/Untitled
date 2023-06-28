@@ -75,8 +75,8 @@ const newRouter = function (collection) {
 					$and: [
 						{
 							$or: [
-								{ 'location.region': 'Birmingham' },
-								{ 'location.city': 'Birmingham' },
+								{ 'location.region': location },
+								{ 'location.city': location },
 							],
 						},
 						{ services: { $in: services } },

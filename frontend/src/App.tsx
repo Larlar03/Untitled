@@ -15,8 +15,6 @@ const App = () => {
     const navigate = useNavigate();
 
     const getStudios = (location: string | undefined, services: string[]) => {
-        console.log('location', location);
-        console.log('options', services);
         axios
             .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/services/`, {
                 params: {
