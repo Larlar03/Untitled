@@ -8,9 +8,9 @@ const newRouter = function (collection) {
 
 	// Function for catching errors, this is to keep the code DRY
 	const errorCatcher = function (error) {
-		console.error(error);
-		res.status(500);
-		res.json({ status: 500, error: error });
+		console.error('Error with getting data:', error);
+		// res.json({ status: 500, error: error });
+		res.status(500).send('Error with getting data:', error);
 	};
 
 	// create new studio

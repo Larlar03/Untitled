@@ -16,7 +16,7 @@ MongoClient.connect(process.env.MONGODB_URI) // This is the location of where yo
 	.then((client) => {
 		const db = client.db('aeriform'); // The name of the DB
 		const studioCollection = db.collection('studios'); // The name of the collection inside the DB
-		const studioRouter = newRouter(studioCollection); // We haven't built the router functionality yet, but we will next!
+		const studioRouter = newRouter(studioCollection); // Feed in collection to the router
 
 		app.use('/studios', studioRouter); // Defining the base route where we can later access our data
 	})
