@@ -11,6 +11,7 @@
         border-radius: 10px;
         position: absolute;
     }
+
     #page__card {
         padding: 15px 50px;
         border: solid 2px var(--jacksons-purple);

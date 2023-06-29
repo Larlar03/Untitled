@@ -9,14 +9,28 @@ section {
     width: 100%;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     width: 100%;
     border: 1px solid var(--gallery);
     border-radius: 10px;
     padding: 6px;
 }
 
-.password-icon {
-    width: 22px;
-    margin: auto;
+#formFile {
+    border: none;
+}
+
+.form-check label {
+    margin-right: 4px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button-container__button {
+    width: 40% !important;
 }
