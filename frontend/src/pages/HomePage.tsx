@@ -10,7 +10,7 @@ const HomePage = (props: Props) => {
     return (
         <>
             <Navbar />
-            <div id='page' className='h-full max-w-md p-0 mx-auto'>
+            <div id='page' className='h-full max-w-md p-0 my-auto mx-auto mt-2.5'>
                 <div id='page__card' className='px-11'>
                     <Header subheading='Aerial & fitness classes near you.' />
                     <SearchForm getStudios={props.getStudios} />
