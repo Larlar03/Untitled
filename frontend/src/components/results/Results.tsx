@@ -45,38 +45,22 @@ const Results = (props: Props) => {
                 handlePrevClick={handlePrevClick}
             />
             <div className='h-full w-full flex flex-row flex-nowrap justify-center'>
-                {props.results && props.results.length > 0 ? (
-                    <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
-                        {props.results?.length <= 2 && (
+                <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
+                    {props.results?.length <= 2 && (
+                        <ResultsCard cardPosition='center-card' studio={props.results[activeCard]} isActive={true} />
+                    )}
+                    {props.results?.length >= 3 && (
+                        <>
+                            <ResultsCard cardPosition='left-card' studio={props.results[prevCard]} isActive={false} />
                             <ResultsCard
                                 cardPosition='center-card'
                                 studio={props.results[activeCard]}
                                 isActive={true}
                             />
-                        )}
-                        {props.results?.length >= 3 && (
-                            <>
-                                <ResultsCard
-                                    cardPosition='left-card'
-                                    studio={props.results[prevCard]}
-                                    isActive={false}
-                                />
-                                <ResultsCard
-                                    cardPosition='center-card'
-                                    studio={props.results[activeCard]}
-                                    isActive={true}
-                                />
-                                <ResultsCard
-                                    cardPosition='right-card'
-                                    studio={props.results[nextCard]}
-                                    isActive={false}
-                                />
-                            </>
-                        )}
-                    </div>
-                ) : (
-                    <p>No Results</p>
-                )}
+                            <ResultsCard cardPosition='right-card' studio={props.results[nextCard]} isActive={false} />
+                        </>
+                    )}
+                </div>
             </div>
         </>
     );

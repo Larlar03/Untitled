@@ -2,7 +2,7 @@ import './page-not-found.css';
 
 const PageNotFound = () => {
     return (
-        <div className=' h-screen w-screen flex flex-col justify-center items-center'>
+        <div className='h-screen w-screen flex flex-col justify-center items-center'>
             <div className='flex flex-row justify-center items-center'>
                 <span className='text-9xl font-medium mr-4'>4</span>
                 <div id='blinking-eye-container'>
