@@ -42,7 +42,7 @@ const PageNotFound = () => {
             <h1 className='text-6xl font-bold mt-9'>Page Not Found</h1>
             <p className='text-xl mt-5'>
                 Back to{' '}
-                <a className=' text-main-200 hover:text-main-300' href='/'>
+                <a className=' text-main-purple-heart hover:text-main-cornflower-blue' href='/'>
                     home
                 </a>
             </p>

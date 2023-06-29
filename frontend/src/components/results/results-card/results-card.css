@@ -1,138 +1,138 @@
 .card-container {
-  width: 100%;
-  height: 600px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 }
 
 .card,
 .card__shadow {
-  width: 350px;
-  height: 600px;
-  border-radius: 10px;
+    width: 350px;
+    height: 600px;
+    border-radius: 10px;
 }
 
 .card {
-  border: 1px solid #241e92;
-  background: #f7f7f7;
-  position: absolute;
-  z-index: 10;
-  text-align: center;
-  padding: 20px;
+    border: 1px solid var(--jacksons-purple);
+    background: var(--alabaster);
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
 }
 
 .card__shadow {
-  background: #7b6cf6;
-  position: relative;
-  bottom: -2.5%;
-  left: 3.5%;
+    background: var(--cornflower-blue);
+    position: relative;
+    bottom: -2.5%;
+    left: 3.5%;
 }
 
 .card__heading h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #7b6cf6;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cornflower-blue);
 }
 
 .card__heading h3:hover {
-  color: #241e92;
+    color: var(--jacksons-purple);
 }
 
 .card__heading h4 {
-  font-size: 1.14rem;
-  color: #241e92;
+    font-size: 1.14rem;
+    color: var(--jacksons-purple);
 }
 
 .card__address {
-  font-size: 0.87rem;
-  margin: 10px 0;
+    font-size: 0.87rem;
+    margin: 10px 0;
 }
 
 .card__image-container {
-  margin: 5px 7px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
+    margin: 5px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
 }
 
 .card_links--instagram,
 .card_links--facebook {
-  height: 6px;
-  width: 6px;
-  color: #7b6cf6;
+    height: 6px;
+    width: 6px;
+    color: var(--cornflower-blue);
 }
 
 .card_links--instagram:hover,
 .card_links--facebook:hover {
-  color: #241e92;
-  cursor: pointer;
+    color: var(--jacksons-purple);
+    cursor: pointer;
 }
 
 .card__contact {
-  padding: 10px 0;
-  font-size: 0.87rem;
+    padding: 10px 0;
+    font-size: 0.87rem;
 }
 
 .card__contact a {
-  display: block;
+    display: block;
 }
 
 #inactive {
-  transform: scale(0.8);
-  transition: 1000ms;
+    transform: scale(0.8);
+    transition: 1000ms;
 }
 
 #inactive .card__shadow {
-  background: black;
+    background: black;
 }
 
 #inactive .card {
-  border: 1px solid black;
+    border: 1px solid black;
 }
 
 #inactive .card img {
-  filter: grayscale(100);
+    filter: grayscale(100);
 }
 
 #inactive h3,
 #inactive h4 {
-  color: black;
+    color: black;
 }
 
 #inactive .card_links--instagram,
 #inactive .card_links--facebook {
-  color: black;
+    color: black;
 }
 
 #inactive .card_links--instagram:hover,
 #inactive .card_links--facebook:hover {
-  color: black;
+    color: black;
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-  .card-container {
-    width: 410px;
-    height: 600px;
-  }
+    .card-container {
+        width: 410px;
+        height: 600px;
+    }
 
-  .card,
-  .card__shadow {
-    width: 375px;
-  }
+    .card,
+    .card__shadow {
+        width: 375px;
+    }
 
-  .card__heading h3 {
-    font-size: 2rem;
-  }
+    .card__heading h3 {
+        font-size: 2rem;
+    }
 
-  .card__heading h4 {
-    font-size: 1.5rem;
-  }
+    .card__heading h4 {
+        font-size: 1.5rem;
+    }
 
-  .card__address {
-    font-size: 0.87rem;
-    margin: 10px 0;
-  }
+    .card__address {
+        font-size: 0.87rem;
+        margin: 10px 0;
+    }
 }

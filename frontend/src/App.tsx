@@ -11,10 +11,12 @@ import ErrorPage from './pages/ErrorPage';
 //Test
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
     const getStudios = (location: string | undefined, services: string[]) => {
+        setLoading(true);
         axios
             .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/services/`, {
                 params: {
@@ -26,7 +28,10 @@ const App = () => {
                 setStudios(response.data);
             })
             .then(() => {
-                navigate('/results');
+                setTimeout(() => {
+                    setLoading(false);
+                    navigate('/results');
+                }, 2000);
             })
             .catch((error) => {
                 console.log(error);
@@ -35,7 +40,7 @@ const App = () => {
 
     return (
         <Routes>
-            <Route path='/' element={<HomePage getStudios={getStudios} />} />
+            <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
             <Route path='/signup' element={<SignUpPage />} />
             <Route path='/login' element={<LogInPage />} />
