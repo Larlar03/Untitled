@@ -10,7 +10,7 @@ const Navbar = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
 
     const handleClick = () => {
-        console.log(click);
+        console.log('click');
     };
 
     return (
