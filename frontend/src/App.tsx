@@ -4,7 +4,7 @@ import './App.css';
 import axios from 'axios';
 import HomePage from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
-import SignUpPage from './pages/SignUpPage';
+import UploadPage from './pages/UploadPage';
 import LogInPage from './pages/LogInPage';
 import Studio from './types/studios';
 import ErrorPage from './pages/ErrorPage';
@@ -42,7 +42,7 @@ const App = () => {
         <Routes>
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
-            <Route path='/signup' element={<SignUpPage />} />
+            <Route path='/upload' element={<UploadPage />} />
             <Route path='/login' element={<LogInPage />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>

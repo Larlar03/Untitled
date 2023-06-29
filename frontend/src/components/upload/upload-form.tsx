@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import CtaButton from '../buttons/cta-button/cta-button';
 import { EyeIcon } from '@heroicons/react/24/outline';
 import { EyeSlashIcon } from '@heroicons/react/24/outline';
-import './signup-form.css';
+import './upload-form.css';
 
-const SignUpForm = () => {
+const UploadForm = () => {
     const [isDisabled, setIsDisabled] = useState<boolean>();
     const [firstName, setFirstName] = useState<string>();
     const [lastName, setLastName] = useState<string>();
@@ -83,4 +83,4 @@ const SignUpForm = () => {
     );
 };
 
-export default SignUpForm;
+export default UploadForm;

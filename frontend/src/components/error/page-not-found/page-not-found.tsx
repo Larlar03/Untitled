@@ -7,6 +7,7 @@ const PageNotFound = () => {
                 <span className='text-9xl font-medium mr-4'>4</span>
                 <div id='blinking-eye-container'>
                     <svg
+                        role='img'
                         id='eye-open'
                         xmlns='http://www.w3.org/2000/svg'
                         width='150'
@@ -22,6 +23,7 @@ const PageNotFound = () => {
                         />
                     </svg>
                     <svg
+                        role='img'
                         id='eye-close'
                         xmlns='http://www.w3.org/2000/svg'
                         width='150'
