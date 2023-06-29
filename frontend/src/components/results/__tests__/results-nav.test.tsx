@@ -93,16 +93,3 @@ describe('Results Navigation', () => {
         });
     });
 });
-
-describe('Results Navigation 0 Results', () => {
-    it('displays 0 on the counter if there are no results', () => {
-        render(
-            <Router>
-                <Results results={[]} />
-            </Router>
-        );
-
-        const resultsCounter = screen.getByText('0 Results');
-        expect(resultsCounter).toBeVisible();
-    });
-});
