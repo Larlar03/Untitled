@@ -1,6 +1,7 @@
 import Header from '../components/header/header';
 import Results from '../components/results/results';
 import Navbar from '../components/navbar/navbar';
+import NoResults from '../components/error/no-results/no-results';
 import Studio from '../types/studios';
 
 interface Props {
@@ -13,7 +14,13 @@ const ResultsPage = (props: Props) => {
             <Navbar />
             <div className='my-2'>
                 <Header subheading='Results' />
-                <Results results={props.results && props.results} />
+                {props.results && props.results.length > 0 ? (
+                    <Results results={props.results && props.results} />
+                ) : (
+                    <div className='h-full mt-12'>
+                        <NoResults />
+                    </div>
+                )}
             </div>
         </>
     );

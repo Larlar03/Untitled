@@ -1,0 +1,21 @@
+#blinking-eye-container {
+    position: relative;
+}
+
+#eye-close {
+    position: absolute;
+    top: 0;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    from {
+        visibility: hidden;
+    }
+    50% {
+        visibility: hidden;
+    }
+    to {
+        visibility: visible;
+    }
+}

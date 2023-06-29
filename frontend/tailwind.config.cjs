@@ -15,10 +15,10 @@ module.exports = {
             },
             colors: {
                 main: {
-                    100: '#241E92',
-                    200: '#5432D3',
-                    300: '#7B6CF6',
-                    400: '#C6A3FF'
+                    'jacksons-purple': '#241E92',
+                    'purple-heart': '#5432D3',
+                    'cornflower-blue': '#7B6CF6',
+                    mauve: '#C6A3FF'
                 },
                 greyscale: {
                     100: '#1A1A1A',

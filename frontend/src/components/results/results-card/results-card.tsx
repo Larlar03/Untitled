@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Studio from '../../../types/studios';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -10,6 +11,14 @@ interface Props {
 }
 
 const ResultsCard = (props: Props) => {
+    const [logoImage, setLogoImage] = useState<string>('');
+
+    useEffect(() => {
+        // Get logo image base64 string to display image
+        const logoBase64String = props.studio.logo;
+        setLogoImage(`data:image/png;base64,${logoBase64String}`);
+    }, [props.studio]);
+
     return (
         <div className='card-container' id={!props.isActive ? 'inactive' : ''} data-testid={`${props.cardPosition}`}>
             {props.studio && (
@@ -27,7 +36,7 @@ const ResultsCard = (props: Props) => {
                             {props.studio.location?.city}, {props.studio.location?.post_code}
                         </div>
                         <div className='card__image-container'>
-                            <img src={props.studio.logo} alt='placeholder' />
+                            {logoImage && <img src={logoImage} alt={`${props.studio.name} logo`} />}
                         </div>
                         <div className='card__links'>
                             <a
