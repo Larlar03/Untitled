@@ -2,25 +2,22 @@ const express = require('express');
 const ObjectID = require('mongodb').ObjectID;
 const fs = require('fs');
 
-// This function will hold all the routing functionality for the database, and will be used in server.js
-const newRouter = function (collection) {
+const studioRouter = function (collection) {
 	const router = express.Router();
 
-	// Function for catching errors, this is to keep the code DRY
 	const errorCatcher = function (error) {
-		console.error('Error with getting data:', error);
-		// res.json({ status: 500, error: error });
-		res.status(500).send('Error with getting data:', error);
+		console.error('Error fetching data:', error);
+		res.status(500).send('Error fetching data:', error);
 	};
 
-	// create new studio
+	// CREATE
 	router.post('/', (req, res) => {
 		let newStudio = req.body;
 		const studioLogoFilePath = newStudio.logo;
 
-		// Read the image file
+		// read the image file
 		const logoData = fs.readFileSync(studioLogoFilePath);
-		// Convert image data to a Buffer object to store in mongoDB
+		// convert image data to a Buffer object to store in mongoDB
 		const logoBuffer = Buffer.from(logoData);
 
 		newStudio.logo = logoBuffer;
@@ -37,7 +34,7 @@ const newRouter = function (collection) {
 			});
 	});
 
-	// get all studios
+	// GET all
 	router.get('/', (req, res) => {
 		collection
 			.find()
@@ -46,7 +43,7 @@ const newRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// get studio by location
+	// GET by location
 	router.get('/locations/:location', (req, res) => {
 		const location = req.params.location;
 		collection
@@ -65,46 +62,40 @@ const newRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// get all studios in location with services
+	// GET by location and services
 	router.get('/:location/services', (req, res) => {
 		const location = req.params.location;
 		const services = req.query.services;
+		let serviceData;
+
+		const query = (serviceData) => {
+			collection
+				.find({
+					$and: [
+						{
+							$or: [
+								{ 'location.region': location },
+								{ 'location.city': location },
+							],
+						},
+						{ services: serviceData },
+					],
+				})
+				.toArray()
+				.then((docs) => res.json(docs))
+				.catch((err) => errorCatcher(err));
+		};
+
 		if (Array.isArray(services)) {
-			collection
-				.find({
-					$and: [
-						{
-							$or: [
-								{ 'location.region': location },
-								{ 'location.city': location },
-							],
-						},
-						{ services: { $in: services } },
-					],
-				})
-				.toArray()
-				.then((docs) => res.json(docs))
-				.catch((err) => errorCatcher(err));
+			serviceData = { $in: services };
+			query(serviceData);
 		} else {
-			collection
-				.find({
-					$and: [
-						{
-							$or: [
-								{ 'location.region': location },
-								{ 'location.city': location },
-							],
-						},
-						{ services: services },
-					],
-				})
-				.toArray()
-				.then((docs) => res.json(docs))
-				.catch((err) => errorCatcher(err));
+			serviceData = services;
+			query(serviceData);
 		}
 	});
 
 	return router;
 };
 
-module.exports = newRouter;
+module.exports = studioRouter;

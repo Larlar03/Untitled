@@ -5,23 +5,23 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors());
-
 // Middleware to parse JSON body
 app.use(express.json());
 
-// router
-const newRouter = require('./router.js');
+// routers
+const studioRouter = require('./routers/studios');
 
-MongoClient.connect(process.env.MONGODB_URI) // This is the location of where your local database is living.
+// connect to mongoDB
+MongoClient.connect(process.env.MONGODB_URI)
 	.then((client) => {
-		const db = client.db('aeriform'); // The name of the DB
-		const studioCollection = db.collection('studios'); // The name of the collection inside the DB
-		const studioRouter = newRouter(studioCollection); // Feed in collection to the router
+		const db = client.db('aeriform');
+		const studioCollection = db.collection('studios');
+		const studios = studioRouter(studioCollection); // Feed in collection to the router
 
-		app.use('/studios', studioRouter); // Defining the base route where we can later access our data
+		app.use('/studios', studios); // Defining the base route where we can access data
 	})
 	.catch(console.err);
 
 app.listen(3000, function () {
-	console.log(`Listening on this port: ${this.address().port}`);
+	console.log(`Listening on port: ${this.address().port}`);
 });
