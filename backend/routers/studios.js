@@ -10,30 +10,6 @@ const studioRouter = function (collection) {
 		res.status(500).send('Error fetching data:', error);
 	};
 
-	// CREATE
-	router.post('/', (req, res) => {
-		let newStudio = req.body;
-		const studioLogoFilePath = newStudio.logo;
-
-		// read the image file
-		const logoData = fs.readFileSync(studioLogoFilePath);
-		// convert image data to a Buffer object to store in mongoDB
-		const logoBuffer = Buffer.from(logoData);
-
-		newStudio.logo = logoBuffer;
-
-		collection
-			.insertOne(newStudio)
-			.then(() => {
-				console.log('New studio stored successfully.');
-				res.status(200).send('New studio stored successfully.');
-			})
-			.catch((error) => {
-				console.error('Error storing image:', error);
-				res.status(500).send('Error storing image.');
-			});
-	});
-
 	// READ all
 	router.get('/', (req, res) => {
 		collection
@@ -59,7 +35,7 @@ const studioRouter = function (collection) {
 			})
 			.toArray()
 			.then((doc) => res.json(doc))
-			.catch((err) => errorCatcher(err));
+			.catch((error) => errorCatcher(error));
 	});
 
 	// READ by location and services
@@ -83,7 +59,7 @@ const studioRouter = function (collection) {
 				})
 				.toArray()
 				.then((docs) => res.json(docs))
-				.catch((err) => errorCatcher(err));
+				.catch((error) => errorCatcher(error));
 		};
 
 		if (Array.isArray(services)) {
@@ -94,6 +70,62 @@ const studioRouter = function (collection) {
 			query(serviceData);
 		}
 	});
+
+	// CREATE
+	router.post('/', (req, res) => {
+		let newStudio = req.body;
+		const studioLogoFilePath = newStudio.logo;
+
+		// read the image file
+		const logoData = fs.readFileSync(studioLogoFilePath);
+		// convert image data to a Buffer object to store in mongoDB
+		const logoBuffer = Buffer.from(logoData);
+
+		newStudio.logo = logoBuffer;
+
+		collection
+			.insertOne(newStudio)
+			.then(() => {
+				console.log('New studio stored successfully.');
+				res.status(200).send('New studio stored successfully.');
+			})
+			.catch((error) => {
+				console.error('Error storing image:', error);
+				res.status(500).send('Error storing image.');
+			});
+	});
+
+	// GET by id
+	// router.get('/:id', (req, res) => {
+	// 	const id = req.params.id;
+	// 	collection
+	// 		.findOne({ _id: ObjectID(id) })
+	// 		.then((doc) => res.json(doc))
+	// 		.catch((err) => errorCatcher(err));
+	// });
+
+	// DELETE by id
+	// router.delete('/:id', (req, res) => {
+	// 		const id = req.params.id;
+	// 		collection
+	// 			.deleteOne({ _id: ObjectID(id) })
+	// 			.then(() => collection.find().toArray())
+	// 			.then((docs) => res.json(docs))
+	// 			.catch((error) => errorCatcher(error));
+	// 	});
+
+	// UPDATE by id
+	// router.put('/:id', (req, res) => {
+	// 	const itemId = req.params.id;
+	// 	const updatedItem = req.body;
+
+	// 	collection
+	// 		.findOneAndUpdate({ _id: ObjectID(itemId) }, { $set: updatedItem })
+	// 		.then((result) => {
+	// 			res.json(result.value);
+	// 		})
+	// 		.catch((error) => errorCatcher(error));
+	// });
 
 	return router;
 };
