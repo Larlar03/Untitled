@@ -34,7 +34,7 @@ const studioRouter = function (collection) {
 			});
 	});
 
-	// GET all
+	// READ all
 	router.get('/', (req, res) => {
 		collection
 			.find()
@@ -43,7 +43,7 @@ const studioRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// GET by location
+	// READ by location
 	router.get('/locations/:location', (req, res) => {
 		const location = req.params.location;
 		collection
@@ -62,7 +62,7 @@ const studioRouter = function (collection) {
 			.catch((err) => errorCatcher(err));
 	});
 
-	// GET by location and services
+	// READ by location and services
 	router.get('/:location/services', (req, res) => {
 		const location = req.params.location;
 		const services = req.query.services;
