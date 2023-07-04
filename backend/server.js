@@ -1,12 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const morgan = require('morgan');
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 
 const app = express();
-app.use(helmet());
 app.use(cors());
+app.use(helmet());
+app.use(morgan('tiny'));
+
 // Middleware to parse JSON body
 app.use(express.json());
 
