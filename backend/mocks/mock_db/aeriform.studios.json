@@ -15,7 +15,7 @@
       "instagram": "www.instagram.com/aycstudios",
       "facebook": "www.facebook.com/AYcircus"
     },
-    "logo": "./assets/studio-logos/ayc-studios.png",
+    "logo": "./mocks/mock_assets/studio-logos/ayc-studios.png",
     "services": [
       "Pole Fitness",
       "PoleDance",
@@ -38,7 +38,7 @@
       "instagram": "www.instagram.com/bodysynergypole",
       "facebook": "www.facebook.com/poledancebirmingham"
     },
-    "logo": "./assets/studio-logos/body-synergy.png",
+    "logo": "./mocks/mock_assets/studio-logos/body-synergy.png",
     "services": [
       "Pole Fitness",
       "PoleDance"
@@ -60,7 +60,7 @@
       "instagram": "www.instagram.com/kpole_danceandfitness",
       "facebook": "www.facebook.com/KpoleShirley"
     },
-    "logo": "./assets/studio-logos/k-pole.png",
+    "logo": "./mocks/mock_assets/studio-logos/k-pole.png",
     "services": [
       "Pole Fitness",
       "PoleDance"
@@ -82,7 +82,7 @@
       "instagram": "www.instagram.com/kpole_danceandfitness",
       "facebook": "www.facebook.com/KpoleShirley"
     },
-    "logo": "./assets/studio-logos/k-pole.png",
+    "logo": "./mocks/mock_assets/studio-logos/k-pole.png",
     "services": [
       "Pole Fitness",
       "PoleDance"
@@ -104,7 +104,7 @@
       "instagram": "www.instagram.com/sirenasylumfitness",
       "facebook": "www.facebook.com/sirenasylum"
     },
-    "logo": "./assets/studio-logos/siren-asylum.png",
+    "logo": "./mocks/mock_assets/studio-logos/siren-asylum.png",
     "services": [
       "Aerial Hoop",
       "Aerial Silks"
@@ -126,7 +126,7 @@
       "instagram": "www.instagram.com/gffdamiandancestudio/",
       "facebook": "www.facebook.com/gffdamiandancestudio/"
     },
-    "logo": "./assets/studio-logos/gff-damian-danc-studio.png",
+    "logo": "./mocks/mock_assets/studio-logos/gff-damian-danc-studio.png",
     "services": [
       "Aerial Hoop",
       "Aerial Silks"

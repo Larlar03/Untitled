@@ -3,51 +3,48 @@ const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 const morgan = require('morgan');
 require('dotenv').config();
-const studioData = require('./mock-databases/aeriform.studios.json');
-const fs = require('fs');
 
 const app = express();
 app.use(cors());
-
-// add Morgan to log HTTP requests
 app.use(morgan('dev'));
-// Middleware to parse JSON body
 app.use(express.json());
 
-// router
+// Import studio data
+const studios = require('./mocks/mock_db/aeriform.studios.json');
+
+// Import helpers
+const convertLogosToBinary = require('./helpers/convert-logos');
+const insertDataToDb = require('./helpers/insert-data');
+
+// Import router
 const newRouter = require('./router.js');
+
+const initialiseData = async (collection) => {
+	try {
+		const convertedStudios = await convertLogosToBinary(studios);
+		const result = await insertDataToDb(collection, convertedStudios);
+		console.log('Initialising db data');
+	} catch (error) {
+		console.error('Error inserting data:', error);
+	}
+};
 
 MongoClient.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 })
 	.then((client) => {
-		console.log('Connected to MongoDB');
-		const db = client.db(); // The name of the DB
-		const studioCollection = db.collection('studios'); // The name of the collection inside the DB
-		const studioRouter = newRouter(studioCollection); // Feed in collection to the router
+		const db = client.db();
+		const studioCollection = db.collection('studios');
+		const studioRouter = newRouter(studioCollection);
 
-		app.use('/studios', studioRouter); // Defining the base route where we can later access our data
+		// Setting routes
+		app.use('/studios', studioRouter);
 
-		// Insert data to the DB
-		const newData = studioData.map((studio) => {
-			const logoData = fs.readFileSync(studio.logo);
-			const logoBuffer = Buffer.from(logoData);
-
-			studio.logo = logoBuffer;
-			return studio;
-		});
-
-		studioCollection
-			.insertMany(newData)
-			.then((result) => {
-				console.log('Document inserted:', result.ops[0]);
-			})
-			.catch((err) => {
-				console.error('Error inserting document:', err);
-			});
+		// Inserting data in the mongo docker container db
+		initialiseData(studioCollection);
 	})
-	.catch(console.err);
+	.catch('Error conecting to db:', console.err);
 
 app.listen(3000, function () {
 	console.log(`Listening on port: ${this.address().port}`);
