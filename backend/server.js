@@ -3,7 +3,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const MongoClient = require('mongodb').MongoClient;
-const morgan = require('morgan');
 require('dotenv').config();
 
 const app = express();
@@ -12,7 +11,14 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 
-// routers
+// Import studio data
+const studios = require('./mocks/mock_db/aeriform.studios.json');
+
+// Import helpers
+const convertLogosToBinary = require('./helpers/convert-logos');
+const insertDataToDb = require('./helpers/insert-data');
+
+// Import router
 const studioRouter = require('./routers/studios');
 
 const initialiseData = async (collection) => {
