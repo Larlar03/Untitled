@@ -27,7 +27,7 @@ const HomePage = (props: Props) => {
                     )}
                     {!props.isLoading && <SearchForm getStudios={props.getStudios} />}
                 </div>
-                <div id='page__card-shadow'></div>
+                <div id='page__card--shadow'></div>
             </div>
         </>
     );

@@ -4,57 +4,62 @@ import './upload-form.css';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;
+    storeNewStudioData: (e: any) => void;
+    newStudio: any;
 }
 
 const UploadForm = (props: Props) => {
     const [isDisabled, setIsDisabled] = useState<boolean>();
-    const [newStudio, setNewStudio] = useState<Studio>({
-        name: undefined,
-        phone_number: undefined,
-        email_address: undefined,
-        location: {
-            address: undefined,
-            post_code: undefined,
-            city: undefined,
-            region: undefined,
-            country: undefined
-        },
-        social_links: {
-            website: undefined,
-            instagram: undefined,
-            facebook: undefined
-        },
-        logo: undefined,
-        services: []
-    });
+
     return (
         <div className='mt-12'>
             <form action='submit'>
                 <section className='mb-4'>
                     <span className='input-group'>
-                        <label htmlFor='website'>Website</label>
-                        <input type='text' id='website' name='website' />
+                        <label htmlFor='social_links.website'>Website</label>
+                        <input
+                            type='text'
+                            id='social_links.website'
+                            name='social_links.website'
+                            onChange={props.storeNewStudioData}
+                        />
                     </span>
                 </section>
                 <section className='mb-8'>
                     <span className='input-group'>
-                        <label htmlFor='instagram'>Instagram</label>
-                        <input type='text' id='instagram' name='instagram' />
+                        <label htmlFor='social_links.instagram'>Instagram</label>
+                        <input
+                            type='text'
+                            id='social_links.instagram'
+                            name='social_links.instagram'
+                            onChange={props.storeNewStudioData}
+                        />
                     </span>
                 </section>
                 <section className='mb-8'>
                     <span className='input-group'>
-                        <label htmlFor='facebook'>Facebook</label>
-                        <input type='text' id='facebook' name='facebook' />
+                        <label htmlFor='social_links.facebook'>Facebook</label>
+                        <input
+                            type='text'
+                            id='social_links.facebook'
+                            name='social_links.facebook'
+                            onChange={props.storeNewStudioData}
+                        />
                     </span>
                 </section>
                 <section className='mb-8'>
                     <div className='mb-3'>
                         <span className='input-group'>
-                            <label htmlFor='formFile' className='form-label'>
+                            <label htmlFor='logo' className='form-label'>
                                 Logo
                             </label>
-                            <input className='form-control input' type='file' id='formFile' />
+                            <input
+                                className='form-control input'
+                                type='file'
+                                id='logo'
+                                name='logo'
+                                onChange={props.storeNewStudioData}
+                            />
                         </span>
                     </div>
                 </section>

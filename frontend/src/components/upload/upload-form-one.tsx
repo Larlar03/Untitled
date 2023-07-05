@@ -5,54 +5,24 @@ import regions from '../../constants/regions';
 import CitiesRegion from '../../types/cities-regions';
 import countries from '../../constants/countries';
 import './upload-form.css';
+import Studio from '../../types/studios';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;
+    storeNewStudioData: (e: any) => void;
+    newStudio: any;
 }
 // TO DO
 // Regex pattern for correct email, phone number and post code
+// Do inline vaildation or disabled button
 
 const UploadFormOne = (props: Props) => {
-    const [isDisabled, setIsDisabled] = useState<boolean>(true);
-    const [newStudio, setNewStudio] = useState<Studio>({
-        name: '',
-        phone_number: '',
-        email_address: '',
-        location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
-        },
-        social_links: {
-            website: '',
-            instagram: '',
-            facebook: ''
-        },
-        logo: '',
-        services: []
-    });
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
-    const storeData = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value;
-        const field = e.currentTarget.name;
-        console.log('field', field);
-
-        const ns = { ...newStudio };
-        ns[field] = value;
-        setNewStudio(ns);
-        console.log(newStudio);
-    };
-
-    useEffect(() => {
-        const occupiedFields = [];
-        const fieldValues = Object.values(newStudio);
-        fieldValues.forEach((val) => {
-            val.length > 0 && occupiedFields.push(val);
-        });
-        occupiedFields.length === 8 && setIsDisabled(false);
-    }, [newStudio]);
+    // useEffect(() => {
+    //     const fieldValues = Object.values(props.newStudio);
+    //     fieldValues.length === 8 ? setIsDisabled(false) : setIsDisabled(true);
+    // }, [props.newStudio]);
 
     return (
         <div className='mt-12'>
@@ -60,34 +30,49 @@ const UploadFormOne = (props: Props) => {
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='name'>Studio Name</label>
-                        <input type='text' id='name' name='name' onChange={storeData} />
+                        <input type='text' id='name' name='name' onChange={props.storeNewStudioData} />
                     </span>
                 </section>
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='phone_number'>Phone Number</label>
-                        <input type='number' id='phone_number' name='phone_number' onChange={storeData} />
+                        <input type='tel' id='phone_number' name='phone_number' onChange={props.storeNewStudioData} />
                     </span>
                     <span className='input-group'>
                         <label htmlFor='email_address'>Email Address</label>
-                        <input type='email' id='email_address' name='email_address' onChange={storeData} />
+                        <input
+                            type='email'
+                            id='email_address'
+                            name='email_address'
+                            onChange={props.storeNewStudioData}
+                        />
                     </span>
                 </section>
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='location.address'>Street Address</label>
-                        <input type='text' id='location.address' name='loaction.address' onChange={storeData} />
+                        <input
+                            type='text'
+                            id='location.address'
+                            name='location.address'
+                            onChange={props.storeNewStudioData}
+                        />
                     </span>
                 </section>
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='location.post_code'>Post Code</label>
-                        <input type='text' id='location.post_code' name='location.post_code' onChange={storeData} />
+                        <input
+                            type='text'
+                            id='location.post_code'
+                            name='location.post_code'
+                            onChange={props.storeNewStudioData}
+                        />
                     </span>
                     <span className='input-group'>
                         <label htmlFor='location.city'>City</label>
-                        <select className='form-select' name='location.city' onChange={storeData}>
-                            <option defaultValue></option>
+                        <select className='form-select' name='location.city' onChange={props.storeNewStudioData}>
+                            <option defaultValue=''></option>
                             {cities.map((city: CitiesRegion, i) => {
                                 return (
                                     <option key={i} value={city.label}>
@@ -101,8 +86,8 @@ const UploadFormOne = (props: Props) => {
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='location.region'>Region</label>
-                        <select className='form-select' name='location.region' onChange={storeData}>
-                            <option defaultValue></option>
+                        <select className='form-select' name='location.region' onChange={props.storeNewStudioData}>
+                            <option defaultValue=''></option>
                             {regions.map((region: CitiesRegion, i) => {
                                 return (
                                     <option key={i} value={region.label}>
@@ -114,8 +99,8 @@ const UploadFormOne = (props: Props) => {
                     </span>
                     <span className='input-group'>
                         <label htmlFor='location.country'>Country</label>
-                        <select className='form-select' name='location.country' onChange={storeData}>
-                            <option defaultValue></option>
+                        <select className='form-select' name='location.country' onChange={props.storeNewStudioData}>
+                            <option defaultValue=''></option>
                             {countries.map((country: CitiesRegion, i) => {
                                 return (
                                     <option key={i} value={country.label}>
