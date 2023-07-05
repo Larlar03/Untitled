@@ -27,7 +27,9 @@ services:
 
 
   mongo:
+    container_name: aeriform-mongo-container
     image: mongo:latest
     ports:
       - 27017:27017
+  
     
