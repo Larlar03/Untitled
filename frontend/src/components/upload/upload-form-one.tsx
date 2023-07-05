@@ -10,7 +10,6 @@ import Studio from '../../types/studios';
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeNewStudioData: (e: any) => void;
-    newStudio: any;
 }
 // TO DO
 // Regex pattern for correct email, phone number and post code

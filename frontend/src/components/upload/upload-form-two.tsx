@@ -5,7 +5,6 @@ import './upload-form.css';
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeNewStudioData: (e: any) => void;
-    newStudio: any;
 }
 
 const UploadForm = (props: Props) => {

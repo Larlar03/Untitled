@@ -6,12 +6,11 @@ import './upload-form.css';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;
+    storeServiceData: (e: any) => void;
 }
 
 const UploadForm = (props: Props) => {
     const [isDisabled, setIsDisabled] = useState<boolean>();
-
-    const [errors, setErrors] = useState<any>({});
 
     const navigate = useNavigate();
 
@@ -19,12 +18,18 @@ const UploadForm = (props: Props) => {
         <div className='mt-12'>
             <form action='submit'>
                 <section className='mb-4 flex flex-col'>
-                    {services.map((service) => (
-                        <div className='form-check'>
+                    {services.map((service, i) => (
+                        <div className='form-check' key={i}>
                             <label className='form-check-label' htmlFor='flexCheckDefault'>
                                 {service}
                             </label>
-                            <input className='form-check-input' type='checkbox' value='' id='flexCheckDefault' />
+                            <input
+                                className='form-check-input'
+                                type='checkbox'
+                                value={service}
+                                id='flexCheckDefault'
+                                onChange={props.storeServiceData}
+                            />
                         </div>
                     ))}
                 </section>

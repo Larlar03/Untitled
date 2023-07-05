@@ -28,10 +28,6 @@ const UploadPage = (props: any) => {
         services: []
     });
 
-    useEffect(() => {
-        console.log('rendering');
-    });
-
     const goToFormPage = (pageNumber: number): void => {
         setFormPage(pageNumber);
     };
@@ -51,6 +47,21 @@ const UploadPage = (props: any) => {
         console.log(newStudio);
     };
 
+    // Fix
+    const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value;
+        const ns: Studio | any = { ...newStudio };
+        if (ns.services.includes(value)) {
+            ns.services.filter((service: string) => {
+                return service !== value;
+            });
+        } else {
+            ns.services.push(value);
+        }
+
+        console.log(ns.services);
+    };
+
     return (
         <>
             <Navbar />
@@ -58,20 +69,14 @@ const UploadPage = (props: any) => {
                 <div id='page__card' className='px-11'>
                     <Header subheading='Upload a Studio' />
                     {formPage === 1 && (
-                        <UploadFormOne
-                            goToFormPage={goToFormPage}
-                            storeNewStudioData={storeNewStudioData}
-                            newStudio={newStudio}
-                        />
+                        <UploadFormOne goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
                     )}
                     {formPage === 2 && (
-                        <UploadFormTwo
-                            goToFormPage={goToFormPage}
-                            storeNewStudioData={storeNewStudioData}
-                            newStudio={newStudio}
-                        />
+                        <UploadFormTwo goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
                     )}
-                    {formPage === 3 && <UploadFormThree goToFormPage={goToFormPage} />}
+                    {formPage === 3 && (
+                        <UploadFormThree goToFormPage={goToFormPage} storeServiceData={storeServiceData} />
+                    )}
                 </div>
                 <div id='page__card--shadow'></div>
             </div>
