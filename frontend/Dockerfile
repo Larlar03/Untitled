@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 5173
 
 #Command to start the Docker container for the frontend React.js application
-CMD npm run dev
+CMD ["npm", "run", "dev"]
