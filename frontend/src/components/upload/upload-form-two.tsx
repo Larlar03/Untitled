@@ -8,7 +8,25 @@ interface Props {
 
 const UploadForm = (props: Props) => {
     const [isDisabled, setIsDisabled] = useState<boolean>();
-
+    const [newStudio, setNewStudio] = useState<Studio>({
+        name: undefined,
+        phone_number: undefined,
+        email_address: undefined,
+        location: {
+            address: undefined,
+            post_code: undefined,
+            city: undefined,
+            region: undefined,
+            country: undefined
+        },
+        social_links: {
+            website: undefined,
+            instagram: undefined,
+            facebook: undefined
+        },
+        logo: undefined,
+        services: []
+    });
     return (
         <div className='mt-12'>
             <form action='submit'>

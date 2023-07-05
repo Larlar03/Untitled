@@ -2,7 +2,7 @@ import Location from './location';
 import SocialLinks from './social-links';
 
 class Studio {
-    id: number | undefined;
+    id?: number | undefined;
     name: string | undefined;
     phone_number: string | undefined;
     email_address: string | undefined;
