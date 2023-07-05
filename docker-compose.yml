@@ -1,7 +1,7 @@
 # Version of Docker-compose
 version: '3.9'
 services:
-  aeriform-frontend:
+  frontend:
       build: 
         context: ./frontend
         dockerfile: Dockerfile
@@ -10,10 +10,10 @@ services:
         - '5173:5173'
       stdin_open: true
       depends_on:
-        - aeriform-backend
+        - backend
         
 
-  aeriform-backend:
+  backend:
     build: 
       context: ./backend
       dockerfile: Dockerfile
