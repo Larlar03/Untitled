@@ -1,17 +1,21 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UploadFormOne from '../upload-form-one';
 
 const mockStoreNewStudioData = jest.fn();
 const mockGoToFormPage = jest.fn();
 
-describe('Page Not Found', () => {
+describe('Upload Form One', () => {
     beforeEach(() => {
         render(
             <Router>
                 <UploadFormOne goToFormPage={mockGoToFormPage} storeNewStudioData={mockStoreNewStudioData} />
             </Router>
         );
+    });
+
+    afterEach(() => {
+        cleanup();
     });
 
     it('renders text input fields', () => {

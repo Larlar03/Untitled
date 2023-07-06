@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UploadFormThree from '../upload-form-three';
 
@@ -6,7 +6,7 @@ const mockStoreServiceData = jest.fn();
 const mockGoToFormPage = jest.fn();
 const mockSubmitForm = jest.fn();
 
-describe('Page Not Found', () => {
+describe('Upload Form Three', () => {
     beforeEach(() => {
         render(
             <Router>
@@ -17,6 +17,10 @@ describe('Page Not Found', () => {
                 />
             </Router>
         );
+    });
+
+    afterEach(() => {
+        cleanup();
     });
 
     it('renders text input fields', () => {
