@@ -24,8 +24,8 @@ const UploadFormOne = (props: Props) => {
     // }, [props.newStudio]);
 
     return (
-        <div className='mt-12'>
-            <form action='submit'>
+        <form action='submit'>
+            <div className='top'>
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='name'>Studio Name</label>
@@ -110,19 +110,19 @@ const UploadFormOne = (props: Props) => {
                         </select>
                     </span>
                 </section>
-                <div className='mt-8'>
-                    <CtaButton
-                        text='Next'
-                        handleClick={(e: React.MouseEvent<HTMLButtonElement>) => [
-                            e.preventDefault(),
-                            props.goToFormPage(2)
-                        ]}
-                        isDisabled={isDisabled}
-                        type='button'
-                    />
-                </div>
-            </form>
-        </div>
+            </div>
+            <div className='bottom'>
+                <CtaButton
+                    text='Next'
+                    handleClick={(e: React.MouseEvent<HTMLButtonElement>) => [
+                        e.preventDefault(),
+                        props.goToFormPage(2)
+                    ]}
+                    isDisabled={isDisabled}
+                    type='button'
+                />
+            </div>
+        </form>
     );
 };
 

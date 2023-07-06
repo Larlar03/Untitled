@@ -33,11 +33,9 @@ const SearchForm = (props: Props) => {
                 <div className='mb-3'>
                     <SearchInput selectLocation={selectLocation} />
                 </div>
-                <div className='mb-4'>
-                    <SearchOptions selectOptions={selectOptions} services={services} />
-                </div>
+                <SearchOptions selectOptions={selectOptions} services={services} />
                 <CtaButton
-                    text='Submit'
+                    text='Search'
                     handleClick={(e: React.MouseEvent<HTMLButtonElement>) => [
                         e.preventDefault(),
                         props.getStudios(location, options)

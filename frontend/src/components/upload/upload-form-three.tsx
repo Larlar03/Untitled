@@ -15,42 +15,42 @@ const UploadForm = (props: Props) => {
     const navigate = useNavigate();
 
     return (
-        <div className='mt-12'>
-            <form action='submit'>
-                <section className='mb-4 flex flex-col'>
+        <form action='submit'>
+            <div className='top'>
+                <section className='mb-4' id='form-check-container'>
                     {services.map((service, i) => (
                         <div className='form-check' key={i}>
-                            <label className='form-check-label' htmlFor='flexCheckDefault'>
-                                {service}
-                            </label>
                             <input
-                                className='form-check-input'
+                                className='form-check__input'
                                 type='checkbox'
                                 value={service}
                                 id='flexCheckDefault'
                                 onChange={props.storeServiceData}
                             />
+                            <label className='form-check__label ml-1.5' htmlFor='flexCheckDefault'>
+                                {service}
+                            </label>
                         </div>
                     ))}
                 </section>
-                <div className='button-container'>
-                    <CtaButton
-                        className='button-container__button'
-                        text='Back'
-                        handleClick={() => props.goToFormPage(2)}
-                        isDisabled={isDisabled}
-                        type='button'
-                    />
-                    <CtaButton
-                        className='button-container__button'
-                        text='Submit'
-                        handleClick={() => navigate('/')}
-                        isDisabled={isDisabled}
-                        type='submit'
-                    />
-                </div>
-            </form>
-        </div>
+            </div>
+            <div className='bottom flex justify-between w-full'>
+                <CtaButton
+                    className='w-2/5'
+                    text='Back'
+                    handleClick={() => props.goToFormPage(2)}
+                    isDisabled={isDisabled}
+                    type='button'
+                />
+                <CtaButton
+                    className='w-2/5'
+                    text='Upload'
+                    handleClick={() => navigate('/')}
+                    isDisabled={isDisabled}
+                    type='submit'
+                />
+            </div>
+        </form>
     );
 };
 

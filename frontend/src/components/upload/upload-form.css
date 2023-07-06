@@ -1,3 +1,11 @@
+form {
+    margin-top: 3rem;
+    height: 71%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
 section {
     width: 100%;
     display: flex;
@@ -17,20 +25,13 @@ section {
     padding: 6px;
 }
 
-#formFile {
-    border: none;
+#form-check-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-row-gap: 2rem;
 }
 
-.form-check label {
-    margin-right: 4px;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.button-container__button {
-    width: 40% !important;
+input[type=checkbox] {
+    accent-color: var(--cornflower-blue)
 }
