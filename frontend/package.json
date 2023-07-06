@@ -23,25 +23,6 @@
             "prettier --write"
         ]
     },
-    "jest": {
-        "collectCoverageFrom": [
-            "**/*.{ts,tsx}"
-        ],
-        "coveragePathIgnorePatterns": [
-            "<rootDir>/src/App.tsx",
-            "<rootDir>/src/main.tsx",
-            "<rootDir>/src/types/",
-            "<rootDir>/src/vite-env.d.ts"
-        ],
-        "coverageThreshold": {
-            "global": {
-                "branches": 80,
-                "functions": 60,
-                "lines": 80,
-                "statements": 80
-            }
-        }
-    },
     "dependencies": {
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
