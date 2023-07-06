@@ -1,11 +1,5 @@
 {
     "collectCoverageFrom": ["**/*.{ts,tsx}"],
-    "coveragePathIgnorePatterns": [
-        "<rootDir>/src/App.tsx",
-        "<rootDir>/src/main.tsx",
-        "<rootDir>/src/types/",
-        "<rootDir>/src/vite-env.d.ts"
-    ],
     "coverageThreshold": {
         "global": {
             "branches": 80,

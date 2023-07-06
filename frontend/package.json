@@ -23,6 +23,14 @@
             "prettier --write"
         ]
     },
+    "jest": {
+        "coveragePathIgnorePatterns": [
+            "<rootDir>/src/App.tsx",
+            "<rootDir>/src/main.tsx",
+            "<rootDir>/src/types/",
+            "<rootDir>/src/vite-env.d.ts"
+        ]
+    },
     "dependencies": {
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
