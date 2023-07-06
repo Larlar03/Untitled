@@ -11,7 +11,6 @@ const UploadForm = (props: Props) => {
     const [isDisabled, setIsDisabled] = useState<boolean>();
 
     return (
-        // <div className='mt-12'>
         <form action='submit' className='mt-12'>
             <div className='top'>
                 <section className='mb-8'>
@@ -79,7 +78,6 @@ const UploadForm = (props: Props) => {
                 />
             </div>
         </form>
-        // </div>
     );
 };
 

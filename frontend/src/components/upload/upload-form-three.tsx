@@ -7,6 +7,7 @@ import './upload-form.css';
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeServiceData: (e: any) => void;
+    submitForm: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const UploadForm = (props: Props) => {
@@ -45,9 +46,9 @@ const UploadForm = (props: Props) => {
                 <CtaButton
                     className='w-2/5'
                     text='Upload'
-                    handleClick={() => navigate('/')}
+                    handleClick={props.submitForm}
                     isDisabled={isDisabled}
-                    type='submit'
+                    type='button'
                 />
             </div>
         </form>

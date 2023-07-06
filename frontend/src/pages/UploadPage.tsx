@@ -1,12 +1,14 @@
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { useState } from 'react';
 import Header from '../components/header/header';
 import Navbar from '../components/navbar/navbar';
 import UploadFormOne from '../components/upload/upload-form-one';
 import UploadFormTwo from '../components/upload/upload-form-two';
 import UploadFormThree from '../components/upload/upload-form-three';
+import UploadSuccess from '../components/upload/upload-success';
 import Studio from '../types/studios';
 
-const UploadPage = (props: any) => {
+const UploadPage = () => {
+    const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
     const [newStudio, setNewStudio] = useState<Studio>({
         name: '',
@@ -35,19 +37,17 @@ const UploadPage = (props: any) => {
     const storeNewStudioData = (e: any) => {
         const value = e.currentTarget.value;
         const field = e.currentTarget.name;
-        const ns: Studio | any = { ...newStudio };
+        const ns = { ...newStudio };
+
         if (field.includes('.')) {
             const fieldArr = field.split('.');
-            console.log('arr', fieldArr);
             ns[fieldArr[0]][fieldArr[1]] = value;
         } else {
             ns[field] = value;
         }
         setNewStudio(ns);
-        console.log(newStudio);
     };
 
-    // Fix
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
 
@@ -55,17 +55,19 @@ const UploadPage = (props: any) => {
             const servicesArr = [...prev.services];
 
             if (servicesArr.includes(value)) {
-                console.log('value included');
                 const filteredServicesArr = servicesArr.filter((service) => service !== value);
                 return { ...prev, services: filteredServicesArr };
             } else {
-                console.log('value NOT included');
                 servicesArr.push(value);
                 return { ...prev, services: servicesArr };
             }
             return prev;
         });
-        console.log(newStudio.services);
+    };
+
+    const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setIsUploaded(true);
+        console.log(newStudio);
     };
 
     return (
@@ -74,14 +76,26 @@ const UploadPage = (props: any) => {
             <div id='page' className='h-full max-w-md p-0 mx-auto'>
                 <div id='page__card' className='px-11'>
                     <Header subheading='Upload a Studio' />
-                    {formPage === 1 && (
-                        <UploadFormOne goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
-                    )}
-                    {formPage === 2 && (
-                        <UploadFormTwo goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
-                    )}
-                    {formPage === 3 && (
-                        <UploadFormThree goToFormPage={goToFormPage} storeServiceData={storeServiceData} />
+                    {isUploaded ? (
+                        <>
+                            <UploadSuccess />
+                        </>
+                    ) : (
+                        <>
+                            {formPage === 1 && (
+                                <UploadFormOne goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
+                            )}
+                            {formPage === 2 && (
+                                <UploadFormTwo goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
+                            )}
+                            {formPage === 3 && (
+                                <UploadFormThree
+                                    goToFormPage={goToFormPage}
+                                    storeServiceData={storeServiceData}
+                                    submitForm={submitForm}
+                                />
+                            )}
+                        </>
                     )}
                 </div>
                 <div id='page__card--shadow'></div>
