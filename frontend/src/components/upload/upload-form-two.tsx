@@ -55,6 +55,7 @@ const UploadForm = (props: Props) => {
                             className='form-control input'
                             type='file'
                             id='logo'
+                            data-testid='logo-upload-input'
                             name='logo'
                             onChange={props.storeNewStudioData}
                         />
@@ -65,14 +66,14 @@ const UploadForm = (props: Props) => {
                 <CtaButton
                     className='w-2/5'
                     text='Back'
-                    handleClick={() => props.goToFormPage(1)}
+                    handleClick={props.goToFormPage(1)}
                     isDisabled={isDisabled}
                     type='button'
                 />
                 <CtaButton
                     className='w-2/5'
                     text='Next'
-                    handleClick={() => props.goToFormPage(3)}
+                    handleClick={props.goToFormPage(3)}
                     isDisabled={isDisabled}
                     type='button'
                 />
