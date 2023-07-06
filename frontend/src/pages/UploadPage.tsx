@@ -50,16 +50,22 @@ const UploadPage = (props: any) => {
     // Fix
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        const ns: Studio | any = { ...newStudio };
-        if (ns.services.includes(value)) {
-            ns.services.filter((service: string) => {
-                return service !== value;
-            });
-        } else {
-            ns.services.push(value);
-        }
 
-        console.log(ns.services);
+        setNewStudio((prev) => {
+            const servicesArr = [...prev.services];
+
+            if (servicesArr.includes(value)) {
+                console.log('value included');
+                const filteredServicesArr = servicesArr.filter((service) => service !== value);
+                return { ...prev, services: filteredServicesArr };
+            } else {
+                console.log('value NOT included');
+                servicesArr.push(value);
+                return { ...prev, services: servicesArr };
+            }
+            return prev;
+        });
+        console.log(newStudio.services);
     };
 
     return (

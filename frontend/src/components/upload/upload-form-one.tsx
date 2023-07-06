@@ -29,7 +29,13 @@ const UploadFormOne = (props: Props) => {
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='name'>Studio Name</label>
-                        <input type='text' id='name' name='name' onChange={props.storeNewStudioData} />
+                        <input
+                            type='text'
+                            id='name'
+                            name='name'
+                            onChange={props.storeNewStudioData}
+                            autoComplete='off'
+                        />
                     </span>
                 </section>
                 <section className='mb-4'>
@@ -44,6 +50,7 @@ const UploadFormOne = (props: Props) => {
                             id='email_address'
                             name='email_address'
                             onChange={props.storeNewStudioData}
+                            autoComplete='off'
                         />
                     </span>
                 </section>
@@ -55,6 +62,7 @@ const UploadFormOne = (props: Props) => {
                             id='location.address'
                             name='location.address'
                             onChange={props.storeNewStudioData}
+                            autoComplete='off'
                         />
                     </span>
                 </section>
@@ -66,11 +74,17 @@ const UploadFormOne = (props: Props) => {
                             id='location.post_code'
                             name='location.post_code'
                             onChange={props.storeNewStudioData}
+                            autoComplete='off'
                         />
                     </span>
                     <span className='input-group'>
                         <label htmlFor='location.city'>City</label>
-                        <select className='form-select' name='location.city' onChange={props.storeNewStudioData}>
+                        <select
+                            id='location.city'
+                            className='form-select'
+                            name='location.city'
+                            onChange={props.storeNewStudioData}
+                        >
                             <option defaultValue=''></option>
                             {cities.map((city: CitiesRegion, i) => {
                                 return (
@@ -85,7 +99,12 @@ const UploadFormOne = (props: Props) => {
                 <section className='mb-4'>
                     <span className='input-group'>
                         <label htmlFor='location.region'>Region</label>
-                        <select className='form-select' name='location.region' onChange={props.storeNewStudioData}>
+                        <select
+                            id='location.region'
+                            className='form-select'
+                            name='location.region'
+                            onChange={props.storeNewStudioData}
+                        >
                             <option defaultValue=''></option>
                             {regions.map((region: CitiesRegion, i) => {
                                 return (
@@ -98,7 +117,12 @@ const UploadFormOne = (props: Props) => {
                     </span>
                     <span className='input-group'>
                         <label htmlFor='location.country'>Country</label>
-                        <select className='form-select' name='location.country' onChange={props.storeNewStudioData}>
+                        <select
+                            id='location.country'
+                            className='form-select'
+                            name='location.country'
+                            onChange={props.storeNewStudioData}
+                        >
                             <option defaultValue=''></option>
                             {countries.map((country: CitiesRegion, i) => {
                                 return (
