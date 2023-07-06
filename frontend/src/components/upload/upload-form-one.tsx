@@ -136,7 +136,12 @@ const UploadFormOne = (props: Props) => {
                 </section>
             </div>
             <div className='bottom'>
-                <CtaButton text='Next' handleClick={props.goToFormPage(2)} isDisabled={isDisabled} type='button' />
+                <CtaButton
+                    text='Next'
+                    handleClick={() => props.goToFormPage(2)}
+                    isDisabled={isDisabled}
+                    type='button'
+                />
             </div>
         </form>
     );

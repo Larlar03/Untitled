@@ -39,7 +39,7 @@ const UploadForm = (props: Props) => {
                 <CtaButton
                     className='w-2/5'
                     text='Back'
-                    handleClick={props.goToFormPage(2)}
+                    handleClick={() => props.goToFormPage(2)}
                     isDisabled={isDisabled}
                     type='button'
                 />
