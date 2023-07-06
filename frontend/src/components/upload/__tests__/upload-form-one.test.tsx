@@ -1,15 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UploadFormOne from '../upload-form-one';
 
-const mockNewStudioData = {};
+const mockStoreNewStudioData = jest.fn();
 const mockGoToFormPage = jest.fn();
 
 describe('Page Not Found', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadFormOne goToFormPage={mockGoToFormPage} newStudioData={mockNewStudioData} />
+                <UploadFormOne goToFormPage={mockGoToFormPage} storeNewStudioData={mockStoreNewStudioData} />
             </Router>
         );
     });
@@ -27,5 +27,11 @@ describe('Page Not Found', () => {
     it('renders button', () => {
         const nextButton = screen.getByRole('button');
         expect(nextButton).toBeVisible();
+    });
+
+    it('calls function to go to next component when button is clicked', () => {
+        const nextButton = screen.getByRole('button');
+        fireEvent.click(nextButton);
+        expect(mockGoToFormPage).toHaveBeenCalled();
     });
 });

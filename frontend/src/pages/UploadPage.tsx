@@ -37,7 +37,7 @@ const UploadPage = () => {
     const storeNewStudioData = (e: any) => {
         const value = e.currentTarget.value;
         const field = e.currentTarget.name;
-        const ns = { ...newStudio };
+        const ns: any = { ...newStudio };
 
         if (field.includes('.')) {
             const fieldArr = field.split('.');
@@ -52,10 +52,10 @@ const UploadPage = () => {
         const value = e.currentTarget.value;
 
         setNewStudio((prev) => {
-            const servicesArr = [...prev.services];
+            const servicesArr = [...(prev.services || [])];
 
             if (servicesArr.includes(value)) {
-                const filteredServicesArr = servicesArr.filter((service) => service !== value);
+                const filteredServicesArr = servicesArr.filter((service: string) => service !== value);
                 return { ...prev, services: filteredServicesArr };
             } else {
                 servicesArr.push(value);
