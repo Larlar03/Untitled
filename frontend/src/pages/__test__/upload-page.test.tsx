@@ -1,5 +1,6 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, waitFor, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
+import axios from 'axios';
 import UploadPage from '../upload-page';
 
 console.log = jest.fn();
@@ -11,10 +12,17 @@ describe('Upload Page', () => {
                 <UploadPage />
             </Router>
         );
+
+        const mockResponse = {
+            data: {}
+        };
+
+        jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
     });
 
     afterEach(() => {
         cleanup();
+        jest.clearAllMocks();
     });
 
     it('renders subheading', () => {
@@ -31,24 +39,10 @@ describe('Upload Page', () => {
         expect(pageTwoInputField).toBeVisible();
     });
 
-    it('renders upload success component on form submit', async () => {
-        //  Go to last form page
-        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-        // Upload form
-        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-        const imgAltText = screen.getByAltText('Magnifying glass with sparkles');
-        const successMessage = screen.getByTestId('upload-success-message');
-
-        expect(imgAltText).toBeVisible();
-        expect(successMessage).toBeVisible();
-    });
-
-    it('stores text field input values', () => {
+    it('should submit the form successfully', async () => {
+        // Simulate form input and submission
         const nameInput = screen.getAllByRole('textbox')[0];
         const postCodeInput = screen.getAllByRole('textbox')[4];
-
         fireEvent.change(nameInput, { target: { value: 'Foo' } });
         fireEvent.change(postCodeInput, { target: { value: 'Bar' } });
 
@@ -58,18 +52,28 @@ describe('Upload Page', () => {
         //  Upload form
         fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-        expect(console.log).toHaveBeenCalledWith({
-            email_address: '',
-            location: { address: '', city: '', country: '', post_code: 'Bar', region: '' },
-            logo: '',
-            name: 'Foo',
-            phone_number: '',
-            services: [],
-            social_links: { facebook: '', instagram: '', website: '' }
+        await waitFor(() => {
+            expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
+                isFrontend: true,
+                newStudio: {
+                    email_address: '',
+                    location: { address: '', city: '', country: '', post_code: 'Bar', region: '' },
+                    logo: '',
+                    name: 'Foo',
+                    phone_number: '',
+                    services: [],
+                    social_links: { facebook: '', instagram: '', website: '' }
+                }
+            });
+
+            // Expect success page to be rendered
+            expect(screen.getByAltText('Magnifying glass with sparkles')).toBeVisible();
+            expect(screen.getByTestId('upload-success-message')).toBeVisible();
         });
     });
 
-    it('stores checked services in studio state object', () => {
+    it('stores checked services in studio state object', async () => {
+        // Simulate form input and submission
         // Go to last form page
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
@@ -79,38 +83,47 @@ describe('Upload Page', () => {
 
         fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-        expect(console.log).toHaveBeenCalledWith({
-            email_address: '',
-            location: { address: '', city: '', country: '', post_code: '', region: '' },
-            logo: '',
-            name: '',
-            phone_number: '',
-            services: ['Aerial Hoop'],
-            social_links: { facebook: '', instagram: '', website: '' }
+        await waitFor(() => {
+            expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
+                isFrontend: true,
+                newStudio: {
+                    email_address: '',
+                    location: { address: '', city: '', country: '', post_code: '', region: '' },
+                    logo: '',
+                    name: '',
+                    phone_number: '',
+                    services: ['Aerial Hoop'],
+                    social_links: { facebook: '', instagram: '', website: '' }
+                }
+            });
         });
     });
 
-    it('removes service from studio state object when unchecked', () => {
+    it('removes checked services in studio state object when clicked twice', async () => {
+        // Simulate form input and submission
         // Go to last form page
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
 
         const firstServiceInput = screen.getAllByRole('checkbox')[0];
-        // check
         fireEvent.click(firstServiceInput);
-        // uncheck
         fireEvent.click(firstServiceInput);
 
         fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-        expect(console.log).toHaveBeenCalledWith({
-            email_address: '',
-            location: { address: '', city: '', country: '', post_code: '', region: '' },
-            logo: '',
-            name: '',
-            phone_number: '',
-            services: [],
-            social_links: { facebook: '', instagram: '', website: '' }
+        await waitFor(() => {
+            expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
+                isFrontend: true,
+                newStudio: {
+                    email_address: '',
+                    location: { address: '', city: '', country: '', post_code: '', region: '' },
+                    logo: '',
+                    name: '',
+                    phone_number: '',
+                    services: [],
+                    social_links: { facebook: '', instagram: '', website: '' }
+                }
+            });
         });
     });
 });

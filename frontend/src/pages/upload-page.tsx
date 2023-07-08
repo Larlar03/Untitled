@@ -12,20 +12,20 @@ const UploadPage = () => {
     const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: 'Fake Studio',
-        phone_number: '0121 773 1765',
-        email_address: 'fake@studio.com',
+        name: '',
+        phone_number: '',
+        email_address: '',
         location: {
-            address: '120 Fake Street',
-            post_code: 'FT23 8XH',
-            city: 'Birmingham',
-            region: 'West Midlands',
-            country: 'England'
+            address: '',
+            post_code: '',
+            city: '',
+            region: '',
+            country: ''
         },
         social_links: {
-            website: 'www.fakestudio.com',
-            instagram: 'www.instagram.com/fakestudio',
-            facebook: 'www.facebook.com/fakestudio'
+            website: '',
+            instagram: '',
+            facebook: ''
         },
         logo: '',
         services: []
@@ -52,13 +52,12 @@ const UploadPage = () => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const contents = e.target?.result;
-                console.log(contents);
                 ns['logo'] = contents;
             };
             reader.readAsDataURL(file);
         }
+
         setNewStudio(ns);
-        console.log(newStudio);
     };
 
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,9 +76,9 @@ const UploadPage = () => {
         });
     };
 
-    const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        axios
-            .post(`${import.meta.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
+    const submitForm = async () => {
+        return axios
+            .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
             .then((response) => {
                 // Pass this into success page?
                 // Pass name into sucess page
