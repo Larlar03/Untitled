@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import Header from '../components/header/header';
 import Navbar from '../components/navbar/navbar';
 import UploadFormOne from '../components/upload/upload-form-one';
@@ -11,20 +12,20 @@ const UploadPage = () => {
     const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: '',
-        phone_number: '',
-        email_address: '',
+        name: 'Fake Studio',
+        phone_number: '0121 773 1765',
+        email_address: 'fake@studio.com',
         location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
+            address: '120 Fake Street',
+            post_code: 'FT23 8XH',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
         },
         social_links: {
-            website: '',
-            instagram: '',
-            facebook: ''
+            website: 'www.fakestudio.com',
+            instagram: 'www.instagram.com/fakestudio',
+            facebook: 'www.facebook.com/fakestudio'
         },
         logo: '',
         services: []
@@ -45,7 +46,19 @@ const UploadPage = () => {
         } else {
             ns[field] = value;
         }
+
+        if (field === 'logo') {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const contents = e.target?.result;
+                console.log(contents);
+                ns['logo'] = contents;
+            };
+            reader.readAsDataURL(file);
+        }
         setNewStudio(ns);
+        console.log(newStudio);
     };
 
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,8 +78,19 @@ const UploadPage = () => {
     };
 
     const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setIsUploaded(true);
         console.log(newStudio);
+        axios
+            .post(`${import.meta.env.VITE_STUDIOS_API}/`, { newStudio })
+            .then((response) => {
+                console.log(newStudio);
+                console.log(response.data);
+            })
+            .then(() => {
+                setIsUploaded(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (

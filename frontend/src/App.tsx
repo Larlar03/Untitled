@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import './App.css';
 import axios from 'axios';
 import HomePage from './pages/home-page';
 import ResultsPage from './pages/results-page';
 import UploadPage from './pages/upload-page';
 import Studio from './types/studios';
 import ErrorPage from './pages/error-page';
+import './App.css';
+
 //Test
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();

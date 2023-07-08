@@ -51,7 +51,7 @@ const UploadForm = (props: Props) => {
                         <input
                             className='form-control input'
                             type='file'
-                            id='logo'
+                            id='logoIput'
                             data-testid='logo-upload-input'
                             name='logo'
                             onChange={props.storeNewStudioData}
