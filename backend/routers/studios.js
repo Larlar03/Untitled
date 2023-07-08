@@ -10,7 +10,7 @@ const studioRouter = function (collection) {
         res.status(500).send('Error fetching data:', error);
     };
 
-    // READ all
+    // GET all
     router.get('/', (req, res) => {
         collection
             .find()
@@ -19,7 +19,7 @@ const studioRouter = function (collection) {
             .catch((err) => errorCatcher(err));
     });
 
-    // READ by location
+    // GET by location
     router.get('/locations/:location', (req, res) => {
         const location = req.params.location;
         collection
@@ -38,7 +38,7 @@ const studioRouter = function (collection) {
             .catch((error) => errorCatcher(error));
     });
 
-    // READ by location and services
+    // GET by location and services
     router.get('/:location/services', (req, res) => {
         const location = req.params.location;
         const services = req.query.services;
@@ -71,21 +71,22 @@ const studioRouter = function (collection) {
         }
     });
 
-    // CREATE
+    // POST new studio
     router.post('/', (req, res) => {
         let newStudio = req.body.newStudio;
-        const nsLogo = newStudio.logo;
+        const newStudioLogo = newStudio.logo;
 
-        // console.log('!!!!!FILE PATH!!!!!!!', studioLogoFilePath);
-        // // read the image file
-        // const logoData = fs.readFileSync(studioLogoFilePath);
-        // console.log('!!!!!LOGO DATA!!!!!!!', logoData);
-        // // convert image data to a Buffer object to store in mongoDB
-        console.log('!!!!!FILE DATA!!!!!!!', nsLogo);
-        const logoBuffer = Buffer.from(nsLogo.split(',')[1], 'base64');
-        console.log('!!!!!LOGO BUFFER!!!!!!!', logoBuffer);
-
-        newStudio.logo = logoBuffer;
+        if (req.body.isFrontend) {
+            const logoBuffer = Buffer.from(
+                newStudioLogo.split(',')[1],
+                'base64'
+            );
+            newStudio.logo = logoBuffer;
+        } else {
+            const logoData = fs.readFileSync(newStudioLogo);
+            const logoBuffer = Buffer.from(logoData);
+            newStudio.logo = logoBuffer;
+        }
 
         collection
             .insertOne(newStudio)

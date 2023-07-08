@@ -78,11 +78,11 @@ const UploadPage = () => {
     };
 
     const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log(newStudio);
         axios
-            .post(`${import.meta.env.VITE_STUDIOS_API}/`, { newStudio })
+            .post(`${import.meta.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
             .then((response) => {
-                console.log(newStudio);
+                // Pass this into success page?
+                // Pass name into sucess page
                 console.log(response.data);
             })
             .then(() => {
