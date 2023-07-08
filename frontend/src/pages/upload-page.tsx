@@ -52,7 +52,7 @@ const UploadPage = () => {
         const value = e.currentTarget.value;
 
         setNewStudio((prev) => {
-            const servicesArr = [...(prev.services || [])];
+            const servicesArr: string[] = [...(prev.services || [])];
 
             if (servicesArr.includes(value)) {
                 const filteredServicesArr = servicesArr.filter((service: string) => service !== value);
@@ -61,7 +61,6 @@ const UploadPage = () => {
                 servicesArr.push(value);
                 return { ...prev, services: servicesArr };
             }
-            return prev;
         });
     };
 

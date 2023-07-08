@@ -6,6 +6,10 @@ form {
     justify-content: space-between;
 }
 
+.bottom {
+    margin-top: 20px;
+}
+
 section {
     width: 100%;
     display: flex;
@@ -34,4 +38,10 @@ section {
 
 input[type=checkbox] {
     accent-color: var(--cornflower-blue)
+}
+
+@media (min-width: 768px) {
+    .bottom {
+        margin-top: 0
+    }
 }
