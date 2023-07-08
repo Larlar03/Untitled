@@ -2,6 +2,8 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UploadPage from '../upload-page';
 
+console.log = jest.fn();
+
 describe('Upload Page', () => {
     beforeEach(() => {
         render(
@@ -17,52 +19,45 @@ describe('Upload Page', () => {
 
     it('renders subheading', () => {
         const subheading = screen.getByRole('heading', { level: 2 });
-
         expect(subheading).toBeVisible();
         expect(subheading).toHaveTextContent('Upload a Studio');
     });
 
     it('updates form page when goToFormPage is called', () => {
         const nextButton = screen.getByText('Next');
-
         fireEvent.click(nextButton);
 
-        const formTwoInputField = screen.getByText('Website URL');
-        expect(formTwoInputField).toBeVisible();
+        const pageTwoInputField = screen.getByText('Website URL');
+        expect(pageTwoInputField).toBeVisible();
     });
 
     it('renders upload success component on form submit', async () => {
-        const pageOneNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageOneNextButton);
-        const pageTwoNexButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageTwoNexButton);
+        //  Go to last form page
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        // Upload form
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-        const uploadButton = screen.getByRole('button', { name: 'Upload' });
-        expect(uploadButton).toBeVisible();
+        const imgAltText = screen.getByAltText('Magnifying glass with sparkles');
+        const successMessage = screen.getByTestId('upload-success-message');
 
-        fireEvent.click(uploadButton);
-        const svgAltText = screen.getByAltText('Magnifying glass with sparkles');
-        expect(svgAltText).toBeVisible();
+        expect(imgAltText).toBeVisible();
+        expect(successMessage).toBeVisible();
     });
 
-    it('stores text field input in studio state object', () => {
-        console.log = jest.fn();
-
-        const inputs = screen.getAllByRole('textbox');
-        const nameInput = inputs[0];
-        const postCodeInput = inputs[4];
+    it('stores text field input values', () => {
+        const nameInput = screen.getAllByRole('textbox')[0];
+        const postCodeInput = screen.getAllByRole('textbox')[4];
 
         fireEvent.change(nameInput, { target: { value: 'Foo' } });
         fireEvent.change(postCodeInput, { target: { value: 'Bar' } });
 
         // Go to last form page
-        const pageOneNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageOneNextButton);
-        const pageTwoNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageTwoNextButton);
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        //  Upload form
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-        const uploadButton = screen.getByRole('button', { name: 'Upload' });
-        fireEvent.click(uploadButton);
         expect(console.log).toHaveBeenCalledWith({
             email_address: '',
             location: { address: '', city: '', country: '', post_code: 'Bar', region: '' },
@@ -75,21 +70,14 @@ describe('Upload Page', () => {
     });
 
     it('stores checked services in studio state object', () => {
-        console.log = jest.fn();
-
         // Go to last form page
-        const pageOneNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageOneNextButton);
-        const pageTwoNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageTwoNextButton);
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
 
-        const textInputFields = screen.getAllByRole('checkbox');
-        const service = textInputFields[0];
+        const firstServiceInput = screen.getAllByRole('checkbox')[0];
+        fireEvent.click(firstServiceInput);
 
-        fireEvent.click(service);
-
-        const uploadButton = screen.getByRole('button', { name: 'Upload' });
-        fireEvent.click(uploadButton);
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
         expect(console.log).toHaveBeenCalledWith({
             email_address: '',
@@ -103,24 +91,17 @@ describe('Upload Page', () => {
     });
 
     it('removes service from studio state object when unchecked', () => {
-        console.log = jest.fn();
-
         // Go to last form page
-        const pageOneNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageOneNextButton);
-        const pageTwoNextButton = screen.getByRole('button', { name: 'Next' });
-        fireEvent.click(pageTwoNextButton);
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
 
-        const textInputFields = screen.getAllByRole('checkbox');
-        const service = textInputFields[0];
-
+        const firstServiceInput = screen.getAllByRole('checkbox')[0];
         // check
-        fireEvent.click(service);
+        fireEvent.click(firstServiceInput);
         // uncheck
-        fireEvent.click(service);
+        fireEvent.click(firstServiceInput);
 
-        const uploadButton = screen.getByRole('button', { name: 'Upload' });
-        fireEvent.click(uploadButton);
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
         expect(console.log).toHaveBeenCalledWith({
             email_address: '',
