@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import cities from '../../constants/cities';
 import regions from '../../constants/regions';
@@ -11,18 +10,8 @@ interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeNewStudioData: (e: any) => void;
 }
-// TO DO
-// Regex pattern for correct email, phone number and post code
-// Do inline vaildation or disabled button
 
 const UploadFormOne = (props: Props) => {
-    const [isDisabled, setIsDisabled] = useState<boolean>(false);
-
-    // useEffect(() => {
-    //     const fieldValues = Object.values(props.newStudio);
-    //     fieldValues.length === 8 ? setIsDisabled(false) : setIsDisabled(true);
-    // }, [props.newStudio]);
-
     return (
         <form action='submit'>
             <div className='top'>
@@ -136,12 +125,7 @@ const UploadFormOne = (props: Props) => {
                 </section>
             </div>
             <div className='bottom'>
-                <CtaButton
-                    text='Next'
-                    handleClick={() => props.goToFormPage(2)}
-                    isDisabled={isDisabled}
-                    type='button'
-                />
+                <CtaButton text='Next' handleClick={() => props.goToFormPage(2)} type='button' />
             </div>
         </form>
     );
