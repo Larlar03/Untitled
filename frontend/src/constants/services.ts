@@ -1,4 +1,4 @@
-const services: string[] = [
+const Services: string[] = [
     'Aerial Hoop',
     'Aerial Silks',
     'Burlesque',
@@ -14,4 +14,4 @@ const services: string[] = [
     'Other'
 ];
 
-export default services;
+export default Services;

@@ -8,5 +8,6 @@
             "statements": 80
         }
     },
-    "setupFilesAfterEnv": ["./src/setupTests.js"]
+    "setupFilesAfterEnv": ["./src/setupTests.js"],
+    "transformIgnorePatterns": ["node_modules/(?!axios)"]
 }

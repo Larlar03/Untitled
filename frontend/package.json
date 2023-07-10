@@ -29,6 +29,9 @@
             "<rootDir>/src/main.tsx",
             "<rootDir>/src/types/",
             "<rootDir>/src/vite-env.d.ts"
+        ],
+        "transformIgnorePatterns": [
+            "node_modules/(?!axios)"
         ]
     },
     "dependencies": {

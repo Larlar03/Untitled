@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import Header from '../components/header/header';
 import Navbar from '../components/navbar/navbar';
 import UploadFormOne from '../components/upload/upload-form-one';
@@ -45,6 +46,17 @@ const UploadPage = () => {
         } else {
             ns[field] = value;
         }
+
+        if (field === 'logo') {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const contents = e.target?.result;
+                ns['logo'] = contents;
+            };
+            reader.readAsDataURL(file);
+        }
+
         setNewStudio(ns);
     };
 
@@ -52,7 +64,7 @@ const UploadPage = () => {
         const value = e.currentTarget.value;
 
         setNewStudio((prev) => {
-            const servicesArr = [...(prev.services || [])];
+            const servicesArr: string[] = [...(prev.services || [])];
 
             if (servicesArr.includes(value)) {
                 const filteredServicesArr = servicesArr.filter((service: string) => service !== value);
@@ -61,13 +73,23 @@ const UploadPage = () => {
                 servicesArr.push(value);
                 return { ...prev, services: servicesArr };
             }
-            return prev;
         });
     };
 
-    const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        setIsUploaded(true);
-        console.log(newStudio);
+    const submitForm = async () => {
+        return axios
+            .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
+            .then((response) => {
+                // Pass this into success page?
+                // Pass name into sucess page
+                console.log(response.data);
+            })
+            .then(() => {
+                setIsUploaded(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (

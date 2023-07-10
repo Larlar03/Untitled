@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import './upload-form.css';
 
@@ -8,8 +7,6 @@ interface Props {
 }
 
 const UploadForm = (props: Props) => {
-    const [isDisabled, setIsDisabled] = useState<boolean>();
-
     return (
         <form action='submit' className='mt-12'>
             <div className='top'>
@@ -54,7 +51,7 @@ const UploadForm = (props: Props) => {
                         <input
                             className='form-control input'
                             type='file'
-                            id='logo'
+                            id='logoIput'
                             data-testid='logo-upload-input'
                             name='logo'
                             onChange={props.storeNewStudioData}
@@ -63,20 +60,8 @@ const UploadForm = (props: Props) => {
                 </section>
             </div>
             <div className='bottom flex justify-between w-full'>
-                <CtaButton
-                    className='w-2/5'
-                    text='Back'
-                    handleClick={() => props.goToFormPage(1)}
-                    isDisabled={isDisabled}
-                    type='button'
-                />
-                <CtaButton
-                    className='w-2/5'
-                    text='Next'
-                    handleClick={() => props.goToFormPage(3)}
-                    isDisabled={isDisabled}
-                    type='button'
-                />
+                <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(1)} type='button' />
+                <CtaButton className='w-2/5' text='Next' handleClick={() => props.goToFormPage(3)} type='button' />
             </div>
         </form>
     );
