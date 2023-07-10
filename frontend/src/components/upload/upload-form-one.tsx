@@ -22,8 +22,17 @@ const UploadFormOne = (props: Props) => {
         const telephonePattern = new RegExp('^(?:\\+44\\d{10}|0\\d{9,10})$');
         const emailPattern = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9.-]+$');
 
-        telephonePattern.test(telephoneInput) ? setValidTelephone(true) : setValidTelephone(false);
-        emailPattern.test(emailInput) ? setValidEmail(true) : setValidEmail(false);
+        if (telephoneInput.length > 0) {
+            telephonePattern.test(telephoneInput) ? setValidTelephone(true) : setValidTelephone(false);
+        } else {
+            setValidTelephone(true);
+        }
+
+        if (emailInput.length > 0) {
+            emailPattern.test(emailInput) ? setValidEmail(true) : setValidEmail(false);
+        } else {
+            setValidEmail(true);
+        }
     };
 
     useEffect(() => {

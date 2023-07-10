@@ -76,20 +76,55 @@ const UploadPage = () => {
         });
     };
 
+    const validateForm = () => {
+        // https://stackoverflow.com/questions/33036487/one-liner-to-flatten-nested-object
+        const flattenedStudioObj = Object.assign(
+            {},
+            ...(function _flatten(o) {
+                return [].concat(
+                    ...Object.keys(o).map((k) => (typeof o[k] === 'object' ? _flatten(o[k]) : { [k]: o[k] }))
+                );
+            })(newStudio)
+        );
+
+        const emptyFieldsArr: string[] = [];
+
+        const nsKeys = Object.keys(flattenedStudioObj);
+        const nsValues = Object.values(flattenedStudioObj);
+
+        nsValues.forEach((val, i) => {
+            val.length === 0 && emptyFieldsArr.push(nsKeys[i]);
+        });
+
+        if (emptyFieldsArr.length > 0) {
+            const x = emptyFieldsArr.join(', ');
+            throw new Error(`The fields ${x} are empty.`);
+        }
+
+        return;
+    };
+
     const submitForm = async () => {
-        return axios
-            .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
-            .then((response) => {
-                // Pass this into success page?
-                // Pass name into sucess page
-                console.log(response.data);
-            })
-            .then(() => {
-                setIsUploaded(true);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        try {
+            validateForm();
+        } catch (err) {
+            alert(err);
+        } finally {
+            console.log('done');
+            axios
+                .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
+                .then((response) => {
+                    // Pass this into success page?
+                    // Pass name into sucess page
+                    console.log(response.data);
+                })
+                .then(() => {
+                    setIsUploaded(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     };
 
     return (

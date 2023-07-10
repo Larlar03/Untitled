@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import './upload-form.css';
 
@@ -7,12 +8,50 @@ interface Props {
 }
 
 const UploadForm = (props: Props) => {
+    const [validWebsite, setValidWebsite] = useState<boolean>(false);
+    const [validInstagram, setValidInstagram] = useState<boolean>(true);
+    const [validFacebook, setValidFacebook] = useState<boolean>(true);
+
+    const validate = () => {
+        const websiteInput = document.getElementById('social_links.website').value;
+        const instagramInput = document.getElementById('social_links.instagram').value;
+        const facebookInput = document.getElementById('social_links.facebook').value;
+
+        const urlPattern = new RegExp(
+            '^(https?:\\/\\/)?(?:www\\.[a-zA-Z0-9]+([-.][a-zA-Z0-9]+)*\\.[a-zA-Z]{2,}(?:\\/.*)?)$'
+        );
+
+        if (websiteInput.length > 0) {
+            urlPattern.test(websiteInput) ? setValidWebsite(true) : setValidWebsite(false);
+        } else {
+            setValidWebsite(true);
+        }
+
+        if (instagramInput.length > 0) {
+            urlPattern.test(instagramInput) ? setValidInstagram(true) : setValidInstagram(false);
+        } else {
+            setValidInstagram(true);
+        }
+
+        if (facebookInput.length > 0) {
+            urlPattern.test(facebookInput) ? setValidFacebook(true) : setValidFacebook(false);
+        } else {
+            setValidFacebook(true);
+        }
+    };
+
+    useEffect(() => {
+        validate();
+    }, [props.storeNewStudioData]);
+
     return (
         <form action='submit' className='mt-12'>
             <div className='top'>
                 <section className='mb-8'>
                     <span className='input-group'>
-                        <label htmlFor='social_links.website'>Website URL</label>
+                        <label htmlFor='social_links.website'>
+                            Website URL {!validWebsite && <span className='text-error-crimson'>*</span>}
+                        </label>
                         <input
                             type='text'
                             id='social_links.website'
@@ -23,7 +62,9 @@ const UploadForm = (props: Props) => {
                 </section>
                 <section className='mb-8'>
                     <span className='input-group'>
-                        <label htmlFor='social_links.instagram'>Instagram URL</label>
+                        <label htmlFor='social_links.instagram'>
+                            Instagram URL {!validInstagram && <span className='text-error-crimson'>*</span>}
+                        </label>
                         <input
                             type='text'
                             id='social_links.instagram'
@@ -34,7 +75,9 @@ const UploadForm = (props: Props) => {
                 </section>
                 <section className='mb-8'>
                     <span className='input-group'>
-                        <label htmlFor='social_links.facebook'>Facebook URL</label>
+                        <label htmlFor='social_links.facebook'>
+                            Facebook URL {!validFacebook && <span className='text-error-crimson'>*</span>}
+                        </label>
                         <input
                             type='text'
                             id='social_links.facebook'
