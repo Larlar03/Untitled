@@ -14,23 +14,23 @@ interface Props {
 const ResultsNav = (props: Props) => {
     return (
         <div className='w-7/12 flex flex-row flex-nowrap justify-between mt-10 mb-4 mx-auto text-xl md:w-80 md:font-bold'>
-            <AdjustmentsHorizontalIcon className='h-6 w-6 text-jacksons-purple hover:text-main-purple-heart cursor-pointer' />
+            <AdjustmentsHorizontalIcon className='h-6 w-6 text-cosmic-cobalt hover:text-main-iris cursor-pointer' />
             <span className='w-full flex flex-row flex-nowrap justify-center gap-4'>
                 <ArrowLeftCircleIcon
                     onClick={props.handlePrevClick}
-                    className='prev-arrow h-8 w-8  text-black hover:text-main-purple-heart cursor-pointer'
+                    className='prev-arrow h-8 w-8  text-black hover:text-main-iris cursor-pointer'
                     data-testid='prev-arrow'
                 />
                 {props.resultsTotal === 0 ? '0 Results' : `${props.activeCardNum + 1} of ${props.resultsTotal}`}
                 <ArrowRightCircleIcon
                     onClick={props.handleNextClick}
-                    className=' next-arrow h-8 w-8 text-black hover:text-main-purple-heart cursor-pointer'
+                    className=' next-arrow h-8 w-8 text-black hover:text-main-iris cursor-pointer'
                     data-testid='next-arrow'
                 />
             </span>
             <Link to='/'>
                 <ArrowUturnLeftIcon
-                    className='h-6 w-6 text-jacksons-purple hover:text-main-purple-heart'
+                    className='h-6 w-6 text-cosmic-cobalt hover:text-main-iris'
                     data-testid='return-arrow'
                 />
             </Link>

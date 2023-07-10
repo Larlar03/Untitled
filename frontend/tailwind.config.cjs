@@ -10,10 +10,13 @@ module.exports = {
             },
             colors: {
                 main: {
-                    'jacksons-purple': '#241E92',
-                    'purple-heart': '#5432D3',
-                    'cornflower-blue': '#7B6CF6',
-                    mauve: '#C6A3FF'
+                    'cosmic-cobalt': '#241E92',
+                    iris: '#5432D3',
+                    'medium-slate-blue': '#7B6CF6',
+                    'pale-violet': '#C6A3FF'
+                },
+                error: {
+                    crimson: '#e01039'
                 },
                 greyscale: {
                     100: '#1A1A1A',

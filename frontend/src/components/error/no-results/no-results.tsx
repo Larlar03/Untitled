@@ -7,7 +7,7 @@ const NoResults = () => {
             <img className='w-80' src={MagnifyingGlass} alt='Magnifying glass with stars' />
             <p className='text-xl'>
                 Back to{' '}
-                <a className=' text-main-purple-heart hover:text-main-cornflower-blue' href='/'>
+                <a className=' text-main-iris hover:text-main-medium-slate-blue' href='/'>
                     search
                 </a>
             </p>

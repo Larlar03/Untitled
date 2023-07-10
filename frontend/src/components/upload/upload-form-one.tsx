@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import cities from '../../constants/cities';
 import regions from '../../constants/regions';
@@ -12,6 +13,23 @@ interface Props {
 }
 
 const UploadFormOne = (props: Props) => {
+    const [validTelephone, setValidTelephone] = useState<boolean>(false);
+    const [validEmail, setValidEmail] = useState<boolean>(false);
+
+    const validate = () => {
+        const telephoneInput = document.getElementById('phone_number').value;
+        const emailInput = document.getElementById('email_address').value;
+        const telephonePattern = new RegExp('^(?:\\+44\\d{10}|0\\d{9,10})$');
+        const emailPattern = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9.-]+$');
+
+        telephonePattern.test(telephoneInput) ? setValidTelephone(true) : setValidTelephone(false);
+        emailPattern.test(emailInput) ? setValidEmail(true) : setValidEmail(false);
+    };
+
+    useEffect(() => {
+        validate();
+    }, [props.storeNewStudioData]);
+
     return (
         <form action='submit'>
             <div className='top'>
@@ -29,11 +47,15 @@ const UploadFormOne = (props: Props) => {
                 </section>
                 <section className='mb-4'>
                     <span className='input-group'>
-                        <label htmlFor='phone_number'>Phone Number</label>
+                        <label htmlFor='phone_number'>
+                            Phone Number {!validTelephone && <span className='text-error-crimson'>*</span>}
+                        </label>
                         <input type='tel' id='phone_number' name='phone_number' onChange={props.storeNewStudioData} />
                     </span>
                     <span className='input-group'>
-                        <label htmlFor='email_address'>Email Address</label>
+                        <label htmlFor='email_address'>
+                            Email Address {!validEmail && <span className='text-error-crimson'>*</span>}
+                        </label>
                         <input
                             type='email'
                             id='email_address'

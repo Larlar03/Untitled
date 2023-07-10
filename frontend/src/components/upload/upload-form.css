@@ -37,7 +37,7 @@ section {
 }
 
 input[type=checkbox] {
-    accent-color: var(--cornflower-blue)
+    accent-color: var(--medium-slate-blue)
 }
 
 @media (min-width: 768px) {

@@ -17,7 +17,7 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    border: 1px solid var(--jacksons-purple);
+    border: 1px solid var(--cosmic-cobalt);
     background: var(--alabaster);
     position: absolute;
     z-index: 10;
@@ -26,7 +26,7 @@
 }
 
 .card__shadow {
-    background: var(--cornflower-blue);
+    background: var(--medium-slate-blue);
     position: relative;
     bottom: -2.5%;
     left: 3.5%;
@@ -35,16 +35,16 @@
 .top__heading h3 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--cornflower-blue);
+    color: var(--medium-slate-blue);
 }
 
 .top__heading h3:hover {
-    color: var(--jacksons-purple);
+    color: var(--cosmic-cobalt);
 }
 
 .top__heading h4 {
     font-size: 1.14rem;
-    color: var(--jacksons-purple);
+    color: var(--cosmic-cobalt);
 }
 
 .top__address {
@@ -64,12 +64,12 @@
 .bottom__links--facebook {
     height: 6px;
     width: 6px;
-    color: var(--cornflower-blue);
+    color: var(--medium-slate-blue);
 }
 
 .bottom__links--instagram:hover,
 .bottom__links--facebook:hover, .bottom__contact a:hover {
-    color: var(--jacksons-purple);
+    color: var(--cosmic-cobalt);
     cursor: pointer;
 }
 

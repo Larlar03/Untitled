@@ -19,14 +19,14 @@
 
     #page__card {
         padding: 15px 50px;
-        border: solid 2px var(--jacksons-purple);
+        border: solid 2px var(--cosmic-cobalt);
         background: var(--alabaster);
         z-index: 10;
         left: 50%;
         transform: translatex(-50%);
     }
     #page__card--shadow {
-        background: var(--jacksons-purple);
+        background: var(--cosmic-cobalt);
         left: 53%;
         top: 2%;
         transform: translatex(-50%);

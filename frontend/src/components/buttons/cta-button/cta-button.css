@@ -6,15 +6,15 @@
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: 5px;
-    background-color: var(--mauve);
-    color: var(--jacksons-purple);
+    background-color: var(--pale-violet);
+    color: var(--cosmic-cobalt);
     margin-top: 0;
     border-radius: 9999px;
 }
 
 #cta-button:hover {
-    background-color: var(--cornflower-blue);
-    color: var(--jacksons-purple);
+    background-color: var(--medium-slate-blue);
+    color: var(--cosmic-cobalt);
 }
 
 button:disabled,

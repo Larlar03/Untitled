@@ -17,10 +17,10 @@ const Navbar = () => {
                 className='text-right'
                 onClick={() => goToPage('bookmarks')}
             >
-                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-main-purple-heart' />
+                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
             </button>
             <button data-testid='upload-icon' type='button' className='text-right' onClick={() => goToPage('upload')}>
-                <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-main-purple-heart' />
+                <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
             </button>
         </div>
     );

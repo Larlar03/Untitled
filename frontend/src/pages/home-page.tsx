@@ -18,7 +18,7 @@ const HomePage = (props: Props) => {
                     {props.isLoading && (
                         <div className='h-4/6 w-full flex justify-center items-center'>
                             <PulseLoader
-                                color='var(--mauve)'
+                                color='var(--pale-violet)'
                                 size={50}
                                 aria-label='Loading Spinner'
                                 data-testid='loader'
