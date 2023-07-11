@@ -80,7 +80,7 @@ const UploadPage = () => {
         // https://stackoverflow.com/questions/33036487/one-liner-to-flatten-nested-object
         const flattenedStudioObj = Object.assign(
             {},
-            ...(function _flatten(o) {
+            ...(function _flatten(o: any): any {
                 return [].concat(
                     ...Object.keys(o).map((k) => (typeof o[k] === 'object' ? _flatten(o[k]) : { [k]: o[k] }))
                 );
@@ -92,7 +92,7 @@ const UploadPage = () => {
         const nsKeys = Object.keys(flattenedStudioObj);
         const nsValues = Object.values(flattenedStudioObj);
 
-        nsValues.forEach((val, i) => {
+        nsValues.forEach((val: any, i) => {
             val.length === 0 && emptyFieldsArr.push(nsKeys[i]);
         });
 
@@ -114,8 +114,6 @@ const UploadPage = () => {
             axios
                 .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
                 .then((response) => {
-                    // Pass this into success page?
-                    // Pass name into sucess page
                     console.log(response.data);
                 })
                 .then(() => {
