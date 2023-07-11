@@ -12,7 +12,6 @@
         height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
-
         --black: #000000;
         --cosmic-cobalt: #241e92;
         --iris: #5432d3;
@@ -20,6 +19,7 @@
         --pale-violet: #c6a3ff;
         --gallery: #eeeeee;
         --alabaster: #f7f7f7;
+        --crimson: #e01039;
     }
 
     body {

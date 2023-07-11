@@ -6,11 +6,15 @@ import UploadFormOne from '../components/upload/upload-form-one';
 import UploadFormTwo from '../components/upload/upload-form-two';
 import UploadFormThree from '../components/upload/upload-form-three';
 import UploadSuccess from '../components/upload/upload-success';
+import Modal from '../components/modal/modal';
 import Studio from '../types/studios';
+import { flattenObject } from '../helpers/flatten-object';
 
 const UploadPage = () => {
+    const [showModel, setShowModal] = useState<boolean>(false);
     const [isUploaded, setIsUploaded] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
         name: '',
         phone_number: '',
@@ -77,16 +81,7 @@ const UploadPage = () => {
     };
 
     const validateForm = () => {
-        // https://stackoverflow.com/questions/33036487/one-liner-to-flatten-nested-object
-        const flattenedStudioObj = Object.assign(
-            {},
-            ...(function _flatten(o: any): any {
-                return [].concat(
-                    ...Object.keys(o).map((k) => (typeof o[k] === 'object' ? _flatten(o[k]) : { [k]: o[k] }))
-                );
-            })(newStudio)
-        );
-
+        const flattenedStudioObj = flattenObject(newStudio);
         const emptyFieldsArr: string[] = [];
 
         const nsKeys = Object.keys(flattenedStudioObj);
@@ -97,8 +92,8 @@ const UploadPage = () => {
         });
 
         if (emptyFieldsArr.length > 0) {
-            const x = emptyFieldsArr.join(', ');
-            throw new Error(`The fields ${x} are empty.`);
+            const fields = emptyFieldsArr.join(', ');
+            throw new Error(`The following fields are empty: ${fields}`);
         }
 
         return;
@@ -107,10 +102,10 @@ const UploadPage = () => {
     const submitForm = async () => {
         try {
             validateForm();
-        } catch (err) {
-            alert(err);
+        } catch (err: any) {
+            setErrorMessage(err.message);
+            setShowModal(true);
         } finally {
-            console.log('done');
             axios
                 .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
                 .then((response) => {
@@ -150,6 +145,7 @@ const UploadPage = () => {
                                     submitForm={submitForm}
                                 />
                             )}
+                            {showModel && <Modal setShowModal={setShowModal} message={errorMessage} />}
                         </>
                     )}
                 </div>
