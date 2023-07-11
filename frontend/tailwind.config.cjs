@@ -15,8 +15,9 @@ module.exports = {
                     'medium-slate-blue': '#7B6CF6',
                     'pale-violet': '#C6A3FF'
                 },
-                error: {
-                    crimson: '#e01039'
+                'error-success': {
+                    crimson: '#e01039',
+                    malachite: '#10e078'
                 },
                 greyscale: {
                     100: '#1A1A1A',

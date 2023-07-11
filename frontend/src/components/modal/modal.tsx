@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import ReactDom from 'react-dom';
-import { XCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { XCircleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import './modal.css';
 
 interface Props {
@@ -25,12 +25,15 @@ const Modal = (props: Props) => {
         <div className='modal-container' ref={modalRef} onClick={closeModal}>
             <div className='modal'>
                 <div className='modal__top'>
-                    <ExclamationTriangleIcon className='h-8 w-8 text-error-crimson' />
                     <p>{props.message && props.message}</p>
                 </div>
                 <div className='modal__bottom'>
                     <button onClick={() => props.setShowModal(false)}>
-                        <XCircleIcon className='h-8 w-8 text-main-pale-violet hover:text-white' />
+                        <XCircleIcon className='h-8 w-8 text-error-success-crimson hover:text-white' />
+                    </button>
+                    {/* logic to procced to api call */}
+                    <button onClick={() => props.setShowModal(false)}>
+                        <CheckCircleIcon className='h-8 w-8 text-error-success-malachite hover:text-white' />
                     </button>
                 </div>
             </div>
