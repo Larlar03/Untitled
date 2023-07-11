@@ -1,23 +1,23 @@
-#page__card {
+#upload-page__card {
     min-height: 670px;
     padding: 15px 50px;
 }
 
 /* Medium devices (768px and up) */
 @media (min-width: 768px) {
-    #page {
+    #upload-page {
         position: relative;
         /* margin: 20px auto; */
     }
-    #page__card,
-    #page__card--shadow {
+    #upload-page__card,
+    #upload-page__card--shadow {
         width: 529px;
         height: 670px;
         border-radius: 10px;
         position: absolute;
     }
 
-    #page__card {
+    #upload-page__card {
         padding: 15px 50px;
         border: solid 2px var(--cosmic-cobalt);
         background: var(--alabaster);
@@ -25,7 +25,7 @@
         left: 50%;
         transform: translatex(-50%);
     }
-    #page__card--shadow {
+    #upload-page__card--shadow {
         background: var(--cosmic-cobalt);
         left: 53%;
         top: 2%;

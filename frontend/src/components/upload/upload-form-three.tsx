@@ -12,7 +12,7 @@ const UploadForm = (props: Props) => {
     return (
         <form action='submit'>
             <div className='top'>
-                <section className='mb-4' id='form-check-container'>
+                <section id='form-check-container'>
                     {Services.map((service, i) => (
                         <div className='form-check' key={i}>
                             <input

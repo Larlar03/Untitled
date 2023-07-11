@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UploadFormThree from '../upload-form-three';
+import Services from '../../../constants/services';
 
 const mockStoreServiceData = jest.fn();
 const mockGoToFormPage = jest.fn();
@@ -25,7 +26,8 @@ describe('Upload Form Three', () => {
 
     it('renders text input fields', () => {
         const textInputFields = screen.getAllByRole('checkbox');
-        expect(textInputFields).toHaveLength(13);
+        const amountOfServices = Services.length;
+        expect(textInputFields).toHaveLength(amountOfServices);
     });
 
     it('renders buttons', () => {

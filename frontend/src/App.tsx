@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import HomePage from './pages/home-page';
-import ResultsPage from './pages/results-page';
-import UploadPage from './pages/upload-page';
+import HomePage from './pages/home-page/home-page';
+import ResultsPage from './pages/results-page/results-page';
+import UploadPage from './pages/upload-page/upload-page';
 import Studio from './types/studios';
-import ErrorPage from './pages/error-page';
-import './App.css';
+import ErrorPage from './pages/error-page/error-page';
 
 //Test
 const App = () => {

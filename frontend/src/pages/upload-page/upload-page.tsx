@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
-import Header from '../components/header/header';
-import Navbar from '../components/navbar/navbar';
-import UploadFormOne from '../components/upload/upload-form-one';
-import UploadFormTwo from '../components/upload/upload-form-two';
-import UploadFormThree from '../components/upload/upload-form-three';
-import UploadSuccess from '../components/upload/upload-success';
-import Modal from '../components/modal/modal';
-import Studio from '../types/studios';
-import { flattenObject } from '../helpers/flatten-object';
+import Header from '../../components/header/header';
+import Navbar from '../../components/navbar/navbar';
+import UploadFormOne from '../../components/upload/upload-form-one';
+import UploadFormTwo from '../../components/upload/upload-form-two';
+import UploadFormThree from '../../components/upload/upload-form-three';
+import UploadSuccess from '../../components/upload/upload-success';
+import Modal from '../../components/modal/modal';
+import Studio from '../../types/studios';
+import { flattenObject } from '../../helpers/flatten-object';
+import './upload-page.css';
 
 const UploadPage = () => {
     const [showModel, setShowModal] = useState<boolean>(false);
@@ -123,8 +124,8 @@ const UploadPage = () => {
     return (
         <>
             <Navbar />
-            <div id='page' className='h-full max-w-md p-0 mx-auto'>
-                <div id='page__card' className='px-11'>
+            <div id='upload-page' className='h-full max-w-md p-0 mx-auto'>
+                <div id='upload-page__card' className='px-11'>
                     <Header subheading='Upload a Studio' />
                     {isUploaded ? (
                         <>
@@ -149,7 +150,7 @@ const UploadPage = () => {
                         </>
                     )}
                 </div>
-                <div id='page__card--shadow'></div>
+                <div id='upload-page__card--shadow'></div>
             </div>
         </>
     );

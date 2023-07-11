@@ -1,9 +1,18 @@
 .MuiAutocomplete-root {
-  width: 100% !important;
-  background: white;
-  border-radius: 100px;
+    width: 50% !important;
+    margin: 0 auto;
+    background: white;
+    border-radius: 100px;
 }
 
 fieldset {
-  border: none !important;
+    border: none !important;
+}
+
+/* Medium devices (821px and up) */
+@media (min-width: 821px) {
+    .MuiAutocomplete-root {
+        width: 50% !important;
+        margin: 0 auto;
+    }
 }

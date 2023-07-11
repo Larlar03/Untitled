@@ -29,11 +29,11 @@ const Modal = (props: Props) => {
                 </div>
                 <div className='modal__bottom'>
                     <button onClick={() => props.setShowModal(false)}>
-                        <XCircleIcon className='h-8 w-8 text-error-success-crimson hover:text-white' />
+                        <XCircleIcon className='h-10 w-10 text-error-success-crimson hover:text-white' />
                     </button>
                     {/* logic to procced to api call */}
                     <button onClick={() => props.setShowModal(false)}>
-                        <CheckCircleIcon className='h-8 w-8 text-error-success-malachite hover:text-white' />
+                        <CheckCircleIcon className='h-10 w-10 text-error-success-malachite hover:text-white' />
                     </button>
                 </div>
             </div>
