@@ -23,11 +23,11 @@ const studioRouter = require('./routers/studios');
 
 const initialiseData = async (collection) => {
 	try {
-		const convertedStudios = await convertLogosToBinary(studios);
-		const result = await insertDataToDb(collection, convertedStudios);
 		console.log('Initialising db data');
+		const convertedStudios = await convertLogosToBinary(studios);
+		insertDataToDb(collection, convertedStudios);
 	} catch (error) {
-		console.error('Error inserting data:', error);
+		console.error('Error inserting data:', error.message);
 	}
 };
 
@@ -43,7 +43,7 @@ MongoClient.connect(process.env.MONGODB_URI, {
 		// Setting routes
 		app.use('/studios', studios);
 
-		// Inserting data in the mongo docker container db
+		// Inserting data into the mongo docker container db
 		initialiseData(studioCollection);
 	})
 	.catch('Error conecting to db:', console.err);
