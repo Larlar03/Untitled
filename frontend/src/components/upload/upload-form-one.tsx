@@ -5,7 +5,6 @@ import regions from '../../constants/regions';
 import CitiesRegion from '../../types/cities-regions';
 import countries from '../../constants/countries';
 import './upload-form.css';
-import Studio from '../../types/studios';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;

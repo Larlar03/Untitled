@@ -5,7 +5,7 @@ import './upload-form.css';
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeServiceData: (e: any) => void;
-    submitForm: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const UploadForm = (props: Props) => {
@@ -31,7 +31,12 @@ const UploadForm = (props: Props) => {
             </div>
             <div className='bottom flex justify-between w-full'>
                 <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
-                <CtaButton className='w-2/5' text='Upload' handleClick={props.submitForm} type='button' />
+                <CtaButton
+                    className='w-2/5'
+                    text='Upload'
+                    handleClick={(e: React.MouseEvent<HTMLButtonElement>) => props.onSubmit(e)}
+                    type='button'
+                />
             </div>
         </form>
     );

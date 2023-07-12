@@ -2,10 +2,14 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import UploadFormThree from '../upload-form-three';
 import Services from '../../../constants/services';
+import { MouseEvent } from 'react';
 
 const mockStoreServiceData = jest.fn();
 const mockGoToFormPage = jest.fn();
-const mockSubmitForm = jest.fn();
+const mockSubmitForm = jest.fn(function (e: MouseEvent<HTMLButtonElement>): void {
+    e.preventDefault();
+    throw new Error('Function not implemented.');
+});
 
 describe('Upload Form Three', () => {
     beforeEach(() => {
@@ -14,7 +18,7 @@ describe('Upload Form Three', () => {
                 <UploadFormThree
                     goToFormPage={mockGoToFormPage}
                     storeServiceData={mockStoreServiceData}
-                    submitForm={mockSubmitForm}
+                    onSubmit={mockSubmitForm}
                 />
             </Router>
         );

@@ -85,6 +85,10 @@ const UploadPage = () => {
         const flattenedStudioObj = flattenObject(newStudio);
         const emptyFieldsArr: string[] = [];
 
+        delete flattenedStudioObj.phone_number;
+        delete flattenedStudioObj.instagram;
+        delete flattenedStudioObj.facebook;
+
         const nsKeys = Object.keys(flattenedStudioObj);
         const nsValues = Object.values(flattenedStudioObj);
 
@@ -95,30 +99,36 @@ const UploadPage = () => {
         if (emptyFieldsArr.length > 0) {
             const fields = emptyFieldsArr.join(', ');
             throw new Error(`The following fields are empty: ${fields}`);
+        } else {
+            uploadForm();
         }
-
-        return;
     };
 
-    const submitForm = async () => {
+    const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         try {
             validateForm();
         } catch (err: any) {
             setErrorMessage(err.message);
             setShowModal(true);
-        } finally {
-            axios
-                .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .then(() => {
-                    setIsUploaded(true);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
         }
+    };
+
+    const uploadForm = async () => {
+        console.log('UPLOADING FORM');
+        setShowModal(false);
+        console.log('SEVICES', newStudio);
+        return axios
+            .post(`${import.meta.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
+            .then((response) => {
+                console.log(response.data);
+            })
+            .then(() => {
+                setIsUploaded(true);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -143,7 +153,7 @@ const UploadPage = () => {
                                 <UploadFormThree
                                     goToFormPage={goToFormPage}
                                     storeServiceData={storeServiceData}
-                                    submitForm={submitForm}
+                                    onSubmit={onSubmit}
                                 />
                             )}
                             {showModel && <Modal setShowModal={setShowModal} message={errorMessage} />}
