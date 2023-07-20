@@ -17,7 +17,7 @@ const App = () => {
     const getStudios = async (location: string | undefined, services: string[]) => {
         setLoading(true);
         axios
-            .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/services/`, {
+            .get(`${process.env.VITE_STUDIOS_API}/${location}/services/`, {
                 params: {
                     services
                 }
