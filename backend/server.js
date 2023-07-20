@@ -25,7 +25,7 @@ MongoClient.connect(process.env.MONGODB_URI, {
 
 		app.use('/studios', studioRouter);
 	})
-	.catch('Error conecting to db:', console.err);
+	.catch('Error connecting to db:', console.err);
 
 app.listen(3000, function () {
 	console.log(`Listening on this port: ${this.address().port}`);
