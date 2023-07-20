@@ -22,10 +22,10 @@ const Modal = (props: Props) => {
 
     //render the modal JSX in the portal div.
     return ReactDom.createPortal(
-        <div className='modal-container' ref={modalRef} onClick={closeModal}>
+        <div className='modal-container' ref={modalRef} onClick={closeModal} data-testid='modal'>
             <div className='modal'>
                 <div className='modal__top'>
-                    <p>{props.message && props.message}</p>
+                    <p data-testid='modal-message'>{props.message && props.message}</p>
                 </div>
                 <div className='modal__bottom'>
                     <button onClick={() => props.setShowModal(false)}>
