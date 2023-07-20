@@ -9,25 +9,8 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
-// Import studio data
-const studios = require('./mocks/mock_db/aeriform.studios.json');
-
-// Import helpers
-const convertLogosToBinary = require('./helpers/convert-logos');
-const insertDataToDb = require('./helpers/insert-data');
-
-// Import router
+// router
 const newRouter = require('./router.js');
-
-const initialiseData = async (collection) => {
-	try {
-		const convertedStudios = await convertLogosToBinary(studios);
-		const result = await insertDataToDb(collection, convertedStudios);
-		console.log('Initialising db data');
-	} catch (error) {
-		console.error('Error inserting data:', error);
-	}
-};
 
 MongoClient.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
@@ -38,14 +21,10 @@ MongoClient.connect(process.env.MONGODB_URI, {
 		const studioCollection = db.collection('studios');
 		const studioRouter = newRouter(studioCollection);
 
-		// Setting routes
 		app.use('/studios', studioRouter);
-
-		// Inserting data in the mongo docker container db
-		initialiseData(studioCollection);
 	})
 	.catch('Error conecting to db:', console.err);
 
 app.listen(3000, function () {
-	console.log(`Listening on port: ${this.address().port}`);
+	console.log(`Listening on this port: ${this.address().port}`);
 });
