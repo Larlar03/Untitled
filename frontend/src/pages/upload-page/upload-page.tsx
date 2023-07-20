@@ -119,7 +119,7 @@ const UploadPage = () => {
         setShowModal(false);
         console.log('SEVICES', newStudio);
         return axios
-            .post(`${import.meta.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
+            .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
             .then((response) => {
                 console.log(response.data);
             })
