@@ -12,7 +12,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // router
-const newRouter = require('./router.js');
+const newRouter = require('./routers/studios');
 
 MongoClient.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
@@ -21,7 +21,7 @@ MongoClient.connect(process.env.MONGODB_URI, {
 	.then((client) => {
 		const db = client.db();
 		const studioCollection = db.collection('studios');
-		const studios = studioRouter(studioCollection);
+		const studioRouter = newRouter(studioCollection);
 
 		app.use('/studios', studioRouter);
 	})
