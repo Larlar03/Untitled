@@ -115,14 +115,8 @@ const UploadPage = () => {
     };
 
     const uploadForm = async () => {
-        console.log('UPLOADING FORM');
-        setShowModal(false);
-        console.log('SEVICES', newStudio);
         return axios
             .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
-            .then((response) => {
-                console.log(response.data);
-            })
             .then(() => {
                 setIsUploaded(true);
             })
