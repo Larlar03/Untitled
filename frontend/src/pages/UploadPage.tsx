@@ -2,7 +2,7 @@ import Header from '../components/header/header';
 import Navbar from '../components/navbar/navbar';
 import UploadForm from '../components/upload/upload-form';
 
-const UploadPage = (props: any) => {
+const UploadPage = () => {
     return (
         <>
             <Navbar />

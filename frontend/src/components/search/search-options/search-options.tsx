@@ -16,9 +16,9 @@ const SearchOptions = (props: Props) => {
     const handleOptionClick = (event: React.MouseEvent<HTMLElement>): void => {
         const selection = event.currentTarget.textContent;
 
-        setOptions((prev: string[]) => {
+        setOptions((prev: any) => {
             if (prev.includes(selection)) {
-                return prev.filter((option) => option !== selection);
+                return prev.filter((option: any) => option !== selection);
             } else {
                 return [...prev, selection];
             }

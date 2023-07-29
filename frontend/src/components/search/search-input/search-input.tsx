@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -15,6 +16,7 @@ const SearchInput = (props: Props) => {
     const [searchOptions, setSearchOptions] = useState<CitiesRegion[]>([]);
 
     useEffect(() => {
+        // @ts-ignore
         setSearchOptions(regions.concat(cities));
     }, []);
 
@@ -22,6 +24,7 @@ const SearchInput = (props: Props) => {
         <div>
             <Autocomplete
                 data-testid='autocomplete'
+                // @ts-ignore
                 onChange={(event, label) => props.selectLocation(label)}
                 disablePortal
                 options={searchOptions}
