@@ -27,20 +27,36 @@
             "version": "detect"
         }
     },
-    "plugins": ["jsx-a11y", "react-hooks", "import", "react", "react-refresh"],
+    "plugins": [
+        "jsx-a11y",
+        "react-hooks",
+        "import",
+        "react",
+        "react-refresh"
+    ],
     "overrides": [
         {
-            "files": ["**/__tests__/**/*.test.js"],
-            "extends": ["plugin:testing-library/react", "plugin:jest/recommended"],
+            "files": [
+                "**/__tests__/**/*.test.js"
+            ],
+            "extends": [
+                "plugin:testing-library/react",
+                "plugin:jest/recommended"
+            ],
             "env": {
                 "jest": true
             },
-            "plugins": ["testing-library", "jest"],
+            "plugins": [
+                "testing-library",
+                "jest"
+            ],
             "rules": {}
         }
     ],
     "rules": {
         "react-refresh/only-export-components": "warn",
-        "react/jsx-key": 0
+        "react/jsx-key": 0,
+        "@typescript-eslint/no-explicit-any": "off",
+        "react-hooks/exhaustive-deps": "off"
     }
 }

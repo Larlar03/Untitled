@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import './cta-button.css';
 
 const CtaButton = (props: any) => {
