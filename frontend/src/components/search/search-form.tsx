@@ -3,7 +3,6 @@ import CtaButton from '../buttons/cta-button/cta-button';
 import SearchInput from './search-input/search-input';
 import SearchOptions from './search-options/search-options';
 import services from '../../constants/services.ts';
-import CitiesRegion from '../../types/cities-regions.ts';
 
 interface Props {
     getStudios: (location: string | undefined, services: string[]) => void;
