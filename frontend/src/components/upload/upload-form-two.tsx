@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import './upload-form.css';
@@ -13,8 +14,12 @@ const UploadForm = (props: Props) => {
     const [validFacebook, setValidFacebook] = useState<boolean>(true);
 
     const validate = () => {
+        // @ts-ignore
         const websiteInput = document.getElementById('social_links.website').value;
+        // @ts-ignore
         const instagramInput = document.getElementById('social_links.instagram').value;
+        // @ts-ignore
+
         const facebookInput = document.getElementById('social_links.facebook').value;
 
         const urlPattern = new RegExp(
