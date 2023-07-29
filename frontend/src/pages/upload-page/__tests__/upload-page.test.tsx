@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, waitFor, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import UploadPage from '../upload-page';

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import ReactDom from 'react-dom';
-import { XCircleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import { XCircleIcon } from '@heroicons/react/24/outline';
 import './modal.css';
 
 interface Props {

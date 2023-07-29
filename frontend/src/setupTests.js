@@ -3,7 +3,6 @@ import '@testing-library/jest-dom';
 
 // Import required testing libraries
 import '@testing-library/jest-dom/extend-expect';
-import { createPortal } from 'react-dom';
 
 // Create a mock portal container element
 const portalContainer = document.createElement('div');
@@ -13,7 +12,7 @@ document.body.appendChild(portalContainer);
 // Mock ReactDom.createPortal to render components into the portal container
 jest.mock('react-dom', () => ({
     ...jest.requireActual('react-dom'),
-    createPortal: (node, container) => {
+    createPortal: (node) => {
         return node;
     }
 }));
