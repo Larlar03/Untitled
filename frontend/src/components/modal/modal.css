@@ -1,0 +1,64 @@
+#portal {
+    position: fixed;
+    z-index: 20;
+}
+
+#portal .modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-container .modal {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background: var(--cosmic-cobalt);
+    z-index: 1;
+    width: 370px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    position: relative;
+    animation: animate 0.3s;
+}
+
+.modal__top {
+    width: 100%;
+    height: 75%;
+    padding: 15px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.modal__top p {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.modal__bottom {
+    height: 25%;
+}
+
+.modal__bottom button {
+    cursor: pointer;
+    margin: 0 8px;
+}
+@keyframes animate {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}

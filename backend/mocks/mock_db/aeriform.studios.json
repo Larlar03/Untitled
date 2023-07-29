@@ -1,135 +1,116 @@
 [
-  {
-    "name": "AYC Studios",
-    "phone_number": "07507797220",
-    "email_address": "aerialyogicircus@gmail.com",
-    "location": {
-      "address": "Unit 10B, Robins Business Park, Bagnall St, West Bromwich",
-      "post_code": "DY4 7BS",
-      "city": "Birmingham",
-      "region": "West Midlands",
-      "country": "England"
-    },
-    "social_links": {
-      "website": "www.aycstudios.co.uk",
-      "instagram": "www.instagram.com/aycstudios",
-      "facebook": "www.facebook.com/AYcircus"
-    },
-    "logo": "./mocks/mock_assets/studio-logos/ayc-studios.png",
-    "services": [
-      "Pole Fitness",
-      "PoleDance",
-      "Aerial Silks"
-    ]
-  },
-  {
-    "name": "Body Synergy",
-    "phone_number": "07507797220",
-    "email_address": "bodysynergymanagement@gmail.com",
-    "location": {
-      "address": "One Fitness Academy, 509 Aldrige Road, Great Barr",
-      "post_code": "B44 8NA",
-      "city": "Birmingham",
-      "region": "West Midlands",
-      "country": "England"
-    },
-    "social_links": {
-      "website": "www.bodysynergy.co.uk/",
-      "instagram": "www.instagram.com/bodysynergypole",
-      "facebook": "www.facebook.com/poledancebirmingham"
-    },
-    "logo": "./mocks/mock_assets/studio-logos/body-synergy.png",
-    "services": [
-      "Pole Fitness",
-      "PoleDance"
-    ]
-  },
-  {
-    "name": "K Pole Solihull",
-    "phone_number": "07800793337",
-    "email_address": "kpoleshirley@hotmail.com",
-    "location": {
-      "address": "YogaHaven, Radway Road",
-      "post_code": "B90 4NR",
-      "city": "Birmingham",
-      "region": "West Midlands",
-      "country": "England"
-    },
-    "social_links": {
-      "website": "www.kpole.co.uk",
-      "instagram": "www.instagram.com/kpole_danceandfitness",
-      "facebook": "www.facebook.com/KpoleShirley"
-    },
-    "logo": "./mocks/mock_assets/studio-logos/k-pole.png",
-    "services": [
-      "Pole Fitness",
-      "PoleDance"
-    ]
-  },
-  {
-    "name": "K Pole Cradely Heath",
-    "phone_number": "07800793337",
-    "email_address": "kpoleshirley@hotmail.com",
-    "location": {
-      "address": "5 Market Square, Cradley Heath",
-      "post_code": "B64 5HH",
-      "city": "Birmingham",
-      "region": "West Midlands",
-      "country": "England"
-    },
-    "social_links": {
-      "website": "www.kpole.co.uk",
-      "instagram": "www.instagram.com/kpole_danceandfitness",
-      "facebook": "www.facebook.com/KpoleShirley"
-    },
-    "logo": "./mocks/mock_assets/studio-logos/k-pole.png",
-    "services": [
-      "Pole Fitness",
-      "PoleDance"
-    ]
-  },
-  {
-    "name": "Siren Asylum",
-    "phone_number": "07784967677",
-    "email_address": "info@sirenasylum.com",
-    "location": {
-      "address": "24 Missouri Ave",
-      "post_code": "M50 2NP",
-      "city": "Manchester",
-      "region": "North West",
-      "country": "England"
-    },
-    "social_links": {
-      "website": "www.sirenasylum.co.uk",
-      "instagram": "www.instagram.com/sirenasylumfitness",
-      "facebook": "www.facebook.com/sirenasylum"
-    },
-    "logo": "./mocks/mock_assets/studio-logos/siren-asylum.png",
-    "services": [
-      "Aerial Hoop",
-      "Aerial Silks"
-    ]
-  },
-  {
-    "name": "GFFDamian Dance Studio ",
-    "phone_number": "01618321697",
-    "email_address": "gffdamiandancestudio@gmail.com",
-    "location": {
-      "address": "109-113 Corporation St",
-      "post_code": "M4 4DX",
-      "city": "Manchester",
-      "region": "North West",
-      "country": "England"
-    },
-    "social_links": {
-      "website": "www.gffdamiandancestudio.com/",
-      "instagram": "www.instagram.com/gffdamiandancestudio/",
-      "facebook": "www.facebook.com/gffdamiandancestudio/"
-    },
-    "logo": "./mocks/mock_assets/studio-logos/gff-damian-dance-studio.png",
-    "services": [
-      "Aerial Hoop",
-      "Aerial Silks"
-    ]
-  }
+	{
+		"name": "AYC Studios",
+		"phone_number": "07507797220",
+		"email_address": "aerialyogicircus@gmail.com",
+		"location": {
+			"address": "Unit 10B, Robins Business Park, Bagnall St, West Bromwich",
+			"post_code": "DY4 7BS",
+			"city": "Birmingham",
+			"region": "West Midlands",
+			"country": "England"
+		},
+		"social_links": {
+			"website": "www.aycstudios.co.uk",
+			"instagram": "www.instagram.com/aycstudios",
+			"facebook": "www.facebook.com/AYcircus"
+		},
+		"logo": "./mocks/mock_assets/studio-logos/ayc-studios.png",
+		"services": ["Pole Fitness", "PoleDance", "Aerial Silks"]
+	},
+	{
+		"name": "Body Synergy",
+		"phone_number": "07507797220",
+		"email_address": "bodysynergymanagement@gmail.com",
+		"location": {
+			"address": "One Fitness Academy, 509 Aldrige Road, Great Barr",
+			"post_code": "B44 8NA",
+			"city": "Birmingham",
+			"region": "West Midlands",
+			"country": "England"
+		},
+		"social_links": {
+			"website": "www.bodysynergy.co.uk/",
+			"instagram": "www.instagram.com/bodysynergypole",
+			"facebook": "www.facebook.com/poledancebirmingham"
+		},
+		"logo": "./mocks/mock_assets/studio-logos/body-synergy.png",
+		"services": ["Pole Fitness", "PoleDance"]
+	},
+	{
+		"name": "K Pole Solihull",
+		"phone_number": "07800793337",
+		"email_address": "kpoleshirley@hotmail.com",
+		"location": {
+			"address": "YogaHaven, Radway Road",
+			"post_code": "B90 4NR",
+			"city": "Birmingham",
+			"region": "West Midlands",
+			"country": "England"
+		},
+		"social_links": {
+			"website": "www.kpole.co.uk",
+			"instagram": "www.instagram.com/kpole_danceandfitness",
+			"facebook": "www.facebook.com/KpoleShirley"
+		},
+		"logo": "./mocks/mock_assets/studio-logos/k-pole.png",
+		"services": ["Pole Fitness", "PoleDance"]
+	},
+	{
+		"name": "K Pole Cradely Heath",
+		"phone_number": "07800793337",
+		"email_address": "kpoleshirley@hotmail.com",
+		"location": {
+			"address": "5 Market Square, Cradley Heath",
+			"post_code": "B64 5HH",
+			"city": "Birmingham",
+			"region": "West Midlands",
+			"country": "England"
+		},
+		"social_links": {
+			"website": "www.kpole.co.uk",
+			"instagram": "www.instagram.com/kpole_danceandfitness",
+			"facebook": "www.facebook.com/KpoleShirley"
+		},
+		"logo": "./mocks/mock_assets/studio-logos/k-pole.png",
+		"services": ["Pole Fitness", "PoleDance"]
+	},
+	{
+		"name": "Siren Asylum",
+		"phone_number": "07784967677",
+		"email_address": "info@sirenasylum.com",
+		"location": {
+			"address": "24 Missouri Ave",
+			"post_code": "M50 2NP",
+			"city": "Manchester",
+			"region": "North West",
+			"country": "England"
+		},
+		"social_links": {
+			"website": "www.sirenasylum.co.uk",
+			"instagram": "www.instagram.com/sirenasylumfitness",
+			"facebook": "www.facebook.com/sirenasylum"
+		},
+		"logo": "./mocks/mock_assets/studio-logos/siren-asylum.png",
+		"services": ["Aerial Hoop", "Aerial Silks"]
+	},
+	{
+		"name": "GFFDamian Dance Studio ",
+		"phone_number": "01618321697",
+		"email_address": "gffdamiandancestudio@gmail.com",
+		"location": {
+			"address": "109-113 Corporation St",
+			"post_code": "M4 4DX",
+			"city": "Manchester",
+			"region": "North West",
+			"country": "England"
+		},
+		"social_links": {
+			"website": "www.gffdamiandancestudio.com/",
+			"instagram": "www.instagram.com/gffdamiandancestudio/",
+			"facebook": "www.facebook.com/gffdamiandancestudio/"
+		},
+		"logo": "./mocks/mock_assets/studio-logos/gff-damian-dance-studio.png",
+		"services": ["Aerial Hoop", "Aerial Silks"]
+	}
 ]

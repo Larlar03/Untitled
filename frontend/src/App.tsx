@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import './App.css';
 import axios from 'axios';
-import HomePage from './pages/HomePage';
-import ResultsPage from './pages/ResultsPage';
-import UploadPage from './pages/UploadPage';
-import LogInPage from './pages/LogInPage';
+import HomePage from './pages/home-page/home-page';
+import ResultsPage from './pages/results-page/results-page';
+import UploadPage from './pages/upload-page/upload-page';
 import Studio from './types/studios';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from './pages/error-page/error-page';
+
 //Test
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
@@ -15,10 +14,10 @@ const App = () => {
 
     const navigate = useNavigate();
 
-    const getStudios = (location: string | undefined, services: string[]) => {
+    const getStudios = async (location: string | undefined, services: string[]) => {
         setLoading(true);
         axios
-            .get(`${import.meta.env.VITE_STUDIOS_API}/${location}/services/`, {
+            .get(`${process.env.VITE_STUDIOS_API}/${location}/services/`, {
                 params: {
                     services
                 }
@@ -43,7 +42,6 @@ const App = () => {
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
             <Route path='/upload' element={<UploadPage />} />
-            <Route path='/login' element={<LogInPage />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>
     );

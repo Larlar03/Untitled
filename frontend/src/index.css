@@ -12,14 +12,14 @@
         height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
-
         --black: #000000;
-        --jacksons-purple: #241e92;
-        --purple-heart: #5432d3;
-        --cornflower-blue: #7b6cf6;
-        --mauve: #c6a3ff;
+        --cosmic-cobalt: #241e92;
+        --iris: #5432d3;
+        --medium-slate-blue: #7b6cf6;
+        --pale-violet: #c6a3ff;
         --gallery: #eeeeee;
         --alabaster: #f7f7f7;
+        --crimson: #e01039;
     }
 
     body {

@@ -1,0 +1,67 @@
+{
+    "git.autofetch": true,
+    "files.associations": {
+        ".env*": "dotenv"
+    },
+    // editor styling
+    "workbench.colorTheme": "Horizon Default",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 22,
+    "debug.console.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    // terminal
+    "workbench.colorCustomizations": {
+        "terminal.ansiBlack": "#1D2021",
+        "terminal.ansiBrightBlack": "#665C54",
+        "terminal.ansiBrightBlue": "#5cdfa8",
+        "terminal.ansiBrightCyan": "#96cafd",
+        "terminal.ansiBrightGreen": "#5cdfa8",
+        "terminal.ansiBrightMagenta": "#8F4673",
+        "terminal.ansiBrightRed": "#c6c4fc",
+        "terminal.ansiBrightWhite": "#FDF4C1",
+        "terminal.ansiBrightYellow": "#FAC03B",
+        "terminal.ansiBlue": "#00a1f9",
+        "terminal.ansiCyan": "#8BA59B",
+        "terminal.ansiGreen": "#95C085",
+        "terminal.ansiMagenta": "#8F4673",
+        "terminal.ansiRed": "#FB543F",
+        "terminal.ansiWhite": "#A89984",
+        "terminal.ansiYellow": "#FAC03B",
+    },
+    // markdown
+    "[markdown]": {
+        "editor.wordWrap": "on"
+    },
+    "markdown.preview.scrollEditorWithPreview": true,
+    "markdown.preview.scrollPreviewWithEditor": true,
+    // prettier
+    "prettier.singleQuote": true,
+    // indent-rainbow
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.lightIndicatorStyleLineWidth": 1,
+    "indentRainbow.colors": [
+        "rgba(134,139,228,0.7)",
+        "rgba(164,132,201,0.7)",
+        "rgba(202,141,188,0.7)",
+        "rgba(238,147,180,0.7)",
+        "rgba(255,158,181,0.7)"
+    ],
+    // file defauly formatters
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+}

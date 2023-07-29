@@ -1,3 +1,15 @@
+form {
+    margin-top: 3rem;
+    height: 71%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.bottom {
+    margin-top: 20px;
+}
+
 section {
     width: 100%;
     display: flex;
@@ -9,14 +21,27 @@ section {
     width: 100%;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     width: 100%;
     border: 1px solid var(--gallery);
     border-radius: 10px;
     padding: 6px;
 }
 
-.password-icon {
-    width: 22px;
-    margin: auto;
+#form-check-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-row-gap: 0.65rem;
+}
+
+input[type='checkbox'] {
+    accent-color: var(--medium-slate-blue);
+}
+
+@media (min-width: 768px) {
+    .bottom {
+        margin-top: 0;
+    }
 }

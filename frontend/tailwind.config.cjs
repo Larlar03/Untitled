@@ -1,24 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    important: true,
     theme: {
         extend: {
-            spacing: {
-                529: '33rem'
-            },
-            height: {
-                670: '41.8rem'
-            },
             fontFamily: {
                 spacemono: ['"Space Mono"', 'monospace'],
                 spacegrotesk: ['"Space Grotesk"', 'sans-serif']
             },
             colors: {
                 main: {
-                    'jacksons-purple': '#241E92',
-                    'purple-heart': '#5432D3',
-                    'cornflower-blue': '#7B6CF6',
-                    mauve: '#C6A3FF'
+                    'cosmic-cobalt': '#241E92',
+                    iris: '#5432D3',
+                    'medium-slate-blue': '#7B6CF6',
+                    'pale-violet': '#C6A3FF'
+                },
+                error: {
+                    crimson: '#e01039'
+                },
+                success: {
+                    malachite: '#10e078'
                 },
                 greyscale: {
                     100: '#1A1A1A',

@@ -1,11 +1,11 @@
-import Header from '../components/header/header';
-import Results from '../components/results/results';
-import Navbar from '../components/navbar/navbar';
-import NoResults from '../components/error/no-results/no-results';
-import Studio from '../types/studios';
+import Header from '../../components/header/header';
+import Results from '../../components/results/results';
+import Navbar from '../../components/navbar/navbar';
+import NoResults from '../../components/error/no-results/no-results';
+import Studio from '../../types/studios';
 
 interface Props {
-    results?: Studio[];
+    results?: Studio[] | undefined;
 }
 
 const ResultsPage = (props: Props) => {

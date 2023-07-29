@@ -1,6 +1,5 @@
 {
-    "collectCoverageFrom": ["**/*.{js,jsx,ts,tsx}"],
-    "coveragePathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/src/main.tsx", "<rootDir>/src/types"],
+    "collectCoverageFrom": ["**/*.{ts,tsx}"],
     "coverageThreshold": {
         "global": {
             "branches": 80,
@@ -9,5 +8,6 @@
             "statements": 80
         }
     },
-    "setupFilesAfterEnv": "./src/setupTests.js"
+    "setupFilesAfterEnv": ["./src/setupTests.js"],
+    "transformIgnorePatterns": ["node_modules/(?!axios)"]
 }

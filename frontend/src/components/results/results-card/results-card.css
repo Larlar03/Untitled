@@ -14,7 +14,10 @@
 }
 
 .card {
-    border: 1px solid var(--jacksons-purple);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    border: 1px solid var(--cosmic-cobalt);
     background: var(--alabaster);
     position: absolute;
     z-index: 10;
@@ -23,59 +26,59 @@
 }
 
 .card__shadow {
-    background: var(--cornflower-blue);
+    background: var(--medium-slate-blue);
     position: relative;
     bottom: -2.5%;
     left: 3.5%;
 }
 
-.card__heading h3 {
+.top__heading h3 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--cornflower-blue);
+    color: var(--medium-slate-blue);
 }
 
-.card__heading h3:hover {
-    color: var(--jacksons-purple);
+.top__heading h3:hover {
+    color: var(--cosmic-cobalt);
 }
 
-.card__heading h4 {
+.top__heading h4 {
     font-size: 1.14rem;
-    color: var(--jacksons-purple);
+    color: var(--cosmic-cobalt);
 }
 
-.card__address {
+.top__address {
     font-size: 0.87rem;
     margin: 10px 0;
 }
 
-.card__image-container {
-    margin: 5px 7px;
+.middle__image-container {
+    margin: 0 7px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 280px;
 }
 
-.card_links--instagram,
-.card_links--facebook {
+.bottom__links--instagram,
+.bottom__links--facebook {
     height: 6px;
     width: 6px;
-    color: var(--cornflower-blue);
+    color: var(--medium-slate-blue);
 }
 
-.card_links--instagram:hover,
-.card_links--facebook:hover {
-    color: var(--jacksons-purple);
+.bottom__links--instagram:hover,
+.bottom__links--facebook:hover, .bottom__contact a:hover {
+    color: var(--cosmic-cobalt);
     cursor: pointer;
 }
 
-.card__contact {
+.bottom__contact {
     padding: 10px 0;
     font-size: 0.87rem;
 }
 
-.card__contact a {
+.bottom__contact a {
     display: block;
 }
 
@@ -123,15 +126,15 @@
         width: 375px;
     }
 
-    .card__heading h3 {
+    .top__heading h3 {
         font-size: 2rem;
     }
 
-    .card__heading h4 {
+    .top__heading h4 {
         font-size: 1.5rem;
     }
 
-    .card__address {
+    .top__address {
         font-size: 0.87rem;
         margin: 10px 0;
     }

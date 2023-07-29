@@ -14,7 +14,7 @@ describe('No Results', () => {
     it('renders h1', () => {
         const h1 = screen.getByRole('heading', { level: 1 });
         expect(h1).toBeVisible();
-        expect(h1).toHaveTextContent('There are 0 results');
+        expect(h1).toHaveTextContent('0 results');
     });
 
     it('renders svg image', () => {
