@@ -13,11 +13,11 @@ const HomePage = (props: Props) => {
     return (
         <>
             <Navbar />
-            <div id='home-page' className='h-full max-w-md p-0 my-auto mx-auto mt-2.5'>
+            <div id='home-page' className='h-full max-w-md p-0 my-auto mx-auto mt-2.5 ipad:max-w-xl'>
                 <div id='home-page__card'>
                     <Header subheading='Aerial, pole & fitness classes near you.' />
                     {props.isLoading && (
-                        <div className='h-4/6 w-full flex justify-center items-center'>
+                        <div className='lg:h-4/6 w-full flex justify-center items-center'>
                             <PulseLoader
                                 color='var(--pale-violet)'
                                 size={50}

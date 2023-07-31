@@ -13,7 +13,7 @@ interface Props {
 
 const ResultsNav = (props: Props) => {
     return (
-        <div className='w-7/12 flex flex-row flex-nowrap justify-between mt-10 mb-4 mx-auto text-xl md:w-80 md:font-bold'>
+        <div className='w-7/12 flex flex-row flex-nowrap justify-between mt-10 mb-4 mx-auto text-xl lg:w-80 lg:font-bold'>
             <AdjustmentsHorizontalIcon className='h-6 w-6 text-cosmic-cobalt hover:text-main-iris cursor-pointer' />
             <span className='w-full flex flex-row flex-nowrap justify-center gap-4'>
                 <ArrowLeftCircleIcon
