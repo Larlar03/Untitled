@@ -9,14 +9,13 @@ import CitiesRegion from '../../../types/cities-regions.ts';
 import './search-input.css';
 
 interface Props {
-    selectLocation: (label: string) => void;
+    selectLocation: (label: CitiesRegion | null) => void;
 }
 
 const SearchInput = (props: Props) => {
     const [searchOptions, setSearchOptions] = useState<CitiesRegion[]>([]);
 
     useEffect(() => {
-        // @ts-ignore
         setSearchOptions(regions.concat(cities));
     }, []);
 
@@ -24,8 +23,7 @@ const SearchInput = (props: Props) => {
         <div>
             <Autocomplete
                 data-testid='autocomplete'
-                // @ts-ignore
-                onChange={(event, label) => props.selectLocation(label)}
+                onChange={(_event, label) => props.selectLocation(label)}
                 disablePortal
                 options={searchOptions}
                 groupBy={(searchOption: any) => searchOption.type}
