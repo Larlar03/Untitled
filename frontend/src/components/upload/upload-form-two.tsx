@@ -2,10 +2,12 @@
 import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import './upload-form.css';
+import Studio from '../../types/studios';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeNewStudioData: (e: any) => void;
+    newStudio: Studio;
 }
 
 const UploadForm = (props: Props) => {
@@ -62,6 +64,7 @@ const UploadForm = (props: Props) => {
                             id='social_links.website'
                             name='social_links.website'
                             onChange={props.storeNewStudioData}
+                            value={props.newStudio.social_links?.website}
                         />
                     </span>
                 </section>
@@ -75,6 +78,7 @@ const UploadForm = (props: Props) => {
                             id='social_links.instagram'
                             name='social_links.instagram'
                             onChange={props.storeNewStudioData}
+                            value={props.newStudio.social_links?.instagram}
                         />
                     </span>
                 </section>
@@ -88,6 +92,7 @@ const UploadForm = (props: Props) => {
                             id='social_links.facebook'
                             name='social_links.facebook'
                             onChange={props.storeNewStudioData}
+                            value={props.newStudio.social_links?.facebook}
                         />
                     </span>
                 </section>

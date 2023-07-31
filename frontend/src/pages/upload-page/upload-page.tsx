@@ -138,15 +138,24 @@ const UploadPage = () => {
                     ) : (
                         <>
                             {formPage === 1 && (
-                                <UploadFormOne goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
+                                <UploadFormOne
+                                    goToFormPage={goToFormPage}
+                                    storeNewStudioData={storeNewStudioData}
+                                    newStudio={newStudio}
+                                />
                             )}
                             {formPage === 2 && (
-                                <UploadFormTwo goToFormPage={goToFormPage} storeNewStudioData={storeNewStudioData} />
+                                <UploadFormTwo
+                                    goToFormPage={goToFormPage}
+                                    storeNewStudioData={storeNewStudioData}
+                                    newStudio={newStudio}
+                                />
                             )}
                             {formPage === 3 && (
                                 <UploadFormThree
                                     goToFormPage={goToFormPage}
                                     storeServiceData={storeServiceData}
+                                    newStudio={newStudio}
                                     onSubmit={onSubmit}
                                 />
                             )}

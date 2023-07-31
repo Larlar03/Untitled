@@ -6,10 +6,12 @@ import regions from '../../constants/regions';
 import CitiesRegion from '../../types/cities-regions';
 import countries from '../../constants/countries';
 import './upload-form.css';
+import Studio from '../../types/studios';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeNewStudioData: (e: any) => void;
+    newStudio: Studio;
 }
 
 const UploadFormOne = (props: Props) => {
@@ -53,6 +55,7 @@ const UploadFormOne = (props: Props) => {
                             name='name'
                             onChange={props.storeNewStudioData}
                             autoComplete='off'
+                            value={props.newStudio.name}
                         />
                     </span>
                 </section>
@@ -61,7 +64,13 @@ const UploadFormOne = (props: Props) => {
                         <label htmlFor='phone_number'>
                             Phone Number {!validTelephone && <span className='text-error-crimson'>*</span>}
                         </label>
-                        <input type='tel' id='phone_number' name='phone_number' onChange={props.storeNewStudioData} />
+                        <input
+                            type='tel'
+                            id='phone_number'
+                            name='phone_number'
+                            onChange={props.storeNewStudioData}
+                            value={props.newStudio.phone_number}
+                        />
                     </span>
                     <span className='input-group'>
                         <label htmlFor='email_address'>
@@ -73,6 +82,7 @@ const UploadFormOne = (props: Props) => {
                             name='email_address'
                             onChange={props.storeNewStudioData}
                             autoComplete='off'
+                            value={props.newStudio.email_address}
                         />
                     </span>
                 </section>
@@ -85,6 +95,7 @@ const UploadFormOne = (props: Props) => {
                             name='location.address'
                             onChange={props.storeNewStudioData}
                             autoComplete='off'
+                            value={props.newStudio.location?.address}
                         />
                     </span>
                 </section>
@@ -97,6 +108,7 @@ const UploadFormOne = (props: Props) => {
                             name='location.post_code'
                             onChange={props.storeNewStudioData}
                             autoComplete='off'
+                            value={props.newStudio.location?.post_code}
                         />
                     </span>
                     <span className='input-group'>
@@ -106,6 +118,7 @@ const UploadFormOne = (props: Props) => {
                             className='form-select'
                             name='location.city'
                             onChange={props.storeNewStudioData}
+                            value={props.newStudio.location?.city}
                         >
                             <option defaultValue=''></option>
                             {cities.map((city: CitiesRegion, i) => {
@@ -126,6 +139,7 @@ const UploadFormOne = (props: Props) => {
                             className='form-select'
                             name='location.region'
                             onChange={props.storeNewStudioData}
+                            value={props.newStudio.location?.region}
                         >
                             <option defaultValue=''></option>
                             {regions.map((region: CitiesRegion, i) => {
@@ -144,6 +158,7 @@ const UploadFormOne = (props: Props) => {
                             className='form-select'
                             name='location.country'
                             onChange={props.storeNewStudioData}
+                            value={props.newStudio.location?.country}
                         >
                             <option defaultValue=''></option>
                             {countries.map((country: CitiesRegion, i) => {

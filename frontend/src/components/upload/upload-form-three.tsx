@@ -1,10 +1,12 @@
 import CtaButton from '../buttons/cta-button/cta-button';
 import Services from '../../constants/services';
 import './upload-form.css';
+import Studio from '../../types/studios';
 
 interface Props {
     goToFormPage: (pageNumber: number) => void;
     storeServiceData: (e: any) => void;
+    newStudio: Studio;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -21,6 +23,7 @@ const UploadForm = (props: Props) => {
                                 value={service}
                                 id='flexCheckDefault'
                                 onChange={props.storeServiceData}
+                                checked={props.newStudio.services?.includes(service)}
                             />
                             <label className='form-check__label ml-1.5' htmlFor='flexCheckDefault'>
                                 {service}

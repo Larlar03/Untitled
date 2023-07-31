@@ -3,6 +3,7 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import UploadFormThree from '../upload-form-three';
 import Services from '../../../constants/services';
 import { MouseEvent } from 'react';
+import Studio from '../../../types/studios';
 
 const mockStoreServiceData = jest.fn();
 const mockGoToFormPage = jest.fn();
@@ -19,6 +20,7 @@ describe('Upload Form Three', () => {
                     goToFormPage={mockGoToFormPage}
                     storeServiceData={mockStoreServiceData}
                     onSubmit={mockSubmitForm}
+                    newStudio={new Studio()}
                 />
             </Router>
         );
