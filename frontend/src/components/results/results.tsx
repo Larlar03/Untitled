@@ -45,8 +45,8 @@ const Results = (props: Props) => {
                 handlePrevClick={handlePrevClick}
             />
             {props.results && (
-                <div className='h-full w-full flex flex-row flex-nowrap justify-center'>
-                    <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-8'>
+                <div className='min-h-[650px] w-full flex flex-row flex-nowrap justify-center'>
+                    <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-16 sm:gap-8'>
                         {props.results?.length <= 2 && (
                             <ResultsCard
                                 cardPosition='center-card'

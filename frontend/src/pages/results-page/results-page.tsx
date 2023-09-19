@@ -17,7 +17,7 @@ const ResultsPage = (props: Props) => {
                 {props.results && props.results.length > 0 ? (
                     <Results results={props.results && props.results} />
                 ) : (
-                    <div className='h-full mt-12'>
+                    <div id='rp' className='h-full mt-12'>
                         <NoResults />
                     </div>
                 )}
