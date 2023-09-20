@@ -10,7 +10,7 @@ interface Props {
 
 const ResultsNav = (props: Props) => {
     return (
-        <div className='w-8/12 sm:w-3/12 mx-auto text-xl lg:w-80 sm:font-bold mt-8 mb-2 '>
+        <div className='w-8/12 sm:w-3/12 sm:font-bold mx-auto text-xl mt-8 mb-2 '>
             <span className='flex flex-row justify-between text-cosmic-cobalt'>
                 <ArrowSmallLeftIcon
                     onClick={props.handlePrevClick}

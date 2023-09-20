@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Studio from '../../../types/studios';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import './results-card.css';
 
 interface Props {
     studio: Studio;
@@ -21,15 +20,19 @@ const ResultsCard = (props: Props) => {
 
     return (
         <div
-            className={`w-full flex flex-col items-center p-4 ${!props.isActive ? 'scale-75' : 'scale-100'}`}
+            id='card-container'
+            className={`w-full flex flex-col items-center p-4 ${
+                !props.isActive ? 'scale-75 invisible lg:visible' : 'scale-100'
+            }`}
             data-testid={`${props.cardPosition}`}
         >
             {props.studio && (
                 <>
                     <div
+                        id='card'
                         className={`${
                             !props.isActive ? 'border-black' : 'border-cosmic-cobalt'
-                        } w-[350px] h-[550px] flex flex-col justify-between text-center p-5 bg-white border-[1px]   rounded-md absolute z-10`}
+                        } w-[350px] h-[550px] flex flex-col justify-between text-center p-5 bg-white border-[1px] rounded-md absolute z-10`}
                         key={props.studio.id}
                         data-testid='results-card'
                     >
@@ -109,7 +112,7 @@ const ResultsCard = (props: Props) => {
                         </div>
                     </div>
                     {!props.isActive ? (
-                        <div className='bg-black w-[350px] h-[550px] relative rounded-md mt-5  z-0 top-[3%] left-[5%]'></div>
+                        <div className='bg-black w-[350px] h-[550px] relative rounded-md mt-5  z-0 top-[0%] left-[5%]'></div>
                     ) : (
                         <div className='bg-medium-slate-blue w-[350px] h-[550px] relative rounded-md  z-0 top-[3%] left-[12%] md:top-[3%] md:left-[6%] lg:top-[3%] lg:left-[5%]'></div>
                     )}
