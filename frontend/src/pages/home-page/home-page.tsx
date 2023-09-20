@@ -33,7 +33,7 @@ const HomePage = (props: Props) => {
                 </div>
                 <div
                     id='home-page__card--shadow'
-                    className='md:w-[476px] md:h-[725px] md:shadow-xl rounded-lg bg-cosmic-cobalt absolute top-[13%] left-[52%] translate-x-[-50%] z-0'
+                    className='invisible md:visible md:w-[476px] md:h-[725px] md:shadow-xl rounded-lg bg-cosmic-cobalt absolute top-[13%] left-[52%] translate-x-[-50%] z-0'
                 ></div>
             </div>
         </>

@@ -45,19 +45,32 @@ const Results = (props: Props) => {
                 handlePrevClick={handlePrevClick}
             />
             {props.results && (
-                <div className='w-full h-full flex flex-row flex-nowrap justify-center align-middle gap-16 sm:gap-8'>
+                <div className='h-auto min-h-auto grid grid-cols-3 pb-10 justify-center'>
                     {props.results?.length <= 2 && (
                         <ResultsCard cardPosition='center-card' studio={props.results[activeCard]} isActive={true} />
                     )}
                     {props.results?.length >= 3 && (
                         <>
-                            <ResultsCard cardPosition='left-card' studio={props.results[prevCard]} isActive={false} />
+                            <div className='invisible lg:visible'>
+                                <ResultsCard
+                                    cardPosition='left-card'
+                                    studio={props.results[prevCard]}
+                                    isActive={false}
+                                />
+                            </div>
                             <ResultsCard
                                 cardPosition='center-card'
                                 studio={props.results[activeCard]}
                                 isActive={true}
                             />
-                            <ResultsCard cardPosition='right-card' studio={props.results[nextCard]} isActive={false} />
+                            <div className='invisible lg:visible'>
+                                {' '}
+                                <ResultsCard
+                                    cardPosition='right-card'
+                                    studio={props.results[nextCard]}
+                                    isActive={false}
+                                />
+                            </div>
                         </>
                     )}
                 </div>
