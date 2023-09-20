@@ -9,12 +9,12 @@ module.exports = {
                 spacegrotesk: ['"Space Grotesk"', 'sans-serif']
             },
             colors: {
-                main: {
-                    'cosmic-cobalt': '#241E92',
-                    iris: '#5432D3',
-                    'medium-slate-blue': '#7B6CF6',
-                    'pale-violet': '#C6A3FF'
-                },
+                'cosmic-cobalt': '#241E92',
+                iris: '#5432D3',
+                'medium-slate-blue': '#7B6CF6',
+                'pale-violet': '#C6A3FF',
+                gallery: '#eeeeee',
+                alabaster: '#f7f7f7',
                 error: {
                     crimson: '#e01039'
                 },

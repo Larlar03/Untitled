@@ -9,9 +9,9 @@ const Navbar = () => {
     };
 
     return (
-        <div className='w-100 mx-auto px-8 pt-3 mb-3 flex flex-nowrap items-center justify-end gap-x-3'>
+        <div className='w-100 mx-auto px-8 pt-3 mb-12 flex flex-nowrap items-center justify-end gap-x-3'>
             <button data-testid='home-icon' type='button' className='text-right' onClick={() => goToPage('')}>
-                <HomeIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
+                <HomeIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
             <button
                 data-testid='bookmark-icon'
@@ -19,10 +19,10 @@ const Navbar = () => {
                 className='text-right'
                 onClick={() => goToPage('bookmarks')}
             >
-                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
+                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
             <button data-testid='upload-icon' type='button' className='text-right' onClick={() => goToPage('upload')}>
-                <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
+                <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
         </div>
     );

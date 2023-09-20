@@ -14,13 +14,13 @@ const ResultsNav = (props: Props) => {
             <span className='w-full flex flex-row flex-nowrap justify-center gap-8'>
                 <ArrowSmallLeftIcon
                     onClick={props.handlePrevClick}
-                    className='prev-arrow h-8 w-8  text-black hover:text-main-iris cursor-pointer'
+                    className='prev-arrow h-8 w-8  text-black hover:text-iris cursor-pointer'
                     data-testid='prev-arrow'
                 />
                 {props.resultsTotal === 0 ? '0 Results' : `${props.activeCardNum + 1} of ${props.resultsTotal}`}
                 <ArrowSmallRightIcon
                     onClick={props.handleNextClick}
-                    className=' next-arrow h-8 w-8 text-black hover:text-main-iris cursor-pointer'
+                    className=' next-arrow h-8 w-8 text-black hover:text-iris cursor-pointer'
                     data-testid='next-arrow'
                 />
             </span>

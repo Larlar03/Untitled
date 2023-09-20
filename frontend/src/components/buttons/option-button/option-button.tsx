@@ -11,7 +11,7 @@ const OptionButton = (props: Props) => {
             onClick={props.handleClick}
             id={props.serviceName}
             data-testid='option-button'
-            className='option-button hover-grow rounded-full'
+            className='hover-grow rounded-full p-2 border-[1px] border-medium-slate-blue font-medium font-spacegrotesk hover:cursor-pointer hover:bg-medium-slate-blue'
         >
             {props.serviceName}
         </li>
@@ -19,3 +19,5 @@ const OptionButton = (props: Props) => {
 };
 
 export default OptionButton;
+
+// className="p-2 bg-gray-200 rounded-md hover:bg-gray-300"

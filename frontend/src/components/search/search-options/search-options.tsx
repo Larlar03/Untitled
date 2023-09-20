@@ -35,7 +35,7 @@ const SearchOptions = (props: Props) => {
     };
 
     return (
-        <ul className='list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center lg:gap-1.5'>
+        <ul className='list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center lg:gap-2'>
             {props.services?.map((service: string, i: number) => (
                 <OptionButton key={i} serviceName={service} handleClick={handleOptionClick} />
             ))}
