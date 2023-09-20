@@ -10,11 +10,11 @@ interface Props {
 
 const ResultsNav = (props: Props) => {
     return (
-        <div className='w-7/12 flex flex-row flex-nowrap justify-between mt-8 mb-4 mx-auto text-xl lg:w-80 lg:font-bold'>
-            <span className='w-full flex flex-row flex-nowrap justify-center gap-8'>
+        <div className='w-3/12 mx-auto text-xl lg:w-80 sm:font-bold mt-8 mb-2 '>
+            <span className='flex flex-row justify-between text-cosmic-cobalt'>
                 <ArrowSmallLeftIcon
                     onClick={props.handlePrevClick}
-                    className='prev-arrow h-8 w-8  text-black hover:text-iris cursor-pointer'
+                    className='prev-arrow h-8 w-8 text-black hover:text-iris cursor-pointer'
                     data-testid='prev-arrow'
                 />
                 {props.resultsTotal === 0 ? '0 Results' : `${props.activeCardNum + 1} of ${props.resultsTotal}`}
