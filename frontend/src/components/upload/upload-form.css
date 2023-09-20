@@ -1,13 +1,12 @@
 form {
     margin-top: 3rem;
-    height: 71%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
 }
 
 .bottom {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 section {
@@ -41,6 +40,9 @@ input[type='checkbox'] {
 }
 
 @media (min-width: 768px) {
+    form {
+        height: 71%;
+    }
     .bottom {
         margin-top: 0;
     }
