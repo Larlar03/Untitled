@@ -6,7 +6,7 @@ import ResultsPage from './pages/results-page/results-page';
 import UploadPage from './pages/upload-page/upload-page';
 import Studio from './types/studios';
 import ErrorPage from './pages/error-page/error-page';
-import TimeoutError from './components/error/request-timeout/request-timeout';
+import TimeoutError from './components/error/timeout/timeout';
 
 //Test
 const App = () => {
