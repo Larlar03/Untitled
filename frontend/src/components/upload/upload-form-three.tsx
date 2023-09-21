@@ -13,7 +13,7 @@ interface Props {
 const UploadForm = (props: Props) => {
     return (
         <form action='submit'>
-            <div className='top'>
+            <div className='top flex justify-center'>
                 <section id='form-check-container'>
                     {Services.map((service, i) => (
                         <div className='form-check' key={i}>

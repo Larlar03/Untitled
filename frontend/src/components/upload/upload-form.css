@@ -29,10 +29,12 @@ section {
 }
 
 #form-check-container {
+    width: 95%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-row-gap: 0.65rem;
+    grid-column-gap: 1.7rem;
 }
 
 input[type='checkbox'] {

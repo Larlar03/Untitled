@@ -97,13 +97,16 @@ const UploadForm = (props: Props) => {
                             Logo
                         </label>
                         <input
-                            className='form-control input'
+                            className='block w-full text-sm text-black border border-gallery rounded-lg cursor-pointer bg-white dark:text-greyscale-300 focus:outline-none '
                             type='file'
                             id='logoIput'
                             data-testid='logo-upload-input'
                             name='logo'
                             onChange={props.storeNewStudioData}
                         />
+                        <p className='mt-1 text-xs' id='file_input_help'>
+                            PNG or JPG (MAX. 500x500px)
+                        </p>
                     </span>
                 </section>
             </div>

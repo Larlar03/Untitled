@@ -102,10 +102,20 @@ const ResultsCard = (props: Props) => {
                                 <FacebookIcon />
                             </a>
                             <div className='text-sm py-3 tracking-wide leading-relaxed'>
-                                <a className='block hover:text-cosmic-cobalt' href={props.studio.social_links?.website}>
+                                <a
+                                    className={`block ${
+                                        !props.isActive ? ' hover:text-black' : ' hover:text-cosmic-cobalt'
+                                    }`}
+                                    href={props.studio.social_links?.website}
+                                >
                                     {props.studio.social_links?.website}
                                 </a>
-                                <a className='block hover:text-cosmic-cobalt' href={`tel:${props.studio.phone_number}`}>
+                                <a
+                                    className={`block ${
+                                        !props.isActive ? ' hover:text-black' : ' hover:text-cosmic-cobalt'
+                                    }`}
+                                    href={`tel:${props.studio.phone_number}`}
+                                >
                                     {props.studio.phone_number}
                                 </a>
                             </div>
