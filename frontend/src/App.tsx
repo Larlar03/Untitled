@@ -6,6 +6,7 @@ import ResultsPage from './pages/results-page/results-page';
 import UploadPage from './pages/upload-page/upload-page';
 import Studio from './types/studios';
 import ErrorPage from './pages/error-page/error-page';
+import TimeoutError from './components/error/timeout/timeout';
 
 //Test
 const App = () => {
@@ -20,7 +21,8 @@ const App = () => {
             .get(`${process.env.VITE_STUDIOS_API}/${location}/services/`, {
                 params: {
                     services
-                }
+                },
+                timeout: 100000
             })
             .then((response) => {
                 console.log(response.data);
@@ -34,6 +36,7 @@ const App = () => {
             })
             .catch((error) => {
                 console.log(error);
+                navigate('/timeout');
             });
     };
 
@@ -42,6 +45,7 @@ const App = () => {
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
             <Route path='/upload' element={<UploadPage />} />
+            <Route path='/timeout' element={<TimeoutError />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>
     );

@@ -1,0 +1,13 @@
+<svg width="64" height="96" viewBox="0 0 64 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="star" clip-path="url(#clip0_203_7)">
+<rect width="64" height="96" fill="#F7F7F7"/>
+<g id="Group">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M31.5975 0C31.5975 0 29.8436 37.5273 25.4588 41.8909C20.1969 47.1273 -0.850351 48 0.0266188 48C-0.850351 48 20.1969 49.7455 25.4588 54.1091C29.8436 58.4727 31.5975 96 31.5975 96C31.5975 96 33.3515 58.4727 38.6133 54.1091C42.9982 49.7455 64.0454 48 63.1685 48C64.0454 48 42.9982 47.1273 38.6133 41.8909C33.3515 37.5273 31.5975 0 31.5975 0Z" fill="#7B6CF6"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_203_7">
+<rect width="64" height="96" fill="white"/>
+</clipPath>
+</defs>
+</svg>

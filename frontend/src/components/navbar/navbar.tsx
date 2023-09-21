@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BookmarkIcon } from '@heroicons/react/24/outline';
-import { ArrowUpOnSquareIcon } from '@heroicons/react/24/outline';
+import { BookmarkIcon, ArrowUpOnSquareIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -10,17 +9,20 @@ const Navbar = () => {
     };
 
     return (
-        <div className='w-100 mx-auto px-8 pt-3 flex flex-nowrap items-center justify-end gap-x-3'>
+        <div className='w-100 mx-auto px-8 pt-3 mb-12 flex flex-nowrap items-center justify-end gap-x-3'>
+            <button data-testid='home-icon' type='button' className='text-right' onClick={() => goToPage('')}>
+                <HomeIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
+            </button>
             <button
                 data-testid='bookmark-icon'
                 type='button'
                 className='text-right'
                 onClick={() => goToPage('bookmarks')}
             >
-                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
+                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
             <button data-testid='upload-icon' type='button' className='text-right' onClick={() => goToPage('upload')}>
-                <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-main-iris' />
+                <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
         </div>
     );

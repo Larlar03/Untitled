@@ -34,16 +34,20 @@ const SearchForm = (props: Props) => {
                 <div className='mb-3'>
                     <SearchInput selectLocation={selectLocation} />
                 </div>
-                <SearchOptions selectOptions={selectOptions} services={services} />
-                <CtaButton
-                    text='Search'
-                    handleClick={(e: React.MouseEvent<HTMLButtonElement>) => [
-                        e.preventDefault(),
-                        props.getStudios(location, options)
-                    ]}
-                    isDisabled={isDisabled}
-                    type='submit'
-                />
+                <div>
+                    <SearchOptions selectOptions={selectOptions} services={services} />
+                </div>
+                <div className='mx-auto w-[100%] md:w-[90%]'>
+                    <CtaButton
+                        text='Search'
+                        handleClick={(e: React.MouseEvent<HTMLButtonElement>) => [
+                            e.preventDefault(),
+                            props.getStudios(location, options)
+                        ]}
+                        isDisabled={isDisabled}
+                        type='submit'
+                    />
+                </div>
             </form>
         </div>
     );

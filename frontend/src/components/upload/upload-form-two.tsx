@@ -97,19 +97,26 @@ const UploadForm = (props: Props) => {
                             Logo
                         </label>
                         <input
-                            className='form-control input'
+                            className='block w-full text-sm text-black border border-gallery rounded-lg cursor-pointer bg-white dark:text-greyscale-300 focus:outline-none '
                             type='file'
                             id='logoIput'
                             data-testid='logo-upload-input'
                             name='logo'
                             onChange={props.storeNewStudioData}
                         />
+                        <p className='mt-1 text-xs' id='file_input_help'>
+                            PNG or JPG (MAX. 500x500px)
+                        </p>
                     </span>
                 </section>
             </div>
             <div className='bottom flex justify-between w-full'>
-                <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(1)} type='button' />
-                <CtaButton className='w-2/5' text='Next' handleClick={() => props.goToFormPage(3)} type='button' />
+                <div className='w-2/5'>
+                    <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(1)} type='button' />
+                </div>
+                <div className='w-2/5'>
+                    <CtaButton className='w-2/5' text='Next' handleClick={() => props.goToFormPage(3)} type='button' />
+                </div>
             </div>
         </form>
     );

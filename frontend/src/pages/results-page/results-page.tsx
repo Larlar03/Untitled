@@ -12,7 +12,7 @@ const ResultsPage = (props: Props) => {
     return (
         <>
             <Navbar />
-            <div className='my-2'>
+            <div id='results-page' className='h-auto grid justify-center'>
                 <Header subheading='Results' />
                 {props.results && props.results.length > 0 ? (
                     <Results results={props.results && props.results} />

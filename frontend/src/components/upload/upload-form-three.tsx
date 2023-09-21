@@ -13,7 +13,7 @@ interface Props {
 const UploadForm = (props: Props) => {
     return (
         <form action='submit'>
-            <div className='top'>
+            <div className='top flex justify-center'>
                 <section id='form-check-container'>
                     {Services.map((service, i) => (
                         <div className='form-check' key={i}>
@@ -33,13 +33,17 @@ const UploadForm = (props: Props) => {
                 </section>
             </div>
             <div className='bottom flex justify-between w-full'>
-                <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
-                <CtaButton
-                    className='w-2/5'
-                    text='Upload'
-                    handleClick={(e: React.MouseEvent<HTMLButtonElement>) => props.onSubmit(e)}
-                    type='button'
-                />
+                <div className='w-2/5'>
+                    <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
+                </div>
+                <div className='w-2/5'>
+                    <CtaButton
+                        className='w-2/5'
+                        text='Upload'
+                        handleClick={(e: React.MouseEvent<HTMLButtonElement>) => props.onSubmit(e)}
+                        type='button'
+                    />
+                </div>
             </div>
         </form>
     );

@@ -1,8 +1,5 @@
-import { Link } from 'react-router-dom';
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline';
-import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid';
-import { ArrowRightCircleIcon } from '@heroicons/react/24/solid';
+import { ArrowSmallLeftIcon } from '@heroicons/react/24/solid';
+import { ArrowSmallRightIcon } from '@heroicons/react/24/solid';
 
 interface Props {
     resultsTotal: number;
@@ -13,27 +10,20 @@ interface Props {
 
 const ResultsNav = (props: Props) => {
     return (
-        <div className='w-7/12 flex flex-row flex-nowrap justify-between mt-10 mb-4 mx-auto text-xl md:w-80 md:font-bold'>
-            <AdjustmentsHorizontalIcon className='h-6 w-6 text-cosmic-cobalt hover:text-main-iris cursor-pointer' />
-            <span className='w-full flex flex-row flex-nowrap justify-center gap-4'>
-                <ArrowLeftCircleIcon
+        <div className='w-8/12 sm:w-3/12 sm:font-bold mx-auto text-xl mt-8 mb-2 '>
+            <span className='flex flex-row justify-between text-cosmic-cobalt'>
+                <ArrowSmallLeftIcon
                     onClick={props.handlePrevClick}
-                    className='prev-arrow h-8 w-8  text-black hover:text-main-iris cursor-pointer'
+                    className='prev-arrow h-8 w-8 text-black hover:text-iris cursor-pointer'
                     data-testid='prev-arrow'
                 />
                 {props.resultsTotal === 0 ? '0 Results' : `${props.activeCardNum + 1} of ${props.resultsTotal}`}
-                <ArrowRightCircleIcon
+                <ArrowSmallRightIcon
                     onClick={props.handleNextClick}
-                    className=' next-arrow h-8 w-8 text-black hover:text-main-iris cursor-pointer'
+                    className=' next-arrow h-8 w-8 text-black hover:text-iris cursor-pointer'
                     data-testid='next-arrow'
                 />
             </span>
-            <Link to='/'>
-                <ArrowUturnLeftIcon
-                    className='h-6 w-6 text-cosmic-cobalt hover:text-main-iris'
-                    data-testid='return-arrow'
-                />
-            </Link>
         </div>
     );
 };

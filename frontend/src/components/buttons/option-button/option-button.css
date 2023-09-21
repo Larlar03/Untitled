@@ -1,16 +1,3 @@
-li.option-button {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 500;
-    border: 1px solid var(--medium-slate-blue);
-    padding: 8px 15px;
-    margin: 6px 0;
-}
-
-li.option-button:hover {
-    cursor: pointer;
-    background: var(--medium-slate-blue);
-}
-
 li.active {
     background: var(--medium-slate-blue) !important;
 }
