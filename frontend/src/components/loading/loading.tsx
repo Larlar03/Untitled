@@ -3,7 +3,7 @@ import Star from '../../assets/svgs/star.svg';
 const Loading = () => {
     return (
         <>
-            <div className='flex w-fit h-fit pl-2 m-2'>
+            <div className='flex w-fit h-fit pl-2 m-2' data-testid='bounce-loader'>
                 <div className={`animate-bounce w-6  mr-2`}>
                     <img src={Star} alt='Sparkling stars' />
                 </div>

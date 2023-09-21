@@ -23,7 +23,7 @@ describe('Home Page', () => {
                 <HomePage isLoading={mockIsLoading} getStudios={mockGetStudios} />
             </Router>
         );
-        const subHeading = screen.getByTestId('loader');
-        expect(subHeading).toBeVisible();
+        const loader = screen.getByTestId('bounce-loader');
+        expect(loader).toBeVisible();
     });
 });

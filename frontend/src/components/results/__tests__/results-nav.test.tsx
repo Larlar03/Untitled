@@ -21,19 +21,6 @@ describe('Results Navigation', () => {
         expect(resultsCounter).toBeVisible();
     });
 
-    it('renders return arrow button', () => {
-        const returnIcon = screen.getByTestId('return-arrow');
-        expect(returnIcon).toBeVisible();
-    });
-
-    it('navigates to the home page when the return icon is clicked', () => {
-        const returnIcon = screen.getByTestId('return-arrow');
-        fireEvent.click(returnIcon);
-
-        expect(returnIcon.closest('a')).toHaveAttribute('href', '/');
-        expect(window.location.href).toBe('http://localhost/');
-    });
-
     it('displays the number of the last result when the previous arrow is clicked', () => {
         const prevArrow = screen.getByTestId('prev-arrow');
         fireEvent.click(prevArrow);

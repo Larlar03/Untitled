@@ -18,7 +18,7 @@ describe('Navbar', () => {
     it('renders icons', () => {
         const icons = screen.getAllByRole('button');
 
-        expect(icons).toHaveLength(2);
+        expect(icons).toHaveLength(3);
         icons.forEach((icon) => {
             expect(icon).toBeVisible();
         });
