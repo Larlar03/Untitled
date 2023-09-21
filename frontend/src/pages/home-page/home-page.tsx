@@ -1,7 +1,7 @@
-import { PulseLoader } from 'react-spinners';
 import Header from '../../components/header/header';
 import SearchForm from '../../components/search/search-form';
 import Navbar from '../../components/navbar/navbar';
+import Loading from '../../components/loading/loading';
 // import './home-page.css';
 
 interface Props {
@@ -21,12 +21,7 @@ const HomePage = (props: Props) => {
                     <Header subheading='Aerial, pole & fitness classes near you.' />
                     {props.isLoading && (
                         <div className='w-full h-4/6 flex justify-center items-center'>
-                            <PulseLoader
-                                color='var(--pale-violet)'
-                                size={25}
-                                aria-label='Loading Spinner'
-                                data-testid='loader'
-                            />
+                            <Loading />
                         </div>
                     )}
                     {!props.isLoading && <SearchForm getStudios={props.getStudios} />}
