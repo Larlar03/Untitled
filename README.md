@@ -5,7 +5,6 @@ Aeriform is a MERN stack project.
 
 ## Screenshots
 ### Homepage
-![screenshot of homepage](./frontend/src/assets/screenshots/home-screnshot.png)
 
 
 ## Tech/framework used
