@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import Header from '../../components/header/header';
 import Navbar from '../../components/navbar/navbar';
 import UploadFormOne from '../../components/upload/upload-form-one';
@@ -8,7 +7,6 @@ import UploadFormThree from '../../components/upload/upload-form-three';
 import UploadSuccess from '../../components/upload/upload-success';
 import Modal from '../../components/modal/modal';
 import Studio from '../../types/studios';
-import { flattenObject } from '../../helpers/flatten-object';
 import { validateForm } from '../../helpers/validate-form';
 import { uploadForm } from '../../helpers/upload-form';
 
@@ -18,18 +16,18 @@ const UploadPage = () => {
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: '',
-        phone_number: '',
-        email_address: '',
+        name: 'test',
+        phone_number: '01217731747',
+        email_address: 'test@gmail.com',
         location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
+            address: '123 test street',
+            post_code: 'tst test',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
         },
         social_links: {
-            website: '',
+            website: 'www.tets.com',
             instagram: '',
             facebook: ''
         },
@@ -84,17 +82,20 @@ const UploadPage = () => {
 
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        validateForm(newStudio)
-            .then(() => {
-                return uploadForm(newStudio);
-            })
-            .then(() => {
+
+        try {
+            validateForm(newStudio);
+            const response = uploadForm(newStudio);
+            if ((await response) === 'New studio stored successfully.') {
                 setIsUploaded(true);
-            })
-            .catch((error: any) => {
-                setErrorMessage(error.message);
+            } else {
+                setErrorMessage('A network error occurred');
                 setShowModal(true);
-            });
+            }
+        } catch (error: any) {
+            setErrorMessage(error.message);
+            setShowModal(true);
+        }
     };
 
     return (

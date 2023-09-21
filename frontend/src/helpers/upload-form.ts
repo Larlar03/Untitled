@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Studio from '../types/studios';
 
-export const uploadForm = async (newStudio: Studio): Promise<any> => {
+export const uploadForm = async (newStudio: Studio): Promise<string> => {
     const requestBody = {
         isFrontend: true,
         newStudio
