@@ -37,11 +37,11 @@ const filledStudio: Studio = {
         instagram: '',
         facebook: ''
     },
-    logo: 'images.jpg',
+    logo: '',
     services: ['Aerial Silks']
 };
 
-describe('Form Validatios', () => {
+describe('Form Validation', () => {
     it('throws error for empty fields', () => {
         expect.assertions(1);
 
@@ -50,7 +50,7 @@ describe('Form Validatios', () => {
         } catch (error) {
             expect(error).toHaveProperty(
                 'message',
-                'The following fields are empty: name, email_address, address, post_code, city, region, country, website, logo'
+                'The following fields are empty: name, email_address, address, post_code, city, region, country, website'
             );
         }
     });

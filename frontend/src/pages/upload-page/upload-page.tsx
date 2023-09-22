@@ -85,8 +85,8 @@ const UploadPage = () => {
 
         try {
             validateForm(newStudio);
-            const response = uploadForm(newStudio);
-            if ((await response) === 'New studio stored successfully.') {
+            const response = await uploadForm(newStudio);
+            if (response === 'New studio stored successfully.') {
                 setIsUploaded(true);
             } else {
                 setErrorMessage('A network error occurred');

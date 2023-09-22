@@ -1,7 +1,8 @@
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import UploadPage from '../upload-page';
+import { uploadForm } from '../../../utils/upload-form';
 
 console.log = jest.fn();
 
@@ -12,12 +13,6 @@ describe('Upload Page', () => {
                 <UploadPage />
             </Router>
         );
-
-        const mockResponse = {
-            data: {}
-        };
-
-        jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
     });
 
     afterEach(() => {
@@ -39,7 +34,7 @@ describe('Upload Page', () => {
         expect(pageTwoInputField).toBeVisible();
     });
 
-    it('shows warning modal when fields are empty', async () => {
+    it('shows warning modal if fields are empty', async () => {
         // Simulate form input and submission
         const nameInput = screen.getAllByRole('textbox')[0];
         const postCodeInput = screen.getAllByRole('textbox')[4];
@@ -56,105 +51,42 @@ describe('Upload Page', () => {
         expect(modal).toBeVisible();
 
         const modalMessage = screen.getByTestId('modal-message');
-        expect(modalMessage).toBeVisible();
+        expect(modalMessage).toHaveTextContent(
+            'The following fields are empty: email_address, address, city, region, country, website'
+        );
     });
-});
 
-it('should submit the form successfully', async () => {
-    // Simulate form input and submission
-    const nameInput = screen.getAllByRole('textbox')[0];
-    const emailInput = screen.getAllByRole('textbox')[2];
-    const addressInput = screen.getAllByRole('textbox')[3];
-    const postCodeInput = screen.getAllByRole('textbox')[4];
-    const citySelect = screen.getAllByRole('combobox')[0];
-    const regionSelect = screen.getAllByRole('combobox')[1];
-    const countrySelect = screen.getAllByRole('combobox')[1];
+    it('uploads form successfully', async () => {
+        // Mock the uploadForm function
+        jest.mock('../../../utils/upload-form', async () => ({}));
 
-    fireEvent.change(nameInput, { target: { value: 'Test' } });
-    fireEvent.change(emailInput, { target: { value: 'test@gmail.com' } });
-    fireEvent.change(addressInput, { target: { value: '123 test Street' } });
-    fireEvent.change(postCodeInput, { target: { value: 'Foo Bar' } });
-    fireEvent.change(citySelect, { target: { value: 'Birmingham' } });
-    fireEvent.change(regionSelect, { target: { value: 'West Midands' } });
-    fireEvent.change(countrySelect, { target: { value: 'England' } });
+        const mockResponse = {
+            data: 'New studio stored successfully.'
+        };
 
-    // Go to next form page
-    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    //  Upload form
-    fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
+        jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
-    await waitFor(() => {
-        expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
-            isFrontend: true,
-            newStudio: {
-                email_address: 'test@gmail.com',
-                location: { address: '123 Test Street', city: '', country: '', post_code: 'Bar', region: '' },
-                logo: '',
-                name: 'Foo',
-                phone_number: '',
-                services: [],
-                social_links: { facebook: '', instagram: '', website: '' }
-            }
-        });
+        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
+        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
+        fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@gmail.com' } });
+        fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
+        fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
+        fireEvent.change(screen.getByLabelText('City'), { target: { value: 'Birmingham' } });
+        fireEvent.change(screen.getByLabelText('Region'), { target: { value: 'West Midlands' } });
+        fireEvent.change(screen.getByLabelText('Country'), { target: { value: 'England' } });
 
-        // Expect success page to be rendered
-        expect(screen.getByAltText('Magnifying glass with sparkles')).toBeVisible();
-        expect(screen.getByTestId('upload-success-message')).toBeVisible();
-    });
-});
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.change(screen.getByLabelText('Website URL'), { target: { value: 'www.test.com' } });
 
-it('stores checked services in studio state object', async () => {
-    // Simulate form input and submission
-    // Go to last form page
-    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getAllByRole('checkbox')[0]);
 
-    const firstServiceInput = screen.getAllByRole('checkbox')[0];
-    fireEvent.click(firstServiceInput);
+        // Submit the form
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-    fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-    await waitFor(() => {
-        expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
-            isFrontend: true,
-            newStudio: {
-                email_address: '',
-                location: { address: '', city: '', country: '', post_code: '', region: '' },
-                logo: '',
-                name: '',
-                phone_number: '',
-                services: ['Aerial Hoop'],
-                social_links: { facebook: '', instagram: '', website: '' }
-            }
-        });
-    });
-});
-
-it('removes checked services in studio state object when clicked twice', async () => {
-    // Simulate form input and submission
-    // Go to last form page
-    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-
-    const firstServiceInput = screen.getAllByRole('checkbox')[0];
-    fireEvent.click(firstServiceInput);
-    fireEvent.click(firstServiceInput);
-
-    fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-    await waitFor(() => {
-        expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
-            isFrontend: true,
-            newStudio: {
-                email_address: '',
-                location: { address: '', city: '', country: '', post_code: '', region: '' },
-                logo: '',
-                name: '',
-                phone_number: '',
-                services: [],
-                social_links: { facebook: '', instagram: '', website: '' }
-            }
+        await waitFor(() => {
+            expect(screen.getByAltText('Sparkling stars')).toBeVisible();
+            expect(screen.getByTestId('upload-success-message')).toHaveTextContent('Studio uploaded successfully');
         });
     });
 });

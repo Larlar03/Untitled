@@ -8,6 +8,7 @@ export const validateForm = (newStudio: Studio) => {
     delete flattenedStudioObj.phone_number;
     delete flattenedStudioObj.instagram;
     delete flattenedStudioObj.facebook;
+    delete flattenedStudioObj.logo;
 
     const nsKeys = Object.keys(flattenedStudioObj);
     const nsValues = Object.values(flattenedStudioObj);
