@@ -7,8 +7,8 @@ import UploadFormThree from '../../components/upload/upload-form-three';
 import UploadSuccess from '../../components/upload/upload-success';
 import Modal from '../../components/modal/modal';
 import Studio from '../../types/studios';
-import { validateForm } from '../../helpers/validate-form';
-import { uploadForm } from '../../helpers/upload-form';
+import { validateForm } from '../../utils/validate-form';
+import { uploadForm } from '../../utils/upload-form';
 
 const UploadPage = () => {
     const [showModel, setShowModal] = useState<boolean>(false);
@@ -16,18 +16,18 @@ const UploadPage = () => {
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: 'test',
-        phone_number: '01217731747',
-        email_address: 'test@gmail.com',
+        name: '',
+        phone_number: '',
+        email_address: '',
         location: {
-            address: '123 test street',
-            post_code: 'tst test',
-            city: 'Birmingham',
-            region: 'West Midlands',
-            country: 'England'
+            address: '',
+            post_code: '',
+            city: '',
+            region: '',
+            country: ''
         },
         social_links: {
-            website: 'www.tets.com',
+            website: '',
             instagram: '',
             facebook: ''
         },
