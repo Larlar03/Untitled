@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import Header from '../../components/header/header';
 import Navbar from '../../components/navbar/navbar';
 import UploadFormOne from '../../components/upload/upload-form-one';
@@ -8,7 +7,8 @@ import UploadFormThree from '../../components/upload/upload-form-three';
 import UploadSuccess from '../../components/upload/upload-success';
 import Modal from '../../components/modal/modal';
 import Studio from '../../types/studios';
-import { flattenObject } from '../../helpers/flatten-object';
+import { validateForm } from '../../utils/validate-form';
+import { uploadForm } from '../../utils/upload-form';
 
 const UploadPage = () => {
     const [showModel, setShowModal] = useState<boolean>(false);
@@ -66,7 +66,6 @@ const UploadPage = () => {
 
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        console.log('value', value);
 
         setNewStudio((prev) => {
             const servicesArr: string[] = [...(prev.services || [])];
@@ -81,48 +80,22 @@ const UploadPage = () => {
         });
     };
 
-    const validateForm = () => {
-        const flattenedStudioObj = flattenObject(newStudio);
-        const emptyFieldsArr: string[] = [];
-
-        delete flattenedStudioObj.phone_number;
-        delete flattenedStudioObj.instagram;
-        delete flattenedStudioObj.facebook;
-
-        const nsKeys = Object.keys(flattenedStudioObj);
-        const nsValues = Object.values(flattenedStudioObj);
-
-        nsValues.forEach((val: any, i) => {
-            val.length === 0 && emptyFieldsArr.push(nsKeys[i]);
-        });
-
-        if (emptyFieldsArr.length > 0) {
-            const fields = emptyFieldsArr.join(', ');
-            throw new Error(`The following fields are empty: ${fields}`);
-        } else {
-            uploadForm();
-        }
-    };
-
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+
         try {
-            validateForm();
-        } catch (err: any) {
-            setErrorMessage(err.message);
+            validateForm(newStudio);
+            const response = uploadForm(newStudio);
+            if ((await response) === 'New studio stored successfully.') {
+                setIsUploaded(true);
+            } else {
+                setErrorMessage('A network error occurred');
+                setShowModal(true);
+            }
+        } catch (error: any) {
+            setErrorMessage(error.message);
             setShowModal(true);
         }
-    };
-
-    const uploadForm = async () => {
-        return axios
-            .post(`${process.env.VITE_STUDIOS_API}/`, { isFrontend: true, newStudio })
-            .then(() => {
-                setIsUploaded(true);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     };
 
     return (
