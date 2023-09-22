@@ -89,4 +89,45 @@ describe('Upload Page', () => {
             expect(screen.getByTestId('upload-success-message')).toHaveTextContent('Studio uploaded successfully');
         });
     });
+
+    it('shows warning modal if there is a network error', async () => {
+        // Mock the uploadForm function
+        jest.mock('../../../utils/upload-form', async () => ({}));
+
+        // const mockResponse = {
+        //     data: undefined
+        // };
+
+        // jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
+
+        const networkError = new Error('Network Error');
+        const axiosMock = jest.fn(() => Promise.reject(networkError));
+        jest.spyOn(axios, 'post').mockImplementation(axiosMock);
+
+        const consoleErrorMock = jest.fn();
+        global.console.error = consoleErrorMock;
+
+        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
+        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
+        fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@gmail.com' } });
+        fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
+        fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
+        fireEvent.change(screen.getByLabelText('City'), { target: { value: 'Birmingham' } });
+        fireEvent.change(screen.getByLabelText('Region'), { target: { value: 'West Midlands' } });
+        fireEvent.change(screen.getByLabelText('Country'), { target: { value: 'England' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.change(screen.getByLabelText('Website URL'), { target: { value: 'www.test.com' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getAllByRole('checkbox')[0]);
+
+        // Submit the form
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
+
+        await waitFor(() => {
+            const modalMessage = screen.getByTestId('modal-message');
+            expect(modalMessage).toHaveTextContent('A network error occurred');
+        });
+    });
 });
