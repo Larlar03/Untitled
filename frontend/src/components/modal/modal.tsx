@@ -28,7 +28,7 @@ const Modal = (props: Props) => {
                     <p data-testid='modal-message'>{props.message && props.message}</p>
                 </div>
                 <div className='modal__bottom'>
-                    <button onClick={() => props.setShowModal(false)}>
+                    <button onClick={() => props.setShowModal(false)} data-testid='modal-close-button'>
                         <XCircleIcon className='h-10 w-10 text-white hover:text-pale-violet' />
                     </button>
                 </div>
