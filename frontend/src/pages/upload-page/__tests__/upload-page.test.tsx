@@ -1,8 +1,7 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import UploadPage from '../upload-page';
-import { uploadForm } from '../../../utils/upload-form';
 
 console.log = jest.fn();
 
@@ -26,7 +25,7 @@ describe('Upload Page', () => {
         expect(subheading).toHaveTextContent('Upload a Studio');
     });
 
-    it('updates form page when goToFormPage is called', () => {
+    it('updates form page on navigation button click', () => {
         const nextButton = screen.getByText('Next');
         fireEvent.click(nextButton);
 
@@ -35,24 +34,20 @@ describe('Upload Page', () => {
     });
 
     it('shows warning modal if fields are empty', async () => {
-        // Simulate form input and submission
-        const nameInput = screen.getAllByRole('textbox')[0];
-        const postCodeInput = screen.getAllByRole('textbox')[4];
-        fireEvent.change(nameInput, { target: { value: 'Foo' } });
-        fireEvent.change(postCodeInput, { target: { value: 'Bar' } });
+        // Simulate one field input
+        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
 
         // Go to last form page
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+
         //  Upload form
         fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
-        const modal = screen.getByTestId('modal');
-        expect(modal).toBeVisible();
+        expect(screen.getByTestId('modal')).toBeVisible();
 
-        const modalMessage = screen.getByTestId('modal-message');
-        expect(modalMessage).toHaveTextContent(
-            'The following fields are empty: email_address, address, city, region, country, website'
+        expect(screen.getByTestId('modal-message')).toHaveTextContent(
+            'The following fields are empty: email_address, address, post_code, city, region, country, website'
         );
     });
 
@@ -60,12 +55,14 @@ describe('Upload Page', () => {
         // Mock the uploadForm function
         jest.mock('../../../utils/upload-form', async () => ({}));
 
+        // Mock uploadForm successfull response
         const mockResponse = {
             data: 'New studio stored successfully.'
         };
 
         jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
+        // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
         fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
         fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@gmail.com' } });
@@ -81,9 +78,9 @@ describe('Upload Page', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getAllByRole('checkbox')[0]);
 
-        // Submit the form
         fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
+        //  Assert
         await waitFor(() => {
             expect(screen.getByAltText('Sparkling stars')).toBeVisible();
             expect(screen.getByTestId('upload-success-message')).toHaveTextContent('Studio uploaded successfully');
@@ -94,19 +91,12 @@ describe('Upload Page', () => {
         // Mock the uploadForm function
         jest.mock('../../../utils/upload-form', async () => ({}));
 
-        // const mockResponse = {
-        //     data: undefined
-        // };
-
-        // jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
-
+        // Mock network error
         const networkError = new Error('Network Error');
         const axiosMock = jest.fn(() => Promise.reject(networkError));
         jest.spyOn(axios, 'post').mockImplementation(axiosMock);
 
-        const consoleErrorMock = jest.fn();
-        global.console.error = consoleErrorMock;
-
+        // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
         fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
         fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@gmail.com' } });
@@ -122,12 +112,11 @@ describe('Upload Page', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getAllByRole('checkbox')[0]);
 
-        // Submit the form
         fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
 
+        //  Assert
         await waitFor(() => {
-            const modalMessage = screen.getByTestId('modal-message');
-            expect(modalMessage).toHaveTextContent('A network error occurred');
+            expect(screen.getByTestId('modal-message')).toHaveTextContent('A network error occurred');
         });
     });
 });
