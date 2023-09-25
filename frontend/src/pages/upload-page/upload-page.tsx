@@ -17,23 +17,23 @@ const UploadPage = () => {
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: 'Upload 4',
-        phone_number: '01217731747',
-        email_address: 'upload@gmail.com',
+        name: '',
+        phone_number: '',
+        email_address: '',
         location: {
-            address: '123 upload stree, upload',
-            post_code: 'upl oad',
-            city: 'Birmingham',
-            region: 'West Midlands',
-            country: 'England'
+            address: '',
+            post_code: '',
+            city: '',
+            region: '',
+            country: ''
         },
         social_links: {
-            website: 'www.uplaod.com',
+            website: '',
             instagram: '',
             facebook: ''
         },
         logo: placeholderImageData,
-        services: ['Pole Dance']
+        services: []
     });
 
     const goToFormPage = (pageNumber: number): void => {
