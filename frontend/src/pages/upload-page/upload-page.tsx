@@ -9,6 +9,7 @@ import Modal from '../../components/modal/modal';
 import Studio from '../../types/studios';
 import { validateForm } from '../../utils/validate-form';
 import { uploadForm } from '../../utils/upload-form';
+import placeholderImageData from '../../constants/placeholder-image-data';
 
 const UploadPage = () => {
     const [showModel, setShowModal] = useState<boolean>(false);
@@ -16,23 +17,23 @@ const UploadPage = () => {
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: '',
-        phone_number: '',
-        email_address: '',
+        name: 'Upload 4',
+        phone_number: '01217731747',
+        email_address: 'upload@gmail.com',
         location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
+            address: '123 upload stree, upload',
+            post_code: 'upl oad',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
         },
         social_links: {
-            website: '',
+            website: 'www.uplaod.com',
             instagram: '',
             facebook: ''
         },
-        logo: '',
-        services: []
+        logo: placeholderImageData,
+        services: ['Pole Dance']
     });
 
     const goToFormPage = (pageNumber: number): void => {
