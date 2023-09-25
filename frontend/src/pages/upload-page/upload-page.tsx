@@ -9,6 +9,7 @@ import Modal from '../../components/modal/modal';
 import Studio from '../../types/studios';
 import { validateForm } from '../../utils/validate-form';
 import { uploadForm } from '../../utils/upload-form';
+import placeholderImageData from '../../constants/placeholder-image-data';
 
 const UploadPage = () => {
     const [showModel, setShowModal] = useState<boolean>(false);
@@ -31,7 +32,7 @@ const UploadPage = () => {
             instagram: '',
             facebook: ''
         },
-        logo: '',
+        logo: placeholderImageData,
         services: []
     });
 
