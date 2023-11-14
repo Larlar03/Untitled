@@ -21,8 +21,8 @@ const ResultsCard = (props: Props) => {
     return (
         <div
             id='card-container'
-            className={`w-full flex flex-col items-center p-4 ${
-                !props.isActive ? 'scale-75 invisible lg:visible' : 'scale-100'
+            className={` w-11/12 md:w-[350px] h-[550px] flex items-center justify-center ${
+                !props.isActive ? 'hidden lg:flex lg:scale-75' : 'scale-100'
             }`}
             data-testid={`${props.cardPosition}`}
         >
@@ -31,8 +31,10 @@ const ResultsCard = (props: Props) => {
                     <div
                         id='card'
                         className={`${
-                            !props.isActive ? 'border-black' : 'border-cosmic-cobalt'
-                        } w-[350px] h-[550px] flex flex-col justify-between text-center p-5 bg-white border-[1px] rounded-md absolute z-10`}
+                            !props.isActive
+                                ? 'border-black md:shadow-black'
+                                : 'border-cosmic-cobalt md:shadow-medium-slate-blue'
+                        } w-full h-full flex flex-col justify-between text-center p-5 shadow-lg md:shadow-none bg-white border-[1px] rounded-md absolute z-10`}
                         key={props.studio.id}
                         data-testid='results-card'
                     >
@@ -121,11 +123,6 @@ const ResultsCard = (props: Props) => {
                             </div>
                         </div>
                     </div>
-                    {!props.isActive ? (
-                        <div className='bg-black w-[350px] h-[550px] relative rounded-md mt-5  z-0 top-[0%] left-[5%]'></div>
-                    ) : (
-                        <div className='bg-medium-slate-blue w-[350px] h-[550px] relative rounded-md  z-0 top-[3%] left-[12%] md:top-[3%] md:left-[6%] lg:top-[3%] lg:left-[5%]'></div>
-                    )}
                 </>
             )}
         </div>

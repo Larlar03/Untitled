@@ -30,6 +30,11 @@ module.exports = {
                 }
             }
         },
+        boxShadow: {
+            'cosmic-cobalt': '16px 18px 0px 0px #241E92',
+            'medium-slate-blue': '16px 18px 0px 0px #7B6CF6',
+            black: '16px 18px 0px 0px #000000'
+        },
         screens: {
             sm: '640px',
             // => @media (min-width: 640px) { ... }
