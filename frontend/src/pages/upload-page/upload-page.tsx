@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Header from '../../components/header/header';
-import Navbar from '../../components/navbar/navbar';
 import UploadFormOne from '../../components/upload/upload-form-one';
 import UploadFormTwo from '../../components/upload/upload-form-two';
 import UploadFormThree from '../../components/upload/upload-form-three';
@@ -101,11 +100,10 @@ const UploadPage = () => {
 
     return (
         <>
-            <Navbar />
-            <div id='upload-page' className='h-auto min-h-screen grid justify-center'>
+            <div id='upload-page' className='h-auto min-h-screen flex justify-center items-center'>
                 <div
                     id='upload-page__card'
-                    className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:absolute md:left-[50%] md:translate-x-[-50%] md:z-10'
+                    className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt md:absolute md:left-[50%] md:translate-x-[-50%] md:z-10'
                 >
                     <Header subheading='Upload a Studio' />
                     {isUploaded ? (
@@ -140,10 +138,6 @@ const UploadPage = () => {
                         </>
                     )}
                 </div>
-                <div
-                    id='upload-page__card--shadow'
-                    className='invisible md:visible md:w-[476px] md:h-[650px] md:shadow-xl rounded-lg bg-cosmic-cobalt absolute top-[12.5%] left-[51%] translate-x-[-50%] z-0'
-                ></div>
             </div>
         </>
     );

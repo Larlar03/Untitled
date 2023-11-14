@@ -1,8 +1,6 @@
 import Header from '../../components/header/header';
 import SearchForm from '../../components/search/search-form';
-import Navbar from '../../components/navbar/navbar';
 import Loading from '../../components/loading/loading';
-// import './home-page.css';
 
 interface Props {
     getStudios: (location: string | undefined, services: string[]) => void;
@@ -12,7 +10,6 @@ interface Props {
 const HomePage = (props: Props) => {
     return (
         <>
-            {/* <Navbar /> */}
             <div id='home-page' className='h-auto min-h-screen flex justify-center items-center'>
                 <div
                     id='home-page__card'
