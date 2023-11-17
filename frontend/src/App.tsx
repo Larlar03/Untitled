@@ -7,6 +7,7 @@ import UploadPage from './pages/upload-page/upload-page';
 import Studio from './types/studios';
 import ErrorPage from './pages/error-page/error-page';
 import TimeoutError from './components/error/timeout/timeout';
+import EditPage from './pages/edit-page/edit-page';
 
 //Test
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
             <Route path='/upload' element={<UploadPage />} />
+            <Route path='/edit' element={<EditPage />} />
             <Route path='/timeout' element={<TimeoutError />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>

@@ -35,7 +35,7 @@ const ResultsCard = (props: Props) => {
                                 ? 'border-black md:shadow-black'
                                 : 'border-cosmic-cobalt md:shadow-medium-slate-blue'
                         } w-full h-full flex flex-col justify-between text-center p-5 shadow-lg md:shadow-none bg-white border-[1px] rounded-md absolute z-10`}
-                        key={props.studio.id}
+                        key={props.studio._id}
                         data-testid='results-card'
                     >
                         <div id='top'>
