@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import services from '../../../constants/services.ts';
 import OptionButton from '../../buttons/option-button/option-button';
 
 interface Props {
     selectOptions: (options: string[]) => void;
-    services: string[];
 }
 
 const SearchOptions = (props: Props) => {
@@ -36,8 +36,8 @@ const SearchOptions = (props: Props) => {
 
     return (
         <ul className='list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center md:gap-2'>
-            {props.services?.map((service: string, i: number) => (
-                <OptionButton key={i} serviceName={service} handleClick={handleOptionClick} />
+            {services?.map((service: string, i: number) => (
+                <OptionButton key={i} optionName={service} handleClick={handleOptionClick} />
             ))}
         </ul>
     );

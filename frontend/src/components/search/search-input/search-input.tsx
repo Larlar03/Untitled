@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import cities from '../../../constants/cities';
-import regions from '../../../constants/regions';
+import cities from '../../../constants/cities.ts';
+import regions from '../../../constants/regions.ts';
 import CitiesRegion from '../../../types/cities-regions.ts';
 
 import './search-input.css';

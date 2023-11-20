@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Studio from '../../types/studios';
-import { uploadForm } from '../upload-form';
+import { uploadStudio } from '../../api/upload-studio';
 import { cleanup } from '@testing-library/react';
 
 const studio: Studio = {
@@ -36,7 +36,7 @@ describe('Upload Studio Form', () => {
 
         jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
-        const response = await uploadForm(studio);
+        const response = await uploadStudio(studio);
 
         expect(axios.post).toHaveBeenCalledWith(
             `${process.env.VITE_STUDIOS_API}/`,
@@ -60,7 +60,7 @@ describe('Upload Studio Form', () => {
         global.console.error = consoleErrorMock;
 
         try {
-            await uploadForm(studio);
+            await uploadStudio(studio);
         } catch (error: any) {
             expect(error.message).toBe('Axios error');
             expect(consoleErrorMock).toHaveBeenCalled();

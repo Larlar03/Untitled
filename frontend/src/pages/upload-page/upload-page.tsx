@@ -7,7 +7,7 @@ import UploadSuccess from '../../components/upload/upload-success';
 import Modal from '../../components/modal/modal';
 import Studio from '../../types/studios';
 import { validateForm } from '../../utils/validate-form';
-import { uploadForm } from '../../utils/upload-form';
+import { uploadStudio } from '../../api/upload-studio';
 import placeholderImageData from '../../constants/placeholder-image-data';
 
 const UploadPage = () => {
@@ -85,7 +85,7 @@ const UploadPage = () => {
 
         try {
             validateForm(newStudio);
-            const response = await uploadForm(newStudio);
+            const response = await uploadStudio(newStudio);
             if (response === 'New studio stored successfully.') {
                 setIsUploaded(true);
             } else {
