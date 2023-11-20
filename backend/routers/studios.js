@@ -89,8 +89,8 @@ const studioRouter = function (collection) {
 		collection
 			.insertOne(newStudio)
 			.then(() => {
-				console.log('New studio stored successfully.');
-				res.status(200).send('New studio stored successfully.');
+				console.log('New studio created.');
+				res.status(201).send('New studio created.');
 			})
 			.catch((error) => {
 				console.error('Error storing image:', error);
@@ -114,8 +114,7 @@ const studioRouter = function (collection) {
 
 		collection
 			.deleteOne({ _id: objectId })
-			.then(() => collection.find().toArray())
-			.then((docs) => res.json(docs))
+			.then(() => res.status(204).send('Studio deleted.'))
 			.catch((error) => errorCatcher(error));
 	});
 

@@ -116,7 +116,7 @@ const UploadPage = () => {
     const upload = async () => {
         const response = await uploadStudioApi(newStudio);
 
-        if (response === 'New studio stored successfully.') {
+        if (response === 'New studio created.') {
             setIsSubmitted(true);
         } else {
             setErrorMessage('A network error occurred');

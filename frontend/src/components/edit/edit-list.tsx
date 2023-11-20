@@ -5,7 +5,7 @@ import NoResults from '../error/no-results/no-results';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 import { useState } from 'react';
-import { deleteStudio } from '../../api/delete-studio';
+import { deleteStudioApi } from '../../api/delete-studio';
 
 interface Props {
     results?: Studio[] | undefined;
@@ -18,32 +18,19 @@ const EditList = (props: Props) => {
 
     const navigate = useNavigate();
 
-    const openModal = async (
-        event: React.MouseEvent<HTMLButtonElement>,
-        studioId: string | undefined,
-        action: string
-    ) => {
+    const openModal = async (event: React.MouseEvent<HTMLButtonElement>, studioId: string | undefined) => {
         event.preventDefault();
-        if (action === 'delete') {
-            setTargetId(studioId);
-            console.log('studio', studioId);
 
-            setErrorMessage('Are you sure you want to delete?');
-            setShowModal(true);
-        } else if (action === 'edit') {
-            console.log(studioId);
-            setTargetId(studioId);
+        setTargetId(studioId);
 
-            setErrorMessage('Edit');
-            setShowModal(true);
-        }
+        setErrorMessage('Are you sure you want to delete?');
+        setShowModal(true);
     };
 
     const confirmDeletion = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        console.log('target', targetId);
-        const res = deleteStudio(targetId);
-        console.log('res', res);
+
+        deleteStudioApi(targetId);
         setShowModal(false);
     };
 
@@ -83,7 +70,7 @@ const EditList = (props: Props) => {
                                     </button>
                                     <button
                                         onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                                            openModal(event, studio._id, 'delete')
+                                            openModal(event, studio._id)
                                         }
                                     >
                                         <TrashIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
