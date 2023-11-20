@@ -11,12 +11,9 @@ import { uploadStudioApi } from '../../api/upload-studio';
 
 import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
+import { useLocation } from 'react-router-dom';
 
-interface Props {
-    type?: 'string';
-}
-
-const UploadPage = (props: Props) => {
+const UploadPage = () => {
     const [formType, setFormType] = useState<string>('upload');
     const [showModel, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -41,9 +38,18 @@ const UploadPage = (props: Props) => {
         logo: placeholderImageData,
         services: ['Acrobalance']
     });
+    const [studioId, setStudioId] = useState<string>('');
+
+    const location = useLocation();
+    const locationProps = location.state || {};
 
     useEffect(() => {
-        props.type && setFormType(props.type);
+        locationProps.type && setFormType(locationProps.type);
+        locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
+        locationProps.studioToEditId && setStudioId(locationProps.studioToEditId);
+
+        console.log('stu id', studioId);
+        console.log('type', formType);
     }, []);
 
     const goToFormPage = (pageNumber: number): void => {

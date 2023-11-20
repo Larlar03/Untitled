@@ -1,3 +1,4 @@
+import { Navigate, useNavigate } from 'react-router-dom';
 import Studio from '../../types/studios';
 import ConfirmationModal from '../modal/confirmation-modal';
 import NoResults from '../error/no-results/no-results';
@@ -15,8 +16,14 @@ const EditList = (props: Props) => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [targetId, setTargetId] = useState<string | undefined>('');
 
-    const openModal = async (e: React.MouseEvent<HTMLButtonElement>, studioId: string | undefined, action: string) => {
-        e.preventDefault();
+    const navigate = useNavigate();
+
+    const openModal = async (
+        event: React.MouseEvent<HTMLButtonElement>,
+        studioId: string | undefined,
+        action: string
+    ) => {
+        event.preventDefault();
         if (action === 'delete') {
             setTargetId(studioId);
             console.log('studio', studioId);
@@ -32,12 +39,27 @@ const EditList = (props: Props) => {
         }
     };
 
-    const confirmDeletion = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const confirmDeletion = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         console.log('target', targetId);
         const res = deleteStudio(targetId);
         console.log('res', res);
         setShowModal(false);
+    };
+
+    const editStudio = (event: React.MouseEvent<HTMLButtonElement>, studio: Studio, studioId: string | undefined) => {
+        event.preventDefault();
+
+        delete studio._id;
+
+        const propsToPass = {
+            type: 'update',
+            studioToEdit: studio,
+            studioToEditId: studioId
+        };
+
+        // Navigate to the UploadPage with props
+        navigate('/upload', { replace: true, state: propsToPass });
     };
 
     return (
@@ -53,18 +75,17 @@ const EditList = (props: Props) => {
                                 <div> {studio.name}</div>
                                 <div className='flex flex-row gap-x-1.5'>
                                     <button
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                                            openModal(e, studio._id, 'edit')
+                                        onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                                            editStudio(event, studio, studio._id)
                                         }
                                     >
                                         <PencilIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
                                     </button>
                                     <button
-                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                                            openModal(e, studio._id, 'delete')
+                                        onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                                            openModal(event, studio._id, 'delete')
                                         }
                                     >
-                                        {/* <DeleteIcon className='ml-1 text-black hover:text-cosmic-cobalt' /> */}
                                         <TrashIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
                                     </button>
                                 </div>

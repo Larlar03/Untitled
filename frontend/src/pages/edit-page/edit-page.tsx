@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { getAllStudiosApi } from '../../api/get-all-studios';
 import Header from '../../components/header/header';
 import Loading from '../../components/loading/loading';
 import Studio from '../../types/studios';
@@ -18,17 +18,19 @@ const EditPage = () => {
 
     const getAllStudios = async () => {
         setLoading(true);
-        axios
-            .get(`${process.env.VITE_STUDIOS_API}/`)
-            .then((response) => {
-                console.log(response.data);
-                setStudios(response.data);
+
+        try {
+            const response = await getAllStudiosApi();
+
+            setStudios(response);
+
+            setTimeout(() => {
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                navigate('/timeout');
-            });
+            }, 2000);
+        } catch (error) {
+            console.error(error);
+            navigate('/timeout');
+        }
     };
     return (
         <>

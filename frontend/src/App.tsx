@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { getAllStudiosApi } from './api/get-all-studios';
+import { searchStudiosApi } from './api/search-studios';
 
 import HomePage from './pages/home-page/home-page';
 import ResultsPage from './pages/results-page/results-page';
@@ -19,7 +19,7 @@ const App = () => {
     const getStudios = async (location: string | undefined, services: string[]) => {
         setLoading(true);
         try {
-            const response = await getAllStudiosApi(location, services);
+            const response = await searchStudiosApi(location, services);
 
             setStudios(response);
 
