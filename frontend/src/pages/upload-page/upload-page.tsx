@@ -1,39 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/header/header';
 import UploadFormOne from '../../components/upload/upload-form-one';
 import UploadFormTwo from '../../components/upload/upload-form-two';
 import UploadFormThree from '../../components/upload/upload-form-three';
 import UploadSuccess from '../../components/upload/upload-success';
-import Modal from '../../components/modal/modal';
-import Studio from '../../types/studios';
+
+import Modal from '../../components/modal/warning-modal';
 import { validateForm } from '../../utils/validate-form';
-import { uploadStudio } from '../../api/upload-studio';
+import { uploadStudioApi } from '../../api/upload-studio';
+
+import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
 
-const UploadPage = () => {
+interface Props {
+    type?: 'string';
+}
+
+const UploadPage = (props: Props) => {
+    const [formType, setFormType] = useState<string>('upload');
     const [showModel, setShowModal] = useState<boolean>(false);
-    const [isUploaded, setIsUploaded] = useState<boolean>(false);
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: '',
-        phone_number: '',
-        email_address: '',
+        name: 'test',
+        phone_number: '01217731747',
+        email_address: 'test@gmail.com',
         location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
+            address: '123 test',
+            post_code: 'tst est',
+            city: 'Birmingham',
+            region: 'West Midlands',
+            country: 'England'
         },
         social_links: {
-            website: '',
+            website: 'www.test.com',
             instagram: '',
             facebook: ''
         },
         logo: placeholderImageData,
-        services: []
+        services: ['Acrobalance']
     });
+
+    useEffect(() => {
+        props.type && setFormType(props.type);
+    }, []);
 
     const goToFormPage = (pageNumber: number): void => {
         setFormPage(pageNumber);
@@ -85,17 +96,41 @@ const UploadPage = () => {
 
         try {
             validateForm(newStudio);
-            const response = await uploadStudio(newStudio);
-            if (response === 'New studio stored successfully.') {
-                setIsUploaded(true);
+            if (formType === 'update') {
+                update();
             } else {
-                setErrorMessage('A network error occurred');
-                setShowModal(true);
+                upload();
             }
         } catch (error: any) {
             setErrorMessage(error.message);
             setShowModal(true);
         }
+    };
+
+    const upload = async () => {
+        const response = await uploadStudioApi(newStudio);
+
+        if (response === 'New studio stored successfully.') {
+            setIsSubmitted(true);
+        } else {
+            setErrorMessage('A network error occurred');
+            setShowModal(true);
+        }
+    };
+
+    const update = async () => {
+        console.log('update api here');
+
+        // const response = await uploadStudioApi(newStudio);
+
+        // if (response === 'New studio stored successfully.') {
+        //     setIsSubmitted(true);
+        // } else {
+        //     setErrorMessage('A network error occurred');
+        //     setShowModal(true);
+        // }
+
+        // setIsSubmitted(true);
     };
 
     return (
@@ -106,9 +141,9 @@ const UploadPage = () => {
                     className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
                 >
                     <Header subheading='Upload a Studio' />
-                    {isUploaded ? (
+                    {isSubmitted ? (
                         <>
-                            <UploadSuccess />
+                            <UploadSuccess type={formType} />
                         </>
                     ) : (
                         <>
@@ -132,6 +167,7 @@ const UploadPage = () => {
                                     storeServiceData={storeServiceData}
                                     newStudio={newStudio}
                                     onSubmit={onSubmit}
+                                    formType={formType}
                                 />
                             )}
                             {showModel && <Modal setShowModal={setShowModal} message={errorMessage} />}

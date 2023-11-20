@@ -8,6 +8,7 @@ interface Props {
     storeServiceData: (e: any) => void;
     newStudio: Studio;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    formType: string;
 }
 
 const UploadForm = (props: Props) => {
@@ -34,12 +35,11 @@ const UploadForm = (props: Props) => {
             </div>
             <div className='bottom flex justify-between w-full'>
                 <div className='w-2/5'>
-                    <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
+                    <CtaButton text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
                 </div>
                 <div className='w-2/5'>
                     <CtaButton
-                        className='w-2/5'
-                        text='Upload'
+                        text={props.formType === 'update' ? 'Update' : 'Upload'}
                         handleClick={(e: React.MouseEvent<HTMLButtonElement>) => props.onSubmit(e)}
                         type='button'
                     />

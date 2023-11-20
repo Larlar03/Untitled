@@ -8,7 +8,7 @@ interface Props {
     message: string;
 }
 
-const Modal = (props: Props) => {
+const WarningModal = (props: Props) => {
     // close the modal when clicking outside the modal.
     const modalRef: any = useRef();
 
@@ -38,4 +38,4 @@ const Modal = (props: Props) => {
     );
 };
 
-export default Modal;
+export default WarningModal;

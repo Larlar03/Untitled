@@ -112,10 +112,10 @@ const UploadForm = (props: Props) => {
             </div>
             <div className='bottom flex justify-between w-full'>
                 <div className='w-2/5'>
-                    <CtaButton className='w-2/5' text='Back' handleClick={() => props.goToFormPage(1)} type='button' />
+                    <CtaButton text='Back' handleClick={() => props.goToFormPage(1)} type='button' />
                 </div>
                 <div className='w-2/5'>
-                    <CtaButton className='w-2/5' text='Next' handleClick={() => props.goToFormPage(3)} type='button' />
+                    <CtaButton text='Next' handleClick={() => props.goToFormPage(3)} type='button' />
                 </div>
             </div>
         </form>
