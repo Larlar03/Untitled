@@ -22,7 +22,7 @@ describe('Search Options', () => {
         expect(submitButton).toBeDisabled();
     });
 
-    it('renders an enabled subit button when a location and service is clicked', async () => {
+    it('renders an enabled submit button when a location and service is clicked', async () => {
         const optionButtons = screen.getAllByTestId('option-button');
         fireEvent.click(optionButtons[0]);
 
