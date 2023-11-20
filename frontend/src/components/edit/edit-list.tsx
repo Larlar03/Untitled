@@ -4,34 +4,40 @@ import NoResults from '../error/no-results/no-results';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 import { useState } from 'react';
+import { deleteStudio } from '../../utils/delete-studio';
 
 interface Props {
     results?: Studio[] | undefined;
 }
 
 const EditList = (props: Props) => {
-    const [showModel, setShowModal] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [targetId, setTargetId] = useState<string | undefined>('');
 
-    const deleteStudio = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const openModal = async (e: React.MouseEvent<HTMLButtonElement>, studioId: string | undefined, action: string) => {
         e.preventDefault();
+        if (action === 'delete') {
+            setTargetId(studioId);
+            console.log('studio', studioId);
 
-        setErrorMessage('Are you sure you want to delete?');
-        setShowModal(true);
+            setErrorMessage('Are you sure you want to delete?');
+            setShowModal(true);
+        } else if (action === 'edit') {
+            console.log(studioId);
+            setTargetId(studioId);
 
-        // try {
-        //     validateForm(newStudio);
-        //     const response = await uploadForm(newStudio);
-        //     if (response === 'New studio stored successfully.') {
-        //         setIsUploaded(true);
-        //     } else {
-        //         setErrorMessage('A network error occurred');
-        //         setShowModal(true);
-        //     }
-        // } catch (error: any) {
-        //     setErrorMessage(error.message);
-        //     setShowModal(true);
-        // }
+            setErrorMessage('Edit');
+            setShowModal(true);
+        }
+    };
+
+    const confirmDeletion = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        console.log('target', targetId);
+        const res = deleteStudio(targetId);
+        console.log('res', res);
+        setShowModal(false);
     };
 
     return (
@@ -46,10 +52,18 @@ const EditList = (props: Props) => {
                             >
                                 <div> {studio.name}</div>
                                 <div className='flex flex-row gap-x-1.5'>
-                                    <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => deleteStudio(e)}>
+                                    <button
+                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                                            openModal(e, studio._id, 'edit')
+                                        }
+                                    >
                                         <PencilIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
                                     </button>
-                                    <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => deleteStudio(e)}>
+                                    <button
+                                        onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                                            openModal(e, studio._id, 'delete')
+                                        }
+                                    >
                                         {/* <DeleteIcon className='ml-1 text-black hover:text-cosmic-cobalt' /> */}
                                         <TrashIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
                                     </button>
@@ -61,7 +75,13 @@ const EditList = (props: Props) => {
                             <NoResults />
                         </div>
                     )}
-                    {showModel && <ConfirmationModal setShowModal={setShowModal} message={errorMessage} />}
+                    {showModal && (
+                        <ConfirmationModal
+                            setShowModal={setShowModal}
+                            message={errorMessage}
+                            delete={confirmDeletion}
+                        />
+                    )}
                 </ul>
             </div>
         </>

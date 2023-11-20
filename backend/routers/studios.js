@@ -1,5 +1,5 @@
 const express = require('express');
-const ObjectID = require('mongodb').ObjectID;
+const { ObjectId } = require('mongodb');
 const fs = require('fs');
 
 const studioRouter = function (collection) {
@@ -108,14 +108,16 @@ const studioRouter = function (collection) {
 	// });
 
 	// DELETE by id
-	// router.delete('/:id', (req, res) => {
-	// 		const id = req.params.id;
-	// 		collection
-	// 			.deleteOne({ _id: ObjectID(id) })
-	// 			.then(() => collection.find().toArray())
-	// 			.then((docs) => res.json(docs))
-	// 			.catch((error) => errorCatcher(error));
-	// 	});
+	router.delete('/:id', (req, res) => {
+		const id = req.params.id;
+		const objectId = new ObjectId(id); // Convert the id to ObjectId
+
+		collection
+			.deleteOne({ _id: objectId })
+			.then(() => collection.find().toArray())
+			.then((docs) => res.json(docs))
+			.catch((error) => errorCatcher(error));
+	});
 
 	// UPDATE by id
 	// router.put('/:id', (req, res) => {

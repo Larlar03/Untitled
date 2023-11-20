@@ -6,6 +6,7 @@ import './modal.css';
 interface Props {
     setShowModal: any;
     message: string;
+    delete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ConfirmationModal = (props: Props) => {
@@ -28,7 +29,10 @@ const ConfirmationModal = (props: Props) => {
                     <p data-testid='modal-message'>{props.message && props.message}</p>
                 </div>
                 <div className='modal__bottom'>
-                    <button onClick={() => props.setShowModal(false)} data-testid='modal-close-button'>
+                    <button
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => props.delete(e)}
+                        data-testid='modal-close-button'
+                    >
                         <CheckCircleIcon className='h-10 w-10 text-white hover:text-pale-violet' />
                     </button>
                     <button onClick={() => props.setShowModal(false)} data-testid='modal-close-button'>
