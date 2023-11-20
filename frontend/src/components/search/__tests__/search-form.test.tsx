@@ -40,7 +40,7 @@ describe('Search Options', () => {
     });
 
     it('prevents default behaviour on submit', async () => {
-        await fireEvent.click(screen.getAllByTestId('option-button')[0]);
+        fireEvent.click(screen.getAllByTestId('option-button')[0]);
 
         const autocomplete = screen.getByTestId('autocomplete');
         const input = within(autocomplete).getByRole('combobox');
@@ -51,6 +51,6 @@ describe('Search Options', () => {
 
         const submitButton = screen.getByTestId('cta-button');
         const isPrevented = fireEvent.click(submitButton);
-        await expect(isPrevented).toBe(false);
+        expect(isPrevented).toBe(false);
     });
 });

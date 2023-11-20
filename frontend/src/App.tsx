@@ -28,7 +28,7 @@ const App = () => {
                 navigate('/results');
             }, 2000);
         } catch (error) {
-            console.error(error);
+            console.log(error);
             navigate('/timeout');
         }
     };
