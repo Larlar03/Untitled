@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Studio from '../../types/studios';
 import ConfirmationModal from '../modal/confirmation-modal';
 import NoResults from '../error/no-results/no-results';
@@ -17,6 +17,8 @@ const EditList = (props: Props) => {
     const [targetId, setTargetId] = useState<string | undefined>('');
 
     const navigate = useNavigate();
+
+    console.log(props.results);
 
     const openModal = async (event: React.MouseEvent<HTMLButtonElement>, studioId: string | undefined) => {
         event.preventDefault();

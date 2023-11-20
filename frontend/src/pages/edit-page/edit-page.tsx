@@ -26,7 +26,7 @@ const EditPage = () => {
 
             setTimeout(() => {
                 setLoading(false);
-            }, 2000);
+            }, 1500);
         } catch (error) {
             console.error(error);
             navigate('/timeout');

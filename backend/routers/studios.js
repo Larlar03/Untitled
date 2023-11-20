@@ -119,17 +119,27 @@ const studioRouter = function (collection) {
 	});
 
 	// UPDATE by id
-	// router.put('/:id', (req, res) => {
-	// 	const itemId = req.params.id;
-	// 	const updatedItem = req.body;
+	router.put('/:id', (req, res) => {
+		const studioId = req.params.id;
+		let updatedStudio = req.body.studio;
 
-	// 	collection
-	// 		.findOneAndUpdate({ _id: ObjectID(itemId) }, { $set: updatedItem })
-	// 		.then((result) => {
-	// 			res.json(result.value);
-	// 		})
-	// 		.catch((error) => errorCatcher(error));
-	// });
+		const objectId = new ObjectId(studioId);
+		const updatedStudioLogo = updatedStudio.logo;
+		const isData = updatedStudioLogo.slice(0, 4);
+
+		if (isData === 'data') {
+			console.log(isData);
+			const logoBuffer = Buffer.from(updatedStudioLogo.split(',')[1], 'base64');
+			updatedStudio.logo = logoBuffer;
+		}
+
+		collection
+			.findOneAndUpdate({ _id: objectId }, { $set: updatedStudio })
+			.then((result) => {
+				res.json(result.value);
+			})
+			.catch((error) => errorCatcher(error));
+	});
 
 	return router;
 };

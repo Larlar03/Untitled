@@ -8,6 +8,7 @@ import UploadSuccess from '../../components/upload/upload-success';
 import Modal from '../../components/modal/warning-modal';
 import { validateForm } from '../../utils/validate-form';
 import { uploadStudioApi } from '../../api/upload-studio';
+import { updateStudioApi } from '../../api/update-studio';
 
 import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
@@ -44,12 +45,11 @@ const UploadPage = () => {
     const locationProps = location.state || {};
 
     useEffect(() => {
+        console.log(locationProps);
         locationProps.type && setFormType(locationProps.type);
         locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
         locationProps.studioToEditId && setStudioId(locationProps.studioToEditId);
-
-        console.log('stu id', studioId);
-        console.log('type', formType);
+        console.log(newStudio.logo);
     }, []);
 
     const goToFormPage = (pageNumber: number): void => {
@@ -79,6 +79,7 @@ const UploadPage = () => {
         }
 
         setNewStudio(ns);
+        console.log(ns.logo);
     };
 
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +100,9 @@ const UploadPage = () => {
 
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+
+        console.log('stu id', studioId);
+        console.log('type', formType);
 
         try {
             validateForm(newStudio);
@@ -127,16 +131,14 @@ const UploadPage = () => {
     const update = async () => {
         console.log('update api here');
 
-        // const response = await uploadStudioApi(newStudio);
+        const response = await updateStudioApi(newStudio, studioId);
 
-        // if (response === 'New studio stored successfully.') {
-        //     setIsSubmitted(true);
-        // } else {
-        //     setErrorMessage('A network error occurred');
-        //     setShowModal(true);
-        // }
-
-        // setIsSubmitted(true);
+        if (response === 200) {
+            setIsSubmitted(true);
+        } else {
+            setErrorMessage('A network error occurred');
+            setShowModal(true);
+        }
     };
 
     return (
