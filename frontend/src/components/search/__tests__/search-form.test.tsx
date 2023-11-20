@@ -22,9 +22,9 @@ describe('Search Options', () => {
         expect(submitButton).toBeDisabled();
     });
 
-    it('renders a enabled subit button when a location and service is clicked', async () => {
+    it('renders an enabled subit button when a location and service is clicked', async () => {
         const optionButtons = screen.getAllByTestId('option-button');
-        await fireEvent.click(optionButtons[0]);
+        fireEvent.click(optionButtons[0]);
 
         const autocomplete = screen.getByTestId('autocomplete');
         const input = within(autocomplete).getByRole('combobox');
@@ -36,7 +36,7 @@ describe('Search Options', () => {
         fireEvent.keyDown(autocomplete, { key: 'Enter' });
 
         const submitButton = screen.getByTestId('cta-button');
-        await expect(submitButton).not.toBeDisabled();
+        expect(submitButton).not.toBeDisabled();
     });
 
     it('prevents default behaviour on submit', async () => {

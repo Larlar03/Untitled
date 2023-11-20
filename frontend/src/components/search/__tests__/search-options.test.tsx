@@ -9,7 +9,7 @@ describe('Search Options', () => {
     beforeEach(() => {
         render(
             <Router>
-                <SearchOptions selectOptions={mockSelectOptions} services={services} />
+                <SearchOptions selectOptions={mockSelectOptions} options={services} />
             </Router>
         );
     });
@@ -27,7 +27,7 @@ describe('Search Options', () => {
         const button = screen.getByText('Aerial Hoop');
         expect(button).not.toHaveClass('active');
 
-        await fireEvent.click(button);
+        fireEvent.click(button);
         expect(button).toHaveClass('active');
     });
 
@@ -35,10 +35,10 @@ describe('Search Options', () => {
         const button = screen.getByText('Aerial Hoop');
         expect(button).not.toHaveClass('active');
 
-        await fireEvent.click(button);
+        fireEvent.click(button);
         expect(button).toHaveClass('active');
 
-        await fireEvent.click(button);
+        fireEvent.click(button);
         expect(button).not.toHaveClass('active');
     });
 

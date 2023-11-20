@@ -5,6 +5,7 @@ import SearchInput from './search-input/search-input';
 import SearchOptions from './search-options/search-options';
 
 import CitiesRegion from '../../types/cities-regions.ts';
+import services from '../../constants/services.ts';
 
 interface Props {
     getStudios: (location: string | undefined, services: string[]) => void;
@@ -34,7 +35,7 @@ const SearchForm = (props: Props) => {
                     <SearchInput selectLocation={selectLocation} />
                 </div>
                 <div>
-                    <SearchOptions selectOptions={selectOptions} />
+                    <SearchOptions selectOptions={selectOptions} options={services} />
                 </div>
                 <div className='mx-auto w-[100%] md:w-[90%]'>
                     <CtaButton
