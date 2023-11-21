@@ -31,7 +31,7 @@ const ConfirmationModal = (props: Props) => {
                 <div className='modal__bottom'>
                     <button
                         onClick={(e: React.MouseEvent<HTMLButtonElement>) => props.delete(e)}
-                        data-testid='modal-close-button'
+                        data-testid='modal-delete-button'
                     >
                         <CheckCircleIcon className='h-10 w-10 text-white hover:text-pale-violet' />
                     </button>

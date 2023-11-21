@@ -2,7 +2,7 @@ import './option-button.css';
 
 interface Props {
     optionName: string;
-    handleClick: (event: React.MouseEvent<HTMLElement>) => void;
+    handleClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const OptionButton = (props: Props) => {

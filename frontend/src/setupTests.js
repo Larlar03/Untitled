@@ -7,6 +7,7 @@ import '@testing-library/jest-dom/extend-expect';
 // Create a mock portal container element
 const portalContainer = document.createElement('div');
 portalContainer.setAttribute('id', 'modal-root');
+portalContainer.setAttribute('data-testid', 'modal-root');
 document.body.appendChild(portalContainer);
 
 // Mock ReactDom.createPortal to render components into the portal container

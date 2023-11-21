@@ -22,7 +22,7 @@ export const mockStudio: Studio = {
 
 export const mockAllStudios: Studio[] = [
     {
-        name: 'Mock Studio Two',
+        name: 'Mock Studio One',
         phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
@@ -60,7 +60,7 @@ export const mockAllStudios: Studio[] = [
         services: ['Aerial Hoop']
     },
     {
-        name: 'Mock Studio',
+        name: 'Mock Studio Three',
         phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
