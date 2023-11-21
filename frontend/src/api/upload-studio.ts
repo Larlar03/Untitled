@@ -14,7 +14,7 @@ export const uploadStudioApi = async (newStudio: Studio): Promise<string> => {
             }
         })
         .catch((error) => {
-            // console.error(error);
+            console.error(error);
         });
 
     return response?.data;

@@ -10,7 +10,7 @@ export const searchStudiosApi = async (location: string | undefined, services: s
             timeout: 100000
         })
         .catch((error) => {
-            // console.error(error);
+            console.error(error);
         });
 
     return response?.data;

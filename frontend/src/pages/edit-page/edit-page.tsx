@@ -28,7 +28,7 @@ const EditPage = () => {
                 setLoading(false);
             }, 1500);
         } catch (error) {
-            // console.error(error);
+            console.error(error);
             navigate('/timeout');
         }
     };
