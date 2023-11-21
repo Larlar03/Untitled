@@ -64,7 +64,7 @@ const EditList = (props: Props) => {
         <>
             <div className='my-6 px-2 flex flex-col justify-center '>
                 <ul className='list-none overflow-y-scroll'>
-                    {props.results ? (
+                    {props.results && props.results.length > 0 ? (
                         props.results.map((studio: Studio) => (
                             <li
                                 key={studio._id}
