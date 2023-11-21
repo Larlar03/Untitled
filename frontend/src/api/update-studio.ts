@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Studio from '../types/studios';
 
-export const updateStudioApi = async (studio: Studio, id: string | undefined): Promise<any> => {
+export const updateStudioApi = async (studio: Studio, id: string | undefined): Promise<number | undefined> => {
     const requestBody = {
         studio
     };

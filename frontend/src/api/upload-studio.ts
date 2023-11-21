@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Studio from '../types/studios';
 
-export const uploadStudioApi = async (newStudio: Studio): Promise<string> => {
+export const uploadStudioApi = async (newStudio: Studio): Promise<number | undefined> => {
     const requestBody = {
         isFrontend: true,
         newStudio
@@ -17,5 +17,5 @@ export const uploadStudioApi = async (newStudio: Studio): Promise<string> => {
             console.error(error);
         });
 
-    return response?.data;
+    return response?.status;
 };

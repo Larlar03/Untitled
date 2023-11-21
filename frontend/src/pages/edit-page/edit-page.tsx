@@ -45,7 +45,7 @@ const EditPage = () => {
                             <Loading />
                         </div>
                     )}
-                    {!loading && <EditList results={studios} />}
+                    {!loading && <EditList results={studios} getAllStudios={getAllStudios} />}
                 </div>
             </div>
         </>

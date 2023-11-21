@@ -9,31 +9,40 @@ import { deleteStudioApi } from '../../api/delete-studio';
 
 interface Props {
     results?: Studio[] | undefined;
+    getAllStudios: () => void;
 }
 
 const EditList = (props: Props) => {
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string>('');
+    const [modalMessage, setModalMessage] = useState<string>('');
     const [targetId, setTargetId] = useState<string | undefined>('');
 
     const navigate = useNavigate();
 
-    console.log(props.results);
-
-    const openModal = async (event: React.MouseEvent<HTMLButtonElement>, studioId: string | undefined) => {
+    const openModal = async (
+        event: React.MouseEvent<HTMLButtonElement>,
+        studioId: string | undefined,
+        studioName: string | undefined
+    ) => {
         event.preventDefault();
 
         setTargetId(studioId);
 
-        setErrorMessage('Are you sure you want to delete?');
+        setModalMessage(`Are you sure you want to delete ${studioName}?`);
         setShowModal(true);
     };
 
     const confirmDeletion = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
-        deleteStudioApi(targetId);
-        setShowModal(false);
+        const responseStatus = await deleteStudioApi(targetId);
+
+        if (responseStatus === 204) {
+            setShowModal(false);
+            props.getAllStudios();
+        } else {
+            setModalMessage('A network error occurred');
+        }
     };
 
     const editStudio = (event: React.MouseEvent<HTMLButtonElement>, studio: Studio, studioId: string | undefined) => {
@@ -72,7 +81,7 @@ const EditList = (props: Props) => {
                                     </button>
                                     <button
                                         onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                                            openModal(event, studio._id)
+                                            openModal(event, studio._id, studio.name)
                                         }
                                     >
                                         <TrashIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
@@ -88,7 +97,7 @@ const EditList = (props: Props) => {
                     {showModal && (
                         <ConfirmationModal
                             setShowModal={setShowModal}
-                            message={errorMessage}
+                            message={modalMessage}
                             delete={confirmDeletion}
                         />
                     )}

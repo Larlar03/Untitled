@@ -16,10 +16,11 @@ import { useLocation } from 'react-router-dom';
 
 const UploadPage = () => {
     const [formType, setFormType] = useState<string>('upload');
-    const [showModel, setShowModal] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [studioId, setStudioId] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
         name: 'test',
         phone_number: '01217731747',
@@ -39,17 +40,16 @@ const UploadPage = () => {
         logo: placeholderImageData,
         services: ['Acrobalance']
     });
-    const [studioId, setStudioId] = useState<string>('');
 
+    // Get props passed from edit page
     const location = useLocation();
     const locationProps = location.state || {};
 
     useEffect(() => {
-        console.log(locationProps);
+        //  Set props passed from edit page
         locationProps.type && setFormType(locationProps.type);
         locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
         locationProps.studioToEditId && setStudioId(locationProps.studioToEditId);
-        console.log(newStudio.logo);
     }, []);
 
     const goToFormPage = (pageNumber: number): void => {
@@ -79,7 +79,6 @@ const UploadPage = () => {
         }
 
         setNewStudio(ns);
-        console.log(ns.logo);
     };
 
     const storeServiceData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,9 +100,6 @@ const UploadPage = () => {
     const onSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        console.log('stu id', studioId);
-        console.log('type', formType);
-
         try {
             validateForm(newStudio);
             if (formType === 'update') {
@@ -118,9 +114,9 @@ const UploadPage = () => {
     };
 
     const upload = async () => {
-        const response = await uploadStudioApi(newStudio);
+        const responseStatus = await uploadStudioApi(newStudio);
 
-        if (response === 'New studio created.') {
+        if (responseStatus === 201) {
             setIsSubmitted(true);
         } else {
             setErrorMessage('A network error occurred');
@@ -129,11 +125,9 @@ const UploadPage = () => {
     };
 
     const update = async () => {
-        console.log('update api here');
+        const responseStatus = await updateStudioApi(newStudio, studioId);
 
-        const response = await updateStudioApi(newStudio, studioId);
-
-        if (response === 200) {
+        if (responseStatus === 204) {
             setIsSubmitted(true);
         } else {
             setErrorMessage('A network error occurred');
@@ -178,7 +172,7 @@ const UploadPage = () => {
                                     formType={formType}
                                 />
                             )}
-                            {showModel && <Modal setShowModal={setShowModal} message={errorMessage} />}
+                            {showModal && <Modal setShowModal={setShowModal} message={errorMessage} />}
                         </>
                     )}
                 </div>
