@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { searchStudiosApi } from './api/search-studios';
+import searchStudiosApi from './api/search-studios';
 
 import HomePage from './pages/home-page/home-page';
 import ResultsPage from './pages/results-page/results-page';

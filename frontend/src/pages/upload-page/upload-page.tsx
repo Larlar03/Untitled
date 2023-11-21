@@ -7,8 +7,8 @@ import UploadSuccess from '../../components/upload/upload-success';
 
 import Modal from '../../components/modal/warning-modal';
 import { validateForm } from '../../utils/validate-form';
-import { uploadStudioApi } from '../../api/upload-studio';
-import { updateStudioApi } from '../../api/update-studio';
+import uploadStudioApi from '../../api/upload-studio';
+import updateStudioApi from '../../api/update-studio';
 
 import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
@@ -22,23 +22,23 @@ const UploadPage = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [studioId, setStudioId] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
-        name: 'test',
-        phone_number: '01217731747',
-        email_address: 'test@gmail.com',
+        name: '',
+        phone_number: '',
+        email_address: '',
         location: {
-            address: '123 test',
-            post_code: 'tst est',
-            city: 'Birmingham',
-            region: 'West Midlands',
-            country: 'England'
+            address: '',
+            post_code: '',
+            city: '',
+            region: '',
+            country: ''
         },
         social_links: {
-            website: 'www.test.com',
+            website: '',
             instagram: '',
             facebook: ''
         },
         logo: placeholderImageData,
-        services: ['Acrobalance']
+        services: []
     });
 
     // Get props passed from edit page

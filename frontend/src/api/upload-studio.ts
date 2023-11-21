@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Studio from '../types/studios';
 
-export const uploadStudioApi = async (newStudio: Studio): Promise<number | undefined> => {
+const uploadStudioApi = async (newStudio: Studio): Promise<number | undefined> => {
     const requestBody = {
         isFrontend: true,
         newStudio
@@ -19,3 +19,5 @@ export const uploadStudioApi = async (newStudio: Studio): Promise<number | undef
 
     return response?.status;
 };
+
+export default uploadStudioApi;

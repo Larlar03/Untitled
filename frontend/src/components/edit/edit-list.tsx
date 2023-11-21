@@ -5,7 +5,7 @@ import NoResults from '../error/no-results/no-results';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 import { useState } from 'react';
-import { deleteStudioApi } from '../../api/delete-studio';
+import deleteStudioApi from '../../api/delete-studio';
 
 interface Props {
     results?: Studio[] | undefined;

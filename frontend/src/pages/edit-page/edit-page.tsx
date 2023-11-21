@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllStudiosApi } from '../../api/get-all-studios';
+import getAllStudiosApi from '../../api/get-all-studios';
 import Header from '../../components/header/header';
 import Loading from '../../components/loading/loading';
 import Studio from '../../types/studios';
