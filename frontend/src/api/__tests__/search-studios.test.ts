@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
 import searchStudiosApi from '../search-studios';
-import { mockAllStudios } from '../__mocks__/mock-studio';
+import { mockFiveStudios } from '../../utils/mock-objects/mock-studios';
 
 const mockLocation = 'Birmingham';
 const mockServices = ['Aerial Hoop'];
@@ -15,7 +15,7 @@ describe('Upload Studio API', () => {
     it('makes a GET request', async () => {
         const mockResponse = {
             status: 200,
-            data: mockAllStudios[2]
+            data: mockFiveStudios[2]
         };
 
         jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponse);
@@ -27,7 +27,7 @@ describe('Upload Studio API', () => {
             timeout: 100000
         });
 
-        expect(response).toBe(mockAllStudios[2]);
+        expect(response).toBe(mockFiveStudios[2]);
     });
 
     it('handles Axios errors', async () => {

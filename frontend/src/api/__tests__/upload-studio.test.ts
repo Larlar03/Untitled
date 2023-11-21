@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
 import uploadStudioApi from '../upload-studio';
-import { mockStudio } from '../__mocks__/mock-studio';
+import { mockStudio } from '../../utils/mock-objects/mock-studios';
 
 describe('Upload Studio API', () => {
     afterEach(() => {

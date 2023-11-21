@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
 import getAllStudiosApi from '../get-all-studios';
-import { mockAllStudios } from '../__mocks__/mock-studio';
+import { mockFiveStudios } from '../../utils/mock-objects/mock-studios';
 
 describe('Upload Studio API', () => {
     afterEach(() => {
@@ -12,7 +12,7 @@ describe('Upload Studio API', () => {
     it('makes a GET request', async () => {
         const mockResponse = {
             status: 200,
-            data: mockAllStudios
+            data: mockFiveStudios
         };
 
         jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponse);
@@ -21,7 +21,7 @@ describe('Upload Studio API', () => {
 
         expect(axios.get).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`);
 
-        expect(response).toBe(mockAllStudios);
+        expect(response).toBe(mockFiveStudios);
     });
 
     it('handles Axios errors', async () => {

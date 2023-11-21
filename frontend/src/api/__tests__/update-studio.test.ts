@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
 import updateStudioApi from '../update-studio';
-import { mockStudio } from '../__mocks__/mock-studio';
+import { mockOneStudio } from '../../utils/mock-objects/mock-studios';
 
 const mockId = '123';
 
@@ -18,10 +18,10 @@ describe('Update Studio API', () => {
 
         jest.spyOn(axios, 'put').mockResolvedValueOnce(mockResponse);
 
-        const response = await updateStudioApi(mockStudio, mockId);
+        const response = await updateStudioApi(mockOneStudio, mockId);
 
         expect(axios.put).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/${mockId}`, {
-            studio: mockStudio
+            studio: mockOneStudio
         });
 
         expect(response).toBe(204);
@@ -34,7 +34,7 @@ describe('Update Studio API', () => {
         global.console.error = consoleErrorMock;
 
         try {
-            await updateStudioApi(mockStudio, mockId);
+            await updateStudioApi(mockOneStudio, mockId);
         } catch (error: any) {
             expect(error.message).toBe('Axios error');
             expect(consoleErrorMock).toHaveBeenCalled();

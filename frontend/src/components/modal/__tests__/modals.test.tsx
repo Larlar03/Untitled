@@ -2,37 +2,15 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import EditList from '../../edit/edit-list';
 import UploadPage from '../../../pages/upload-page/upload-page';
-import Studio from '../../../types/studios';
+import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
 
 const mockGetAllStudiosFunc = jest.fn();
-const mockStudios: Studio[] = [
-    {
-        _id: 'One',
-        name: 'Mock Studio One',
-        phone_number: '00000000000',
-        email_address: 'mockstudio@gmail.com',
-        location: {
-            address: '123 Street',
-            post_code: '000 000',
-            city: 'Birmingham',
-            region: 'West Midlands',
-            country: 'England'
-        },
-        social_links: {
-            website: 'www.mockstudio.com',
-            instagram: '',
-            facebook: ''
-        },
-        logo: '',
-        services: ['Aerial Silks']
-    }
-];
 
 describe('Confirmation Modal', () => {
     beforeEach(() => {
         render(
             <Router>
-                <EditList results={mockStudios} getAllStudios={mockGetAllStudiosFunc} />
+                <EditList results={mockOneStudio} getAllStudios={mockGetAllStudiosFunc} />
             </Router>
         );
     });
