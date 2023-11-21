@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BookmarkIcon, ArrowUpOnSquareIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, ArrowUpOnSquareIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -13,13 +13,8 @@ const Navbar = () => {
             <button data-testid='home-icon' type='button' className='text-right' onClick={() => goToPage('')}>
                 <HomeIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
-            <button
-                data-testid='bookmark-icon'
-                type='button'
-                className='text-right'
-                onClick={() => goToPage('bookmarks')}
-            >
-                <BookmarkIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
+            <button data-testid='edit-icon' type='button' className='text-right' onClick={() => goToPage('edit')}>
+                <PencilIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />
             </button>
             <button data-testid='upload-icon' type='button' className='text-right' onClick={() => goToPage('upload')}>
                 <ArrowUpOnSquareIcon className='h-8 w-8 text-greyscale-100 hover:text-iris' />

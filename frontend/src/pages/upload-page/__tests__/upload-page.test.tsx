@@ -33,39 +33,6 @@ describe('Upload Page', () => {
         expect(pageTwoInputField).toBeVisible();
     });
 
-    // it('shows warning modal if fields are empty', () => {
-    //     // Simulate one field input
-    //     fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
-
-    //     // Go to last form page
-    //     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    //     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-
-    //     //  Upload form
-    //     fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-    //     expect(screen.getByTestId('modal')).toBeVisible();
-
-    //     expect(screen.getByTestId('modal-message')).toHaveTextContent(
-    //         'The following fields are empty: email_address, address, post_code, city, region, country, website'
-    //     );
-    // });
-
-    // it('closes model on x button click', () => {
-    //     // Go to last form page and upload empty form
-    //     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    //     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    //     fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-    //     // Show modal
-    //     expect(screen.getByTestId('modal')).toBeVisible();
-    //     expect(screen.getByTestId('modal-close-button')).toBeVisible();
-
-    //     // Close modal
-    //     fireEvent.click(screen.getByTestId('modal-close-button'));
-    //     expect(screen.queryByTestId('modal')).toBeNull();
-    // });
-
     // it('uploads form successfully', async () => {
     //     // Mock the uploadForm function
     //     jest.mock('../../../utils/upload-form', async () => ({}));
