@@ -17,6 +17,7 @@ describe('Upload Form Three', () => {
         render(
             <Router>
                 <UploadFormThree
+                    formType='upload'
                     goToFormPage={mockGoToFormPage}
                     storeServiceData={mockStoreServiceData}
                     onSubmit={mockSubmitForm}

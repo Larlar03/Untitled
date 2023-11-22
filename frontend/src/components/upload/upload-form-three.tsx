@@ -8,7 +8,7 @@ interface Props {
     storeServiceData: (e: any) => void;
     newStudio: Studio;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    formType: string;
+    formType?: string;
 }
 
 const UploadForm = (props: Props) => {

@@ -10,7 +10,7 @@ describe('Results Page', () => {
     it('renders', () => {
         render(
             <Router>
-                <ResultsPage results={mockOneStudio} />
+                <ResultsPage results={[mockOneStudio]} />
             </Router>
         );
         const subHeading = screen.getByText('Results');
