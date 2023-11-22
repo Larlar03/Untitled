@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Navbar from '../navbar';
 
@@ -11,10 +11,6 @@ describe('Navbar', () => {
         );
     });
 
-    afterEach(() => {
-        cleanup();
-    });
-
     it('renders icons', () => {
         const icons = screen.getAllByRole('button');
 
@@ -24,15 +20,30 @@ describe('Navbar', () => {
         });
     });
 
+    it('navigates to home page when home icon is clicked', async () => {
+        const homeIcon = screen.getByTestId('home-icon');
+        fireEvent.click(homeIcon);
+
+        waitFor(() => {
+            expect(window.location.href).toBe('http://127.0.0.1:5173/');
+        });
+    });
+
     it('navigates to upload page when upload icon is clicked', async () => {
         const uploadIcon = screen.getByTestId('upload-icon');
         fireEvent.click(uploadIcon);
-        // expect(window.location.href).toBe('http://127.0.0.1:5173/upload');
+
+        waitFor(() => {
+            expect(window.location.href).toBe('http://127.0.0.1:5173/upload');
+        });
     });
 
-    it('navigates to bookmark page when boomark icon is clicked', async () => {
-        const bookmarkIcon = screen.getByTestId('bookmark-icon');
+    it('navigates to edit page when edit icon is clicked', async () => {
+        const bookmarkIcon = screen.getByTestId('edit-icon');
         fireEvent.click(bookmarkIcon);
-        // expect(window.location.href).toBe('http://127.0.0.1:5173/upload');
+
+        waitFor(() => {
+            expect(window.location.href).toBe('http://127.0.0.1:5173/edit');
+        });
     });
 });

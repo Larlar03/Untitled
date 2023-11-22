@@ -48,7 +48,7 @@
 
 .modal__bottom button {
     cursor: pointer;
-    margin: 0 8px;
+    margin: 4px 8px 24px 8px;
 }
 @keyframes animate {
     from {

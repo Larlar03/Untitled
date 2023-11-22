@@ -2,7 +2,7 @@ import Location from './location';
 import SocialLinks from './social-links';
 
 class Studio {
-    id?: number | undefined;
+    _id?: string | undefined;
     name: string | undefined;
     phone_number: string | undefined;
     email_address: string | undefined;
@@ -12,7 +12,7 @@ class Studio {
     services: string[] | undefined;
 
     constructor() {
-        this.id = undefined;
+        this._id = undefined;
         this.name = undefined;
         this.phone_number = undefined;
         this.email_address = undefined;

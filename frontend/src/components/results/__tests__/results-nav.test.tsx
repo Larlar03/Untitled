@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Results from '../results.tsx';
-import { mockFiveStudios } from '../__mocks__/mockStudioResults.ts';
+import { mockFiveStudios } from '../../../utils/mock-objects/mock-studios.ts';
 
 describe('Results Navigation', () => {
     beforeEach(() => {
@@ -56,9 +56,9 @@ describe('Results Navigation', () => {
         const nextArrow = screen.getByTestId('next-arrow');
         fireEvent.click(nextArrow);
 
-        const leftCard = screen.getByText('Siren Asylum');
-        const middleCard = screen.getByText('AYC Studios');
-        const rightCard = screen.getByText('Body Synergy');
+        const leftCard = screen.getByText('Mock Studio One');
+        const middleCard = screen.getByText('Mock Studio Two');
+        const rightCard = screen.getByText('Mock Studio Three');
         const cardArray = [leftCard, middleCard, rightCard];
 
         cardArray.forEach((card) => {
@@ -70,9 +70,9 @@ describe('Results Navigation', () => {
         const prevArrow = screen.getByTestId('prev-arrow');
         fireEvent.click(prevArrow);
 
-        const leftCard = screen.getByText('K Pole Solihull');
-        const middleCard = screen.getByText('K Pole Cradely Heath');
-        const rightCard = screen.getByText('Siren Asylum');
+        const leftCard = screen.getByText('Mock Studio Four');
+        const middleCard = screen.getByText('Mock Studio Five');
+        const rightCard = screen.getByText('Mock Studio One');
         const cardArray = [leftCard, middleCard, rightCard];
 
         cardArray.forEach((card) => {

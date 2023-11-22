@@ -1,48 +1,28 @@
 import axios from 'axios';
-import Studio from '../../types/studios';
-import { uploadForm } from '../upload-form';
 import { cleanup } from '@testing-library/react';
+import uploadStudioApi from '../upload-studio';
+import { mockOneStudio } from '../../utils/mock-objects/mock-studios';
 
-const studio: Studio = {
-    name: 'Studio',
-    phone_number: '00000000000',
-    email_address: 'studio@gmail.com',
-    location: {
-        address: '123 Street',
-        post_code: '000 000',
-        city: 'Birmingham',
-        region: 'West Midlands',
-        country: 'England'
-    },
-    social_links: {
-        website: 'www.studio.com',
-        instagram: '',
-        facebook: ''
-    },
-    logo: '',
-    services: ['Aerial Silks']
-};
-
-describe('Upload Studio Form', () => {
+describe('Upload Studio API', () => {
     afterEach(() => {
         cleanup();
         jest.clearAllMocks();
     });
 
-    it('makes a post request', async () => {
+    it('makes a POST request', async () => {
         const mockResponse = {
-            data: 'New studio stored successfully.'
+            status: 204
         };
 
         jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
-        const response = await uploadForm(studio);
+        const response = await uploadStudioApi(mockOneStudio);
 
         expect(axios.post).toHaveBeenCalledWith(
             `${process.env.VITE_STUDIOS_API}/`,
             {
                 isFrontend: true,
-                newStudio: studio
+                newStudio: mockOneStudio
             },
             {
                 headers: {
@@ -51,16 +31,17 @@ describe('Upload Studio Form', () => {
             }
         );
 
-        expect(response).toBe('New studio stored successfully.');
+        expect(response).toBe(204);
     });
 
-    it('logs Axios errors', async () => {
+    it('handles Axios errors', async () => {
         jest.spyOn(axios, 'post').mockRejectedValueOnce(new Error('Axios error'));
+
         const consoleErrorMock = jest.fn();
         global.console.error = consoleErrorMock;
 
         try {
-            await uploadForm(studio);
+            await uploadStudioApi(mockOneStudio);
         } catch (error: any) {
             expect(error.message).toBe('Axios error');
             expect(consoleErrorMock).toHaveBeenCalled();

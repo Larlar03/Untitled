@@ -1,14 +1,15 @@
 import { useRef } from 'react';
 import ReactDom from 'react-dom';
-import { XCircleIcon } from '@heroicons/react/24/outline';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import './modal.css';
 
 interface Props {
     setShowModal: any;
     message: string;
+    delete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Modal = (props: Props) => {
+const ConfirmationModal = (props: Props) => {
     // close the modal when clicking outside the modal.
     const modalRef: any = useRef();
 
@@ -28,6 +29,12 @@ const Modal = (props: Props) => {
                     <p data-testid='modal-message'>{props.message && props.message}</p>
                 </div>
                 <div className='modal__bottom'>
+                    <button
+                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => props.delete(e)}
+                        data-testid='modal-delete-button'
+                    >
+                        <CheckCircleIcon className='h-10 w-10 text-white hover:text-pale-violet' />
+                    </button>
                     <button onClick={() => props.setShowModal(false)} data-testid='modal-close-button'>
                         <XCircleIcon className='h-10 w-10 text-white hover:text-pale-violet' />
                     </button>
@@ -38,4 +45,4 @@ const Modal = (props: Props) => {
     );
 };
 
-export default Modal;
+export default ConfirmationModal;

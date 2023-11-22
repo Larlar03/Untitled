@@ -1,29 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import ResultsPage from '../results-page';
+import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
 import Studio from '../../../types/studios';
-
-const mockStudios: Studio[] = [
-    {
-        name: '',
-        phone_number: '',
-        email_address: '',
-        location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
-        },
-        social_links: {
-            website: '',
-            instagram: '',
-            facebook: ''
-        },
-        logo: '',
-        services: []
-    }
-];
 
 const mockNoStudios: Studio[] = [];
 
@@ -31,7 +10,7 @@ describe('Results Page', () => {
     it('renders', () => {
         render(
             <Router>
-                <ResultsPage results={mockStudios} />
+                <ResultsPage results={[mockOneStudio]} />
             </Router>
         );
         const subHeading = screen.getByText('Results');

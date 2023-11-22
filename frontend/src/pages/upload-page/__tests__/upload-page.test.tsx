@@ -2,21 +2,36 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import UploadPage from '../upload-page';
+import Studio from '../../../types/studios';
+import placeholderImageData from '../../../constants/placeholder-image-data';
 
-console.log = jest.fn();
+export const mockStudio: Studio = {
+    name: 'Mock Studio One',
+    phone_number: '00000000000',
+    email_address: 'mockstudio@gmail.com',
+    location: {
+        address: '123 Street',
+        post_code: '000 000',
+        city: 'Birmingham',
+        region: 'West Midlands',
+        country: 'England'
+    },
+    social_links: {
+        website: 'www.mockstudio.com',
+        instagram: '',
+        facebook: ''
+    },
+    logo: placeholderImageData,
+    services: ['Acrobalance']
+};
 
-describe('Upload Page', () => {
+describe('Upload Page UI', () => {
     beforeEach(() => {
         render(
             <Router>
                 <UploadPage />
             </Router>
         );
-    });
-
-    afterEach(() => {
-        cleanup();
-        jest.clearAllMocks();
     });
 
     it('renders subheading', () => {
@@ -32,69 +47,34 @@ describe('Upload Page', () => {
         const pageTwoInputField = screen.getByText('Website URL');
         expect(pageTwoInputField).toBeVisible();
     });
+});
 
-    it('shows warning modal if fields are empty', () => {
-        // Simulate one field input
-        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
-
-        // Go to last form page
-        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-
-        //  Upload form
-        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-        expect(screen.getByTestId('modal')).toBeVisible();
-
-        expect(screen.getByTestId('modal-message')).toHaveTextContent(
-            'The following fields are empty: email_address, address, post_code, city, region, country, website'
+describe('Upload API Calls', () => {
+    beforeEach(() => {
+        render(
+            <Router>
+                <UploadPage />
+            </Router>
         );
     });
 
-    it('closes model on x button click', () => {
-        // Go to last form page and upload empty form
-        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-        // Show modal
-        expect(screen.getByTestId('modal')).toBeVisible();
-        expect(screen.getByTestId('modal-close-button')).toBeVisible();
-
-        // Close modal
-        fireEvent.click(screen.getByTestId('modal-close-button'));
-        expect(screen.queryByTestId('modal')).toBeNull();
+    afterEach(() => {
+        cleanup();
+        jest.clearAllMocks();
     });
 
-    // it('closes model on click event outside of the modal component', async () => {
-    //     // Go to last form page and upload empty form
-    //     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    //     fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-    //     fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
-
-    //     // Show modal
-    //     expect(screen.getByTestId('modal')).toBeVisible();
-    //     expect(screen.getByTestId('modal-close-button')).toBeVisible();
-
-    //     fireEvent.click(document.body);
-    //     expect(screen.queryByTestId('modal')).toBeNull();
-    // });
-
-    it('uploads form successfully', async () => {
-        // Mock the uploadForm function
-        jest.mock('../../../utils/upload-form', async () => ({}));
-
-        // Mock uploadForm successfull response
+    it('calls upload studio api on upload form submission', async () => {
+        // Mock POST request
         const mockResponse = {
-            data: 'New studio stored successfully.'
+            status: 200
         };
 
         jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
         // Simulate form input and submission
-        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
+        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Mock Studio One' } });
         fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
-        fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@gmail.com' } });
+        fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'mockstudio@gmail.com' } });
         fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
         fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
         fireEvent.change(screen.getByLabelText('City'), { target: { value: 'Birmingham' } });
@@ -102,7 +82,7 @@ describe('Upload Page', () => {
         fireEvent.change(screen.getByLabelText('Country'), { target: { value: 'England' } });
 
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
-        fireEvent.change(screen.getByLabelText('Website URL'), { target: { value: 'www.test.com' } });
+        fireEvent.change(screen.getByLabelText('Website URL'), { target: { value: 'www.mockstudio.com' } });
 
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getAllByRole('checkbox')[0]);
@@ -111,23 +91,96 @@ describe('Upload Page', () => {
 
         //  Assert
         await waitFor(() => {
-            expect(screen.getByAltText('Sparkling stars')).toBeVisible();
-            expect(screen.getByTestId('upload-success-message')).toHaveTextContent('Studio uploaded successfully');
+            expect(axios.post).toHaveBeenCalledWith(
+                `${process.env.VITE_STUDIOS_API}/`,
+                {
+                    isFrontend: true,
+                    newStudio: mockStudio
+                },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
         });
     });
 
-    it('shows warning modal if there is a network error', async () => {
-        // Mock the uploadForm function
-        jest.mock('../../../utils/upload-form', async () => ({}));
-
+    it('shows warning modal if there is an upload network error', async () => {
         // Mock network error
-        const networkError = new Error('Network Error');
-        const axiosMock = jest.fn(() => Promise.reject(networkError));
-        jest.spyOn(axios, 'post').mockImplementation(axiosMock);
+        jest.spyOn(axios, 'post').mockRejectedValueOnce(new Error('Axios error'));
 
-        // Create a mock function for console.error
-        const consoleErrorMock = jest.fn();
-        global.console.error = consoleErrorMock;
+        // Simulate form input and submission
+        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Mock Studio One' } });
+        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
+        fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'mockstudio@gmail.com' } });
+        fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
+        fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
+        fireEvent.change(screen.getByLabelText('City'), { target: { value: 'Birmingham' } });
+        fireEvent.change(screen.getByLabelText('Region'), { target: { value: 'West Midlands' } });
+        fireEvent.change(screen.getByLabelText('Country'), { target: { value: 'England' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.change(screen.getByLabelText('Website URL'), { target: { value: 'www.mockstudio.com' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getAllByRole('checkbox')[0]);
+
+        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
+
+        //  Assert
+        await waitFor(() => {
+            expect(screen.getByTestId('modal-message')).toHaveTextContent('An upload network error occurred');
+        });
+    });
+});
+
+describe('Update API Calls', () => {
+    beforeEach(() => {
+        render(
+            <Router>
+                <UploadPage formType='update' />
+            </Router>
+        );
+    });
+
+    afterEach(() => {
+        cleanup();
+        jest.clearAllMocks();
+    });
+
+    it('calls update studio api on update form submission', async () => {
+        // Mock PUT api  request
+        const mockResponse = {
+            status: 204
+        };
+
+        jest.spyOn(axios, 'put').mockResolvedValueOnce(mockResponse);
+
+        // Simulate form input and submission
+        fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Mock Studio One' } });
+        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
+        fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'mockstudio@gmail.com' } });
+        fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
+        fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
+        fireEvent.change(screen.getByLabelText('City'), { target: { value: 'Birmingham' } });
+        fireEvent.change(screen.getByLabelText('Region'), { target: { value: 'West Midlands' } });
+        fireEvent.change(screen.getByLabelText('Country'), { target: { value: 'England' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.change(screen.getByLabelText('Website URL'), { target: { value: 'www.mockstudio.com' } });
+
+        fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+        fireEvent.click(screen.getAllByRole('checkbox')[0]);
+
+        fireEvent.click(screen.getByRole('button', { name: 'Update' }));
+
+        //  Assert
+        await waitFor(() => {
+            expect(axios.put).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
+                studio: mockStudio
+            });
+        });
+    });
+    it('shows warning modal if there is a network error', async () => {
+        // Mock network error
+        jest.spyOn(axios, 'put').mockRejectedValueOnce(new Error('Axios error'));
 
         // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
@@ -145,11 +198,11 @@ describe('Upload Page', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Next' }));
         fireEvent.click(screen.getAllByRole('checkbox')[0]);
 
-        fireEvent.click(screen.getByRole('button', { name: 'Upload' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Update' }));
 
         //  Assert
         await waitFor(() => {
-            expect(screen.getByTestId('modal-message')).toHaveTextContent('A network error occurred');
+            expect(screen.getByTestId('modal-message')).toHaveTextContent('An update network error occurred');
         });
     });
 });

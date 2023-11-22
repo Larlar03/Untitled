@@ -1,21 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/header/header';
-import Navbar from '../../components/navbar/navbar';
 import UploadFormOne from '../../components/upload/upload-form-one';
 import UploadFormTwo from '../../components/upload/upload-form-two';
 import UploadFormThree from '../../components/upload/upload-form-three';
 import UploadSuccess from '../../components/upload/upload-success';
-import Modal from '../../components/modal/modal';
-import Studio from '../../types/studios';
-import { validateForm } from '../../utils/validate-form';
-import { uploadForm } from '../../utils/upload-form';
-import placeholderImageData from '../../constants/placeholder-image-data';
 
-const UploadPage = () => {
-    const [showModel, setShowModal] = useState<boolean>(false);
-    const [isUploaded, setIsUploaded] = useState<boolean>(false);
+import Modal from '../../components/modal/warning-modal';
+import { validateForm } from '../../utils/validate-form';
+import uploadStudioApi from '../../api/upload-studio';
+import updateStudioApi from '../../api/update-studio';
+
+import Studio from '../../types/studios';
+import placeholderImageData from '../../constants/placeholder-image-data';
+import { useLocation } from 'react-router-dom';
+
+interface Props {
+    formType?: string;
+}
+
+const UploadPage = (props: Props) => {
+    const [formType, setFormType] = useState<string>('upload');
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [studioId, setStudioId] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
         name: '',
         phone_number: '',
@@ -35,6 +44,19 @@ const UploadPage = () => {
         logo: placeholderImageData,
         services: []
     });
+
+    // Get props passed from edit page
+    const location = useLocation();
+    const locationProps = location.state || {};
+
+    useEffect(() => {
+        props.formType && setFormType(props.formType);
+
+        //  Set props passed from edit page
+        locationProps.type && setFormType(locationProps.type);
+        locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
+        locationProps.studioToEditId && setStudioId(locationProps.studioToEditId);
+    }, []);
 
     const goToFormPage = (pageNumber: number): void => {
         setFormPage(pageNumber);
@@ -86,12 +108,10 @@ const UploadPage = () => {
 
         try {
             validateForm(newStudio);
-            const response = await uploadForm(newStudio);
-            if (response === 'New studio stored successfully.') {
-                setIsUploaded(true);
+            if (formType === 'update') {
+                update();
             } else {
-                setErrorMessage('A network error occurred');
-                setShowModal(true);
+                upload();
             }
         } catch (error: any) {
             setErrorMessage(error.message);
@@ -99,18 +119,39 @@ const UploadPage = () => {
         }
     };
 
+    const upload = async () => {
+        const responseStatus = await uploadStudioApi(newStudio);
+
+        if (responseStatus === 201) {
+            setIsSubmitted(true);
+        } else {
+            setErrorMessage('An upload network error occurred');
+            setShowModal(true);
+        }
+    };
+
+    const update = async () => {
+        const responseStatus = await updateStudioApi(newStudio, studioId);
+
+        if (responseStatus === 204) {
+            setIsSubmitted(true);
+        } else {
+            setErrorMessage('An update network error occurred');
+            setShowModal(true);
+        }
+    };
+
     return (
         <>
-            <Navbar />
-            <div id='upload-page' className='h-auto min-h-screen grid justify-center'>
+            <div id='upload-page' className='h-auto min-h-screen flex justify-center items-center'>
                 <div
                     id='upload-page__card'
-                    className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:absolute md:left-[50%] md:translate-x-[-50%] md:z-10'
+                    className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
                 >
                     <Header subheading='Upload a Studio' />
-                    {isUploaded ? (
+                    {isSubmitted ? (
                         <>
-                            <UploadSuccess />
+                            <UploadSuccess type={formType} />
                         </>
                     ) : (
                         <>
@@ -134,16 +175,13 @@ const UploadPage = () => {
                                     storeServiceData={storeServiceData}
                                     newStudio={newStudio}
                                     onSubmit={onSubmit}
+                                    formType={formType}
                                 />
                             )}
-                            {showModel && <Modal setShowModal={setShowModal} message={errorMessage} />}
+                            {showModal && <Modal setShowModal={setShowModal} message={errorMessage} />}
                         </>
                     )}
                 </div>
-                <div
-                    id='upload-page__card--shadow'
-                    className='invisible md:visible md:w-[476px] md:h-[650px] md:shadow-xl rounded-lg bg-cosmic-cobalt absolute top-[12.5%] left-[51%] translate-x-[-50%] z-0'
-                ></div>
             </div>
         </>
     );

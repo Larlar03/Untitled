@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import ResultsCard from './results-card/results-card';
 import ResultsNav from './results-nav/results-nav';
+import ResultsCard from './results-card/results-card';
 import Studio from '../../types/studios';
 
 interface Props {
@@ -45,7 +45,7 @@ const Results = (props: Props) => {
                 handlePrevClick={handlePrevClick}
             />
             {props.results && (
-                <div className='h-auto min-h-auto grid grid-cols-3 justify-center pb-10'>
+                <div className='h-full w-full mt-6 flex flex-row justify-center'>
                     {props.results?.length <= 2 && (
                         <ResultsCard cardPosition='center-card' studio={props.results[activeCard]} isActive={true} />
                     )}
