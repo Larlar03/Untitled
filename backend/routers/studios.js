@@ -80,7 +80,7 @@ const studioRouter = function (collection) {
 		collection
 			.findOne({ _id: objectId })
 			.then((doc) => res.json(doc))
-			.catch((err) => errorCatcher(err));
+			.catch((err) => errorCatcher(500, err));
 	});
 
 	// POST new studio

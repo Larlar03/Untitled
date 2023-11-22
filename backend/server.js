@@ -12,7 +12,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // router
-const newRouter = require('./routers/studios');
+const newRouterOne = require('./routers/studios');
+const newRouterTwo = require('./routers/admin');
 
 MongoClient.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
@@ -20,10 +21,18 @@ MongoClient.connect(process.env.MONGODB_URI, {
 })
 	.then((client) => {
 		const db = client.db();
+
+		// Studios
 		const studioCollection = db.collection('studios');
-		const studioRouter = newRouter(studioCollection);
+		const studioRouter = newRouterOne(studioCollection);
 
 		app.use('/studios', studioRouter);
+
+		// Admin
+		const adminCollection = db.collection('admin');
+		const adminRouter = newRouterTwo(adminCollection);
+
+		app.use('/admin', adminRouter);
 	})
 	.catch('Error connecting to db:', console.err);
 

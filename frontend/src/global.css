@@ -40,8 +40,8 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    /* background-color: white; */
+    /* background: #f1f1f1; */
+    background: var(--alabaster);
 }
 
 /* Handle */
