@@ -31,7 +31,7 @@ describe('No Results', () => {
     it('renders link back to search page', () => {
         const link = screen.getByRole('link');
         expect(link).toBeVisible();
-        expect(link).toHaveTextContent('search');
+        expect(link).toHaveTextContent('home');
         expect(link).toHaveAttribute('href', '/');
         expect(window.location.href).toBe('http://localhost/');
     });
