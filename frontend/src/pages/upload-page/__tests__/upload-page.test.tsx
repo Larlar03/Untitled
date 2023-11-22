@@ -1,11 +1,9 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import UploadPage from '../upload-page';
 import axios from 'axios';
+import UploadPage from '../upload-page';
 import Studio from '../../../types/studios';
 import placeholderImageData from '../../../constants/placeholder-image-data';
-
-console.log = jest.fn();
 
 export const mockStudio: Studio = {
     name: 'Mock Studio One',
@@ -34,11 +32,6 @@ describe('Upload Page UI', () => {
                 <UploadPage />
             </Router>
         );
-    });
-
-    afterEach(() => {
-        cleanup();
-        jest.clearAllMocks();
     });
 
     it('renders subheading', () => {
@@ -71,6 +64,7 @@ describe('Upload API Calls', () => {
     });
 
     it('calls upload studio api on upload form submission', async () => {
+        // Mock POST request
         const mockResponse = {
             status: 200
         };
@@ -152,6 +146,7 @@ describe('Update API Calls', () => {
     });
 
     it('calls update studio api on update form submission', async () => {
+        // Mock PUT api  request
         const mockResponse = {
             status: 204
         };
