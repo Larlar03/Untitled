@@ -1,27 +1,25 @@
 import Studio from '../../types/studios';
 
-export const mockOneStudio: Studio[] = [
-    {
-        _id: '1',
-        name: 'Mock Studio One',
-        phone_number: '00000000000',
-        email_address: 'mockstudio@gmail.com',
-        location: {
-            address: '123 Street',
-            post_code: '000 000',
-            city: 'Birmingham',
-            region: 'West Midlands',
-            country: 'England'
-        },
-        social_links: {
-            website: 'www.mockstudio.com',
-            instagram: '',
-            facebook: ''
-        },
-        logo: '',
-        services: ['Aerial Silks']
-    }
-];
+export const mockOneStudio: Studio = {
+    _id: '1',
+    name: 'Mock Studio One',
+    phone_number: '00000000000',
+    email_address: 'mockstudio@gmail.com',
+    location: {
+        address: '123 Street',
+        post_code: '000 000',
+        city: 'Birmingham',
+        region: 'West Midlands',
+        country: 'England'
+    },
+    social_links: {
+        website: 'www.mockstudio.com',
+        instagram: '',
+        facebook: ''
+    },
+    logo: '',
+    services: ['Aerial Silks']
+};
 
 export const mockTwoStudios: Studio[] = [
     {

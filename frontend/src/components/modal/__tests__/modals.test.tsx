@@ -10,7 +10,7 @@ describe('Confirmation Modal', () => {
     beforeEach(() => {
         render(
             <Router>
-                <EditList results={mockOneStudio} getAllStudios={mockGetAllStudiosFunc} />
+                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudiosFunc} />
             </Router>
         );
     });

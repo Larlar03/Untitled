@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
 import uploadStudioApi from '../upload-studio';
-import { mockStudio } from '../../utils/mock-objects/mock-studios';
+import { mockOneStudio } from '../../utils/mock-objects/mock-studios';
 
 describe('Upload Studio API', () => {
     afterEach(() => {
@@ -16,13 +16,13 @@ describe('Upload Studio API', () => {
 
         jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
-        const response = await uploadStudioApi(mockStudio);
+        const response = await uploadStudioApi(mockOneStudio);
 
         expect(axios.post).toHaveBeenCalledWith(
             `${process.env.VITE_STUDIOS_API}/`,
             {
                 isFrontend: true,
-                newStudio: mockStudio
+                newStudio: mockOneStudio
             },
             {
                 headers: {
@@ -41,7 +41,7 @@ describe('Upload Studio API', () => {
         global.console.error = consoleErrorMock;
 
         try {
-            await uploadStudioApi(mockStudio);
+            await uploadStudioApi(mockOneStudio);
         } catch (error: any) {
             expect(error.message).toBe('Axios error');
             expect(consoleErrorMock).toHaveBeenCalled();

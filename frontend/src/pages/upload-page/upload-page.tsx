@@ -14,7 +14,11 @@ import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
 import { useLocation } from 'react-router-dom';
 
-const UploadPage = () => {
+interface Props {
+    formType?: string;
+}
+
+const UploadPage = (props: Props) => {
     const [formType, setFormType] = useState<string>('upload');
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -46,6 +50,8 @@ const UploadPage = () => {
     const locationProps = location.state || {};
 
     useEffect(() => {
+        props.formType && setFormType(props.formType);
+
         //  Set props passed from edit page
         locationProps.type && setFormType(locationProps.type);
         locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
@@ -119,7 +125,7 @@ const UploadPage = () => {
         if (responseStatus === 201) {
             setIsSubmitted(true);
         } else {
-            setErrorMessage('A network error occurred');
+            setErrorMessage('An upload network error occurred');
             setShowModal(true);
         }
     };
@@ -130,7 +136,7 @@ const UploadPage = () => {
         if (responseStatus === 204) {
             setIsSubmitted(true);
         } else {
-            setErrorMessage('A network error occurred');
+            setErrorMessage('An update network error occurred');
             setShowModal(true);
         }
     };

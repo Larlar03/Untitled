@@ -10,7 +10,7 @@ describe('Results', () => {
     it('displays 1 results card when 1 result is returned', () => {
         render(
             <Router>
-                <Results results={mockOneStudio} />
+                <Results results={[mockOneStudio]} />
             </Router>
         );
 

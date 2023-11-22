@@ -25,7 +25,7 @@ describe('Edit List', () => {
     it('navigates to upload page with studio details when edit button is clicked', () => {
         render(
             <Router>
-                <EditList results={mockOneStudio} getAllStudios={mockGetAllStudios} />
+                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudios} />
             </Router>
         );
 
@@ -42,7 +42,7 @@ describe('Edit List', () => {
     it('calls delete studio api when delete modal pop up is confirmed and closes modal', () => {
         render(
             <Router>
-                <EditList results={mockOneStudio} getAllStudios={mockGetAllStudios} />
+                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudios} />
             </Router>
         );
 
