@@ -43,7 +43,7 @@ const usersRouter = function (collection) {
 			.catch((error) => errorCatcher(500, error));
 	});
 
-	// UPDATE user password by username
+	// UPDATE user password
 	router.put('/:username', async (req, res) => {
 		const username = req.params.username;
 		const newPassword = req.body.newPassword;
@@ -84,6 +84,17 @@ const usersRouter = function (collection) {
 			})
 			.catch((err) => errorCatcher(500, err));
 	});
+
+	// DELETE user
+	router.delete('/:username', (req, res) => {
+		const username = req.params.username;
+
+		collection
+			.deleteOne({ username: username })
+			.then(() => res.status(204).send('User deleted.'))
+			.catch((error) => errorCatcher(500, error));
+	});
+
 	return router;
 };
 
