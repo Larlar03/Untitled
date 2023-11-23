@@ -9,6 +9,7 @@ import Studio from './types/studios';
 import ErrorPage from './pages/error-page/error-page';
 import TimeoutError from './components/error/timeout/timeout';
 import EditPage from './pages/edit-page/edit-page';
+import AdminPage from './pages/admin-page/admin-page';
 
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
@@ -37,6 +38,7 @@ const App = () => {
         <Routes>
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
+            <Route path='/admin' element={<AdminPage />} />
             <Route path='/upload' element={<UploadPage />} />
             <Route path='/edit' element={<EditPage />} />
             <Route path='/timeout' element={<TimeoutError />} />

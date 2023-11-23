@@ -47,7 +47,7 @@ const UploadForm = (props: Props) => {
     }, [props.storeNewStudioData]);
 
     return (
-        <form action='submit' className='mt-12'>
+        <form action='submit' className='mt-12' id='upload-form'>
             <div className='top'>
                 <section className='mb-8'>
                     <span className='input-group'>

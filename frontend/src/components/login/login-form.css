@@ -1,0 +1,31 @@
+#login-form {
+    margin-top: 3rem;
+}
+
+.bottom {
+    margin-top: 40px;
+}
+
+section {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 15px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-group input {
+    width: 100%;
+    border: 1px solid var(--gallery);
+    border-radius: 10px;
+    padding: 6px;
+}
+
+@media (min-width: 768px) {
+    .bottom {
+        margin-top: 30px;
+    }
+}

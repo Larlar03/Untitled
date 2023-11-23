@@ -10,6 +10,7 @@ interface Props {
 const HomePage = (props: Props) => {
     return (
         <>
+            {' '}
             <div id='home-page' className='h-auto min-h-screen flex justify-center items-center'>
                 <div
                     id='home-page__card'
