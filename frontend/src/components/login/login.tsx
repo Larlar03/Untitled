@@ -1,24 +1,24 @@
-import { useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import './login-form.css';
+import User from '../../types/user';
 
 interface Props {
-    handleLogin: (username: string, password: string) => void;
+    user: User;
+    storeUsername: React.Dispatch<React.SetStateAction<string>>;
+    storePassword: React.Dispatch<React.SetStateAction<string>>;
+    handleLogin: () => void;
+    error?: string;
 }
 
 const Login = (props: Props) => {
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const field = e.currentTarget.name;
+    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
+        props.storeUsername(value);
+    };
 
-        if (field === 'username') {
-            setUsername(value);
-        } else if (field === 'password') {
-            setPassword(value);
-        }
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value;
+        props.storePassword(value);
     };
 
     return (
@@ -31,9 +31,9 @@ const Login = (props: Props) => {
                             type='text'
                             id='username'
                             name='username'
-                            onChange={handleChange}
+                            onChange={handleUsernameChange}
                             autoComplete='off'
-                            value={username}
+                            value={props.user && props.user.username}
                         />
                     </span>
                 </section>
@@ -44,15 +44,17 @@ const Login = (props: Props) => {
                             type='password'
                             id='password'
                             name='password'
-                            onChange={handleChange}
+                            onChange={handlePasswordChange}
                             autoComplete='off'
-                            value={password}
+                            value={props.user && props.user.password}
                         />
                     </span>
                 </section>
             </div>
-            <div className='bottom'>
-                <CtaButton text='Login' handleClick={() => props.handleLogin(username, password)} type='button' />
+
+            <div className='bottom flex flex-col '>
+                <CtaButton text='Login' handleClick={() => props.handleLogin()} type='button' />
+                <span className='text-error-crimson mt-3 mx-auto'>{props.error && props.error}</span>
             </div>
         </form>
     );

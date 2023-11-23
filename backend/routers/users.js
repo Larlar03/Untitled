@@ -21,26 +21,26 @@ const usersRouter = function (collection) {
 			.catch((error) => errorCatcher(404, error));
 	});
 
-	// GET by username
-	router.get('/:username', (req, res) => {
-		const username = req.params.username;
-
-		collection
-			.findOne({ username: username })
-			.then((doc) => res.json(doc))
-			.catch((err) => errorCatcher(404, err));
-	});
-
 	// CREATE user
 	router.post('/', (req, res) => {
 		const newUser = req.body;
+		const userPassword = req.body.password;
 
-		collection
-			.insertOne(newUser)
-			.then(() => {
-				res.status(201).send('Created.');
+		hashPassword(userPassword)
+			.then((hashedPassword) => {
+				newUser.password = hashedPassword;
 			})
-			.catch((error) => errorCatcher(500, error));
+			.then(() => {
+				collection
+					.insertOne(newUser)
+					.then(() => {
+						res.status(201).send('Created.');
+					})
+					.catch((error) => errorCatcher(500, error));
+			})
+			.catch((err) => {
+				console.error('Error creating new user: ', err);
+			});
 	});
 
 	// UPDATE user password
@@ -63,26 +63,8 @@ const usersRouter = function (collection) {
 					.catch((error) => errorCatcher(500, error));
 			})
 			.catch((err) => {
-				console.error('Error hashing password in PUT req: ', err);
+				console.error('Error updating user: ', err);
 			});
-	});
-
-	// User login
-	router.post('/login', async (req, res) => {
-		const username = req.body.username;
-		const providedPassword = req.body.password;
-
-		collection
-			.findOne({ username: username })
-			.then(async (user) => {
-				const result = await comparePasswords(providedPassword, user.password);
-				if (result === true) {
-					res.status(200).res.json({ message: 'Access granted' });
-				} else {
-					res.status(401).json({ error: 'Access denied' });
-				}
-			})
-			.catch((err) => errorCatcher(500, err));
 	});
 
 	// DELETE user
@@ -93,6 +75,24 @@ const usersRouter = function (collection) {
 			.deleteOne({ username: username })
 			.then(() => res.status(204).send('User deleted.'))
 			.catch((error) => errorCatcher(500, error));
+	});
+
+	// LOGIN
+	router.post('/login', async (req, res) => {
+		const username = req.body.username;
+		const providedPassword = req.body.password;
+
+		collection
+			.findOne({ username: username })
+			.then(async (user) => {
+				const result = await comparePasswords(providedPassword, user.password);
+				if (result === true) {
+					res.status(200).json({ message: 'Access granted' });
+				} else {
+					res.status(401).json({ error: 'Access denied' });
+				}
+			})
+			.catch((err) => errorCatcher(500, err));
 	});
 
 	return router;
