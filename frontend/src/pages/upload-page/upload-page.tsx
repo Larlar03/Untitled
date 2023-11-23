@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Header from '../../components/header/header';
 import UploadFormOne from '../../components/upload/upload-form-one';
 import UploadFormTwo from '../../components/upload/upload-form-two';
 import UploadFormThree from '../../components/upload/upload-form-three';
@@ -142,46 +141,40 @@ const UploadPage = (props: Props) => {
     };
 
     return (
-        <div id='upload-page' className='h-auto min-h-screen flex justify-center items-center'>
-            <div
-                id='upload-page__card'
-                className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
-            >
-                <Header subheading='Upload a Studio' />
-                {isSubmitted ? (
-                    <>
-                        <UploadSuccess type={formType} />
-                    </>
-                ) : (
-                    <>
-                        {formPage === 1 && (
-                            <UploadFormOne
-                                goToFormPage={goToFormPage}
-                                storeNewStudioData={storeNewStudioData}
-                                newStudio={newStudio}
-                            />
-                        )}
-                        {formPage === 2 && (
-                            <UploadFormTwo
-                                goToFormPage={goToFormPage}
-                                storeNewStudioData={storeNewStudioData}
-                                newStudio={newStudio}
-                            />
-                        )}
-                        {formPage === 3 && (
-                            <UploadFormThree
-                                goToFormPage={goToFormPage}
-                                storeServiceData={storeServiceData}
-                                newStudio={newStudio}
-                                onSubmit={onSubmit}
-                                formType={formType}
-                            />
-                        )}
-                        {showModal && <Modal setShowModal={setShowModal} message={errorMessage} />}
-                    </>
-                )}
-            </div>
-        </div>
+        <>
+            {isSubmitted ? (
+                <>
+                    <UploadSuccess type={formType} />
+                </>
+            ) : (
+                <div className='px-2 '>
+                    {formPage === 1 && (
+                        <UploadFormOne
+                            goToFormPage={goToFormPage}
+                            storeNewStudioData={storeNewStudioData}
+                            newStudio={newStudio}
+                        />
+                    )}
+                    {formPage === 2 && (
+                        <UploadFormTwo
+                            goToFormPage={goToFormPage}
+                            storeNewStudioData={storeNewStudioData}
+                            newStudio={newStudio}
+                        />
+                    )}
+                    {formPage === 3 && (
+                        <UploadFormThree
+                            goToFormPage={goToFormPage}
+                            storeServiceData={storeServiceData}
+                            newStudio={newStudio}
+                            onSubmit={onSubmit}
+                            formType={formType}
+                        />
+                    )}
+                    {showModal && <Modal setShowModal={setShowModal} message={errorMessage} />}
+                </div>
+            )}
+        </>
     );
 };
 

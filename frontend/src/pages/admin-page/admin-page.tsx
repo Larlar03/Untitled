@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Header from '../../components/header/header';
 import Login from '../../components/login/login';
 import userLoginApi from '../../api/user-login';
+import AdminNavbar from './admin-navbar';
+import EditPage from '../edit-page/edit-page';
+import UploadPage from '../upload-page/upload-page';
 
 interface Props {
     adminLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,11 +15,7 @@ const AdminPage = (props: Props) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>();
-
-    useEffect(() => {
-        console.log('username', username);
-        console.log('password', password);
-    }, [username, password]);
+    const [view, setView] = useState<string>('upload');
 
     const handleLogin = async () => {
         const response = await userLoginApi(username, password);
@@ -29,25 +28,27 @@ const AdminPage = (props: Props) => {
         }
     };
 
-    // clear input and error message for incorrect password, set login states
     const handleLoginError = () => {
         setUsername('');
         setPassword('');
         setErrorMessage('Access denied');
     };
 
-    // logout
+    const handleLogout = () => {
+        setUsername('');
+        setPassword('');
+        props.adminLogin(false);
+    };
 
     return (
-        <div id='admin-page' className='h-auto min-h-screen flex justify-center items-center'>
+        <div id='admin-page' className='h-auto min-h-screen flex flex-col justify-center items-center'>
+            <AdminNavbar handleLogout={handleLogout} changeView={setView} />
             <div
                 id='admin-page__card'
                 className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
             >
-                <Header subheading='Admin Login' />
-                {props.isAdmin ? (
-                    <p>edit/upload</p>
-                ) : (
+                <Header subheading={props.isAdmin ? 'Admin' : 'Admin Login'} />
+                {!props.isAdmin ? (
                     <Login
                         handleLogin={handleLogin}
                         user={{ username: username, password: password }}
@@ -55,6 +56,18 @@ const AdminPage = (props: Props) => {
                         storePassword={setPassword}
                         error={errorMessage}
                     />
+                ) : (
+                    (() => {
+                        switch (view) {
+                            case 'edit':
+                                return <EditPage />;
+                            case 'upload':
+                                return <UploadPage />;
+
+                            default:
+                                return <EditPage />;
+                        }
+                    })()
                 )}
             </div>
         </div>

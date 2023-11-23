@@ -12,7 +12,7 @@ import AdminPage from './pages/admin-page/admin-page';
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
     const [loading, setLoading] = useState<boolean>(false);
-    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [isAdmin, setIsAdmin] = useState<boolean>(true);
 
     const navigate = useNavigate();
 
