@@ -10,6 +10,7 @@ import deleteStudioApi from '../../api/delete-studio';
 interface Props {
     results?: Studio[] | undefined;
     getAllStudios: () => void;
+    changeView: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const EditList = (props: Props) => {
@@ -51,13 +52,16 @@ const EditList = (props: Props) => {
         delete studio._id;
 
         const propsToPass = {
+            view: 'upload',
             type: 'update',
             studioToEdit: studio,
             studioToEditId: studioId
         };
 
+        props.changeView('upload');
+
         // Navigate to the UploadPage with props
-        navigate('/upload', { replace: true, state: propsToPass });
+        navigate('/admin', { replace: true, state: propsToPass });
     };
 
     return (

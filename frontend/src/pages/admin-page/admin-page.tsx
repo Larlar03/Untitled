@@ -15,7 +15,7 @@ const AdminPage = (props: Props) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>();
-    const [view, setView] = useState<string>('upload');
+    const [view, setView] = useState<string>('admin');
 
     const handleLogin = async () => {
         const response = await userLoginApi(username, password);
@@ -47,7 +47,18 @@ const AdminPage = (props: Props) => {
                 id='admin-page__card'
                 className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
             >
-                <Header subheading={props.isAdmin ? 'Admin' : 'Admin Login'} />
+                <Header
+                    subheading={(() => {
+                        switch (view) {
+                            case 'edit':
+                                return 'Edit a Studio';
+                            case 'upload':
+                                return 'Upload a Studio';
+                            default:
+                                return 'Admin Login';
+                        }
+                    })()}
+                />
                 {!props.isAdmin ? (
                     <Login
                         handleLogin={handleLogin}
@@ -60,12 +71,12 @@ const AdminPage = (props: Props) => {
                     (() => {
                         switch (view) {
                             case 'edit':
-                                return <EditPage />;
+                                return <EditPage changeView={setView} />;
                             case 'upload':
                                 return <UploadPage />;
 
                             default:
-                                return <EditPage />;
+                                return <EditPage changeView={setView} />;
                         }
                     })()
                 )}

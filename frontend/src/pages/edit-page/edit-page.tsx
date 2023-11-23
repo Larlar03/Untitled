@@ -5,7 +5,11 @@ import Loading from '../../components/loading/loading';
 import Studio from '../../types/studios';
 import EditList from '../../components/edit/edit-list';
 
-const EditPage = () => {
+interface Props {
+    changeView: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const EditPage = (props: Props) => {
     const [studios, setStudios] = useState<Studio[]>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -38,7 +42,7 @@ const EditPage = () => {
                     <Loading />
                 </div>
             )}
-            {!loading && <EditList results={studios} getAllStudios={getAllStudios} />}
+            {!loading && <EditList results={studios} getAllStudios={getAllStudios} changeView={props.changeView} />}
         </>
     );
 };

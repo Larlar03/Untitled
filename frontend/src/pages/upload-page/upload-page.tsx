@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom';
 
 interface Props {
     formType?: string;
+    isAdmin?: boolean;
 }
 
 const UploadPage = (props: Props) => {
