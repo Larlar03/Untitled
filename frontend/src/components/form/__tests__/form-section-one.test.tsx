@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import UploadFormOne from '../upload-form-one';
+import FormSectionOne from '../form-section-one';
 import Studio from '../../../types/studios';
 
 const mockStoreNewStudioData = jest.fn();
@@ -10,7 +10,7 @@ describe('Upload Form One', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadFormOne
+                <FormSectionOne
                     goToFormPage={mockGoToFormPage}
                     storeNewStudioData={mockStoreNewStudioData}
                     newStudio={new Studio()}

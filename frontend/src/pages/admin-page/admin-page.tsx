@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import Header from '../../components/header/header';
-import Login from '../../components/login/login';
 import userLoginApi from '../../api/user-login';
+import Header from '../../components/header/header';
 import AdminNavbar from './admin-navbar';
+import Login from '../../components/login/login';
 import EditPage from '../edit-page/edit-page';
-import UploadPage from '../upload-page/upload-page';
+import Form from '../../components/form/form';
 import Studio from '../../types/studios';
 
 interface Props {
-    adminLogin: React.Dispatch<React.SetStateAction<boolean>>;
     isAdmin: boolean;
+    setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AdminPage = (props: Props) => {
@@ -25,7 +25,7 @@ const AdminPage = (props: Props) => {
         const response = await userLoginApi(username, password);
 
         if (response === 200) {
-            props.adminLogin(true);
+            props.setIsAdmin(true);
         } else {
             handleLoginError();
             console.log('Access denied');
@@ -41,7 +41,7 @@ const AdminPage = (props: Props) => {
     const handleLogout = () => {
         setUsername('');
         setPassword('');
-        props.adminLogin(false);
+        props.setIsAdmin(false);
     };
 
     const showForm = (
@@ -99,7 +99,7 @@ const AdminPage = (props: Props) => {
                                                     : `${formType} a Studio`
                                             }
                                         />
-                                        <UploadPage
+                                        <Form
                                             formType={formType}
                                             studioToEdit={studioToEdit}
                                             studioToEditId={studioToEditId}

@@ -1,5 +1,5 @@
 import CtaButton from '../buttons/cta-button/cta-button';
-import './login-form.css';
+import './login.css';
 import User from '../../types/user';
 
 interface Props {

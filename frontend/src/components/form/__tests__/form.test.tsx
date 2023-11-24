@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
-import UploadPage from '../upload-page';
+import Form from '../form';
 import Studio from '../../../types/studios';
 import placeholderImageData from '../../../constants/placeholder-image-data';
 
@@ -29,7 +29,7 @@ describe('Upload Page UI', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage />
+                <Form />
             </Router>
         );
     });
@@ -53,7 +53,7 @@ describe('Upload API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage />
+                <Form />
             </Router>
         );
     });
@@ -135,7 +135,7 @@ describe('Update API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage formType='update' />
+                <Form formType='update' />
             </Router>
         );
     });

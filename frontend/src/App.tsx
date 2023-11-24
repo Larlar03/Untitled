@@ -12,7 +12,7 @@ import AdminPage from './pages/admin-page/admin-page';
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
     const [loading, setLoading] = useState<boolean>(false);
-    const [isAdmin, setIsAdmin] = useState<boolean>(true);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const App = () => {
         <Routes>
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
-            <Route path='/admin' element={<AdminPage adminLogin={setIsAdmin} isAdmin={isAdmin} />} />
+            <Route path='/admin' element={<AdminPage isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
             <Route path='/timeout' element={<TimeoutError />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>

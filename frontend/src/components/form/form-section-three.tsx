@@ -1,6 +1,6 @@
 import CtaButton from '../buttons/cta-button/cta-button';
 import Services from '../../constants/services';
-import './upload-form.css';
+import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
@@ -11,9 +11,9 @@ interface Props {
     formType?: string;
 }
 
-const UploadForm = (props: Props) => {
+const FormSectionThree = (props: Props) => {
     return (
-        <form action='submit' id='upload-form'>
+        <form action='submit' id='form'>
             <div className='top flex justify-center'>
                 <section id='form-check-container'>
                     {Services.map((service, i) => (
@@ -49,4 +49,4 @@ const UploadForm = (props: Props) => {
     );
 };
 
-export default UploadForm;
+export default FormSectionThree;

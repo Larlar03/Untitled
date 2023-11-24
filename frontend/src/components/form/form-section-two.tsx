@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
-import './upload-form.css';
+import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
     newStudio: Studio;
 }
 
-const UploadForm = (props: Props) => {
+const FormSectionTwo = (props: Props) => {
     const [validWebsite, setValidWebsite] = useState<boolean>(false);
     const [validInstagram, setValidInstagram] = useState<boolean>(true);
     const [validFacebook, setValidFacebook] = useState<boolean>(true);
@@ -47,7 +47,7 @@ const UploadForm = (props: Props) => {
     }, [props.storeNewStudioData]);
 
     return (
-        <form action='submit' className='mt-12' id='upload-form'>
+        <form action='submit' className='mt-12' id='form'>
             <div className='top'>
                 <section className='mb-8'>
                     <span className='input-group'>
@@ -122,4 +122,4 @@ const UploadForm = (props: Props) => {
     );
 };
 
-export default UploadForm;
+export default FormSectionTwo;

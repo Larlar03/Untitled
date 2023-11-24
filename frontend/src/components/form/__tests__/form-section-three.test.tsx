@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import UploadFormThree from '../upload-form-three';
+import FormSectionThree from '../form-section-three';
 import Services from '../../../constants/services';
 import { MouseEvent } from 'react';
 import Studio from '../../../types/studios';
@@ -16,7 +16,7 @@ describe('Upload Form Three', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadFormThree
+                <FormSectionThree
                     formType='upload'
                     goToFormPage={mockGoToFormPage}
                     storeServiceData={mockStoreServiceData}

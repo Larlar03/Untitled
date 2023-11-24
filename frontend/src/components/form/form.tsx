@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import UploadFormOne from '../../components/upload/upload-form-one';
-import UploadFormTwo from '../../components/upload/upload-form-two';
-import UploadFormThree from '../../components/upload/upload-form-three';
-import UploadSuccess from '../../components/upload/upload-success';
+import UploadFormOne from './form-section-one';
+import UploadFormTwo from './form-section-two';
+import UploadFormThree from './form-section-three';
+import UploadSuccess from './form-success';
+import Modal from '../modal/warning-modal';
 
-import Modal from '../../components/modal/warning-modal';
 import { validateForm } from '../../utils/validate-form';
 import uploadStudioApi from '../../api/upload-studio';
 import updateStudioApi from '../../api/update-studio';
@@ -19,7 +19,7 @@ interface Props {
     studioToEditId?: string | undefined;
 }
 
-const UploadPage = (props: Props) => {
+const Form = (props: Props) => {
     const [formType, setFormType] = useState<string>('Upload');
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -46,34 +46,30 @@ const UploadPage = (props: Props) => {
         services: []
     });
 
-    // // Get props passed from edit page
-    // const location = useLocation();
-    // const locationProps = location.state || {};
+    const studioTemplate: Studio = {
+        name: '',
+        phone_number: '',
+        email_address: '',
+        location: {
+            address: '',
+            post_code: '',
+            city: '',
+            region: '',
+            country: ''
+        },
+        social_links: {
+            website: '',
+            instagram: '',
+            facebook: ''
+        },
+        logo: placeholderImageData,
+        services: []
+    };
 
     useEffect(() => {
         console.log(props);
         props.formType && setFormType(props.formType);
-        props.studioToEdit
-            ? setNewStudio(props.studioToEdit)
-            : setNewStudio({
-                  name: '',
-                  phone_number: '',
-                  email_address: '',
-                  location: {
-                      address: '',
-                      post_code: '',
-                      city: '',
-                      region: '',
-                      country: ''
-                  },
-                  social_links: {
-                      website: '',
-                      instagram: '',
-                      facebook: ''
-                  },
-                  logo: placeholderImageData,
-                  services: []
-              });
+        props.studioToEdit ? setNewStudio(props.studioToEdit) : setNewStudio(studioTemplate);
         props.studioToEditId ? setStudioId(props.studioToEditId) : setStudioId('');
     }, [props]);
 
@@ -198,4 +194,4 @@ const UploadPage = (props: Props) => {
     );
 };
 
-export default UploadPage;
+export default Form;
