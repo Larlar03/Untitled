@@ -4,7 +4,7 @@ import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
-    goToFormPage: (pageNumber: number) => void;
+    goToFormSection: (section: number) => void;
     storeServiceData: (e: any) => void;
     newStudio: Studio;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -35,7 +35,7 @@ const FormSectionThree = (props: Props) => {
             </div>
             <div className='bottom flex justify-between w-full'>
                 <div className='w-2/5'>
-                    <CtaButton text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
+                    <CtaButton text='Back' handleClick={() => props.goToFormSection(2)} type='button' />
                 </div>
                 <div className='w-2/5'>
                     <CtaButton

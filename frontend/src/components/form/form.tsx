@@ -14,7 +14,6 @@ import placeholderImageData from '../../constants/placeholder-image-data';
 
 interface Props {
     formType?: string;
-    isAdmin?: boolean;
     studioToEdit?: Studio | undefined;
     studioToEditId?: string | undefined;
 }
@@ -23,7 +22,7 @@ const Form = (props: Props) => {
     const [formType, setFormType] = useState<string>('Upload');
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-    const [formPage, setFormPage] = useState<number>(1);
+    const [formSection, setFormSection] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [studioId, setStudioId] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
@@ -67,14 +66,14 @@ const Form = (props: Props) => {
     };
 
     useEffect(() => {
-        console.log(props);
+        // console.log(props.studioToEdit?.logo);
         props.formType && setFormType(props.formType);
         props.studioToEdit ? setNewStudio(props.studioToEdit) : setNewStudio(studioTemplate);
         props.studioToEditId ? setStudioId(props.studioToEditId) : setStudioId('');
     }, [props]);
 
-    const goToFormPage = (pageNumber: number): void => {
-        setFormPage(pageNumber);
+    const goToFormSection = (section: number): void => {
+        setFormSection(section);
     };
 
     const storeNewStudioData = (e: any) => {
@@ -123,7 +122,7 @@ const Form = (props: Props) => {
 
         try {
             validateForm(newStudio);
-            if (formType === 'update') {
+            if (formType === 'Update') {
                 update();
             } else {
                 upload();
@@ -164,23 +163,23 @@ const Form = (props: Props) => {
                 </>
             ) : (
                 <div className='px-2 '>
-                    {formPage === 1 && (
+                    {formSection === 1 && (
                         <UploadFormOne
-                            goToFormPage={goToFormPage}
+                            goToFormSection={goToFormSection}
                             storeNewStudioData={storeNewStudioData}
                             newStudio={newStudio}
                         />
                     )}
-                    {formPage === 2 && (
+                    {formSection === 2 && (
                         <UploadFormTwo
-                            goToFormPage={goToFormPage}
+                            goToFormSection={goToFormSection}
                             storeNewStudioData={storeNewStudioData}
                             newStudio={newStudio}
                         />
                     )}
-                    {formPage === 3 && (
+                    {formSection === 3 && (
                         <UploadFormThree
-                            goToFormPage={goToFormPage}
+                            goToFormSection={goToFormSection}
                             storeServiceData={storeServiceData}
                             newStudio={newStudio}
                             onSubmit={onSubmit}

@@ -1,13 +1,12 @@
-import Studio from '../../types/studios';
-import ConfirmationModal from '../modal/confirmation-modal';
-import NoResults from '../error/no-results/no-results';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
-
 import { useState } from 'react';
 import deleteStudioApi from '../../api/delete-studio';
+import ConfirmationModal from '../modal/confirmation-modal';
+import NoResults from '../error/no-results/no-results';
+import Studio from '../../types/studios';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 interface Props {
-    results?: Studio[] | undefined;
+    studios?: Studio[] | undefined;
     getAllStudios: () => void;
     showForm: (
         event: React.MouseEvent<HTMLButtonElement>,
@@ -52,8 +51,8 @@ const EditList = (props: Props) => {
         <>
             <div className='my-6 px-2 flex flex-col justify-center '>
                 <ul className='list-none overflow-y-scroll'>
-                    {props.results && props.results.length > 0 ? (
-                        props.results.map((studio: Studio) => (
+                    {props.studios && props.studios.length > 0 ? (
+                        props.studios.map((studio: Studio) => (
                             <li
                                 key={studio._id}
                                 className='flex flex-row justify-between hover:bg-greyscale-400 rounded py-0.5 pl-2 pr-1 mr-1'

@@ -8,7 +8,7 @@ import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
-    goToFormPage: (pageNumber: number) => void;
+    goToFormSection: (section: number) => void;
     storeNewStudioData: (e: any) => void;
     newStudio: Studio;
 }
@@ -171,7 +171,7 @@ const FormSectionOne = (props: Props) => {
                 </section>
             </div>
             <div className='bottom'>
-                <CtaButton text='Next' handleClick={() => props.goToFormPage(2)} type='button' />
+                <CtaButton text='Next' handleClick={() => props.goToFormSection(2)} type='button' />
             </div>
         </form>
     );

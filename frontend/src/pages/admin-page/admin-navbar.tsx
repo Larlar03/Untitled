@@ -2,6 +2,7 @@ import { ArrowLeftOnRectangleIcon, PencilIcon, ArrowUpOnSquareIcon } from '@hero
 import Studio from '../../types/studios';
 
 interface Props {
+    setView: React.Dispatch<React.SetStateAction<string>>;
     handleLogout: () => void;
     showForm: (
         event: React.MouseEvent<HTMLButtonElement>,
@@ -9,7 +10,6 @@ interface Props {
         studioId: string | undefined,
         studio: Studio | undefined
     ) => void;
-    changeView: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AdminNavbar = (props: Props) => {
@@ -26,7 +26,7 @@ const AdminNavbar = (props: Props) => {
                     data-testid='edit-icon'
                     type='button'
                     className='text-right'
-                    onClick={() => props.changeView('edit')}
+                    onClick={() => props.setView('edit')}
                 >
                     <PencilIcon className='h-6 w-6 text-greyscale-100 hover:text-iris' />
                 </button>

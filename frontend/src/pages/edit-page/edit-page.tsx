@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getAllStudiosApi from '../../api/get-all-studios';
+import EditList from '../../components/edit/edit-list';
 import Loading from '../../components/loading/loading';
 import Studio from '../../types/studios';
-import EditList from '../../components/edit/edit-list';
 
 interface Props {
     showForm: (
@@ -47,7 +47,7 @@ const EditPage = (props: Props) => {
                     <Loading />
                 </div>
             )}
-            {!loading && <EditList results={studios} getAllStudios={getAllStudios} showForm={props.showForm} />}
+            {!loading && <EditList studios={studios} getAllStudios={getAllStudios} showForm={props.showForm} />}
         </>
     );
 };

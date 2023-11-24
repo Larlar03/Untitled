@@ -16,9 +16,9 @@ const AdminPage = (props: Props) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>();
-    const [view, setView] = useState<string>('admin');
+    const [view, setView] = useState<string>('');
     const [formType, setFormType] = useState<string>('');
-    const [studioToEditId, setStudioToEditId] = useState<string | undefined>('');
+    const [studioToEditId, setStudioToEditId] = useState<string | undefined>();
     const [studioToEdit, setStudioToEdit] = useState<Studio | undefined>();
 
     const handleLogin = async () => {
@@ -28,7 +28,6 @@ const AdminPage = (props: Props) => {
             props.setIsAdmin(true);
         } else {
             handleLoginError();
-            console.log('Access denied');
         }
     };
 
@@ -51,7 +50,6 @@ const AdminPage = (props: Props) => {
         studio: Studio | undefined
     ) => {
         event.preventDefault();
-        console.log('showing', formType);
 
         setFormType(formType);
         setStudioToEditId(studioId);
@@ -62,7 +60,7 @@ const AdminPage = (props: Props) => {
 
     return (
         <div id='admin-page' className='h-auto min-h-screen flex flex-col justify-center items-center'>
-            <AdminNavbar handleLogout={handleLogout} showForm={showForm} changeView={setView} />
+            <AdminNavbar handleLogout={handleLogout} showForm={showForm} setView={setView} />
             <div
                 id='admin-page__card'
                 className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
@@ -74,8 +72,8 @@ const AdminPage = (props: Props) => {
                         <Login
                             handleLogin={handleLogin}
                             user={{ username: username, password: password }}
-                            storeUsername={setUsername}
-                            storePassword={setPassword}
+                            setUsername={setUsername}
+                            setPassword={setPassword}
                             error={errorMessage}
                         />
                     </>

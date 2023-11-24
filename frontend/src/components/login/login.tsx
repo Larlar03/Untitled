@@ -4,8 +4,8 @@ import User from '../../types/user';
 
 interface Props {
     user: User;
-    storeUsername: React.Dispatch<React.SetStateAction<string>>;
-    storePassword: React.Dispatch<React.SetStateAction<string>>;
+    setUsername: React.Dispatch<React.SetStateAction<string>>;
+    setPassword: React.Dispatch<React.SetStateAction<string>>;
     handleLogin: () => void;
     error?: string;
 }
@@ -13,12 +13,12 @@ interface Props {
 const Login = (props: Props) => {
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        props.storeUsername(value);
+        props.setUsername(value);
     };
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        props.storePassword(value);
+        props.setPassword(value);
     };
 
     return (
