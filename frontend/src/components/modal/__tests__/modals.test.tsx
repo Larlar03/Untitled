@@ -5,12 +5,13 @@ import Form from '../../form/form';
 import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
 
 const mockGetAllStudiosFunc = jest.fn();
+const mockShowForm = jest.fn();
 
 describe('Confirmation Modal', () => {
     beforeEach(() => {
         render(
             <Router>
-                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudiosFunc} />
+                <EditList studios={[mockOneStudio]} getAllStudios={mockGetAllStudiosFunc} showForm={mockShowForm} />
             </Router>
         );
     });

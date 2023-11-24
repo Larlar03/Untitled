@@ -6,7 +6,7 @@ import { MouseEvent } from 'react';
 import Studio from '../../../types/studios';
 
 const mockStoreServiceData = jest.fn();
-const mockGoToFormPage = jest.fn();
+const mockGoToFormSection = jest.fn();
 const mockSubmitForm = jest.fn(function (e: MouseEvent<HTMLButtonElement>): void {
     e.preventDefault();
     throw new Error('Function not implemented.');
@@ -18,7 +18,7 @@ describe('Upload Form Three', () => {
             <Router>
                 <FormSectionThree
                     formType='upload'
-                    goToFormPage={mockGoToFormPage}
+                    goToFormSection={mockGoToFormSection}
                     storeServiceData={mockStoreServiceData}
                     onSubmit={mockSubmitForm}
                     newStudio={new Studio()}
@@ -47,7 +47,7 @@ describe('Upload Form Three', () => {
     it('calls function to go to previous component when back button is clicked', () => {
         const backButton = screen.getByText('Back');
         fireEvent.click(backButton);
-        expect(mockGoToFormPage).toHaveBeenCalled();
+        expect(mockGoToFormSection).toHaveBeenCalled();
     });
 
     it('calls function to go to submit form when upload button is clicked', () => {

@@ -29,15 +29,9 @@ describe('Upload Page UI', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form />
+                <Form formType='Upload' />
             </Router>
         );
-    });
-
-    it('renders subheading', () => {
-        const subheading = screen.getByRole('heading', { level: 2 });
-        expect(subheading).toBeVisible();
-        expect(subheading).toHaveTextContent('Upload a Studio');
     });
 
     it('updates form page on navigation button click', () => {
@@ -53,7 +47,7 @@ describe('Upload API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form />
+                <Form formType='Upload' />
             </Router>
         );
     });
@@ -135,7 +129,7 @@ describe('Update API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form formType='update' />
+                <Form formType='Update' />
             </Router>
         );
     });

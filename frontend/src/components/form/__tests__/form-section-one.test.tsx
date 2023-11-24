@@ -4,14 +4,14 @@ import FormSectionOne from '../form-section-one';
 import Studio from '../../../types/studios';
 
 const mockStoreNewStudioData = jest.fn();
-const mockGoToFormPage = jest.fn();
+const mockGoToFormSection = jest.fn();
 
 describe('Upload Form One', () => {
     beforeEach(() => {
         render(
             <Router>
                 <FormSectionOne
-                    goToFormPage={mockGoToFormPage}
+                    goToFormSection={mockGoToFormSection}
                     storeNewStudioData={mockStoreNewStudioData}
                     newStudio={new Studio()}
                 />
@@ -41,6 +41,6 @@ describe('Upload Form One', () => {
     it('calls function to go to next component when button is clicked', () => {
         const nextButton = screen.getByRole('button');
         fireEvent.click(nextButton);
-        expect(mockGoToFormPage).toHaveBeenCalled();
+        expect(mockGoToFormSection).toHaveBeenCalled();
     });
 });

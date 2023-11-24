@@ -5,6 +5,7 @@ import deleteStudioApi from '../../../api/delete-studio';
 import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
 
 const mockGetAllStudios = jest.fn();
+const mockShowForm = jest.fn();
 
 jest.mock('../../../api/delete-studio', () => ({
     __esModule: true,
@@ -15,7 +16,7 @@ describe('Edit List', () => {
     it('renders no results component when 0 studios are passed as props', () => {
         render(
             <Router>
-                <EditList results={[]} getAllStudios={mockGetAllStudios} />
+                <EditList studios={[]} getAllStudios={mockGetAllStudios} showForm={mockShowForm} />
             </Router>
         );
 
@@ -25,7 +26,7 @@ describe('Edit List', () => {
     it('navigates to upload page with studio details when edit button is clicked', () => {
         render(
             <Router>
-                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudios} />
+                <EditList studios={[mockOneStudio]} getAllStudios={mockGetAllStudios} showForm={mockShowForm} />
             </Router>
         );
 
@@ -42,7 +43,7 @@ describe('Edit List', () => {
     it('calls delete studio api when delete modal pop up is confirmed and closes modal', () => {
         render(
             <Router>
-                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudios} />
+                <EditList studios={[mockOneStudio]} getAllStudios={mockGetAllStudios} showForm={mockShowForm} />
             </Router>
         );
 
