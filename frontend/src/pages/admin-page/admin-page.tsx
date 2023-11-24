@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import userLoginApi from '../../api/user-login';
 import Header from '../../components/header/header';
 import AdminNavbar from '../../components/navbar/admin-navbar';
