@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import userLoginApi from '../../api/user-login';
 import Header from '../../components/header/header';
-import AdminNavbar from './admin-navbar';
+import AdminNavbar from '../../components/navbar/admin-navbar';
 import Login from '../../components/login/login';
 import EditPage from '../edit-page/edit-page';
 import Form from '../../components/form/form';

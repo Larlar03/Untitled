@@ -8,11 +8,13 @@ jest.mock('../../../api/get-all-studios', () => ({
     default: jest.fn()
 }));
 
+const mockShowForm = jest.fn();
+
 describe('Edit Page', () => {
     it('calls get all studios API on render', () => {
         render(
             <Router>
-                <EditPage />
+                <EditPage showForm={mockShowForm} />
             </Router>
         );
 
