@@ -6,7 +6,12 @@ import Studio from '../../types/studios';
 import EditList from '../../components/edit/edit-list';
 
 interface Props {
-    changeView: React.Dispatch<React.SetStateAction<string>>;
+    showForm: (
+        event: React.MouseEvent<HTMLButtonElement>,
+        formType: string,
+        studioId: string | undefined,
+        studio: Studio | undefined
+    ) => void;
 }
 
 const EditPage = (props: Props) => {
@@ -42,7 +47,7 @@ const EditPage = (props: Props) => {
                     <Loading />
                 </div>
             )}
-            {!loading && <EditList results={studios} getAllStudios={getAllStudios} changeView={props.changeView} />}
+            {!loading && <EditList results={studios} getAllStudios={getAllStudios} showForm={props.showForm} />}
         </>
     );
 };

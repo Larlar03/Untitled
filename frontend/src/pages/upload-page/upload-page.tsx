@@ -11,15 +11,16 @@ import updateStudioApi from '../../api/update-studio';
 
 import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
-import { useLocation } from 'react-router-dom';
 
 interface Props {
     formType?: string;
     isAdmin?: boolean;
+    studioToEdit?: Studio | undefined;
+    studioToEditId?: string | undefined;
 }
 
 const UploadPage = (props: Props) => {
-    const [formType, setFormType] = useState<string>('upload');
+    const [formType, setFormType] = useState<string>('Upload');
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
     const [formPage, setFormPage] = useState<number>(1);
@@ -45,18 +46,36 @@ const UploadPage = (props: Props) => {
         services: []
     });
 
-    // Get props passed from edit page
-    const location = useLocation();
-    const locationProps = location.state || {};
+    // // Get props passed from edit page
+    // const location = useLocation();
+    // const locationProps = location.state || {};
 
     useEffect(() => {
+        console.log(props);
         props.formType && setFormType(props.formType);
-
-        //  Set props passed from edit page
-        locationProps.type && setFormType(locationProps.type);
-        locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
-        locationProps.studioToEditId && setStudioId(locationProps.studioToEditId);
-    }, []);
+        props.studioToEdit
+            ? setNewStudio(props.studioToEdit)
+            : setNewStudio({
+                  name: '',
+                  phone_number: '',
+                  email_address: '',
+                  location: {
+                      address: '',
+                      post_code: '',
+                      city: '',
+                      region: '',
+                      country: ''
+                  },
+                  social_links: {
+                      website: '',
+                      instagram: '',
+                      facebook: ''
+                  },
+                  logo: placeholderImageData,
+                  services: []
+              });
+        props.studioToEditId ? setStudioId(props.studioToEditId) : setStudioId('');
+    }, [props]);
 
     const goToFormPage = (pageNumber: number): void => {
         setFormPage(pageNumber);

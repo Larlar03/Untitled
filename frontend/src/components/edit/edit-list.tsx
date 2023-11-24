@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Studio from '../../types/studios';
 import ConfirmationModal from '../modal/confirmation-modal';
 import NoResults from '../error/no-results/no-results';
@@ -10,15 +9,18 @@ import deleteStudioApi from '../../api/delete-studio';
 interface Props {
     results?: Studio[] | undefined;
     getAllStudios: () => void;
-    changeView: React.Dispatch<React.SetStateAction<string>>;
+    showForm: (
+        event: React.MouseEvent<HTMLButtonElement>,
+        formType: string,
+        studioId: string | undefined,
+        studio: Studio | undefined
+    ) => void;
 }
 
 const EditList = (props: Props) => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [modalMessage, setModalMessage] = useState<string>('');
     const [targetId, setTargetId] = useState<string | undefined>('');
-
-    const navigate = useNavigate();
 
     const openModal = async (
         event: React.MouseEvent<HTMLButtonElement>,
@@ -46,24 +48,6 @@ const EditList = (props: Props) => {
         }
     };
 
-    const editStudio = (event: React.MouseEvent<HTMLButtonElement>, studio: Studio, studioId: string | undefined) => {
-        event.preventDefault();
-
-        delete studio._id;
-
-        const propsToPass = {
-            view: 'upload',
-            type: 'update',
-            studioToEdit: studio,
-            studioToEditId: studioId
-        };
-
-        props.changeView('upload');
-
-        // Navigate to the UploadPage with props
-        navigate('/admin', { replace: true, state: propsToPass });
-    };
-
     return (
         <>
             <div className='my-6 px-2 flex flex-col justify-center '>
@@ -78,7 +62,7 @@ const EditList = (props: Props) => {
                                 <div className='flex flex-row gap-x-1.5'>
                                     <button
                                         onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                                            editStudio(event, studio, studio._id)
+                                            props.showForm(event, 'Update', studio._id, studio)
                                         }
                                     >
                                         <PencilIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />

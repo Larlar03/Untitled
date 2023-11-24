@@ -39,7 +39,7 @@ const UploadForm = (props: Props) => {
                 </div>
                 <div className='w-2/5'>
                     <CtaButton
-                        text={props.formType === 'update' ? 'Update' : 'Upload'}
+                        text={props.formType === 'Update' ? 'Update' : 'Upload'}
                         handleClick={(e: React.MouseEvent<HTMLButtonElement>) => props.onSubmit(e)}
                         type='button'
                     />
