@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Login from '../login';
 
@@ -18,6 +18,11 @@ describe('Admin Login', () => {
                 />{' '}
             </Router>
         );
+    });
+
+    afterEach(() => {
+        cleanup();
+        jest.clearAllMocks();
     });
 
     it('updates username state when username input is changed', async () => {

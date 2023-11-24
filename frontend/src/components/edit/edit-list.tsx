@@ -64,14 +64,20 @@ const EditList = (props: Props) => {
                                             props.showForm(event, 'Update', studio._id, studio)
                                         }
                                     >
-                                        <PencilIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
+                                        <PencilIcon
+                                            data-testid='edit-list-edit-icon'
+                                            className='h-5 w-5 text-black hover:text-cosmic-cobalt'
+                                        />
                                     </button>
                                     <button
                                         onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
                                             openModal(event, studio._id, studio.name)
                                         }
                                     >
-                                        <TrashIcon className='h-5 w-5 text-black hover:text-cosmic-cobalt' />
+                                        <TrashIcon
+                                            data-testid='edit-list-trash-icon'
+                                            className='h-5 w-5 text-black hover:text-cosmic-cobalt'
+                                        />
                                     </button>
                                 </div>
                             </li>
