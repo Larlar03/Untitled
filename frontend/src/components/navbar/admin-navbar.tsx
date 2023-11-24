@@ -14,7 +14,7 @@ interface Props {
 
 const AdminNavbar = (props: Props) => {
     return (
-        <div className='w-full md:w-3/5 mb-3 px-3 flex flex-nowrap justify-between'>
+        <div className='w-full my-3 px-3 flex flex-nowrap justify-between md:px-12 md:justify-around'>
             <div>
                 <button
                     data-testid='navbar-logout-icon'

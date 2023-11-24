@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getAllStudiosApi from '../../api/get-all-studios';
-import EditList from '../../components/edit/edit-list';
-import Loading from '../../components/loading/loading';
+import EditList from './edit-list';
+import Loading from '../loading/loading';
 import Studio from '../../types/studios';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
     ) => void;
 }
 
-const EditPage = (props: Props) => {
+const Edit = (props: Props) => {
     const [studios, setStudios] = useState<Studio[]>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -34,7 +34,7 @@ const EditPage = (props: Props) => {
 
             setTimeout(() => {
                 setLoading(false);
-            }, 1500);
+            }, 1000);
         } catch (error) {
             console.error(error);
             navigate('/timeout');
@@ -52,4 +52,4 @@ const EditPage = (props: Props) => {
     );
 };
 
-export default EditPage;
+export default Edit;

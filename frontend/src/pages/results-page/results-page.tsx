@@ -10,7 +10,7 @@ interface Props {
 const ResultsPage = (props: Props) => {
     return (
         <>
-            <div id='results-page' className='h-screen flex flex-col justify-center items-center pt-12'>
+            <div id='results-page' className='h-screen flex flex-col items-center pt-12'>
                 <Header subheading='Results' />
                 {props.results && props.results.length > 0 ? (
                     <Results results={props.results && props.results} />
