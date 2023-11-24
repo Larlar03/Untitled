@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
-import UploadPage from '../upload-page';
+import Form from '../form';
 import Studio from '../../../types/studios';
 import placeholderImageData from '../../../constants/placeholder-image-data';
 
@@ -29,15 +29,9 @@ describe('Upload Page UI', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage />
+                <Form formType='Upload' />
             </Router>
         );
-    });
-
-    it('renders subheading', () => {
-        const subheading = screen.getByRole('heading', { level: 2 });
-        expect(subheading).toBeVisible();
-        expect(subheading).toHaveTextContent('Upload a Studio');
     });
 
     it('updates form page on navigation button click', () => {
@@ -53,7 +47,7 @@ describe('Upload API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage />
+                <Form formType='Upload' />
             </Router>
         );
     });
@@ -135,7 +129,7 @@ describe('Update API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage formType='update' />
+                <Form formType='Update' />
             </Router>
         );
     });

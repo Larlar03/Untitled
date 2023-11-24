@@ -4,7 +4,7 @@ interface Props {
     type?: string;
 }
 
-const UploadSuccess = (props: Props) => {
+const FormSuccess = (props: Props) => {
     console.log(props.type);
     return (
         <div className='h-4/5 flex flex-col items-center justify-center'>
@@ -17,4 +17,4 @@ const UploadSuccess = (props: Props) => {
     );
 };
 
-export default UploadSuccess;
+export default FormSuccess;

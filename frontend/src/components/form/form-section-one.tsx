@@ -4,16 +4,16 @@ import cities from '../../constants/cities';
 import regions from '../../constants/regions';
 import CitiesRegion from '../../types/cities-regions';
 import countries from '../../constants/countries';
-import './upload-form.css';
+import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
-    goToFormPage: (pageNumber: number) => void;
+    goToFormSection: (section: number) => void;
     storeNewStudioData: (e: any) => void;
     newStudio: Studio;
 }
 
-const UploadFormOne = (props: Props) => {
+const FormSectionOne = (props: Props) => {
     const [validTelephone, setValidTelephone] = useState<boolean>(false);
     const [validEmail, setValidEmail] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ const UploadFormOne = (props: Props) => {
     }, [props.storeNewStudioData]);
 
     return (
-        <form action='submit'>
+        <form action='submit' id='form'>
             <div className='top'>
                 <section className='mb-4'>
                     <span className='input-group'>
@@ -171,10 +171,10 @@ const UploadFormOne = (props: Props) => {
                 </section>
             </div>
             <div className='bottom'>
-                <CtaButton text='Next' handleClick={() => props.goToFormPage(2)} type='button' />
+                <CtaButton text='Next' handleClick={() => props.goToFormSection(2)} type='button' />
             </div>
         </form>
     );
 };
 
-export default UploadFormOne;
+export default FormSectionOne;

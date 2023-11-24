@@ -1,16 +1,17 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import EditList from '../../edit/edit-list';
-import UploadPage from '../../../pages/upload-page/upload-page';
+import Form from '../../form/form';
 import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
 
 const mockGetAllStudiosFunc = jest.fn();
+const mockShowForm = jest.fn();
 
 describe('Confirmation Modal', () => {
     beforeEach(() => {
         render(
             <Router>
-                <EditList results={[mockOneStudio]} getAllStudios={mockGetAllStudiosFunc} />
+                <EditList studios={[mockOneStudio]} getAllStudios={mockGetAllStudiosFunc} showForm={mockShowForm} />
             </Router>
         );
     });
@@ -44,7 +45,7 @@ describe('Warning Modal', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadPage />
+                <Form />
             </Router>
         );
     });

@@ -4,15 +4,15 @@ import searchStudiosApi from './api/search-studios';
 
 import HomePage from './pages/home-page/home-page';
 import ResultsPage from './pages/results-page/results-page';
-import UploadPage from './pages/upload-page/upload-page';
 import Studio from './types/studios';
 import ErrorPage from './pages/error-page/error-page';
 import TimeoutError from './components/error/timeout/timeout';
-import EditPage from './pages/edit-page/edit-page';
+import AdminPage from './pages/admin-page/admin-page';
 
 const App = () => {
     const [studios, setStudios] = useState<Studio[]>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const App = () => {
                 navigate('/results');
             }, 2000);
         } catch (error) {
-            // consoleerror(error);
+            console.error(error);
             navigate('/timeout');
         }
     };
@@ -37,8 +37,7 @@ const App = () => {
         <Routes>
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
-            <Route path='/upload' element={<UploadPage />} />
-            <Route path='/edit' element={<EditPage />} />
+            <Route path='/admin' element={<AdminPage isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
             <Route path='/timeout' element={<TimeoutError />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>

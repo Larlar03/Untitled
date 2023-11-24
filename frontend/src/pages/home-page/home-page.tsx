@@ -10,7 +10,8 @@ interface Props {
 const HomePage = (props: Props) => {
     return (
         <>
-            <div id='home-page' className='h-auto min-h-screen flex justify-center items-center'>
+            {' '}
+            <div id='home-page' className='h-auto min-h-screen flex justify-center mt-6'>
                 <div
                     id='home-page__card'
                     className='w-full max-w-md p-6 bg-alabaster md:max-w-[476px] md:h-[725px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'

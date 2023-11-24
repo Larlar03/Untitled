@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import UploadSuccess from '../upload-success';
+import FormSuccess from '../form-success';
 
 describe('Upload Success', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadSuccess />
+                <FormSuccess />
             </Router>
         );
     });

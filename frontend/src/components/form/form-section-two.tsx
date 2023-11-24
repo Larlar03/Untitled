@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
-import './upload-form.css';
+import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
-    goToFormPage: (pageNumber: number) => void;
+    goToFormSection: (section: number) => void;
     storeNewStudioData: (e: any) => void;
     newStudio: Studio;
 }
 
-const UploadForm = (props: Props) => {
+const FormSectionTwo = (props: Props) => {
     const [validWebsite, setValidWebsite] = useState<boolean>(false);
     const [validInstagram, setValidInstagram] = useState<boolean>(true);
     const [validFacebook, setValidFacebook] = useState<boolean>(true);
@@ -47,7 +47,7 @@ const UploadForm = (props: Props) => {
     }, [props.storeNewStudioData]);
 
     return (
-        <form action='submit' className='mt-12'>
+        <form action='submit' className='mt-12' id='form'>
             <div className='top'>
                 <section className='mb-8'>
                     <span className='input-group'>
@@ -112,14 +112,14 @@ const UploadForm = (props: Props) => {
             </div>
             <div className='bottom flex justify-between w-full'>
                 <div className='w-2/5'>
-                    <CtaButton text='Back' handleClick={() => props.goToFormPage(1)} type='button' />
+                    <CtaButton text='Back' handleClick={() => props.goToFormSection(1)} type='button' />
                 </div>
                 <div className='w-2/5'>
-                    <CtaButton text='Next' handleClick={() => props.goToFormPage(3)} type='button' />
+                    <CtaButton text='Next' handleClick={() => props.goToFormSection(3)} type='button' />
                 </div>
             </div>
         </form>
     );
 };
 
-export default UploadForm;
+export default FormSectionTwo;

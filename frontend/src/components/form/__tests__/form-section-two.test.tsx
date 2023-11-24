@@ -1,17 +1,17 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import UploadFormTwo from '../upload-form-two';
+import FormSectionTwo from '../form-section-two';
 import Studio from '../../../types/studios';
 
 const mockStoreNewStudioData = jest.fn();
-const mockGoToFormPage = jest.fn();
+const mockGoToFormSection = jest.fn();
 
 describe('Upload Form Two', () => {
     beforeEach(() => {
         render(
             <Router>
-                <UploadFormTwo
-                    goToFormPage={mockGoToFormPage}
+                <FormSectionTwo
+                    goToFormSection={mockGoToFormSection}
                     storeNewStudioData={mockStoreNewStudioData}
                     newStudio={new Studio()}
                 />
@@ -43,12 +43,12 @@ describe('Upload Form Two', () => {
     it('calls function to go to previous component when back button is clicked', () => {
         const backButton = screen.getByText('Back');
         fireEvent.click(backButton);
-        expect(mockGoToFormPage).toHaveBeenCalled();
+        expect(mockGoToFormSection).toHaveBeenCalled();
     });
 
     it('calls function to go to next component when next button is clicked', () => {
         const nextButton = screen.getByText('Next');
         fireEvent.click(nextButton);
-        expect(mockGoToFormPage).toHaveBeenCalled();
+        expect(mockGoToFormSection).toHaveBeenCalled();
     });
 });

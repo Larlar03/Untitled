@@ -1,19 +1,19 @@
 import CtaButton from '../buttons/cta-button/cta-button';
 import Services from '../../constants/services';
-import './upload-form.css';
+import './form.css';
 import Studio from '../../types/studios';
 
 interface Props {
-    goToFormPage: (pageNumber: number) => void;
+    goToFormSection: (section: number) => void;
     storeServiceData: (e: any) => void;
     newStudio: Studio;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
     formType?: string;
 }
 
-const UploadForm = (props: Props) => {
+const FormSectionThree = (props: Props) => {
     return (
-        <form action='submit'>
+        <form action='submit' id='form'>
             <div className='top flex justify-center'>
                 <section id='form-check-container'>
                     {Services.map((service, i) => (
@@ -35,11 +35,11 @@ const UploadForm = (props: Props) => {
             </div>
             <div className='bottom flex justify-between w-full'>
                 <div className='w-2/5'>
-                    <CtaButton text='Back' handleClick={() => props.goToFormPage(2)} type='button' />
+                    <CtaButton text='Back' handleClick={() => props.goToFormSection(2)} type='button' />
                 </div>
                 <div className='w-2/5'>
                     <CtaButton
-                        text={props.formType === 'update' ? 'Update' : 'Upload'}
+                        text={props.formType === 'Update' ? 'Update' : 'Upload'}
                         handleClick={(e: React.MouseEvent<HTMLButtonElement>) => props.onSubmit(e)}
                         type='button'
                     />
@@ -49,4 +49,4 @@ const UploadForm = (props: Props) => {
     );
 };
 
-export default UploadForm;
+export default FormSectionThree;

@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
-import Header from '../../components/header/header';
-import UploadFormOne from '../../components/upload/upload-form-one';
-import UploadFormTwo from '../../components/upload/upload-form-two';
-import UploadFormThree from '../../components/upload/upload-form-three';
-import UploadSuccess from '../../components/upload/upload-success';
+import UploadFormOne from './form-section-one';
+import UploadFormTwo from './form-section-two';
+import UploadFormThree from './form-section-three';
+import UploadSuccess from './form-success';
+import Modal from '../modal/warning-modal';
 
-import Modal from '../../components/modal/warning-modal';
 import { validateForm } from '../../utils/validate-form';
 import uploadStudioApi from '../../api/upload-studio';
 import updateStudioApi from '../../api/update-studio';
 
 import Studio from '../../types/studios';
 import placeholderImageData from '../../constants/placeholder-image-data';
-import { useLocation } from 'react-router-dom';
 
 interface Props {
     formType?: string;
+    studioToEdit?: Studio | undefined;
+    studioToEditId?: string | undefined;
 }
 
-const UploadPage = (props: Props) => {
-    const [formType, setFormType] = useState<string>('upload');
+const Form = (props: Props) => {
+    const [formType, setFormType] = useState<string>('Upload');
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-    const [formPage, setFormPage] = useState<number>(1);
+    const [formSection, setFormSection] = useState<number>(1);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [studioId, setStudioId] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
@@ -45,21 +45,35 @@ const UploadPage = (props: Props) => {
         services: []
     });
 
-    // Get props passed from edit page
-    const location = useLocation();
-    const locationProps = location.state || {};
+    const studioTemplate: Studio = {
+        name: '',
+        phone_number: '',
+        email_address: '',
+        location: {
+            address: '',
+            post_code: '',
+            city: '',
+            region: '',
+            country: ''
+        },
+        social_links: {
+            website: '',
+            instagram: '',
+            facebook: ''
+        },
+        logo: placeholderImageData,
+        services: []
+    };
 
     useEffect(() => {
+        // console.log(props.studioToEdit?.logo);
         props.formType && setFormType(props.formType);
+        props.studioToEdit ? setNewStudio(props.studioToEdit) : setNewStudio(studioTemplate);
+        props.studioToEditId ? setStudioId(props.studioToEditId) : setStudioId('');
+    }, [props]);
 
-        //  Set props passed from edit page
-        locationProps.type && setFormType(locationProps.type);
-        locationProps.studioToEdit && setNewStudio(locationProps.studioToEdit);
-        locationProps.studioToEditId && setStudioId(locationProps.studioToEditId);
-    }, []);
-
-    const goToFormPage = (pageNumber: number): void => {
-        setFormPage(pageNumber);
+    const goToFormSection = (section: number): void => {
+        setFormSection(section);
     };
 
     const storeNewStudioData = (e: any) => {
@@ -108,7 +122,7 @@ const UploadPage = (props: Props) => {
 
         try {
             validateForm(newStudio);
-            if (formType === 'update') {
+            if (formType === 'Update') {
                 update();
             } else {
                 upload();
@@ -143,48 +157,40 @@ const UploadPage = (props: Props) => {
 
     return (
         <>
-            <div id='upload-page' className='h-auto min-h-screen flex justify-center items-center'>
-                <div
-                    id='upload-page__card'
-                    className='w-full max-w-md h-auto bg-alabaster p-6 md:max-w-[476px] md:h-[650px] md:rounded-lg md:border-[1px] md:border-cosmic-cobalt md:shadow-cosmic-cobalt'
-                >
-                    <Header subheading='Upload a Studio' />
-                    {isSubmitted ? (
-                        <>
-                            <UploadSuccess type={formType} />
-                        </>
-                    ) : (
-                        <>
-                            {formPage === 1 && (
-                                <UploadFormOne
-                                    goToFormPage={goToFormPage}
-                                    storeNewStudioData={storeNewStudioData}
-                                    newStudio={newStudio}
-                                />
-                            )}
-                            {formPage === 2 && (
-                                <UploadFormTwo
-                                    goToFormPage={goToFormPage}
-                                    storeNewStudioData={storeNewStudioData}
-                                    newStudio={newStudio}
-                                />
-                            )}
-                            {formPage === 3 && (
-                                <UploadFormThree
-                                    goToFormPage={goToFormPage}
-                                    storeServiceData={storeServiceData}
-                                    newStudio={newStudio}
-                                    onSubmit={onSubmit}
-                                    formType={formType}
-                                />
-                            )}
-                            {showModal && <Modal setShowModal={setShowModal} message={errorMessage} />}
-                        </>
+            {isSubmitted ? (
+                <>
+                    <UploadSuccess type={formType} />
+                </>
+            ) : (
+                <div className='px-2 '>
+                    {formSection === 1 && (
+                        <UploadFormOne
+                            goToFormSection={goToFormSection}
+                            storeNewStudioData={storeNewStudioData}
+                            newStudio={newStudio}
+                        />
                     )}
+                    {formSection === 2 && (
+                        <UploadFormTwo
+                            goToFormSection={goToFormSection}
+                            storeNewStudioData={storeNewStudioData}
+                            newStudio={newStudio}
+                        />
+                    )}
+                    {formSection === 3 && (
+                        <UploadFormThree
+                            goToFormSection={goToFormSection}
+                            storeServiceData={storeServiceData}
+                            newStudio={newStudio}
+                            onSubmit={onSubmit}
+                            formType={formType}
+                        />
+                    )}
+                    {showModal && <Modal setShowModal={setShowModal} message={errorMessage} />}
                 </div>
-            </div>
+            )}
         </>
     );
 };
 
-export default UploadPage;
+export default Form;
