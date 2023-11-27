@@ -15,27 +15,43 @@ app.use(express.json());
 const newRouterOne = require('./routers/studios');
 const newRouterTwo = require('./routers/users');
 
-MongoClient.connect(process.env.MONGODB_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-})
-	.then((client) => {
-		const db = client.db();
+const connectToMongoDb = async () => {
+	try {
+		return await MongoClient.connect(process.env.MONGODB_URI, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
+	} catch (error) {
+		console.error('Error connecting to db: ', error);
+	}
+};
+
+const setupRouters = async (client) => {
+	try {
+		const db = await client.db();
 
 		// Studios
 		const studioCollection = db.collection('studios');
 		const studioRouter = newRouterOne(studioCollection);
 
-		app.use('/studios', studioRouter);
-
 		// Users
 		const usersCollection = db.collection('users');
 		const usersRouter = newRouterTwo(usersCollection);
 
+		app.use('/studios', studioRouter);
 		app.use('/users', usersRouter);
-	})
-	.catch('Error connecting to db:', console.err);
+	} catch (error) {
+		console.error('Error setting up routers: ', error);
+	}
+};
 
-app.listen(3000, function () {
-	console.log(`Listening on this port: ${this.address().port}`);
-});
+const main = async () => {
+	const mongoDbClient = await connectToMongoDb();
+	await setupRouters(mongoDbClient);
+
+	app.listen(3000, function () {
+		console.log(`Listening on this port: ${this.address().port}`);
+	});
+};
+
+main();

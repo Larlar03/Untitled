@@ -2,7 +2,7 @@ const express = require('express');
 const {
 	hashPassword,
 	comparePasswords,
-} = require('../helpers/bcrypt-passwords.js');
+} = require('../utils/bcrypt-passwords.js');
 
 const usersRouter = function (collection) {
 	const router = express.Router();
