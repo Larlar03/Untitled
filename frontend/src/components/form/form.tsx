@@ -145,6 +145,7 @@ const Form = (props: Props) => {
     };
 
     const update = async () => {
+        delete newStudio._id;
         const responseStatus = await updateStudioApi(newStudio, studioId);
 
         if (responseStatus === 204) {
