@@ -3,7 +3,6 @@ import Studio from '../../types/studios';
 export const mockOneStudio: Studio = {
     _id: '1',
     name: 'Mock Studio One',
-    phone_number: '00000000000',
     email_address: 'mockstudio@gmail.com',
     location: {
         address: '123 Street',
@@ -25,7 +24,6 @@ export const mockTwoStudios: Studio[] = [
     {
         _id: '1',
         name: 'Mock Studio One',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',
@@ -45,7 +43,6 @@ export const mockTwoStudios: Studio[] = [
     {
         _id: '2',
         name: 'Mock Studio Two',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',
@@ -68,7 +65,6 @@ export const mockFiveStudios: Studio[] = [
     {
         _id: '1',
         name: 'Mock Studio One',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',
@@ -88,7 +84,6 @@ export const mockFiveStudios: Studio[] = [
     {
         _id: '2',
         name: 'Mock Studio Two',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',
@@ -108,7 +103,6 @@ export const mockFiveStudios: Studio[] = [
     {
         _id: '3',
         name: 'Mock Studio Three',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',
@@ -128,7 +122,6 @@ export const mockFiveStudios: Studio[] = [
     {
         _id: '4',
         name: 'Mock Studio Four',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',
@@ -148,7 +141,6 @@ export const mockFiveStudios: Studio[] = [
     {
         _id: '5',
         name: 'Mock Studio Five',
-        phone_number: '00000000000',
         email_address: 'mockstudio@gmail.com',
         location: {
             address: '123 Street',

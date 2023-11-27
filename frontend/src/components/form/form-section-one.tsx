@@ -14,21 +14,11 @@ interface Props {
 }
 
 const FormSectionOne = (props: Props) => {
-    const [validTelephone, setValidTelephone] = useState<boolean>(false);
     const [validEmail, setValidEmail] = useState<boolean>(false);
 
     const validate = () => {
-        // const telephoneInput = document.getElementById('phone_number').value;
-        const telephoneInput = (document.getElementById('phone_number') as HTMLInputElement).value;
         const emailInput = (document.getElementById('email_address') as HTMLInputElement).value;
-        const telephonePattern = new RegExp('^(?:\\+44\\d{10}|0\\d{9,10})$');
         const emailPattern = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9.-]+$');
-
-        if (telephoneInput.length > 0) {
-            telephonePattern.test(telephoneInput) ? setValidTelephone(true) : setValidTelephone(false);
-        } else {
-            setValidTelephone(true);
-        }
 
         if (emailInput.length > 0) {
             emailPattern.test(emailInput) ? setValidEmail(true) : setValidEmail(false);
@@ -58,18 +48,6 @@ const FormSectionOne = (props: Props) => {
                     </span>
                 </section>
                 <section className='mb-4'>
-                    <span className='input-group'>
-                        <label htmlFor='phone_number'>
-                            Phone Number {!validTelephone && <span className='text-error-crimson'>*</span>}
-                        </label>
-                        <input
-                            type='tel'
-                            id='phone_number'
-                            name='phone_number'
-                            onChange={props.storeNewStudioData}
-                            value={props.newStudio.phone_number}
-                        />
-                    </span>
                     <span className='input-group'>
                         <label htmlFor='email_address'>
                             Email Address {!validEmail && <span className='text-error-crimson'>*</span>}

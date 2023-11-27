@@ -112,14 +112,6 @@ const ResultsCard = (props: Props) => {
                                 >
                                     {props.studio.social_links?.website}
                                 </a>
-                                <a
-                                    className={`block ${
-                                        !props.isActive ? ' hover:text-black' : ' hover:text-cosmic-cobalt'
-                                    }`}
-                                    href={`tel:${props.studio.phone_number}`}
-                                >
-                                    {props.studio.phone_number}
-                                </a>
                             </div>
                         </div>
                     </div>

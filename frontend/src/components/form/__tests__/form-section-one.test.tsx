@@ -25,7 +25,7 @@ describe('Upload Form One', () => {
 
     it('renders text input fields', () => {
         const textInputFields = screen.getAllByRole('textbox');
-        expect(textInputFields).toHaveLength(5);
+        expect(textInputFields).toHaveLength(4);
     });
 
     it('renders select input fields', () => {

@@ -6,6 +6,8 @@ const updateStudioApi = async (studio: Studio, id: string | undefined): Promise<
         studio
     };
 
+    console.log(requestBody);
+
     const response = await axios.put(`${process.env.VITE_STUDIOS_API}/${id}`, requestBody).catch((error) => {
         console.error(error);
     });
