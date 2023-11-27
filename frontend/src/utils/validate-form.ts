@@ -5,7 +5,6 @@ export const validateForm = (newStudio: Studio) => {
     const flattenedStudioObj = flattenObject(newStudio);
     const emptyFieldsArr: string[] = [];
 
-    delete flattenedStudioObj.phone_number;
     delete flattenedStudioObj.instagram;
     delete flattenedStudioObj.facebook;
     delete flattenedStudioObj.logo;

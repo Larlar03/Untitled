@@ -2,7 +2,6 @@
 	{
 		"_id": "649c4191f89493f48a94af6a",
 		"name": "AYC Studios",
-		"phone_number": "07507797220",
 		"email_address": "aerialyogicircus@gmail.com",
 		"location": {
 			"address": "Unit 10B, Robins Business Park, Bagnall St, West Bromwich",
@@ -23,7 +22,6 @@
 		"_id": "649c41aff89493f48a94af6b",
 
 		"name": "Body Synergy",
-		"phone_number": "07507797220",
 		"email_address": "bodysynergymanagement@gmail.com",
 		"location": {
 			"address": "One Fitness Academy, 509 Aldrige Road, Great Barr",
@@ -44,7 +42,6 @@
 		"_id": "649c41d4f89493f48a94af6c",
 
 		"name": "K Pole Solihull",
-		"phone_number": "07800793337",
 		"email_address": "kpoleshirley@hotmail.com",
 		"location": {
 			"address": "YogaHaven, Radway Road",
@@ -65,7 +62,6 @@
 		"_id": "649c41f6f89493f48a94af6d",
 
 		"name": "K Pole Cradely Heath",
-		"phone_number": "07800793337",
 		"email_address": "kpoleshirley@hotmail.com",
 		"location": {
 			"address": "5 Market Square, Cradley Heath",
@@ -86,7 +82,6 @@
 		"_id": "649c4d6b12ad93c22b6c0103",
 
 		"name": "Siren Asylum",
-		"phone_number": "07784967677",
 		"email_address": "info@sirenasylum.com",
 		"location": {
 			"address": "24 Missouri Ave",
@@ -107,7 +102,6 @@
 		"_id": "649d7a1981d6a824bd81bf9c",
 
 		"name": "GFFDamian Dance Studio ",
-		"phone_number": "01618321697",
 		"email_address": "gffdamiandancestudio@gmail.com",
 		"location": {
 			"address": "109-113 Corporation St",
@@ -126,7 +120,6 @@
 	},
 	{
 		"name": "Cloud Aerial Arts",
-		"phone_number": "01217731747",
 		"email_address": "cloud@gmail.com",
 		"location": {
 			"address": "Test Street",

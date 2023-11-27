@@ -7,7 +7,6 @@ import placeholderImageData from '../../../constants/placeholder-image-data';
 
 export const mockStudio: Studio = {
     name: 'Mock Studio One',
-    phone_number: '00000000000',
     email_address: 'mockstudio@gmail.com',
     location: {
         address: '123 Street',

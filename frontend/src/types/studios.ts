@@ -4,7 +4,6 @@ import SocialLinks from './social-links';
 class Studio {
     _id?: string | undefined;
     name: string | undefined;
-    phone_number: string | undefined;
     email_address: string | undefined;
     location: Location | undefined;
     social_links: SocialLinks | undefined;
@@ -14,7 +13,6 @@ class Studio {
     constructor() {
         this._id = undefined;
         this.name = undefined;
-        this.phone_number = undefined;
         this.email_address = undefined;
         this.location = undefined;
         this.logo = undefined;

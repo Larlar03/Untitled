@@ -13,13 +13,9 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:3000/studios",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"studios"
-					]
+					"path": ["studios"]
 				}
 			},
 			"response": []
@@ -43,13 +39,9 @@
 				},
 				"url": {
 					"raw": "localhost:3000/studios",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"studios"
-					]
+					"path": ["studios"]
 				}
 			},
 			"response": []
@@ -61,15 +53,9 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:3000/studios/locations/Manchester",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"studios",
-						"locations",
-						"Manchester"
-					]
+					"path": ["studios", "locations", "Manchester"]
 				}
 			},
 			"response": []
@@ -81,16 +67,9 @@
 				"header": [],
 				"url": {
 					"raw": "localhost:3000/studios/Manchester/services/?services=Aerial%20Hoop&services=Aerial%20Silks",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"studios",
-						"Manchester",
-						"services",
-						""
-					],
+					"path": ["studios", "Manchester", "services", ""],
 					"query": [
 						{
 							"key": "services",
@@ -122,7 +101,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"name\": \"Siren Asylum\",\n        \"phone_number\": \"07784967677\",\n        \"email_address\": \"info@sirenasylum.com\",\n        \"location\": {\n            \"address\": \"24 Missouri Ave\",\n            \"post_code\": \"M50 2NP\",\n            \"city\": \"Manchester\",\n            \"region\": \"North West\",\n            \"country\": \"England\"\n        },\n        \"social_links\": {\n            \"website\": \"www.sirenasylum.co.uk\",\n            \"instagram\": \"www.instagram.com/sirenasylumfitness\",\n            \"facebook:\": \"www.facebook.com/sirenasylum\"\n        },\n        \"logo\": \"/Users/lana.gordon/Documents/Bench-Projects/aeriform/frontend/src/assets/studio-logos/siren-asylum.png\",\n        \"services\": [\n            \"Aerial Hoop\",\n            \"Aerial Silks\"\n        ]\n    }",
+					"raw": "{\n        \"name\": \"Siren Asylum\",\n            \"email_address\": \"info@sirenasylum.com\",\n        \"location\": {\n            \"address\": \"24 Missouri Ave\",\n            \"post_code\": \"M50 2NP\",\n            \"city\": \"Manchester\",\n            \"region\": \"North West\",\n            \"country\": \"England\"\n        },\n        \"social_links\": {\n            \"website\": \"www.sirenasylum.co.uk\",\n            \"instagram\": \"www.instagram.com/sirenasylumfitness\",\n            \"facebook:\": \"www.facebook.com/sirenasylum\"\n        },\n        \"logo\": \"/Users/lana.gordon/Documents/Bench-Projects/aeriform/frontend/src/assets/studio-logos/siren-asylum.png\",\n        \"services\": [\n            \"Aerial Hoop\",\n            \"Aerial Silks\"\n        ]\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -131,13 +110,9 @@
 				},
 				"url": {
 					"raw": "localhost:3000/studios",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"studios"
-					]
+					"path": ["studios"]
 				}
 			},
 			"response": []

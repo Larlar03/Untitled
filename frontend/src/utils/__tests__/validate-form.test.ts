@@ -3,7 +3,6 @@ import { validateForm } from '../validate-form';
 
 const blankStudio: Studio = {
     name: '',
-    phone_number: '',
     email_address: '',
     location: {
         address: '',
@@ -23,7 +22,6 @@ const blankStudio: Studio = {
 
 const filledStudio: Studio = {
     name: 'Studio',
-    phone_number: '00000000000',
     email_address: 'studio@gmail.com',
     location: {
         address: '123 Street',

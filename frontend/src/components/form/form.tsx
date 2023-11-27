@@ -27,7 +27,6 @@ const Form = (props: Props) => {
     const [studioId, setStudioId] = useState<string>('');
     const [newStudio, setNewStudio] = useState<Studio>({
         name: '',
-        phone_number: '',
         email_address: '',
         location: {
             address: '',
@@ -47,7 +46,6 @@ const Form = (props: Props) => {
 
     const studioTemplate: Studio = {
         name: '',
-        phone_number: '',
         email_address: '',
         location: {
             address: '',
