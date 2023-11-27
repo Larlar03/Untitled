@@ -66,7 +66,6 @@ describe('Upload API Calls', () => {
 
         // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Mock Studio One' } });
-        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
         fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'mockstudio@gmail.com' } });
         fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
         fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
@@ -101,7 +100,6 @@ describe('Upload API Calls', () => {
 
         // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Mock Studio One' } });
-        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
         fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'mockstudio@gmail.com' } });
         fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
         fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
@@ -148,7 +146,6 @@ describe('Update API Calls', () => {
 
         // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Mock Studio One' } });
-        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
         fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'mockstudio@gmail.com' } });
         fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
         fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
@@ -177,7 +174,6 @@ describe('Update API Calls', () => {
 
         // Simulate form input and submission
         fireEvent.change(screen.getByLabelText('Studio Name'), { target: { value: 'Test Studio' } });
-        fireEvent.change(screen.getByLabelText('Phone Number'), { target: { value: '00000000000' } });
         fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@gmail.com' } });
         fireEvent.change(screen.getByLabelText('Street Address'), { target: { value: '123 Street' } });
         fireEvent.change(screen.getByLabelText('Post Code'), { target: { value: '000 000' } });
