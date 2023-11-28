@@ -2,20 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-// const MongoClient = require('mongodb').MongoClient;
 const { MongoClient } = require('mongodb');
 
 require('dotenv').config();
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(express.json());
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
-// routers
+// Routers
 const newRouterOne = require('./routers/studios');
 const newRouterTwo = require('./routers/users');
 
@@ -29,9 +28,9 @@ const run = async () => {
 		app.use('/studios', studioRouter);
 
 		// Users
-		// const usersCollection = db.collection('users');
-		// const usersRouter = newRouterTwo(usersCollection);
-		// app.use('/users', usersRouter);
+		const usersCollection = db.collection('users');
+		const usersRouter = newRouterTwo(usersCollection);
+		app.use('/users', usersRouter);
 	} catch (error) {
 		console.error('Error connecting to db : ', error);
 	}
