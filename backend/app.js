@@ -2,40 +2,42 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
+
 require('dotenv').config();
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(express.json());
 
-// router
+const client = new MongoClient(process.env.MONGODB_URI);
+
+// Routers
 const newRouterOne = require('./routers/studios');
 const newRouterTwo = require('./routers/users');
 
-MongoClient.connect(process.env.MONGODB_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-})
-	.then((client) => {
-		const db = client.db();
+const run = async () => {
+	try {
+		const db = client.db('aeriform');
 
 		// Studios
 		const studioCollection = db.collection('studios');
 		const studioRouter = newRouterOne(studioCollection);
-
 		app.use('/studios', studioRouter);
 
 		// Users
 		const usersCollection = db.collection('users');
 		const usersRouter = newRouterTwo(usersCollection);
-
 		app.use('/users', usersRouter);
-	})
-	.catch('Error connecting to db:', console.err);
+	} catch (error) {
+		console.error('Error connecting to db : ', error);
+	}
 
-app.listen(3000, function () {
-	console.log(`Listening on this port: ${this.address().port}`);
-});
+	app.listen(3000, function () {
+		console.log(`Listening on this port: ${this.address().port}`);
+	});
+};
+
+run().catch(console.dir);
