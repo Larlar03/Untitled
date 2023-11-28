@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "d6ffa6ee-25ef-44b5-b155-d914e250dc40",
+		"name": "Aeriform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23475897"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:username",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/username-here",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"username-here"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"helloworld\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "username",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newPassword\": \"helloworld\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Studios",
+			"item": [
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/studios",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"studios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/studios/649c4191f89493f48a94af6a",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"studios",
+								"649c4191f89493f48a94af6a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/studios/locations/Manchester",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"studios",
+								"locations",
+								"Manchester"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:location/services Manchester",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/studios/Manchester/services/?services=Aerial%20Hoop&services=Aerial%20Silks",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"studios",
+								"Manchester",
+								"services",
+								""
+							],
+							"query": [
+								{
+									"key": "services",
+									"value": "Pole%20Fitness",
+									"disabled": true
+								},
+								{
+									"key": "services",
+									"value": "Pole%20Dance",
+									"disabled": true
+								},
+								{
+									"key": "services",
+									"value": "Aerial%20Hoop"
+								},
+								{
+									"key": "services",
+									"value": "Aerial%20Silks"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/:location/services Birmingham",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/studios/Manchester/services/?services=Aerial%20Hoop&services=Aerial%20Silks",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"studios",
+								"Manchester",
+								"services",
+								""
+							],
+							"query": [
+								{
+									"key": "services",
+									"value": "Pole%20Fitness",
+									"disabled": true
+								},
+								{
+									"key": "services",
+									"value": "Pole%20Dance",
+									"disabled": true
+								},
+								{
+									"key": "services",
+									"value": "Aerial%20Hoop"
+								},
+								{
+									"key": "services",
+									"value": "Aerial%20Silks"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/studios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Siren Asylum\",\n        \"phone_number\": \"07784967677\",\n        \"email_address\": \"info@sirenasylum.com\",\n        \"location\": {\n            \"address\": \"24 Missouri Ave\",\n            \"post_code\": \"M50 2NP\",\n            \"city\": \"Manchester\",\n            \"region\": \"North West\",\n            \"country\": \"England\"\n        },\n        \"social_links\": {\n            \"website\": \"www.sirenasylum.co.uk\",\n            \"instagram\": \"www.instagram.com/sirenasylumfitness\",\n            \"facebook:\": \"www.facebook.com/sirenasylum\"\n        },\n        \"logo\": \"/Users/lana.gordon/Documents/Bench-Projects/aeriform/frontend/src/assets/studio-logos/siren-asylum.png\",\n        \"services\": [\n            \"Aerial Hoop\",\n            \"Aerial Silks\"\n        ]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/studios",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"studios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Hello world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/upload",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
