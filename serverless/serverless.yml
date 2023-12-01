@@ -1,0 +1,17 @@
+service: serverless
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-2
+
+functions:
+  studios:
+    handler: studios.router
+    events:
+      - httpApi: '*'
+  # users:
+  #   handler: users.usersRouter
+  #   events:
+  #     - httpApi: '*'
