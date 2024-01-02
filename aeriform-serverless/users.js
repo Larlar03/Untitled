@@ -8,7 +8,10 @@ const {
 } = require('@aws-sdk/lib-dynamodb');
 const express = require('express');
 const serverless = require('serverless-http');
-const { hashPassword } = require('./utils/bcrypt-passwords.js');
+const {
+	hashPassword,
+	comparePasswords,
+} = require('./utils/bcrypt-passwords.js');
 
 const app = express();
 
@@ -18,47 +21,32 @@ const dynamoDbClient = DynamoDBDocumentClient.from(client);
 
 app.use(express.json());
 
-// get all
-app.get('/users', async function (req, res) {
-	const params = {
-		TableName: USERS_TABLE,
-	};
+// login
+app.post('/users/login', async function (req, res) {
+	const userEmail = req.body.email;
+	const providedPassword = req.body.password;
 
-	try {
-		const { Items } = await dynamoDbClient.send(new GetCommand(params));
-		if (Items) {
-			console.log(Items);
-		} else {
-			res.status(404).json({ error: 'Could not find any users"' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Could not retreive any users' });
-	}
-});
-
-//  get by id - login
-app.get('/users/:userId', async function (req, res) {
 	const params = {
 		TableName: USERS_TABLE,
 		Key: {
-			userId: req.params.userId,
+			email: userEmail,
 		},
 	};
 
 	try {
 		const { Item } = await dynamoDbClient.send(new GetCommand(params));
 		if (Item) {
-			const { userId, name } = Item;
-			res.json({ userId, name });
+			const { email, username, password } = Item;
+			const result = await comparePasswords(providedPassword, password);
+			res.json({ email, username, result });
 		} else {
 			res
 				.status(404)
-				.json({ error: 'Could not find user with provided "userId"' });
+				.json({ error: 'Could not find user with provided "email"' });
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not retreive user' });
+		res.status(500).json({ error: 'Could not retreive user to login' });
 	}
 });
 
