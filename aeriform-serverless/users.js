@@ -3,6 +3,7 @@ const {
 	DynamoDBDocumentClient,
 	GetCommand,
 	PutCommand,
+	DeleteCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const express = require('express');
 const serverless = require('serverless-http');
@@ -94,6 +95,22 @@ app.post('/users', async function (req, res) {
 //  update
 
 // delete
+app.delete('/users/:userEmail', async function (req, res) {
+	const params = {
+		TableName: USERS_TABLE,
+		Key: {
+			email: req.params.userEmail,
+		},
+	};
+
+	try {
+		await dynamoDbClient.send(new DeleteCommand(params));
+		res.json({ message: 'User ' + params.Key.email + ' deleted' });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Could not delete user' });
+	}
+});
 
 app.use((req, res, next) => {
 	return res.status(404).json({
