@@ -4,6 +4,7 @@ const {
 	GetCommand,
 	PutCommand,
 	DeleteCommand,
+	UpdateCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const express = require('express');
 const serverless = require('serverless-http');
@@ -92,7 +93,34 @@ app.post('/users', async function (req, res) {
 	}
 });
 
-//  update
+//  update user password
+// todo: compare and check old password
+app.put('/users/:userEmail', async function (req, res) {
+	const email = req.params.userEmail;
+	const { newPassword } = req.body;
+
+	try {
+		const hashedPassword = await hashPassword(newPassword);
+
+		const params = {
+			TableName: USERS_TABLE,
+			Key: {
+				email: email,
+			},
+			UpdateExpression: 'set password = :password',
+			ExpressionAttributeValues: {
+				':password': hashedPassword,
+			},
+			ReturnValues: 'ALL_NEW',
+		};
+
+		await dynamoDbClient.send(new UpdateCommand(params));
+		res.json({ message: 'User ' + params.Key.email + ' updated' });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Could not update user' });
+	}
+});
 
 // delete
 app.delete('/users/:userEmail', async function (req, res) {
