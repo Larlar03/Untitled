@@ -35,26 +35,26 @@ provider:
 
 
 functions:
-  usersApi:
-    handler: api/users/users.handler
+  users:
+    handler: src/users/users.handler
     events:
       - httpApi:
           method: ANY
           path: /users/{proxy+}
     package: 
       patterns:
-        - "api/users"
-        - "!api/studios"
-  studiosApi:
-    handler: api/studios/studios.handler
+        - "src/users"
+        - "!src/studios"
+  studios:
+    handler: src/studios/studios.handler
     events:
       - httpApi:
           method: ANY
           path: /studios/{proxy+}
     package: 
       patterns:
-        - "api/studios"
-        - "!api/studios"
+        - "src/studios"
+        - "!src/users"
 
 resources:
   Resources:
