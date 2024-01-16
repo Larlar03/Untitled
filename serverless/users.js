@@ -7,6 +7,8 @@ const {
 	UpdateCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
 const serverless = require('serverless-http');
 const {
 	hashPassword,
@@ -14,12 +16,13 @@ const {
 } = require('./utils/bcrypt-passwords.js');
 
 const app = express();
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
 
 const USERS_TABLE = process.env.USERS_TABLE;
 const client = new DynamoDBClient();
 const dynamoDbClient = DynamoDBDocumentClient.from(client);
-
-app.use(express.json());
 
 // login
 app.post('/users/login', async function (req, res) {

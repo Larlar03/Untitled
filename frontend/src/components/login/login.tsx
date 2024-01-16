@@ -4,16 +4,16 @@ import User from '../../types/user';
 
 interface Props {
     user: User;
-    setUsername: React.Dispatch<React.SetStateAction<string>>;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
     setPassword: React.Dispatch<React.SetStateAction<string>>;
     handleLogin: () => void;
     error?: string;
 }
 
 const Login = (props: Props) => {
-    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        props.setUsername(value);
+        props.setEmail(value);
     };
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +26,14 @@ const Login = (props: Props) => {
             <div className='top'>
                 <section className='mb-4'>
                     <span className='input-group'>
-                        <label htmlFor='username'>Username</label>
+                        <label htmlFor='email'>Email</label>
                         <input
                             type='text'
-                            id='username'
-                            name='username'
-                            onChange={handleUsernameChange}
+                            id='email'
+                            name='email'
+                            onChange={handleEmailChange}
                             autoComplete='off'
-                            value={props.user && props.user.username}
+                            value={props.user && props.user.email}
                         />
                     </span>
                 </section>

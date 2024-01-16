@@ -1,13 +1,16 @@
 service: aeriform-serverless
 frameworkVersion: '3'
+configValidationMode: error
 
 custom:
-  tableName: 'users-table-${sls:stage}'
+  usersTable: 'aeriform-users-${sls:stage}'
 
 provider:
   name: aws
   region: eu-west-2
   runtime: nodejs18.x
+  httpApi:
+    cors: true
   iam:
     role:
       statements:
@@ -22,13 +25,15 @@ provider:
           Resource:
             - Fn::GetAtt: [ UsersTable, Arn ]
   environment:
-    USERS_TABLE: ${self:custom.tableName}
+    USERS_TABLE: ${self:custom.usersTable}
 
 functions:
   usersApi:
     handler: users.handler
     events:
-      - httpApi: '*'
+      - httpApi:
+          method: ANY
+          path: /users/{proxy+}
 
 resources:
   Resources:
@@ -44,4 +49,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:custom.tableName}
+        TableName: ${self:custom.usersTable}
