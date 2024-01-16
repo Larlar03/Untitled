@@ -1,6 +1,8 @@
 service: aeriform-serverless
 frameworkVersion: '3'
 configValidationMode: error
+package:
+  individually: true
 
 custom:
   usersTable: 'aeriform-users-${sls:stage}'
@@ -10,6 +12,7 @@ provider:
   name: aws
   region: eu-west-2
   runtime: nodejs18.x
+
   httpApi:
     cors: true
   iam:
@@ -38,12 +41,20 @@ functions:
       - httpApi:
           method: ANY
           path: /users/{proxy+}
+    package: 
+      patterns:
+        - "api/users"
+        - "!api/studios"
   studiosApi:
     handler: api/studios/studios.handler
     events:
       - httpApi:
           method: ANY
           path: /studios/{proxy+}
+    package: 
+      patterns:
+        - "api/studios"
+        - "!api/studios"
 
 resources:
   Resources:
