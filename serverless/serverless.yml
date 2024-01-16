@@ -4,6 +4,7 @@ configValidationMode: error
 
 custom:
   usersTable: 'aeriform-users-${sls:stage}'
+  studiosTable: 'aeriform-studios-${sls:stage}'
 
 provider:
   name: aws
@@ -24,16 +25,25 @@ provider:
             - dynamodb:DeleteItem
           Resource:
             - Fn::GetAtt: [ UsersTable, Arn ]
+            - Fn::GetAtt: [ StudiosTable, Arn ]
   environment:
     USERS_TABLE: ${self:custom.usersTable}
+    STUDIOS_TABLE: ${self:custom.studiosTable}
+
 
 functions:
   usersApi:
-    handler: users.handler
+    handler: api/users/users.handler
     events:
       - httpApi:
           method: ANY
           path: /users/{proxy+}
+  studiosApi:
+    handler: api/studios/studios.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /studios/{proxy+}
 
 resources:
   Resources:
@@ -50,3 +60,16 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.usersTable}
+    StudiosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: _id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: _id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.studiosTable}

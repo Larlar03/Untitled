@@ -1,3 +1,7 @@
+const serverless = require('serverless-http');
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const {
 	DynamoDBDocumentClient,
@@ -6,10 +10,6 @@ const {
 	DeleteCommand,
 	UpdateCommand,
 } = require('@aws-sdk/lib-dynamodb');
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const serverless = require('serverless-http');
 const {
 	hashPassword,
 	comparePasswords,
