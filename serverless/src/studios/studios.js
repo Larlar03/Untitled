@@ -66,13 +66,47 @@ app.get('/studios/:id', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not retreive studio' });
+		res.status(500).json({ error: 'Error fetching studio' });
 	}
 });
 
-//  GET by location & services
-
 //  GET by location
+app.get('/studios/location/:location', async function (req, res) {
+	const locationQuery = req.params.location;
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		// Query condition
+		FilterExpression:
+			'#studioLocation.#city = :query OR #studioLocation.#region = :query',
+		// Query value
+		ExpressionAttributeValues: {
+			':query': locationQuery,
+		},
+		// Table keys
+		ExpressionAttributeNames: {
+			'#studioLocation': 'location',
+			'#city': 'city',
+			'#region': 'region',
+		},
+	};
+
+	try {
+		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		if (Items) {
+			res.status(200).json(Items);
+		} else {
+			res.status(404).json({ error: 'Studios in this location not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching studios in this location' });
+	}
+});
+
+//  GET by services
+
+//  GET by location & services
 
 // POST new studio
 
