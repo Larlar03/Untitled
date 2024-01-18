@@ -176,6 +176,28 @@ app.get('/studios', async function (req, res) {
 });
 
 // DELETE by id
+app.delete('/studios/:id', async function (req, res) {
+	const studioId = req.params.id;
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Key: {
+			_id: studioId,
+		},
+	};
+
+	try {
+		const { $metadata } = await dynamoDbClient.send(new DeleteCommand(params));
+		if ($metadata.httpStatusCode === 200) {
+			res.status(204).json({ message: 'Studio deleted.' });
+		} else {
+			res.status(404).json({ error: 'No studios found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Could not retreive studios' });
+	}
+});
 
 // POST new studio
 
