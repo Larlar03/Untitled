@@ -24,6 +24,33 @@ const dynamoDbClient = DynamoDBDocumentClient.from(client);
 
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
+//  GET by services
+app.get('/studios/services', async function (req, res) {
+	const reqData = req.query.services;
+	const serviceArray = Array.isArray(reqData) ? reqData : [reqData];
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+	};
+
+	try {
+		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		if (Items) {
+			const results = Items.filter((studio) => {
+				return serviceArray.some((service) =>
+					studio.services.includes(service)
+				);
+			});
+			res.status(200).json(results);
+		} else {
+			res.status(404).json({ error: 'Studios with these services not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching studios' });
+	}
+});
+
 // GET all
 app.get('/studios', async function (req, res) {
 	const params = {
@@ -33,10 +60,7 @@ app.get('/studios', async function (req, res) {
 	try {
 		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
 		if (Items) {
-			const studios = Items.map((item) => {
-				return item;
-			});
-			res.status(200).json(studios);
+			res.status(200).json(Items);
 		} else {
 			res.status(404).json({ error: 'No studios found' });
 		}
@@ -100,11 +124,9 @@ app.get('/studios/location/:location', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching studios in this location' });
+		res.status(500).json({ error: 'Error fetching studios' });
 	}
 });
-
-//  GET by services
 
 //  GET by location & services
 
