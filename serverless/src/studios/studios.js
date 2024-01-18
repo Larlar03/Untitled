@@ -24,10 +24,57 @@ const dynamoDbClient = DynamoDBDocumentClient.from(client);
 
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
+// GET by location and services
+app.get('/studios/:location/services', async function (req, res) {
+	const locationQuery = req.params.location;
+	const servicesQuery = req.query.services;
+	const serviceArray = Array.isArray(servicesQuery)
+		? servicesQuery
+		: [servicesQuery];
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		// Query condition
+		FilterExpression:
+			'#studioLocation.#city = :query OR #studioLocation.#region = :query',
+		// Query value
+		ExpressionAttributeValues: {
+			':query': locationQuery,
+		},
+		// Table keys
+		ExpressionAttributeNames: {
+			'#studioLocation': 'location',
+			'#city': 'city',
+			'#region': 'region',
+		},
+	};
+
+	try {
+		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		if (Items) {
+			const results = Items.filter((studio) => {
+				return serviceArray.some((service) =>
+					studio.services.includes(service)
+				);
+			});
+			res.status(200).json(results);
+		} else {
+			res.status(404).json({
+				error: 'Studios in this location with these sevices not found',
+			});
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching studios' });
+	}
+});
+
 //  GET by services
 app.get('/studios/services', async function (req, res) {
-	const reqData = req.query.services;
-	const serviceArray = Array.isArray(reqData) ? reqData : [reqData];
+	const serviceQuery = req.query.services;
+	const serviceArray = Array.isArray(serviceQuery)
+		? serviceQuery
+		: [serviceQuery];
 
 	const params = {
 		TableName: STUDIOS_TABLE,
@@ -48,49 +95,6 @@ app.get('/studios/services', async function (req, res) {
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ error: 'Error fetching studios' });
-	}
-});
-
-// GET all
-app.get('/studios', async function (req, res) {
-	const params = {
-		TableName: STUDIOS_TABLE,
-	};
-
-	try {
-		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
-		if (Items) {
-			res.status(200).json(Items);
-		} else {
-			res.status(404).json({ error: 'No studios found' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Could not retreive studios' });
-	}
-});
-
-// GET by id
-app.get('/studios/:id', async function (req, res) {
-	const studioId = req.params.id;
-
-	const params = {
-		TableName: STUDIOS_TABLE,
-		Key: {
-			_id: studioId,
-		},
-	};
-
-	try {
-		const { Item } = await dynamoDbClient.send(new GetCommand(params));
-		if (Item) {
-			res.status(200).json(Item);
-		} else {
-			res.status(404).json({ error: 'Studio not found' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching studio' });
 	}
 });
 
@@ -128,11 +132,52 @@ app.get('/studios/location/:location', async function (req, res) {
 	}
 });
 
-//  GET by location & services
+// GET by id
+app.get('/studios/:id', async function (req, res) {
+	const studioId = req.params.id;
 
-// POST new studio
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Key: {
+			_id: studioId,
+		},
+	};
+
+	try {
+		const { Item } = await dynamoDbClient.send(new GetCommand(params));
+		if (Item) {
+			res.status(200).json(Item);
+		} else {
+			res.status(404).json({ error: 'Studio not found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching studio' });
+	}
+});
+
+// GET all
+app.get('/studios', async function (req, res) {
+	const params = {
+		TableName: STUDIOS_TABLE,
+	};
+
+	try {
+		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		if (Items) {
+			res.status(200).json(Items);
+		} else {
+			res.status(404).json({ error: 'No studios found' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Could not retreive studios' });
+	}
+});
 
 // DELETE by id
+
+// POST new studio
 
 // UPDATE by id
 
