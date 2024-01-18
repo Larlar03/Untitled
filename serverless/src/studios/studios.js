@@ -189,7 +189,7 @@ app.delete('/studios/:id', async function (req, res) {
 	try {
 		const { $metadata } = await dynamoDbClient.send(new DeleteCommand(params));
 		if ($metadata.httpStatusCode === 200) {
-			res.status(204).json({ message: 'Studio deleted.' });
+			res.status(204);
 		} else {
 			res.status(404).json({ error: 'No studios found' });
 		}
