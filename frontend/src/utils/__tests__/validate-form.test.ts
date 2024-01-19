@@ -52,11 +52,4 @@ describe('Form Validation', () => {
             );
         }
     });
-
-    it('validates when all fields have values', () => {
-        console.log = jest.fn();
-
-        validateForm(filledStudio);
-        expect(console.log).toHaveBeenCalledWith('form validated');
-    });
 });

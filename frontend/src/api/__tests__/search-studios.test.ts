@@ -22,7 +22,7 @@ describe('Upload Studio API', () => {
 
         const response = await searchStudiosApi(mockLocation, mockServices);
 
-        expect(axios.get).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/${mockLocation}/services/`, {
+        expect(axios.get).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/${mockLocation}/services`, {
             params: { services: ['Aerial Hoop'] },
             timeout: 100000
         });

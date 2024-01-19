@@ -21,7 +21,6 @@ describe('Upload Studio API', () => {
         expect(axios.post).toHaveBeenCalledWith(
             `${process.env.VITE_STUDIOS_API}/`,
             {
-                isFrontend: true,
                 newStudio: mockOneStudio
             },
             {

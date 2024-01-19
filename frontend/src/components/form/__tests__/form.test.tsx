@@ -3,8 +3,6 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Form from '../form';
 import Studio from '../../../types/studios';
-import placeholderImageData from '../../../constants/placeholder-image-data';
-
 export const mockStudio: Studio = {
     name: 'Mock Studio One',
     email_address: 'mockstudio@gmail.com',
@@ -20,7 +18,7 @@ export const mockStudio: Studio = {
         instagram: '',
         facebook: ''
     },
-    logo: placeholderImageData,
+    logo: '',
     services: ['Acrobalance']
 };
 
@@ -86,7 +84,6 @@ describe('Upload API Calls', () => {
             expect(axios.post).toHaveBeenCalledWith(
                 `${process.env.VITE_STUDIOS_API}/`,
                 {
-                    isFrontend: true,
                     newStudio: mockStudio
                 },
                 { headers: { 'Content-Type': 'application/json' } }
