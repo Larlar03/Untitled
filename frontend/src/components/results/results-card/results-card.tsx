@@ -17,7 +17,7 @@ const ResultsCard = (props: Props) => {
         const logoBase64String = props.studio.logo;
         setLogoImage(`data:image/png;base64,${logoBase64String}`);
     }, [props.studio]);
-
+    console.log(props.studio.social_links?.website);
     return (
         <div
             id='card-container'
@@ -40,7 +40,11 @@ const ResultsCard = (props: Props) => {
                     >
                         <div id='top'>
                             <div className='top__heading'>
-                                <a href={props.studio.social_links?.website} target='_blank' rel='noreferrer'>
+                                <a
+                                    href={`http://${props.studio.social_links?.website}`}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                >
                                     <h3
                                         className={`text-3xl font-bold ${
                                             !props.isActive
@@ -78,7 +82,7 @@ const ResultsCard = (props: Props) => {
                         </div>
                         <div id='bottom'>
                             <a
-                                href={`${props.studio.social_links?.instagram}`}
+                                href={`http://${props.studio.social_links?.instagram}`}
                                 target='_blank'
                                 rel='noreferrer'
                                 className={`h-1.5 w-1.5 ${
@@ -91,7 +95,7 @@ const ResultsCard = (props: Props) => {
                                 <InstagramIcon />
                             </a>
                             <a
-                                href={`${props.studio.social_links?.facebook}`}
+                                href={`http://${props.studio.social_links?.facebook}`}
                                 target='_blank'
                                 rel='noreferrer'
                                 className={`h-1.5 w-1.5 ${
@@ -108,7 +112,9 @@ const ResultsCard = (props: Props) => {
                                     className={`block ${
                                         !props.isActive ? ' hover:text-black' : ' hover:text-cosmic-cobalt'
                                     }`}
-                                    href={props.studio.social_links?.website}
+                                    target='_blank'
+                                    href={`http://${props.studio.social_links?.website}`}
+                                    rel='noreferrer'
                                 >
                                     {props.studio.social_links?.website}
                                 </a>
