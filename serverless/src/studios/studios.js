@@ -204,6 +204,7 @@ app.post('/studios', async function (req, res) {
 	newStudio._id = uuidv4();
 
 	if (newStudio.logo.length > 0) {
+		const logo = newStudio.logo;
 		newStudio.logo = logo.split(',')[1];
 	} else {
 		newStudio.logo = placeholderImageData;
