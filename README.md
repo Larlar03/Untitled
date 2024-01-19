@@ -1,5 +1,5 @@
 ## Aeriform
-Aeriform is a MERN stack project.
+Aeriform is a full stack project.
 
 ## Motivation
 
@@ -12,10 +12,10 @@ Aeriform is a MERN stack project.
 <b>Built with</b>
 
 - ReactJS
-- MongoDB
 - ExpressJS
 - NodeJS
-- ReactJS
+- AWS Lambda
+- AWS DynamoDB
 
 ## Installation
 
