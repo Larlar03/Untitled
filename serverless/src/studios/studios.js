@@ -188,7 +188,7 @@ app.delete('/studios/:id', async function (req, res) {
 	try {
 		const { $metadata } = await dynamoDbClient.send(new DeleteCommand(params));
 		if ($metadata.httpStatusCode === 200) {
-			res.status(204);
+			res.status(204).send();
 		} else {
 			res.status(404).json({ error: 'Studio not found' });
 		}
@@ -229,6 +229,71 @@ app.post('/studios', async function (req, res) {
 });
 
 // UPDATE by id
+app.put('/studios/:id', async function (req, res) {
+	const studioId = req.params.id;
+	let updatedStudio = req.body.studio;
+	console.log({ studioId, updatedStudio });
+
+	const logo = updatedStudio.logo;
+	const logoString = logo.slice(0, 5);
+
+	if (logoString === 'data:') {
+		updatedStudio.logo = logo.split(',')[1];
+	}
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Key: {
+			_id: studioId,
+		},
+		UpdateExpression:
+			'SET #name = :name, #email_address = :email_address, #location = :location, #social_links = :social_links, #logo = :logo, #services = :services',
+		ExpressionAttributeValues: {
+			':name': updatedStudio.name,
+			':email_address': updatedStudio.email_address,
+			':location': updatedStudio.location,
+			':social_links': updatedStudio.social_links,
+			':logo': updatedStudio.logo,
+			':services': updatedStudio.services,
+		},
+		ExpressionAttributeNames: {
+			'#name': 'name',
+			'#email_address': 'email_address',
+			'#location': 'location',
+			'#social_links': 'social_links',
+			'#logo': 'logo',
+			'#services': 'services',
+		},
+		ReturnValues: 'ALL_NEW',
+	};
+
+	try {
+		// Find studio in db
+		const { Item } = await dynamoDbClient.send(
+			new GetCommand({
+				TableName: STUDIOS_TABLE,
+				Key: {
+					_id: studioId,
+				},
+			})
+		);
+
+		if (Item) {
+			// Update studio in db
+			const { $metadata } = await dynamoDbClient.send(
+				new UpdateCommand(params)
+			);
+			$metadata.httpStatusCode === 200
+				? res.status(204).send({ message: 'Studio updated' })
+				: res.status(404).json({ error: 'Could not update studio' });
+		} else {
+			res.status(404).json({ error: 'Could not find studio to update' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
 
 app.use((req, res, next) => {
 	return res.status(404).json({

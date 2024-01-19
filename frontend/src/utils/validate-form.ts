@@ -19,7 +19,5 @@ export const validateForm = (newStudio: Studio) => {
     if (emptyFieldsArr.length > 0) {
         const fields = emptyFieldsArr.join(', ');
         throw new Error(`The following fields are empty: ${fields}`);
-    } else {
-        console.log('form validated');
     }
 };
