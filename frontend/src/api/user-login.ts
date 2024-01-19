@@ -7,7 +7,7 @@ const userLoginApi = async (email: string, password: string): Promise<number | u
         password: password
     };
 
-    const URL = 'https://29qfxdpdma.execute-api.eu-west-2.amazonaws.com/users/login';
+    const URL = `${process.env.VITE_USERS_API}/login`;
 
     const response = await axios
         .post(URL, requestBody, {

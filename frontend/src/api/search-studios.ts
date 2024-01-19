@@ -3,7 +3,7 @@ import Studio from '../types/studios';
 
 const searchStudiosApi = async (location: string | undefined, services: string[]): Promise<Studio[]> => {
     const response = await axios
-        .get(`${process.env.VITE_STUDIOS_API}/${location}/services/`, {
+        .get(`${process.env.VITE_STUDIOS_API}/${location}/services`, {
             params: {
                 services
             },

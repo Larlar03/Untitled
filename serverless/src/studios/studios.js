@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const { v4: uuidv4 } = require('uuid');
+const placeholderImageData = require('./utils/placeholder-image-data');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const {
 	DynamoDBDocumentClient,
@@ -21,8 +22,6 @@ app.use(helmet());
 const STUDIOS_TABLE = process.env.STUDIOS_TABLE;
 const client = new DynamoDBClient();
 const dynamoDbClient = DynamoDBDocumentClient.from(client);
-
-// uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 // GET by location and services
 app.get('/studios/:location/services', async function (req, res) {
@@ -65,7 +64,7 @@ app.get('/studios/:location/services', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching studios' });
+		res.status(500).json({ error: 'Error fetching data' });
 	}
 });
 
@@ -94,7 +93,7 @@ app.get('/studios/services', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching studios' });
+		res.status(500).json({ error: 'Error fetching data' });
 	}
 });
 
@@ -128,7 +127,7 @@ app.get('/studios/location/:location', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching studios' });
+		res.status(500).json({ error: 'Error fetching data' });
 	}
 });
 
@@ -152,7 +151,7 @@ app.get('/studios/:id', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching studio' });
+		res.status(500).json({ error: 'Error fetching data' });
 	}
 });
 
@@ -171,7 +170,7 @@ app.get('/studios', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not retreive studios' });
+		res.status(500).json({ error: 'Error fetching data' });
 	}
 });
 
@@ -191,15 +190,43 @@ app.delete('/studios/:id', async function (req, res) {
 		if ($metadata.httpStatusCode === 200) {
 			res.status(204);
 		} else {
-			res.status(404).json({ error: 'No studios found' });
+			res.status(404).json({ error: 'Studio not found' });
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not retreive studios' });
+		res.status(500).json({ error: 'Error fetching data' });
 	}
 });
 
 // POST new studio
+app.post('/studios', async function (req, res) {
+	let newStudio = req.body.newStudio;
+	newStudio._id = uuidv4();
+
+	if (newStudio.logo.length > 0) {
+		newStudio.logo = logo.split(',')[1];
+	} else {
+		newStudio.logo = placeholderImageData;
+	}
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Item: newStudio,
+	};
+
+	try {
+		const response = await dynamoDbClient.send(new PutCommand(params));
+		if (response) {
+			console.log(response);
+			res.status(201).send({ message: 'New studio created uploaded' });
+		} else {
+			res.status(404).json({ error: 'Could not create studio' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
 
 // UPDATE by id
 
