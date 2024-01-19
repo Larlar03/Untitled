@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import searchStudiosApi from './api/search-studios';
-
 import HomePage from './pages/home-page/home-page';
 import ResultsPage from './pages/results-page/results-page';
 import Studio from './types/studios';
@@ -15,6 +14,24 @@ const App = () => {
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.getItem('session') === 'admin' && setIsAdmin(true);
+    });
+
+    useEffect(() => {
+        setAdminSession();
+    }, [setIsAdmin]);
+
+    const setAdminSession = () => {
+        isAdmin && localStorage.setItem('session', 'admin');
+    };
+
+    const endAdminSession = () => {
+        localStorage.clear();
+    };
+
+    window.addEventListener('load', endAdminSession);
 
     const getStudios = async (location: string | undefined, services: string[]) => {
         setLoading(true);

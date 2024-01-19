@@ -17,7 +17,7 @@ const ResultsCard = (props: Props) => {
         const logoBase64String = props.studio.logo;
         setLogoImage(`data:image/png;base64,${logoBase64String}`);
     }, [props.studio]);
-    console.log(props.studio.social_links?.website);
+
     return (
         <div
             id='card-container'

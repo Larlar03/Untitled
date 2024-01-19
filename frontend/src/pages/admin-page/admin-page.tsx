@@ -70,7 +70,7 @@ const AdminPage = (props: Props) => {
                 >
                     {!props.isAdmin ? (
                         <>
-                            <Header subheading='Admin Login' />
+                            <Header subheading='Login' />
 
                             <Login
                                 handleLogin={handleLogin}
