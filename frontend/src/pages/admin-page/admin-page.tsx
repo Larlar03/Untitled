@@ -13,7 +13,7 @@ interface Props {
 }
 
 const AdminPage = (props: Props) => {
-    const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string>();
     const [view, setView] = useState<string>('');
@@ -22,7 +22,7 @@ const AdminPage = (props: Props) => {
     const [studioToEdit, setStudioToEdit] = useState<Studio | undefined>();
 
     const handleLogin = async () => {
-        const response = await userLoginApi(username, password);
+        const response = await userLoginApi(email, password);
 
         if (response === 200) {
             props.setIsAdmin(true);
@@ -32,13 +32,13 @@ const AdminPage = (props: Props) => {
     };
 
     const handleLoginError = () => {
-        setUsername('');
+        setEmail('');
         setPassword('');
         setErrorMessage('Access denied');
     };
 
     const handleLogout = () => {
-        setUsername('');
+        setEmail('');
         setPassword('');
         setErrorMessage('');
         props.setIsAdmin(false);
@@ -74,8 +74,8 @@ const AdminPage = (props: Props) => {
 
                             <Login
                                 handleLogin={handleLogin}
-                                user={{ username: username, password: password }}
-                                setUsername={setUsername}
+                                user={{ email: email, password: password }}
+                                setEmail={setEmail}
                                 setPassword={setPassword}
                                 error={errorMessage}
                             />

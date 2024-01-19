@@ -10,7 +10,6 @@ import uploadStudioApi from '../../api/upload-studio';
 import updateStudioApi from '../../api/update-studio';
 
 import Studio from '../../types/studios';
-import placeholderImageData from '../../constants/placeholder-image-data';
 
 interface Props {
     formType?: string;
@@ -40,7 +39,7 @@ const Form = (props: Props) => {
             instagram: '',
             facebook: ''
         },
-        logo: placeholderImageData,
+        logo: '',
         services: []
     });
 
@@ -59,7 +58,7 @@ const Form = (props: Props) => {
             instagram: '',
             facebook: ''
         },
-        logo: placeholderImageData,
+        logo: '',
         services: []
     };
 

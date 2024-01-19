@@ -1,0 +1,86 @@
+service: aeriform-serverless
+frameworkVersion: '3'
+configValidationMode: error
+package:
+  individually: true
+
+custom:
+  usersTable: 'aeriform-users-${sls:stage}'
+  studiosTable: 'aeriform-studios-${sls:stage}'
+
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: nodejs18.x
+
+  httpApi:
+    cors: true
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ UsersTable, Arn ]
+            - Fn::GetAtt: [ StudiosTable, Arn ]
+  environment:
+    USERS_TABLE: ${self:custom.usersTable}
+    STUDIOS_TABLE: ${self:custom.studiosTable}
+
+
+functions:
+  users:
+    handler: src/users/users.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /users/{proxy+}
+    package: 
+      patterns:
+        - "src/users"
+        - "!src/studios"
+  studios:
+    handler: src/studios/studios.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /studios/{proxy+}
+    package: 
+      patterns:
+        - "src/studios"
+        - "!src/users"
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.usersTable}
+    StudiosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: _id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: _id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.studiosTable}

@@ -15,12 +15,12 @@ describe('User Login Api', () => {
 
         jest.spyOn(axios, 'post').mockResolvedValueOnce(mockResponse);
 
-        const response = await userLoginApi('username', 'password');
+        const response = await userLoginApi('email', 'password');
 
         expect(axios.post).toHaveBeenCalledWith(
             `${process.env.VITE_USERS_API}/login`,
             {
-                username: 'username',
+                email: 'email',
                 password: 'password'
             },
             {
@@ -40,7 +40,7 @@ describe('User Login Api', () => {
         global.console.error = consoleErrorMock;
 
         try {
-            await userLoginApi('username', 'password');
+            await userLoginApi('email', 'password');
         } catch (error: any) {
             expect(error.message).toBe('Axios error');
             expect(consoleErrorMock).toHaveBeenCalled();

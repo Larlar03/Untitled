@@ -1,14 +1,16 @@
 import axios from 'axios';
 import User from '../types/user';
 
-const userLoginApi = async (username: string, password: string): Promise<number | undefined> => {
+const userLoginApi = async (email: string, password: string): Promise<number | undefined> => {
     const requestBody: User = {
-        username: username,
+        email: email,
         password: password
     };
 
+    const URL = `${process.env.VITE_USERS_API}/login`;
+
     const response = await axios
-        .post(`${process.env.VITE_USERS_API}/login`, requestBody, {
+        .post(URL, requestBody, {
             headers: {
                 'Content-Type': 'application/json'
             }

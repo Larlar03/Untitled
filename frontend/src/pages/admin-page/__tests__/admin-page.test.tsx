@@ -23,7 +23,7 @@ describe('Admin Page', () => {
             </Router>
         );
 
-        fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'admin' } });
+        fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'admin' } });
         fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass' } });
 
         fireEvent.click(screen.getByTestId('cta-button'));
@@ -37,7 +37,7 @@ describe('Admin Page', () => {
             </Router>
         );
 
-        fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'admin' } });
+        fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'admin' } });
         fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'pass' } });
 
         fireEvent.click(screen.getByTestId('cta-button'));
