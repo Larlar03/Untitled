@@ -3,7 +3,7 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import FormSectionThree from '../form-section-three';
 import Services from '../../../constants/services';
 import { MouseEvent } from 'react';
-import Studio from '../../../types/studios';
+import Studio from '../../../types/studio';
 
 const mockStoreServiceData = jest.fn();
 const mockGoToFormSection = jest.fn();

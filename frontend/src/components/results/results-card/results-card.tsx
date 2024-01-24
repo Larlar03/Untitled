@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Studio from '../../../types/studios';
+import Studio from '../../../types/studio';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 

@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import Results from '../../components/results/results';
 import NoResults from '../../components/error/no-results/no-results';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     results?: Studio[] | undefined;

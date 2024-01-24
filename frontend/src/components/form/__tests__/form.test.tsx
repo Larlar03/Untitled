@@ -2,7 +2,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Form from '../form';
-import Studio from '../../../types/studios';
+import Studio from '../../../types/studio';
 export const mockStudio: Studio = {
     name: 'Mock Studio One',
     email_address: 'mockstudio@gmail.com',

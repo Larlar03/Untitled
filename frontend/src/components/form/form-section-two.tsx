@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CtaButton from '../buttons/cta-button/cta-button';
 import './form.css';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     goToFormSection: (section: number) => void;

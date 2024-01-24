@@ -9,7 +9,7 @@ import { validateForm } from '../../utils/validate-form';
 import uploadStudioApi from '../../api/upload-studio';
 import updateStudioApi from '../../api/update-studio';
 
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     formType?: string;

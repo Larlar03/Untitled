@@ -5,7 +5,7 @@ import AdminNavbar from '../../components/navbar/admin-navbar';
 import Login from '../../components/login/login';
 import Edit from '../../components/edit/edit';
 import Form from '../../components/form/form';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     isAdmin: boolean;

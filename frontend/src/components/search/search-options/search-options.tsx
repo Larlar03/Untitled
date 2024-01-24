@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import OptionButton from '../../buttons/option-button/option-button';
+import Service from '../../../types/service';
 
 interface Props {
     selectOptions: (options: string[]) => void;
-    options: string[];
+    services: Service[] | undefined;
 }
 
 const SearchOptions = (props: Props) => {
-    const [options, setOptions] = useState<Array<string>>([]);
+    const [options, setOptions] = useState<string[]>([]);
 
     useEffect(() => {
         props.selectOptions(options);
@@ -37,8 +38,8 @@ const SearchOptions = (props: Props) => {
 
     return (
         <div className='list-none my-9 mx-auto p-0 flex flex-row flex-wrap justify-center gap-2.5 text-center md:gap-2'>
-            {props.options?.map((service: string, i: number) => (
-                <OptionButton key={i} optionName={service} handleClick={handleOptionClick} />
+            {props.services?.map((service: Service) => (
+                <OptionButton key={service._id} optionData={service} handleClick={handleOptionClick} />
             ))}
         </div>
     );
