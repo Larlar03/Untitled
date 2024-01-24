@@ -44,6 +44,7 @@ const Login = (props: Props) => {
                             type='password'
                             id='password'
                             name='password'
+                            data-testid='password-input'
                             onChange={handlePasswordChange}
                             autoComplete='off'
                             value={props.user && props.user.password}

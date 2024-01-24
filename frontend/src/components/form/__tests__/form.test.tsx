@@ -3,6 +3,7 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Form from '../form';
 import Studio from '../../../types/studio';
+import mockServices from '../../../utils/mock-objects/mock-services';
 export const mockStudio: Studio = {
     name: 'Mock Studio One',
     email_address: 'mockstudio@gmail.com',
@@ -26,7 +27,7 @@ describe('Upload Page UI', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form formType='Upload' />
+                <Form formType='Upload' services={mockServices} />
             </Router>
         );
     });
@@ -44,7 +45,7 @@ describe('Upload API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form formType='Upload' />
+                <Form formType='Upload' services={mockServices} />
             </Router>
         );
     });
@@ -81,13 +82,9 @@ describe('Upload API Calls', () => {
 
         //  Assert
         await waitFor(() => {
-            expect(axios.post).toHaveBeenCalledWith(
-                `${process.env.VITE_STUDIOS_API}/`,
-                {
-                    newStudio: mockStudio
-                },
-                { headers: { 'Content-Type': 'application/json' } }
-            );
+            expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, mockStudio, {
+                headers: { 'Content-Type': 'application/json' }
+            });
         });
     });
 
@@ -123,7 +120,7 @@ describe('Update API Calls', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form formType='Update' />
+                <Form formType='Update' services={mockServices} />
             </Router>
         );
     });

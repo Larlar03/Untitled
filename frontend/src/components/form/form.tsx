@@ -65,7 +65,6 @@ const Form = (props: Props) => {
     };
 
     useEffect(() => {
-        // console.log(props.studioToEdit?.logo);
         props.formType && setFormType(props.formType);
         props.studioToEdit ? setNewStudio(props.studioToEdit) : setNewStudio(studioTemplate);
         props.studioToEditId ? setStudioId(props.studioToEditId) : setStudioId('');

@@ -1,6 +1,6 @@
 import Service from '../../types/service';
 
-const MockServices: Service[] = [
+const mockServices: Service[] = [
     { _id: '1', service: 'Acrobalance' },
     { _id: '2', service: 'Aerial Hoop' },
     { _id: '3', service: 'Aerial Silks' },
@@ -24,4 +24,4 @@ const MockServices: Service[] = [
     { _id: '21', service: 'Yoga' }
 ];
 
-export default MockServices;
+export default mockServices;

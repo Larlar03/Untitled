@@ -14,7 +14,7 @@ describe('Navbar', () => {
     it('renders icons', () => {
         const icons = screen.getAllByRole('button');
 
-        expect(icons).toHaveLength(3);
+        expect(icons).toHaveLength(2);
         icons.forEach((icon) => {
             expect(icon).toBeVisible();
         });
@@ -29,21 +29,12 @@ describe('Navbar', () => {
         });
     });
 
-    it('navigates to upload page when upload icon is clicked', async () => {
-        const uploadIcon = screen.getByTestId('upload-icon');
+    it('navigates to admin page when user icon is clicked', async () => {
+        const uploadIcon = screen.getByTestId('user-icon');
         fireEvent.click(uploadIcon);
 
         waitFor(() => {
-            expect(window.location.href).toBe('http://127.0.0.1:5173/upload');
-        });
-    });
-
-    it('navigates to edit page when edit icon is clicked', async () => {
-        const bookmarkIcon = screen.getByTestId('edit-icon');
-        fireEvent.click(bookmarkIcon);
-
-        waitFor(() => {
-            expect(window.location.href).toBe('http://127.0.0.1:5173/edit');
+            expect(window.location.href).toBe('http://127.0.0.1:5173/admin');
         });
     });
 });

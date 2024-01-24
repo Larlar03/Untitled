@@ -1,15 +1,15 @@
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import SearchOptions from '../search-options/search-options';
+import mockServices from '../../../utils/mock-objects/mock-services';
 
-const services = ['Aerial Hoop', 'Aerial Silks', 'Pole Fitness'];
 const mockSelectOptions = jest.fn();
 
 describe('Search Options', () => {
     beforeEach(() => {
         render(
             <Router>
-                <SearchOptions selectOptions={mockSelectOptions} options={services} />
+                <SearchOptions selectOptions={mockSelectOptions} services={mockServices} />
             </Router>
         );
     });
@@ -20,7 +20,7 @@ describe('Search Options', () => {
 
     it('renders the option button', () => {
         const buttons = screen.getAllByTestId('option-button');
-        expect(buttons.length).toBe(3);
+        expect(buttons.length).toBe(21);
     });
 
     it('applies button styling to selected option', async () => {
