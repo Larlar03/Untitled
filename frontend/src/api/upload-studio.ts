@@ -2,7 +2,7 @@ import axios from 'axios';
 import Studio from '../types/studios';
 
 const uploadStudioApi = async (newStudio: Studio): Promise<number | undefined> => {
-    const requestBody = { newStudio };
+    const requestBody = newStudio;
 
     const response = await axios
         .post(`${process.env.VITE_STUDIOS_API}/`, requestBody, {

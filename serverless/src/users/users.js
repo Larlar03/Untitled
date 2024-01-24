@@ -21,8 +21,7 @@ app.use(cors());
 app.use(helmet());
 
 const USERS_TABLE = process.env.USERS_TABLE;
-const client = new DynamoDBClient();
-const dynamoDbClient = DynamoDBDocumentClient.from(client);
+const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
 // login
 app.post('/users/login', async function (req, res) {
@@ -37,7 +36,7 @@ app.post('/users/login', async function (req, res) {
 	};
 
 	try {
-		const { Item } = await dynamoDbClient.send(new GetCommand(params));
+		const { Item } = await client.send(new GetCommand(params));
 		if (Item) {
 			const { email, username, password } = Item;
 			const result = await comparePasswords(providedPassword, password);
@@ -76,7 +75,7 @@ app.post('/users', async function (req, res) {
 			},
 		};
 
-		await dynamoDbClient.send(new PutCommand(params));
+		await client.send(new PutCommand(params));
 		res.json({ email, username, hashedPassword });
 	} catch (error) {
 		console.log(error);
@@ -105,7 +104,7 @@ app.put('/users/:userEmail', async function (req, res) {
 			ReturnValues: 'ALL_NEW',
 		};
 
-		await dynamoDbClient.send(new UpdateCommand(params));
+		await client.send(new UpdateCommand(params));
 		res.json({ message: 'User ' + params.Key.email + ' updated' });
 	} catch (error) {
 		console.log(error);
@@ -123,7 +122,7 @@ app.delete('/users/:userEmail', async function (req, res) {
 	};
 
 	try {
-		await dynamoDbClient.send(new DeleteCommand(params));
+		await client.send(new DeleteCommand(params));
 		res.json({ message: 'User ' + params.Key.email + ' deleted' });
 	} catch (error) {
 		console.log(error);
