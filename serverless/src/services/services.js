@@ -71,7 +71,24 @@ app.put('/services/:id', async function (req, res) {
 });
 
 // DELETE by id
-app.delete('/services/:id', async function (req, res) {});
+app.delete('/services/:id', async function (req, res) {
+	const serviceId = Number(req.params.id);
+
+	const params = {
+		TableName: SERVICES_TABLE,
+		Key: {
+			_id: serviceId,
+		},
+	};
+
+	try {
+		await client.send(new DeleteCommand(params));
+		res.status(204).json({ message: 'User ' + params.Key._id + ' deleted' });
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Could not delete user' });
+	}
+});
 
 // POST new service
 app.post('/services', async function (req, res) {
