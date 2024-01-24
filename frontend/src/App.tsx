@@ -33,21 +33,21 @@ const App = () => {
         isAdmin && localStorage.setItem('session', 'admin');
     };
 
-    const endAdminSession = () => {
+    const clearLocalStorage = () => {
         localStorage.clear();
     };
 
-    window.addEventListener('load', endAdminSession);
+    window.addEventListener('load', clearLocalStorage);
 
     const getServices = async () => {
-        const response = await getAllServicesApi();
-        // console.log(response);
-        setServices(response);
-        // const storedServices = localStorage.getItem('services')
-        // if (!storedServices) {
-        //     localStorage.setItem('session', 'admin');
-        // };
-        // }
+        const storedServices = localStorage.getItem('services');
+        if (storedServices) {
+            setServices(JSON.parse(storedServices));
+        } else {
+            const response = await getAllServicesApi();
+            localStorage.setItem('services', JSON.stringify(response));
+            setServices(response);
+        }
     };
 
     const getStudios = async (location: string | undefined, services: string[]) => {
@@ -71,7 +71,10 @@ const App = () => {
         <Routes>
             <Route path='/' element={<HomePage isLoading={loading} getStudios={getStudios} services={services} />} />
             <Route path='/results' element={<ResultsPage results={studios} />} />
-            <Route path='/admin' element={<AdminPage isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route
+                path='/admin'
+                element={<AdminPage isAdmin={isAdmin} setIsAdmin={setIsAdmin} services={services} />}
+            />
             <Route path='/timeout' element={<TimeoutError />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>

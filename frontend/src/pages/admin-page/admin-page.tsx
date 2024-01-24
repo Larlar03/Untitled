@@ -6,10 +6,12 @@ import Login from '../../components/login/login';
 import Edit from '../../components/edit/edit';
 import Form from '../../components/form/form';
 import Studio from '../../types/studio';
+import Service from '../../types/service';
 
 interface Props {
     isAdmin: boolean;
     setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
+    services: Service[] | undefined;
 }
 
 const AdminPage = (props: Props) => {
@@ -104,6 +106,7 @@ const AdminPage = (props: Props) => {
                                                 formType={formType}
                                                 studioToEdit={studioToEdit}
                                                 studioToEditId={studioToEditId}
+                                                services={props.services}
                                             />
                                         </>
                                     );

@@ -10,11 +10,13 @@ import uploadStudioApi from '../../api/upload-studio';
 import updateStudioApi from '../../api/update-studio';
 
 import Studio from '../../types/studio';
+import Service from '../../types/service';
 
 interface Props {
     formType?: string;
     studioToEdit?: Studio | undefined;
     studioToEditId?: string | undefined;
+    services: Service[] | undefined;
 }
 
 const Form = (props: Props) => {
@@ -178,6 +180,7 @@ const Form = (props: Props) => {
                     {formSection === 3 && (
                         <UploadFormThree
                             goToFormSection={goToFormSection}
+                            services={props.services}
                             storeServiceData={storeServiceData}
                             newStudio={newStudio}
                             onSubmit={onSubmit}

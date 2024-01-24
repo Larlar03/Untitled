@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import FormSectionThree from '../form-section-three';
-import Services from '../../../constants/services';
 import { MouseEvent } from 'react';
 import Studio from '../../../types/studio';
+import MockServices from '../../../utils/mock-objects/mock-services';
 
 const mockStoreServiceData = jest.fn();
 const mockGoToFormSection = jest.fn();
@@ -22,6 +22,7 @@ describe('Upload Form Three', () => {
                     storeServiceData={mockStoreServiceData}
                     onSubmit={mockSubmitForm}
                     newStudio={new Studio()}
+                    services={MockServices}
                 />
             </Router>
         );
@@ -33,7 +34,7 @@ describe('Upload Form Three', () => {
 
     it('renders text input fields', () => {
         const textInputFields = screen.getAllByRole('checkbox');
-        const amountOfServices = Services.length;
+        const amountOfServices = MockServices.length;
         expect(textInputFields).toHaveLength(amountOfServices);
     });
 

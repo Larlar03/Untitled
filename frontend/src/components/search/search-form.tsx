@@ -27,7 +27,6 @@ const SearchForm = (props: Props) => {
 
     const selectOptions = (options: string[]) => {
         setOptions(options);
-        console.log(options);
     };
 
     return (
