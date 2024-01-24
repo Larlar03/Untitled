@@ -128,7 +128,13 @@ app.get('/services', async function (req, res) {
 	try {
 		const { Items } = await client.send(new ScanCommand(params));
 		if (Items) {
-			res.status(200).json(Items);
+			// Sort the services alphabetically alphabetically
+			const sortedItems = Items.sort((a, b) => {
+				const serviceA = a.service.toLowerCase(); // Convert to lowercase for case-insensitive sorting
+				const serviceB = b.service.toLowerCase();
+				return serviceA.localeCompare(serviceB);
+			});
+			res.status(200).json(sortedItems);
 		} else {
 			res.status(404).json({ error: 'No services found' });
 		}
