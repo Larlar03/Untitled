@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
 import getAllServicesApi from '../get-all-services';
-import { mockFiveStudios } from '../../utils/mock-objects/mock-studios';
 import mockServices from '../../utils/mock-objects/mock-services';
 
 describe('Get All Services API', () => {
