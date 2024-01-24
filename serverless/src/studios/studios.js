@@ -20,8 +20,7 @@ app.use(cors());
 app.use(helmet());
 
 const STUDIOS_TABLE = process.env.STUDIOS_TABLE;
-const client = new DynamoDBClient();
-const dynamoDbClient = DynamoDBDocumentClient.from(client);
+const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
 // GET by location and services
 app.get('/studios/:location/services', async function (req, res) {
@@ -49,7 +48,7 @@ app.get('/studios/:location/services', async function (req, res) {
 	};
 
 	try {
-		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		const { Items } = await client.send(new ScanCommand(params));
 		if (Items) {
 			const results = Items.filter((studio) => {
 				return serviceArray.some((service) =>
@@ -80,7 +79,7 @@ app.get('/studios/services', async function (req, res) {
 	};
 
 	try {
-		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		const { Items } = await client.send(new ScanCommand(params));
 		if (Items) {
 			const results = Items.filter((studio) => {
 				return serviceArray.some((service) =>
@@ -119,7 +118,7 @@ app.get('/studios/location/:location', async function (req, res) {
 	};
 
 	try {
-		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
+		const { Items } = await client.send(new ScanCommand(params));
 		if (Items) {
 			res.status(200).json(Items);
 		} else {
@@ -143,30 +142,11 @@ app.get('/studios/:id', async function (req, res) {
 	};
 
 	try {
-		const { Item } = await dynamoDbClient.send(new GetCommand(params));
+		const { Item } = await client.send(new GetCommand(params));
 		if (Item) {
 			res.status(200).json(Item);
 		} else {
 			res.status(404).json({ error: 'Studio not found' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
-	}
-});
-
-// GET all
-app.get('/studios', async function (req, res) {
-	const params = {
-		TableName: STUDIOS_TABLE,
-	};
-
-	try {
-		const { Items } = await dynamoDbClient.send(new ScanCommand(params));
-		if (Items) {
-			res.status(200).json(Items);
-		} else {
-			res.status(404).json({ error: 'No studios found' });
 		}
 	} catch (error) {
 		console.log(error);
@@ -186,7 +166,7 @@ app.delete('/studios/:id', async function (req, res) {
 	};
 
 	try {
-		const { $metadata } = await dynamoDbClient.send(new DeleteCommand(params));
+		const { $metadata } = await client.send(new DeleteCommand(params));
 		if ($metadata.httpStatusCode === 200) {
 			res.status(204).send();
 		} else {
@@ -200,7 +180,7 @@ app.delete('/studios/:id', async function (req, res) {
 
 // POST new studio
 app.post('/studios', async function (req, res) {
-	let newStudio = req.body.newStudio;
+	let newStudio = req.body;
 	newStudio._id = uuidv4();
 
 	if (newStudio.logo.length > 0) {
@@ -216,7 +196,7 @@ app.post('/studios', async function (req, res) {
 	};
 
 	try {
-		const response = await dynamoDbClient.send(new PutCommand(params));
+		const response = await client.send(new PutCommand(params));
 		if (response) {
 			console.log(response);
 			res.status(201).send({ message: 'New studio created uploaded' });
@@ -270,7 +250,7 @@ app.put('/studios/:id', async function (req, res) {
 
 	try {
 		// Find studio in db
-		const { Item } = await dynamoDbClient.send(
+		const { Item } = await client.send(
 			new GetCommand({
 				TableName: STUDIOS_TABLE,
 				Key: {
@@ -281,14 +261,31 @@ app.put('/studios/:id', async function (req, res) {
 
 		if (Item) {
 			// Update studio in db
-			const { $metadata } = await dynamoDbClient.send(
-				new UpdateCommand(params)
-			);
+			const { $metadata } = await client.send(new UpdateCommand(params));
 			$metadata.httpStatusCode === 200
 				? res.status(204).send({ message: 'Studio updated' })
 				: res.status(404).json({ error: 'Could not update studio' });
 		} else {
 			res.status(404).json({ error: 'Could not find studio to update' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
+
+// GET all
+app.get('/studios', async function (req, res) {
+	const params = {
+		TableName: STUDIOS_TABLE,
+	};
+
+	try {
+		const { Items } = await client.send(new ScanCommand(params));
+		if (Items) {
+			res.status(200).json(Items);
+		} else {
+			res.status(404).json({ error: 'No studios found' });
 		}
 	} catch (error) {
 		console.log(error);

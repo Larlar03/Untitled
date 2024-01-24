@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Studio from '../types/studios';
+import Studio from '../types/studio';
 
 const searchStudiosApi = async (location: string | undefined, services: string[]): Promise<Studio[]> => {
     const response = await axios

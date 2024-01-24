@@ -2,7 +2,7 @@ import { useState } from 'react';
 import deleteStudioApi from '../../api/delete-studio';
 import ConfirmationModal from '../modal/confirmation-modal';
 import NoResults from '../error/no-results/no-results';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 interface Props {

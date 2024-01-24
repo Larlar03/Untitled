@@ -13,7 +13,7 @@ const Navbar = () => {
             <button data-testid='home-icon' type='button' className='text-right' onClick={() => goToPage('')}>
                 <HomeIcon className='h-6 w-6 text-greyscale-100 hover:text-iris' />
             </button>
-            <button data-testid='upload-icon' type='button' className='text-right' onClick={() => goToPage('admin')}>
+            <button data-testid='user-icon' type='button' className='text-right' onClick={() => goToPage('admin')}>
                 <UserIcon className='h-6 w-6 text-greyscale-100 hover:text-iris' />
             </button>
         </div>

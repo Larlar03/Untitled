@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { cleanup } from '@testing-library/react';
-import getAllStudiosApi from '../get-all-studios';
-import { mockFiveStudios } from '../../utils/mock-objects/mock-studios';
+import getAllServicesApi from '../get-all-services';
+import mockServices from '../../utils/mock-objects/mock-services';
 
-describe('Get All Studios API', () => {
+describe('Get All Services API', () => {
     afterEach(() => {
         cleanup();
         jest.clearAllMocks();
@@ -12,16 +12,16 @@ describe('Get All Studios API', () => {
     it('makes a GET request', async () => {
         const mockResponse = {
             status: 200,
-            data: mockFiveStudios
+            data: mockServices
         };
 
         jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponse);
 
-        const response = await getAllStudiosApi();
+        const response = await getAllServicesApi();
 
-        expect(axios.get).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`);
+        expect(axios.get).toHaveBeenCalledWith(`${process.env.VITE_SERVICES_API}/`);
 
-        expect(response).toBe(mockFiveStudios);
+        expect(response).toBe(mockServices);
     });
 
     it('handles Axios errors', async () => {
@@ -31,7 +31,7 @@ describe('Get All Studios API', () => {
         global.console.error = consoleErrorMock;
 
         try {
-            await getAllStudiosApi();
+            await getAllServicesApi();
         } catch (error: any) {
             expect(error.message).toBe('Axios error');
             expect(consoleErrorMock).toHaveBeenCalled();

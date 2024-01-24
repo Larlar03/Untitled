@@ -5,7 +5,7 @@ import regions from '../../constants/regions';
 import CitiesRegion from '../../types/cities-regions';
 import countries from '../../constants/countries';
 import './form.css';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     goToFormSection: (section: number) => void;

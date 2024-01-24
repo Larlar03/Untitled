@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import ResultsPage from '../results-page';
 import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
-import Studio from '../../../types/studios';
+import Studio from '../../../types/studio';
 
 const mockNoStudios: Studio[] = [];
 

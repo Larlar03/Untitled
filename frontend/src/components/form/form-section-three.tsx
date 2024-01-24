@@ -1,7 +1,7 @@
 import CtaButton from '../buttons/cta-button/cta-button';
-import Services from '../../constants/services';
 import './form.css';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
+import Service from '../../types/service';
 
 interface Props {
     goToFormSection: (section: number) => void;
@@ -9,6 +9,7 @@ interface Props {
     newStudio: Studio;
     onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
     formType?: string;
+    services: Service[] | undefined;
 }
 
 const FormSectionThree = (props: Props) => {
@@ -16,18 +17,18 @@ const FormSectionThree = (props: Props) => {
         <form action='submit' id='form'>
             <div className='top flex justify-center'>
                 <section id='form-check-container'>
-                    {Services.map((service, i) => (
-                        <div className='form-check' key={i}>
+                    {props.services?.map((service: any) => (
+                        <div className='form-check' key={service._id}>
                             <input
                                 className='form-check__input'
                                 type='checkbox'
-                                value={service}
+                                value={service.service}
                                 id='flexCheckDefault'
                                 onChange={props.storeServiceData}
-                                checked={props.newStudio.services?.includes(service)}
+                                checked={props.newStudio.services?.includes(service.service)}
                             />
                             <label className='form-check__label ml-1.5' htmlFor='flexCheckDefault'>
-                                {service}
+                                {service.service}
                             </label>
                         </div>
                     ))}

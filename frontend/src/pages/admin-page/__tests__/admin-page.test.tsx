@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 import { MemoryRouter as Router } from 'react-router-dom';
 import userLoginApi from '../../../api/user-login';
 import AdminPage from '../admin-page';
+import mockServices from '../../../utils/mock-objects/mock-services';
 
 jest.mock('../../../api/user-login', () => ({
     __esModule: true,
@@ -19,7 +20,7 @@ describe('Admin Page', () => {
     it('calls user login api on login button click', () => {
         render(
             <Router>
-                <AdminPage isAdmin={false} setIsAdmin={mockSetIsAdmin} />
+                <AdminPage isAdmin={false} setIsAdmin={mockSetIsAdmin} services={mockServices} />
             </Router>
         );
 
@@ -33,7 +34,7 @@ describe('Admin Page', () => {
     it('sets isAdmin state to true on successful login', () => {
         render(
             <Router>
-                <AdminPage isAdmin={false} setIsAdmin={mockSetIsAdmin} />
+                <AdminPage isAdmin={false} setIsAdmin={mockSetIsAdmin} services={mockServices} />
             </Router>
         );
 
@@ -50,7 +51,7 @@ describe('Admin Page', () => {
     it('sets isAdmin state to false when logout icon is clicked', () => {
         render(
             <Router>
-                <AdminPage isAdmin={true} setIsAdmin={mockSetIsAdmin} />
+                <AdminPage isAdmin={true} setIsAdmin={mockSetIsAdmin} services={mockServices} />
             </Router>
         );
 
@@ -63,7 +64,7 @@ describe('Admin Page', () => {
     it('shows upload form when upload icon in the navbar is clicked', () => {
         render(
             <Router>
-                <AdminPage isAdmin={true} setIsAdmin={mockSetIsAdmin} />
+                <AdminPage isAdmin={true} setIsAdmin={mockSetIsAdmin} services={mockServices} />
             </Router>
         );
 

@@ -18,17 +18,11 @@ describe('Upload Studio API', () => {
 
         const response = await uploadStudioApi(mockOneStudio);
 
-        expect(axios.post).toHaveBeenCalledWith(
-            `${process.env.VITE_STUDIOS_API}/`,
-            {
-                newStudio: mockOneStudio
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        expect(axios.post).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, mockOneStudio, {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        );
+        });
 
         expect(response).toBe(204);
     });

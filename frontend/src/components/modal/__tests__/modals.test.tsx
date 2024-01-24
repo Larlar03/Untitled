@@ -3,6 +3,7 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import EditList from '../../edit/edit-list';
 import Form from '../../form/form';
 import { mockOneStudio } from '../../../utils/mock-objects/mock-studios';
+import mockServices from '../../../utils/mock-objects/mock-services';
 
 const mockGetAllStudiosFunc = jest.fn();
 const mockShowForm = jest.fn();
@@ -45,7 +46,7 @@ describe('Warning Modal', () => {
     beforeEach(() => {
         render(
             <Router>
-                <Form />
+                <Form services={mockServices} />
             </Router>
         );
     });

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ResultsNav from './results-nav/results-nav';
 import ResultsCard from './results-card/results-card';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     results?: Studio[];

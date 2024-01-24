@@ -7,6 +7,7 @@ package:
 custom:
   usersTable: 'aeriform-users-${sls:stage}'
   studiosTable: 'aeriform-studios-${sls:stage}'
+  servicesTable: 'aeriform-services-${sls:stage}'
 
 provider:
   name: aws
@@ -29,9 +30,11 @@ provider:
           Resource:
             - Fn::GetAtt: [ UsersTable, Arn ]
             - Fn::GetAtt: [ StudiosTable, Arn ]
+            - Fn::GetAtt: [ ServicesTable, Arn ]
   environment:
     USERS_TABLE: ${self:custom.usersTable}
     STUDIOS_TABLE: ${self:custom.studiosTable}
+    SERVICES_TABLE: ${self:custom.servicesTable}
 
 
 functions:
@@ -45,6 +48,7 @@ functions:
       patterns:
         - "src/users"
         - "!src/studios"
+        - "!src/services"
   studios:
     handler: src/studios/studios.handler
     events:
@@ -55,6 +59,19 @@ functions:
       patterns:
         - "src/studios"
         - "!src/users"
+        - "!src/services"
+  services:
+    handler: src/services/services.handler
+    events:
+      - httpApi:
+          method: ANY
+          path: /services/{proxy+}
+    package: 
+      patterns:
+        - "src/services"
+        - "!src/users"
+        - "!src/studios"
+
 
 resources:
   Resources:
@@ -84,3 +101,16 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.studiosTable}
+    ServicesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: _id
+            AttributeType: N
+        KeySchema:
+          - AttributeName: _id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.servicesTable}
