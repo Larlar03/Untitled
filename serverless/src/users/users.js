@@ -105,7 +105,7 @@ app.put('/users/:userEmail', async function (req, res) {
 		};
 
 		await client.send(new UpdateCommand(params));
-		res.json({ message: 'User ' + params.Key.email + ' updated' });
+		res.status(204).json({ message: 'User ' + params.Key.email + ' updated' });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ error: 'Could not update user' });
@@ -123,7 +123,7 @@ app.delete('/users/:userEmail', async function (req, res) {
 
 	try {
 		await client.send(new DeleteCommand(params));
-		res.json({ message: 'User ' + params.Key.email + ' deleted' });
+		res.status(204).json({ message: 'User ' + params.Key.email + ' deleted' });
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ error: 'Could not delete user' });
