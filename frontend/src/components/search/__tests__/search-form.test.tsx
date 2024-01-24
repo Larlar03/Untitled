@@ -1,6 +1,7 @@
 import { render, screen, cleanup, fireEvent, within } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import SearchForm from '../search-form';
+import mockServices from '../../../utils/mock-objects/mock-services';
 
 const mockGetStudios = jest.fn();
 
@@ -8,7 +9,7 @@ describe('Search Options', () => {
     beforeEach(() => {
         render(
             <Router>
-                <SearchForm getStudios={mockGetStudios} />
+                <SearchForm getStudios={mockGetStudios} services={mockServices} />
             </Router>
         );
     });

@@ -39,4 +39,10 @@ describe('Admin Login', () => {
         fireEvent.click(screen.getByRole('button'));
         expect(mockHandleLogin).toHaveBeenCalled();
     });
+
+    it('calls handleLogin when the login button is clickedon Enter key press', () => {
+        const passwordInput = screen.getByTestId('password-input');
+        fireEvent.keyDown(passwordInput, { key: 'Enter' });
+        expect(mockHandleLogin).toHaveBeenCalled();
+    });
 });

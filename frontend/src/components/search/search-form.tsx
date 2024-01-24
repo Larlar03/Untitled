@@ -5,14 +5,15 @@ import SearchInput from './search-input/search-input';
 import SearchOptions from './search-options/search-options';
 
 import CitiesRegion from '../../types/cities-regions.ts';
-import services from '../../constants/services.ts';
+import Service from '../../types/service.ts';
 
 interface Props {
     getStudios: (location: string | undefined, services: string[]) => void;
+    services: Service[] | undefined;
 }
 
 const SearchForm = (props: Props) => {
-    const [options, setOptions] = useState<Array<string>>([]);
+    const [options, setOptions] = useState<string[]>([]);
     const [location, setLocation] = useState<string>();
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
@@ -35,7 +36,7 @@ const SearchForm = (props: Props) => {
                     <SearchInput selectLocation={selectLocation} />
                 </div>
                 <div>
-                    <SearchOptions selectOptions={selectOptions} options={services} />
+                    <SearchOptions selectOptions={selectOptions} services={props.services} />
                 </div>
                 <div className='mx-auto w-[100%] md:w-[90%]'>
                     <CtaButton

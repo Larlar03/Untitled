@@ -1,6 +1,5 @@
 [
 	{
-		"_id": "649c4191f89493f48a94af6a",
 		"name": "AYC Studios",
 		"email_address": "aerialyogicircus@gmail.com",
 		"location": {
@@ -15,12 +14,10 @@
 			"instagram": "www.instagram.com/aycstudios",
 			"facebook": "www.facebook.com/AYcircus"
 		},
-		"logo": "./mocks/mock_assets/studio-logos/ayc-studios.png",
+		"logo": "",
 		"services": ["Pole Fitness", "PoleDance", "Aerial Silks"]
 	},
 	{
-		"_id": "649c41aff89493f48a94af6b",
-
 		"name": "Body Synergy",
 		"email_address": "bodysynergymanagement@gmail.com",
 		"location": {
@@ -35,12 +32,10 @@
 			"instagram": "www.instagram.com/bodysynergypole",
 			"facebook": "www.facebook.com/poledancebirmingham"
 		},
-		"logo": "./mocks/mock_assets/studio-logos/body-synergy.png",
+		"logo": "",
 		"services": ["Pole Fitness", "PoleDance"]
 	},
 	{
-		"_id": "649c41d4f89493f48a94af6c",
-
 		"name": "K Pole Solihull",
 		"email_address": "kpoleshirley@hotmail.com",
 		"location": {
@@ -55,12 +50,10 @@
 			"instagram": "www.instagram.com/kpole_danceandfitness",
 			"facebook": "www.facebook.com/KpoleShirley"
 		},
-		"logo": "./mocks/mock_assets/studio-logos/k-pole.png",
+		"logo": "",
 		"services": ["Pole Fitness", "PoleDance"]
 	},
 	{
-		"_id": "649c41f6f89493f48a94af6d",
-
 		"name": "K Pole Cradely Heath",
 		"email_address": "kpoleshirley@hotmail.com",
 		"location": {
@@ -75,12 +68,10 @@
 			"instagram": "www.instagram.com/kpole_danceandfitness",
 			"facebook": "www.facebook.com/KpoleShirley"
 		},
-		"logo": "./mocks/mock_assets/studio-logos/k-pole.png",
+		"logo": "",
 		"services": ["Pole Fitness", "PoleDance"]
 	},
 	{
-		"_id": "649c4d6b12ad93c22b6c0103",
-
 		"name": "Siren Asylum",
 		"email_address": "info@sirenasylum.com",
 		"location": {
@@ -95,12 +86,10 @@
 			"instagram": "www.instagram.com/sirenasylumfitness",
 			"facebook": "www.facebook.com/sirenasylum"
 		},
-		"logo": "./mocks/mock_assets/studio-logos/siren-asylum.png",
+		"logo": "",
 		"services": ["Aerial Hoop", "Aerial Silks"]
 	},
 	{
-		"_id": "649d7a1981d6a824bd81bf9c",
-
 		"name": "GFFDamian Dance Studio",
 		"email_address": "gffdamiandancestudio@gmail.com",
 		"location": {
@@ -115,21 +104,21 @@
 			"instagram": "www.instagram.com/gffdamiandancestudio/",
 			"facebook": "www.facebook.com/gffdamiandancestudio/"
 		},
-		"logo": "./mocks/mock_assets/studio-logos/gff-damian-dance-studio.png",
+		"logo": "",
 		"services": ["Aerial Hoop", "Aerial Silks"]
 	},
 	{
 		"name": "Cloud Aerial Arts",
-		"email_address": "cloud@gmail.com",
+		"email_address": "cloudaerialbooking@gmail.com",
 		"location": {
-			"address": "Test Street",
-			"post_code": "TST TEST",
-			"city": "Birmingham",
-			"region": "West Midlands",
+			"address": "Unit A, Aldow Enterprise Park, Blckett Street",
+			"post_code": "M12 6AE",
+			"city": "Manchester",
+			"region": "North West",
 			"country": "England"
 		},
 		"social_links": {
-			"website": "www.google.com",
+			"website": "www.cloudaerialarts.co.uk",
 			"instagram": "",
 			"facebook": ""
 		},

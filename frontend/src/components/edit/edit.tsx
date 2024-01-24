@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import getAllStudiosApi from '../../api/get-all-studios';
 import EditList from './edit-list';
 import Loading from '../loading/loading';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     showForm: (

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import CtaButton from '../cta-button/cta-button';
 import OptionButton from '../option-button/option-button';
+import mockServices from '../../../utils/mock-objects/mock-services';
 
 describe('CTA Button', () => {
     it('renders cta button', () => {
@@ -28,7 +29,7 @@ describe('Option Button', () => {
     it('renders option button', () => {
         render(
             <Router>
-                <OptionButton optionName='Option One' />
+                <OptionButton optionData={mockServices[0]} />
             </Router>
         );
         expect(screen.getByTestId('option-button')).toBeInTheDocument();

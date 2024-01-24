@@ -2,10 +2,12 @@ import Header from '../../components/header/header';
 import SearchForm from '../../components/search/search-form';
 import Loading from '../../components/loading/loading';
 import Navbar from '../../components/navbar/navbar';
+import Service from '../../types/service';
 
 interface Props {
     getStudios: (location: string | undefined, services: string[]) => void;
     isLoading?: boolean;
+    services: Service[] | undefined;
 }
 
 const HomePage = (props: Props) => {
@@ -23,7 +25,7 @@ const HomePage = (props: Props) => {
                             <Loading />
                         </div>
                     )}
-                    {!props.isLoading && <SearchForm getStudios={props.getStudios} />}
+                    {!props.isLoading && <SearchForm getStudios={props.getStudios} services={props.services} />}
                 </div>
             </div>
         </>

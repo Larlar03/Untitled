@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Studio from '../../../types/studios';
+import Studio from '../../../types/studio';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
@@ -109,7 +109,7 @@ const ResultsCard = (props: Props) => {
                             </a>
                             <div className='text-sm py-3 tracking-wide leading-relaxed'>
                                 <a
-                                    className={`block ${
+                                    className={`block underline ${
                                         !props.isActive ? ' hover:text-black' : ' hover:text-cosmic-cobalt'
                                     }`}
                                     target='_blank'

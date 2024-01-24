@@ -1,4 +1,4 @@
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 export const mockOneStudio: Studio = {
     _id: '1',

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Studio from '../types/studios';
+import Studio from '../types/studio';
 
 const getAllStudiosApi = async (): Promise<Studio[]> => {
     const response = await axios.get(`${process.env.VITE_STUDIOS_API}/`).catch((error) => {

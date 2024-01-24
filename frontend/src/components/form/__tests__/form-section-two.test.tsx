@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import FormSectionTwo from '../form-section-two';
-import Studio from '../../../types/studios';
+import Studio from '../../../types/studio';
 
 const mockStoreNewStudioData = jest.fn();
 const mockGoToFormSection = jest.fn();

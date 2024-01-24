@@ -1,5 +1,5 @@
 import { ArrowLeftOnRectangleIcon, PencilIcon, ArrowUpOnSquareIcon } from '@heroicons/react/24/outline';
-import Studio from '../../types/studios';
+import Studio from '../../types/studio';
 
 interface Props {
     setView: React.Dispatch<React.SetStateAction<string>>;
