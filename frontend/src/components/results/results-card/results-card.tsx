@@ -109,7 +109,7 @@ const ResultsCard = (props: Props) => {
                             </a>
                             <div className='text-sm py-3 tracking-wide leading-relaxed'>
                                 <a
-                                    className={`block ${
+                                    className={`block underline ${
                                         !props.isActive ? ' hover:text-black' : ' hover:text-cosmic-cobalt'
                                     }`}
                                     target='_blank'
