@@ -40,13 +40,17 @@ const App = () => {
     window.addEventListener('load', clearLocalStorage);
 
     const getServices = async () => {
+        setLoading(true);
         const storedServices = localStorage.getItem('services');
+
         if (storedServices) {
             setServices(JSON.parse(storedServices));
+            setLoading(false);
         } else {
             const response = await getAllServicesApi();
             localStorage.setItem('services', JSON.stringify(response));
             setServices(response);
+            setLoading(false);
         }
     };
 
