@@ -49,6 +49,69 @@ app.post('/studios', async function (req, res) {
 	}
 });
 
+// UPDATE studio by id
+app.put('/studios/:id', async function (req, res) {
+	const studioId = req.params.id;
+	let updatedStudio = req.body.studio;
+
+	// If new logo is uploaded
+	const logoData = extractLogoData(updatedStudio.logo, 'put');
+	if (logoData) {
+		updatedStudio.logo = logoData;
+	}
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Key: {
+			_id: studioId,
+		},
+		UpdateExpression:
+			'SET #name = :name, #email_address = :email_address, #location = :location, #social_links = :social_links, #logo = :logo, #services = :services',
+		ExpressionAttributeValues: {
+			':name': updatedStudio.name,
+			':email_address': updatedStudio.email_address,
+			':location': updatedStudio.location,
+			':social_links': updatedStudio.social_links,
+			':logo': updatedStudio.logo,
+			':services': updatedStudio.services,
+		},
+		ExpressionAttributeNames: {
+			'#name': 'name',
+			'#email_address': 'email_address',
+			'#location': 'location',
+			'#social_links': 'social_links',
+			'#logo': 'logo',
+			'#services': 'services',
+		},
+		ReturnValues: 'ALL_NEW',
+	};
+
+	try {
+		// Find studio in db
+		const { Item } = await client.send(
+			new GetCommand({
+				TableName: STUDIOS_TABLE,
+				Key: {
+					_id: studioId,
+				},
+			})
+		);
+
+		if (Item) {
+			// Update studio in db
+			const { $metadata } = await client.send(new UpdateCommand(params));
+			$metadata.httpStatusCode === 200
+				? res.status(204).send({ message: 'Studio updated' })
+				: res.status(404).json({ error: 'Could not update studio' });
+		} else {
+			res.status(404).json({ error: 'Could not find studio to update' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
+
 // GET by location and services
 app.get('/studios/:location/services', async function (req, res) {
 	const locationQuery = req.params.location;
@@ -174,70 +237,6 @@ app.delete('/studios/:id', async function (req, res) {
 			res.status(204).send();
 		} else {
 			res.status(404).json({ error: 'Studio not found' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
-	}
-});
-
-// UPDATE by id
-app.put('/studios/:id', async function (req, res) {
-	const studioId = req.params.id;
-	let updatedStudio = req.body;
-
-	// If new logo is uploaded
-	const logo = updatedStudio.logo;
-	console.log('LOGO', logo);
-	const logoData = extractLogoData(logo);
-	logoData && updatedStudio.logo;
-	console.log('LOGO DATA', logoData);
-
-	const params = {
-		TableName: STUDIOS_TABLE,
-		Key: {
-			_id: studioId,
-		},
-		UpdateExpression:
-			'SET #name = :name, #email_address = :email_address, #location = :location, #social_links = :social_links, #logo = :logo, #services = :services',
-		ExpressionAttributeValues: {
-			':name': updatedStudio.name,
-			':email_address': updatedStudio.email_address,
-			':location': updatedStudio.location,
-			':social_links': updatedStudio.social_links,
-			':logo': updatedStudio.logo,
-			':services': updatedStudio.services,
-		},
-		ExpressionAttributeNames: {
-			'#name': 'name',
-			'#email_address': 'email_address',
-			'#location': 'location',
-			'#social_links': 'social_links',
-			'#logo': 'logo',
-			'#services': 'services',
-		},
-		ReturnValues: 'ALL_NEW',
-	};
-
-	try {
-		// Find studio in db
-		const { Item } = await client.send(
-			new GetCommand({
-				TableName: STUDIOS_TABLE,
-				Key: {
-					_id: studioId,
-				},
-			})
-		);
-
-		if (Item) {
-			// Update studio in db
-			const { $metadata } = await client.send(new UpdateCommand(params));
-			$metadata.httpStatusCode === 200
-				? res.status(204).send({ message: 'Studio updated' })
-				: res.status(404).json({ error: 'Could not update studio' });
-		} else {
-			res.status(404).json({ error: 'Could not find studio to update' });
 		}
 	} catch (error) {
 		console.log(error);
