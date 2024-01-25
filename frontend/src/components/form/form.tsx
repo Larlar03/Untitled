@@ -146,7 +146,7 @@ const Form = (props: Props) => {
         delete newStudio._id;
         const responseStatus = await updateStudioApi(newStudio, studioId);
 
-        if (responseStatus === 204) {
+        if (responseStatus === 200) {
             setIsSubmitted(true);
         } else {
             setErrorMessage('An update network error occurred');

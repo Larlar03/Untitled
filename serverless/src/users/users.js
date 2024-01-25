@@ -14,7 +14,7 @@ const {
 	hashPassword,
 	comparePasswords,
 } = require('./utils/bcrypt-passwords.js');
-const { queryTableForUser } = require('./utils/query-table.js');
+const queryTableForUser = require('./utils/query-users-table.js');
 
 const app = express();
 app.use(express.json());
@@ -30,10 +30,10 @@ app.post('/users/login', async function (req, res) {
 	const providedPassword = req.body.password;
 
 	try {
-		const Item = await queryTableForUser(userEmail);
+		const User = await queryTableForUser(userEmail);
 
-		if (Item) {
-			const { email, username, password } = Item;
+		if (User) {
+			const { email, username, password } = User;
 			const result = await comparePasswords(providedPassword, password);
 			res.status(200).json({ email, username, result });
 		} else {
@@ -58,9 +58,9 @@ app.post('/users', async function (req, res) {
 	}
 
 	try {
-		const Item = await queryTableForUser(email);
+		const User = await queryTableForUser(email);
 
-		if (Item) {
+		if (User) {
 			res
 				.status(403)
 				.json({ message: 'Account with this email already exists' });

@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const { v4: uuidv4 } = require('uuid');
-const placeholderImageData = require('./utils/placeholder-image-data');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const {
 	DynamoDBDocumentClient,
@@ -14,6 +13,7 @@ const {
 	ScanCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const extractLogoData = require('./utils/extract-logo-data');
+const queryTableForStudio = require('./utils/query-studios-table');
 
 const app = express();
 app.use(express.json());
@@ -22,32 +22,6 @@ app.use(helmet());
 
 const STUDIOS_TABLE = process.env.STUDIOS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
-
-// POST new studio
-app.post('/studios', async function (req, res) {
-	let newStudio = req.body;
-	newStudio._id = uuidv4();
-
-	newStudio.logo = extractLogoData(newStudio.logo, 'post');
-
-	const params = {
-		TableName: STUDIOS_TABLE,
-		Item: newStudio,
-	};
-
-	try {
-		const response = await client.send(new PutCommand(params));
-		if (response) {
-			console.log(response);
-			res.status(201).send({ message: 'New studio created' });
-		} else {
-			res.status(404).json({ error: 'Could not create studio' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
-	}
-});
 
 // UPDATE studio by id
 app.put('/studios/:id', async function (req, res) {
@@ -87,24 +61,38 @@ app.put('/studios/:id', async function (req, res) {
 	};
 
 	try {
-		// Find studio in db
-		const { Item } = await client.send(
-			new GetCommand({
-				TableName: STUDIOS_TABLE,
-				Key: {
-					_id: studioId,
-				},
-			})
-		);
+		const Studio = await queryTableForStudio(studioId);
 
-		if (Item) {
-			// Update studio in db
-			const { $metadata } = await client.send(new UpdateCommand(params));
-			$metadata.httpStatusCode === 200
-				? res.status(204).send({ message: 'Studio updated' })
-				: res.status(404).json({ error: 'Could not update studio' });
+		if (Studio) {
+			await client.send(new UpdateCommand(params));
+			res.status(200);
 		} else {
 			res.status(404).json({ error: 'Could not find studio to update' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
+
+// POST new studio
+app.post('/studios', async function (req, res) {
+	let newStudio = req.body;
+	newStudio._id = uuidv4();
+
+	newStudio.logo = extractLogoData(newStudio.logo, 'post');
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Item: newStudio,
+	};
+
+	try {
+		const response = await client.send(new PutCommand(params));
+		if (response) {
+			res.status(201).send({ message: 'New studio created' });
+		} else {
+			res.status(404).json({ error: 'Could not create studio' });
 		}
 	} catch (error) {
 		console.log(error);
