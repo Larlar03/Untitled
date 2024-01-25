@@ -22,4 +22,4 @@ const queryTableForUser = async (userEmail) => {
 	}
 };
 
-module.exports = { queryTableForUser };
+module.exports = queryTableForUser;

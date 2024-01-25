@@ -13,6 +13,7 @@ const {
 	UpdateCommand,
 	ScanCommand,
 } = require('@aws-sdk/lib-dynamodb');
+const extractLogoData = require('./utils/extract-logo-data');
 
 const app = express();
 app.use(express.json());
@@ -21,6 +22,32 @@ app.use(helmet());
 
 const STUDIOS_TABLE = process.env.STUDIOS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
+
+// POST new studio
+app.post('/studios', async function (req, res) {
+	let newStudio = req.body;
+	newStudio._id = uuidv4();
+
+	newStudio.logo = extractLogoData(newStudio.logo, 'post');
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Item: newStudio,
+	};
+
+	try {
+		const response = await client.send(new PutCommand(params));
+		if (response) {
+			console.log(response);
+			res.status(201).send({ message: 'New studio created' });
+		} else {
+			res.status(404).json({ error: 'Could not create studio' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
 
 // GET by location and services
 app.get('/studios/:location/services', async function (req, res) {
@@ -130,30 +157,6 @@ app.get('/studios/location/:location', async function (req, res) {
 	}
 });
 
-// GET by id
-app.get('/studios/:id', async function (req, res) {
-	const studioId = req.params.id;
-
-	const params = {
-		TableName: STUDIOS_TABLE,
-		Key: {
-			_id: studioId,
-		},
-	};
-
-	try {
-		const { Item } = await client.send(new GetCommand(params));
-		if (Item) {
-			res.status(200).json(Item);
-		} else {
-			res.status(404).json({ error: 'Studio not found' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
-	}
-});
-
 // DELETE by id
 app.delete('/studios/:id', async function (req, res) {
 	const studioId = req.params.id;
@@ -178,49 +181,17 @@ app.delete('/studios/:id', async function (req, res) {
 	}
 });
 
-// POST new studio
-app.post('/studios', async function (req, res) {
-	let newStudio = req.body;
-	newStudio._id = uuidv4();
-
-	if (newStudio.logo.length > 0) {
-		const logo = newStudio.logo;
-		newStudio.logo = logo.split(',')[1];
-	} else {
-		newStudio.logo = placeholderImageData;
-	}
-
-	const params = {
-		TableName: STUDIOS_TABLE,
-		Item: newStudio,
-	};
-
-	try {
-		const response = await client.send(new PutCommand(params));
-		if (response) {
-			console.log(response);
-			res.status(201).send({ message: 'New studio created uploaded' });
-		} else {
-			res.status(404).json({ error: 'Could not create studio' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
-	}
-});
-
 // UPDATE by id
 app.put('/studios/:id', async function (req, res) {
 	const studioId = req.params.id;
-	let updatedStudio = req.body.studio;
-	console.log({ studioId, updatedStudio });
+	let updatedStudio = req.body;
 
+	// If new logo is uploaded
 	const logo = updatedStudio.logo;
-	const logoString = logo.slice(0, 5);
-
-	if (logoString === 'data:') {
-		updatedStudio.logo = logo.split(',')[1];
-	}
+	console.log('LOGO', logo);
+	const logoData = extractLogoData(logo);
+	logoData && updatedStudio.logo;
+	console.log('LOGO DATA', logoData);
 
 	const params = {
 		TableName: STUDIOS_TABLE,
@@ -267,6 +238,30 @@ app.put('/studios/:id', async function (req, res) {
 				: res.status(404).json({ error: 'Could not update studio' });
 		} else {
 			res.status(404).json({ error: 'Could not find studio to update' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error fetching data' });
+	}
+});
+
+// GET by id
+app.get('/studios/:id', async function (req, res) {
+	const studioId = req.params.id;
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Key: {
+			_id: studioId,
+		},
+	};
+
+	try {
+		const { Item } = await client.send(new GetCommand(params));
+		if (Item) {
+			res.status(200).json(Item);
+		} else {
+			res.status(404).json({ error: 'Studio not found' });
 		}
 	} catch (error) {
 		console.log(error);
