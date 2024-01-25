@@ -52,7 +52,7 @@ app.post('/studios', async function (req, res) {
 // UPDATE studio by id
 app.put('/studios/:id', async function (req, res) {
 	const studioId = req.params.id;
-	let updatedStudio = req.body.studio;
+	let updatedStudio = req.body;
 
 	// If new logo is uploaded
 	const logoData = extractLogoData(updatedStudio.logo, 'put');

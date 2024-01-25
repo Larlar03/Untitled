@@ -4,19 +4,11 @@ const extractLogoData = (logo, method) => {
 	let result;
 
 	if (method === 'post') {
-		if (logo.length > 0) {
-			result = logo.split(',')[1];
-		} else {
-			result = placeholderImageData;
-		}
+		result = logo.length > 0 ? logo.split(',')[1] : placeholderImageData;
 	} else if (method === 'put') {
 		const logoString = logo.slice(0, 5);
-
-		if (logoString === 'data:') {
-			result = logo.split(',')[1];
-		} else {
-			result = null;
-		}
+		result =
+			logoString === 'data:' ? (result = logo.split(',')[1]) : (result = null);
 	}
 
 	return result;
