@@ -5,15 +5,16 @@ const helmet = require('helmet');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const {
 	DynamoDBDocumentClient,
-	GetCommand,
 	PutCommand,
 	DeleteCommand,
 	UpdateCommand,
 } = require('@aws-sdk/lib-dynamodb');
+
 const {
 	hashPassword,
 	comparePasswords,
 } = require('./utils/bcrypt-passwords.js');
+const queryTableForUser = require('./utils/query-users-table.js');
 
 const app = express();
 app.use(express.json());
@@ -23,96 +24,107 @@ app.use(helmet());
 const USERS_TABLE = process.env.USERS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
-// login
+// POST - login
 app.post('/users/login', async function (req, res) {
 	const userEmail = req.body.email;
 	const providedPassword = req.body.password;
 
-	const params = {
-		TableName: USERS_TABLE,
-		Key: {
-			email: userEmail,
-		},
-	};
-
 	try {
-		const { Item } = await client.send(new GetCommand(params));
-		if (Item) {
-			const { email, username, password } = Item;
+		const User = await queryTableForUser(userEmail);
+
+		if (User) {
+			const { email, username, password } = User;
 			const result = await comparePasswords(providedPassword, password);
-			res.json({ email, username, result });
+			res.status(200).json({ email, username, result });
 		} else {
-			res
-				.status(404)
-				.json({ error: 'Could not find user with provided "email"' });
+			res.status(404).json({ error: 'Could not retreive user.' });
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not retreive user to login' });
+		res.status(500).json({ error: 'Error making POST request' });
 	}
 });
 
-// create user
+// POST user
 app.post('/users', async function (req, res) {
 	const { email, username, password } = req.body;
-	if (typeof email !== 'string') {
-		res.status(400).json({ error: '"email" must be a string' });
-	} else if (typeof username !== 'string') {
-		res.status(400).json({ error: '"username" must be a string' });
-	} else if (typeof password !== 'string') {
-		res.status(400).json({ error: '"password" must be a string' });
+
+	if (
+		typeof email !== 'string' ||
+		typeof username !== 'string' ||
+		typeof password !== 'string'
+	) {
+		res.status(400).json({ error: 'Values must be strings' });
 	}
 
 	try {
-		const hashedPassword = await hashPassword(password);
+		const User = await queryTableForUser(email);
 
-		const params = {
-			TableName: USERS_TABLE,
-			Item: {
-				email: email,
-				username: username,
-				password: hashedPassword,
-			},
-		};
+		if (User) {
+			res
+				.status(403)
+				.json({ message: 'Account with this email already exists' });
+		} else {
+			const hashedPassword = await hashPassword(password);
 
-		await client.send(new PutCommand(params));
-		res.json({ email, username, hashedPassword });
+			const params = {
+				TableName: USERS_TABLE,
+				Item: {
+					email: email,
+					username: username,
+					password: hashedPassword,
+				},
+			};
+
+			await client.send(new PutCommand(params));
+			res.status(201).json({ message: 'Account created' });
+		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not create user' });
+		res.status(500).json({ error: 'Error making POST request' });
 	}
 });
 
-//  update user password
-// todo: compare and check old password
+// UPDATE password
 app.put('/users/:userEmail', async function (req, res) {
 	const email = req.params.userEmail;
-	const { newPassword } = req.body;
+	const { oldPassword, newPassword } = req.body;
 
 	try {
-		const hashedPassword = await hashPassword(newPassword);
+		const Item = await queryTableForUser(email);
 
-		const params = {
-			TableName: USERS_TABLE,
-			Key: {
-				email: email,
-			},
-			UpdateExpression: 'set password = :password',
-			ExpressionAttributeValues: {
-				':password': hashedPassword,
-			},
-			ReturnValues: 'ALL_NEW',
-		};
+		if (Item) {
+			const { password } = Item;
+			const result = await comparePasswords(oldPassword, password);
 
-		await client.send(new UpdateCommand(params));
-		res.status(204).json({ message: 'User ' + params.Key.email + ' updated' });
+			if (result === true) {
+				const hashedPassword = await hashPassword(newPassword);
+
+				const params = {
+					TableName: USERS_TABLE,
+					Key: {
+						email: email,
+					},
+					UpdateExpression: 'set password = :password',
+					ExpressionAttributeValues: {
+						':password': hashedPassword,
+					},
+					ReturnValues: 'ALL_NEW',
+				};
+
+				await client.send(new UpdateCommand(params));
+				res.status(204);
+			} else {
+				res.status(404).json({ error: 'Incorrect password' });
+			}
+		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not update user' });
+		res.status(500).json({ error: 'Error making PUT request' });
 	}
 });
 
-// delete
+// DELETE user
 app.delete('/users/:userEmail', async function (req, res) {
 	const params = {
 		TableName: USERS_TABLE,
@@ -123,10 +135,10 @@ app.delete('/users/:userEmail', async function (req, res) {
 
 	try {
 		await client.send(new DeleteCommand(params));
-		res.status(204).json({ message: 'User ' + params.Key.email + ' deleted' });
+		res.status(204);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not delete user' });
+		res.status(500).json({ error: 'Error making DELETE request' });
 	}
 });
 
