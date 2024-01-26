@@ -19,10 +19,6 @@ The results page displays the results from the user's search. The results are di
 ### Login
 There is an option to login. This currently leads to the admin portal, where there is the ability for an admin to upload, edit, and delete studios.
 
-
-## Screenshots
-
-
 ## Technologies Used
 The project began as a MERN stack project, using MongoDB for the database. It then evolved to use AWS services for the backend.
 
@@ -42,3 +38,16 @@ The **Backend** is a serverless Express app.
 - NodeJS
 - AWS Lambda
 - AWS DynamoDB
+
+
+
+## Screenshots
+![Home/Search page screenshot](./frontend/src/assets/screenshots/home-page.png)
+![Results page screenshot](./frontend/src/assets/screenshots/results-page.png)
+![Login page screenshot](./frontend/src/assets/screenshots/login-page.png)
+![Edit page screenshot](./frontend/src/assets/screenshots/edit-page.png)
+![Upload page screenshot](./frontend/src/assets/screenshots/upload-page.png)
+
+
+
+
