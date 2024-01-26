@@ -24,7 +24,7 @@ app.use(helmet());
 const USERS_TABLE = process.env.USERS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
-// login
+// POST - login
 app.post('/users/login', async function (req, res) {
 	const userEmail = req.body.email;
 	const providedPassword = req.body.password;
@@ -41,11 +41,11 @@ app.post('/users/login', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error making login request' });
+		res.status(500).json({ error: 'Error making POST request' });
 	}
 });
 
-// create user
+// POST user
 app.post('/users', async function (req, res) {
 	const { email, username, password } = req.body;
 
@@ -81,11 +81,11 @@ app.post('/users', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error making request' });
+		res.status(500).json({ error: 'Error making POST request' });
 	}
 });
 
-//  update password
+// UPDATE password
 app.put('/users/:userEmail', async function (req, res) {
 	const email = req.params.userEmail;
 	const { oldPassword, newPassword } = req.body;
@@ -120,11 +120,11 @@ app.put('/users/:userEmail', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error making request' });
+		res.status(500).json({ error: 'Error making PUT request' });
 	}
 });
 
-// delete user
+// DELETE user
 app.delete('/users/:userEmail', async function (req, res) {
 	const params = {
 		TableName: USERS_TABLE,
@@ -138,7 +138,7 @@ app.delete('/users/:userEmail', async function (req, res) {
 		res.status(204);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not delete user' });
+		res.status(500).json({ error: 'Error making DELETE request' });
 	}
 });
 

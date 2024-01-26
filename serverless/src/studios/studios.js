@@ -23,6 +23,31 @@ app.use(helmet());
 const STUDIOS_TABLE = process.env.STUDIOS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
+// POST new studio
+app.post('/studios', async function (req, res) {
+	let newStudio = req.body;
+	newStudio._id = uuidv4();
+
+	newStudio.logo = extractLogoData(newStudio.logo, 'post');
+
+	const params = {
+		TableName: STUDIOS_TABLE,
+		Item: newStudio,
+	};
+
+	try {
+		const response = await client.send(new PutCommand(params));
+		if (response) {
+			res.status(201).send({ message: 'New studio created' });
+		} else {
+			res.status(404).json({ error: 'Could not create studio' });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ error: 'Error making POST request' });
+	}
+});
+
 // UPDATE studio by id
 app.put('/studios/:id', async function (req, res) {
 	const studioId = req.params.id;
@@ -71,42 +96,17 @@ app.put('/studios/:id', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
-	}
-});
-
-// POST new studio
-app.post('/studios', async function (req, res) {
-	let newStudio = req.body;
-	newStudio._id = uuidv4();
-
-	newStudio.logo = extractLogoData(newStudio.logo, 'post');
-
-	const params = {
-		TableName: STUDIOS_TABLE,
-		Item: newStudio,
-	};
-
-	try {
-		const response = await client.send(new PutCommand(params));
-		if (response) {
-			res.status(201).send({ message: 'New studio created' });
-		} else {
-			res.status(404).json({ error: 'Could not create studio' });
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making PUT request' });
 	}
 });
 
 // GET by location and services
 app.get('/studios/:location/services', async function (req, res) {
-	const locationQuery = req.params.location;
-	const servicesQuery = req.query.services;
-	const serviceArray = Array.isArray(servicesQuery)
-		? servicesQuery
-		: [servicesQuery];
+	const locationParam = req.params.location;
+	const serviceQuery = req.query.services;
+	const servicesArray = Array.isArray(serviceQuery)
+		? serviceQuery
+		: [serviceQuery];
 
 	const params = {
 		TableName: STUDIOS_TABLE,
@@ -115,7 +115,7 @@ app.get('/studios/:location/services', async function (req, res) {
 			'#studioLocation.#city = :query OR #studioLocation.#region = :query',
 		// Query value
 		ExpressionAttributeValues: {
-			':query': locationQuery,
+			':query': locationParam,
 		},
 		// Table keys
 		ExpressionAttributeNames: {
@@ -129,7 +129,7 @@ app.get('/studios/:location/services', async function (req, res) {
 		const { Items } = await client.send(new ScanCommand(params));
 		if (Items) {
 			const results = Items.filter((studio) => {
-				return serviceArray.some((service) =>
+				return servicesArray.some((service) =>
 					studio.services.includes(service)
 				);
 			});
@@ -148,7 +148,7 @@ app.get('/studios/:location/services', async function (req, res) {
 //  GET by services
 app.get('/studios/services', async function (req, res) {
 	const serviceQuery = req.query.services;
-	const serviceArray = Array.isArray(serviceQuery)
+	const servicesArray = Array.isArray(serviceQuery)
 		? serviceQuery
 		: [serviceQuery];
 
@@ -160,7 +160,7 @@ app.get('/studios/services', async function (req, res) {
 		const { Items } = await client.send(new ScanCommand(params));
 		if (Items) {
 			const results = Items.filter((studio) => {
-				return serviceArray.some((service) =>
+				return servicesArray.some((service) =>
 					studio.services.includes(service)
 				);
 			});
@@ -176,7 +176,7 @@ app.get('/studios/services', async function (req, res) {
 
 //  GET by location
 app.get('/studios/location/:location', async function (req, res) {
-	const locationQuery = req.params.location;
+	const locationParam = req.params.location;
 
 	const params = {
 		TableName: STUDIOS_TABLE,
@@ -185,7 +185,7 @@ app.get('/studios/location/:location', async function (req, res) {
 			'#studioLocation.#city = :query OR #studioLocation.#region = :query',
 		// Query value
 		ExpressionAttributeValues: {
-			':query': locationQuery,
+			':query': locationParam,
 		},
 		// Table keys
 		ExpressionAttributeNames: {
@@ -204,7 +204,7 @@ app.get('/studios/location/:location', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making GET request' });
 	}
 });
 
@@ -220,15 +220,11 @@ app.delete('/studios/:id', async function (req, res) {
 	};
 
 	try {
-		const { $metadata } = await client.send(new DeleteCommand(params));
-		if ($metadata.httpStatusCode === 200) {
-			res.status(204).send();
-		} else {
-			res.status(404).json({ error: 'Studio not found' });
-		}
+		await client.send(new DeleteCommand(params));
+		res.status(204);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making DELETE request' });
 	}
 });
 
@@ -252,7 +248,7 @@ app.get('/studios/:id', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making GET request' });
 	}
 });
 
@@ -271,7 +267,7 @@ app.get('/studios', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making GET request' });
 	}
 });
 

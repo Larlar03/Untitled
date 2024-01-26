@@ -11,6 +11,7 @@ const {
 	UpdateCommand,
 	ScanCommand,
 } = require('@aws-sdk/lib-dynamodb');
+const incrementIds = require('./utils/increment-ids');
 
 const app = express();
 app.use(express.json());
@@ -20,27 +21,23 @@ app.use(helmet());
 const SERVICES_TABLE = process.env.SERVICES_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
-// GET by id
-app.get('/services/:id', async function (req, res) {
-	const serviceId = Number(req.params.id);
-
-	const params = {
-		TableName: SERVICES_TABLE,
-		Key: {
-			_id: serviceId,
-		},
-	};
+// POST new service
+app.post('/services', async function (req, res) {
+	let newService = req.body.service;
 
 	try {
-		const { Item } = await client.send(new GetCommand(params));
-		if (Item) {
-			res.status(200).json(Item);
-		} else {
-			res.status(404).json({ error: 'Studio not found' });
-		}
+		const newId = await incrementIds();
+
+		const params = {
+			TableName: SERVICES_TABLE,
+			Item: { _id: newId, service: newService },
+		};
+
+		await client.send(new PutCommand(params));
+		res.status(201).send({ message: 'New service added' });
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making POST request' });
 	}
 });
 
@@ -63,10 +60,10 @@ app.put('/services/:id', async function (req, res) {
 
 	try {
 		await client.send(new UpdateCommand(params));
-		res.status(204).json({ message: 'User ' + params.Key._id + ' updated' });
+		res.status(200);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making PUT request' });
 	}
 });
 
@@ -83,39 +80,34 @@ app.delete('/services/:id', async function (req, res) {
 
 	try {
 		await client.send(new DeleteCommand(params));
-		res.status(204).json({ message: 'User ' + params.Key._id + ' deleted' });
+		res.status(204);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Could not delete user' });
+		res.status(500).json({ error: 'Error making DELETE request' });
 	}
 });
 
-// POST new service
-app.post('/services', async function (req, res) {
-	let newService = req.body.service;
+// GET by id
+app.get('/services/:id', async function (req, res) {
+	const serviceId = Number(req.params.id);
+
+	const params = {
+		TableName: SERVICES_TABLE,
+		Key: {
+			_id: serviceId,
+		},
+	};
 
 	try {
-		// Get number of items in table
-		const { Items } = await client.send(
-			new ScanCommand({
-				TableName: SERVICES_TABLE,
-			})
-		);
-		if (Items) {
-			const count = Items.length + 1;
-			await client.send(
-				new PutCommand({
-					TableName: SERVICES_TABLE,
-					Item: { _id: count, service: newService },
-				})
-			);
-			res.status(201).send({ message: 'New service added' });
+		const { Item } = await client.send(new GetCommand(params));
+		if (Item) {
+			res.status(200).json(Item);
 		} else {
-			res.status(404).json({ error: 'Error adding new service' });
+			res.status(404).json({ error: 'Service not found' });
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making GET request' });
 	}
 });
 
@@ -130,7 +122,7 @@ app.get('/services', async function (req, res) {
 		if (Items) {
 			// Sort the services alphabetically alphabetically
 			const sortedItems = Items.sort((a, b) => {
-				const serviceA = a.service.toLowerCase(); // Convert to lowercase for case-insensitive sorting
+				const serviceA = a.service.toLowerCase();
 				const serviceB = b.service.toLowerCase();
 				return serviceA.localeCompare(serviceB);
 			});
@@ -140,7 +132,7 @@ app.get('/services', async function (req, res) {
 		}
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Error fetching data' });
+		res.status(500).json({ error: 'Error making GET request' });
 	}
 });
 
