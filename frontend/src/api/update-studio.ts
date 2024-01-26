@@ -8,7 +8,6 @@ const updateStudioApi = async (studio: Studio, id: string | undefined): Promise<
         console.error(error);
     });
 
-    console.log(response);
     return response?.status;
 };
 

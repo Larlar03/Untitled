@@ -39,7 +39,7 @@ const EditList = (props: Props) => {
 
         const responseStatus = await deleteStudioApi(targetId);
 
-        if (responseStatus === 204) {
+        if (responseStatus === 200) {
             setShowModal(false);
             props.getAllStudios();
         } else {
