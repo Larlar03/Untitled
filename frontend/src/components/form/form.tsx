@@ -8,6 +8,7 @@ import Modal from '../modal/warning-modal';
 import { validateForm } from '../../utils/validate-form';
 import uploadStudioApi from '../../api/upload-studio';
 import updateStudioApi from '../../api/update-studio';
+import { studioTemplate } from '../../utils/studio-template';
 
 import Studio from '../../types/studio';
 import Service from '../../types/service';
@@ -45,25 +46,6 @@ const Form = (props: Props) => {
         services: []
     });
 
-    const studioTemplate: Studio = {
-        name: '',
-        email_address: '',
-        location: {
-            address: '',
-            post_code: '',
-            city: '',
-            region: '',
-            country: ''
-        },
-        social_links: {
-            website: '',
-            instagram: '',
-            facebook: ''
-        },
-        logo: '',
-        services: []
-    };
-
     useEffect(() => {
         props.formType && setFormType(props.formType);
         props.studioToEdit ? setNewStudio(props.studioToEdit) : setNewStudio(studioTemplate);
@@ -86,6 +68,7 @@ const Form = (props: Props) => {
             ns[field] = value;
         }
 
+        // Convert logo image upload to image data string
         if (field === 'logo') {
             const file = e.target.files[0];
             const reader = new FileReader();

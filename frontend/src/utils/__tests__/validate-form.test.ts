@@ -1,31 +1,12 @@
-import Studio from '../../types/studio';
+import { mockBlankStudio } from '../mock-objects/mock-studios';
 import { validateForm } from '../validate-form';
-
-const blankStudio: Studio = {
-    name: '',
-    email_address: '',
-    location: {
-        address: '',
-        post_code: '',
-        city: '',
-        region: '',
-        country: ''
-    },
-    social_links: {
-        website: '',
-        instagram: '',
-        facebook: ''
-    },
-    logo: '',
-    services: []
-};
 
 describe('Form Validation', () => {
     it('throws error for empty fields', () => {
         expect.assertions(1);
 
         try {
-            validateForm(blankStudio);
+            validateForm(mockBlankStudio);
         } catch (error) {
             expect(error).toHaveProperty(
                 'message',
