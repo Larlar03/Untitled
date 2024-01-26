@@ -1,5 +1,24 @@
 import Studio from '../../types/studio';
 
+export const mockBlankStudio: Studio = {
+    name: '',
+    email_address: '',
+    location: {
+        address: '',
+        post_code: '',
+        city: '',
+        region: '',
+        country: ''
+    },
+    social_links: {
+        website: '',
+        instagram: '',
+        facebook: ''
+    },
+    logo: '',
+    services: []
+};
+
 export const mockOneStudio: Studio = {
     _id: '1',
     name: 'Mock Studio One',

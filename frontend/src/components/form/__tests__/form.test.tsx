@@ -133,7 +133,7 @@ describe('Update API Calls', () => {
     it('calls update studio api on update form submission', async () => {
         // Mock PUT api  request
         const mockResponse = {
-            status: 204
+            status: 200
         };
 
         jest.spyOn(axios, 'put').mockResolvedValueOnce(mockResponse);
@@ -157,9 +157,7 @@ describe('Update API Calls', () => {
 
         //  Assert
         await waitFor(() => {
-            expect(axios.put).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, {
-                studio: mockStudio
-            });
+            expect(axios.put).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/`, mockStudio);
         });
     });
     it('shows warning modal if there is a network error', async () => {

@@ -1,5 +1,7 @@
 export const flattenObject = (initialObj: object) => {
-    // https://stackoverflow.com/questions/33036487/one-liner-to-flatten-nested-object
+    /** Flatten a nested object into a one level object
+     * https://stackoverflow.com/questions/33036487/one-liner-to-flatten-nested-object
+     */
     const flatObj = Object.assign(
         {},
         ...(function _flatten(o: any): any {

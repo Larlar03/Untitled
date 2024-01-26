@@ -95,6 +95,7 @@ const studioRouter = function (collection) {
 			const logoBuffer = Buffer.from(newStudioLogo.split(',')[1], 'base64');
 			newStudio.logo = logoBuffer;
 		} else {
+			// Sent from postman
 			// Read contents of file in file path and store it as a Buffer object
 			const logoData = fs.readFileSync(newStudioLogo);
 			const logoBuffer = Buffer.from(logoData);

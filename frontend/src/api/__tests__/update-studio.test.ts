@@ -13,18 +13,16 @@ describe('Update Studio API', () => {
 
     it('makes a PUT request', async () => {
         const mockResponse = {
-            status: 204
+            status: 200
         };
 
         jest.spyOn(axios, 'put').mockResolvedValueOnce(mockResponse);
 
         const response = await updateStudioApi(mockOneStudio, mockId);
 
-        expect(axios.put).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/${mockId}`, {
-            studio: mockOneStudio
-        });
+        expect(axios.put).toHaveBeenCalledWith(`${process.env.VITE_STUDIOS_API}/${mockId}`, mockOneStudio);
 
-        expect(response).toBe(204);
+        expect(response).toBe(200);
     });
 
     it('handles Axios errors', async () => {

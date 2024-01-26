@@ -7,9 +7,8 @@
 @layer base {
     html,
     body,
-    #root,
     .app {
-        height: 100% !important;
+        height: 100vh !important;
         margin: 0 !important;
         padding: 0 !important;
         --black: #000000;
@@ -22,9 +21,11 @@
         --crimson: #e01039;
     }
 
+    #root {
+        padding-bottom: 40px;
+    }
+
     body {
-        margin: 0;
-        padding: 0;
         font-family: 'Space Grotesk', sans-serif;
         color: var(--black) !important;
         background: var(--alabaster) !important;
