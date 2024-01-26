@@ -4,6 +4,7 @@ const { GetCommand, DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
 const STUDIOS_TABLE = process.env.STUDIOS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
+/** Queries table by id for specific for studio item */
 const queryTableForStudio = async (id) => {
 	const params = {
 		TableName: STUDIOS_TABLE,

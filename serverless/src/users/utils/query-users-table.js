@@ -4,6 +4,7 @@ const { GetCommand, DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
 const USERS_TABLE = process.env.USERS_TABLE;
 const client = DynamoDBDocumentClient.from(new DynamoDBClient());
 
+/** Queries table by id for specific for user item */
 const queryTableForUser = async (email) => {
 	const params = {
 		TableName: USERS_TABLE,
