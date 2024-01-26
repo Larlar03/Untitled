@@ -7,8 +7,9 @@ Aeriform is a full-stack, web app project. Aeriform allows users to search for a
 ## Table of Contents
 
 - [Features](#features)
-- [Screenshots](#screenshots)
 - [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
+
 
 ## Features
 
